@@ -19,7 +19,7 @@ print(not 0)
 # new line,Function if-else
 number = 333
 print("enter number:")
-guss = int(input())
+guss = 333
 print(guss)
 
 if guss == number:
@@ -34,7 +34,7 @@ else:
 number = 333
 running = True
 while running:
-    guss = int(input("input a int:"))
+    guss = 333
     if guss == number:
         print("guss == input number")
         running = False
@@ -44,8 +44,10 @@ while running:
         print("both shit")
 else:
     print('The while loop is over.')
+print("")
 
 # NEW LINE,Function for
+print("NEW LINE,Function----for:")
 sumer = 0
 for i in range(0, 10):
     sumer += i
@@ -57,10 +59,21 @@ sumer = 1
 for i in range(1, 10):
     sumer *= i
 print"9! =", sumer
+print("")
 
-# NEW LINE,Function def
+# NEW LINE,Function print_max
+print("NEW LINE,Function----print_max:")
 from print_max import print_max
 
 print_max(4, 5)
 print_max(5, 4)
 print_max(4, 4)
+print("")
+
+# NEW LINE,Function tuple
+from Tuple import tuple
+
+print(tuple(3, 1, 2, 3, alfons = 12, aal = 32))
+print tuple.__name__
+print tuple.__doc__
+print('')
