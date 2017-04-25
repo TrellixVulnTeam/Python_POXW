@@ -15,12 +15,12 @@ def file_w_r():
     里面是一些文字，
     用于测试此函数。
     """
-
-    f = open("file_func.txt", 'w')
+    filename = "file_func.txt"
+    f = open(filename, 'w')
     f.write(str)
     f.close()
 
-    f = open("file_func.txt", 'r')
+    f = open(filename, 'r')
     while True:
         line = f.readline()
         if len(line) == 0:
@@ -28,3 +28,5 @@ def file_w_r():
         print line,
 
     f.close()
+    import os
+    os.remove(filename)
