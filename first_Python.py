@@ -77,3 +77,9 @@ print(tuple(3, 1, 2, 3, alfons = 12, aal = 32))
 print tuple.__name__
 print tuple.__doc__
 print('')
+
+import os
+print os.getcwd()
+
+import math
+print math.pi
