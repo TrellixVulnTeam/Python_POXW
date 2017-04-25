@@ -8,7 +8,7 @@
 @version: v1.0 
 """
 
-def tuple(num,*number,**userName):
+def print_tuple(num,*number,**userName):
     """这是一个遍历元祖的函数,输出每个元祖的元素"""
     print"Function___tuple"
     print num
