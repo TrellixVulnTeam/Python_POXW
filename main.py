@@ -19,6 +19,7 @@ print(not 0)
 # NEW LINE,Function Logic()
 print("NEW Function----Logic:")
 from Function import Logic_Function
+
 Logic_Function.Logic()
 print("")
 
@@ -41,6 +42,7 @@ print('')
 
 # NEW LINE,Function DataStruct
 from Function import DataStructers
+
 print ("{0:_^64}".format("DataStructers.list_func()"))
 DataStructers.list_func()
 print ("\n{0:_^64}".format("DataStructers.tuple_func()"))
@@ -52,6 +54,7 @@ DataStructers.seq_function()
 
 # NEW LINE,Class iPhone
 from iPhone.CiPhone import iPhone_v
+
 print ("\n{0:_^64}".format("class iPhone_v"))
 iPhone_3G = iPhone_v("iPhone_3G")
 iPhone_3G.say_hi()
@@ -69,20 +72,21 @@ iPhone_v.how_many()
 
 # NEW LINE,Class Animal
 from Animal.animal import *
+
 print ("\n{0:_^64}".format("class Animal"))
-bird = bird("鹦鹉","jugle","can")
+bird = bird("鹦鹉", "jugle", "can")
 bird.live()
 
-dog = dog("哈士奇","home","maybe")
+dog = dog("哈士奇", "home", "maybe")
 dog.live()
 
 print ""
-animals = [bird,dog]
+animals = [bird, dog]
 for animal in animals:
     animal.live()
 
 # NEW LINE,File_func
-from Function import File_func
-print ("\n{0:_^64}".format("File_func"))
-File_func.file_w_r()
+from Function.io import io_using_file
 
+print ("\n{0:_^64}".format("File_func"))
+io_using_file.file_w_r()

@@ -3,7 +3,7 @@
 """
 @author: Alfons
 @contact: alfons_xh@163.com
-@file: File_func.py 
+@file: io_using_file.py 
 @time: 2017/4/25 14:35 
 @version: v1.0 
 """
