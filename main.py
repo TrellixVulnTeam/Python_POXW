@@ -52,20 +52,20 @@ DataStructers.seq_function()
 
 # NEW LINE,Class iPhone
 # from iPhone import iPhone
-from iPhone import CiPhone
+from iPhone.CiPhone import iPhone_v
 print ("\n{0:_^64}".format("class iPhone_v"))
-iPhone_3G = CiPhone.iPhone_v("iPhone_3G")
+iPhone_3G = iPhone_v("iPhone_3G")
 iPhone_3G.say_hi()
-CiPhone.iPhone_v.how_many()
+iPhone_v.how_many()
 print ""
 
-iPhone_4s = CiPhone.iPhone_v("iPhone_4s")
+iPhone_4s = iPhone_v("iPhone_4s")
 iPhone_4s.say_hi()
-CiPhone.iPhone_v.how_many()
+iPhone_v.how_many()
 print ""
 
 iPhone_3G.recycle()
 iPhone_4s.recycle()
-CiPhone.iPhone_v.how_many()
+iPhone_v.how_many()
 
 
