@@ -16,58 +16,20 @@ print("{0:.3}".format(10.0 / 3))
 print("{0:.^13}".format('hello'))
 print(not 0)
 
-# new line,Function if-else
-number = 333
-print("enter number:")
-guss = 333
-print(guss)
+# NEW LINE,Function Logic()
+print("NEW Function----Logic:")
+import Logic_Function
 
-if guss == number:
-    print("guss == input number")
-    print("hahahah")
-elif number > guss:
-    print("guss < number")
-else:
-    print("both shit")
-
-# NEW LINE,Function while
-number = 333
-running = True
-while running:
-    guss = 333
-    if guss == number:
-        print("guss == input number")
-        running = False
-    elif guss < number:
-        print("guss < number")
-    else:
-        print("both shit")
-else:
-    print('The while loop is over.')
+Logic_Function.Logic()
 print("")
 
-# NEW LINE,Function for
-print("NEW LINE,Function----for:")
-sumer = 0
-for i in range(0, 10):
-    sumer += i
-# print('sum is:{0}'.format(sumer))
-print("sum is:", sumer)  # print:('sum is:', 45)
-print"sum is:", sumer  # print: sum is: 45
+# NEW LINE,Function print_max()
+print("NEW Function----print_max:")
+import print_max
 
-sumer = 1
-for i in range(1, 10):
-    sumer *= i
-print"9! =", sumer
-print("")
-
-# NEW LINE,Function print_max
-print("NEW LINE,Function----print_max:")
-from print_max import print_max
-
-print_max(4, 5)
-print_max(5, 4)
-print_max(4, 4)
+print_max.print_max(4, 5)
+print_max.print_max(5, 4)
+print_max.print_max(4, 4)
 print("")
 
 # NEW LINE,Function tuple
@@ -78,8 +40,13 @@ print tuple.__name__
 print tuple.__doc__
 print('')
 
-import os
-print os.getcwd()
-
-import math
-print math.pi
+# NEW LINE,Function DataStruct
+import DataStructers
+print ("{0:_^64}".format("DataStructers.list_func()"))
+DataStructers.list_func()
+print ("{0:_^64}".format("DataStructers.tuple_func()"))
+DataStructers.tuple_func()
+print ("{0:_^64}".format("DataStructers.dictionary_func()"))
+DataStructers.dictionary_func()
+print ("{0:_^64}".format("DataStructers.seq_function()"))
+DataStructers.seq_function()
