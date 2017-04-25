@@ -51,7 +51,6 @@ print ("\n{0:_^64}".format("DataStructers.seq_function()"))
 DataStructers.seq_function()
 
 # NEW LINE,Class iPhone
-# from iPhone import iPhone
 from iPhone.CiPhone import iPhone_v
 print ("\n{0:_^64}".format("class iPhone_v"))
 iPhone_3G = iPhone_v("iPhone_3G")
@@ -68,4 +67,22 @@ iPhone_3G.recycle()
 iPhone_4s.recycle()
 iPhone_v.how_many()
 
+# NEW LINE,Class Animal
+from Animal.animal import *
+print ("\n{0:_^64}".format("class Animal"))
+bird = bird("鹦鹉","jugle","can")
+bird.live()
+
+dog = dog("哈士奇","home","maybe")
+dog.live()
+
+print ""
+animals = [bird,dog]
+for animal in animals:
+    animal.live()
+
+# NEW LINE,File_func
+from Function import File_func
+print ("\n{0:_^64}".format("File_func"))
+File_func.file_w_r()
 
