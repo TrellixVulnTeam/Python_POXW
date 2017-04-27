@@ -1,5 +1,5 @@
 #!/usr/bin/env python  
-# encoding: utf-8  
+# encoding: utf-8
 """
 @author: Alfons
 @contact: alfons_xh@163.com
@@ -90,4 +90,77 @@ from Function.io import io_using_file
 
 print ("\n{0:_^64}".format("File_func"))
 io_using_file.file_w_r()
+print ""
+
+# NEW LINE,Produce List
+print ("{0:_^64}".format("列表生成式"))
+list_a = [x * x for x in range(1, 11)]
+print list_a
+list_a = [x * x for x in range(1, 11) if x % 2 == 0]
+print list_a
+n_list = ['X', 4, 'Y', 'Z']
+print ("\n{0:_^64}".format("通过[for...in...for...in...]完成"))
+list_a = [m + n.lower() for m in "ABC" for n in n_list if isinstance(n, str)]
+print list_a
+
+import os
+
+print [d for d in os.listdir("..")]
+
+
+# NEW LINE,generator 生成器
+def fib(max):
+    n, a, b = 0, 0, 1
+    while n < max:
+        yield b
+        a, b = b, a + b
+        n = n + 1
+
+
+print [i for i in fib(10)]
+
+# NEW LINE,map()/reduce()
+print ("\n{0:_^64}".format("map()/reduce()"))
+#map(f,[x1, x2, x3, x4])) = [f(x1),f(x2),f(x3),f(x4)] // map()的f()只能接受一个参数
+def func_map(name):
+    if not isinstance(name, str):
+        return ""
+    return name.capitalize()
+
+print map(func_map, [43, 'LISA', 'barT'])
+
+
+#reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4) // reduce()的f()需要两个参数
+def func_mul(x, y):
+    return x * y
+print reduce(func_mul, [1, 2, 3, 4, 5, 6])
+
+# NEW LINE,filter()
+print ("\n{0:_^64}".format("filter()"))
+
+
+def judge_prime(n):
+    if n == 1:
+        return False
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True
+print filter(judge_prime,range(100,1000))
+
+# NEW LINE,sorted()
+print sorted([34,23,4,2,1,65,77])[::-1]
+
+def com_string(str1,str2):
+    str1 = str1.upper()
+    str2 = str2.upper()
+    if str1 < str2:
+        return -1
+    elif str1 > str2:
+        return 1
+    else:
+        return 0
+
+print sorted(['bob', 'about', 'Zoo', 'Credit'],com_string)
+
 
