@@ -10,32 +10,27 @@
 
 
 class animal:
-    def __init__(self, name, loction):
-        self.name = name
-        self.loction = loction
-        print self.name, "have been init."
-
-    def live(self):
-        print self.name, "living in", self.loction
-
-
-class bird(animal):
-    def __init__(self, name, loction, fly):
-        self.name = name
-        self.loction = loction
-        self.fly = fly
-        print self.name, "have been init."
-
-    def live(self):
-        print self.name, "living in", self.loction, "and it", self.fly, "fly"
+    def run(self):
+        print "Animal running..."
 
 
 class dog(animal):
-    def __init__(self, name, loction, fly):
-        self.name = name
-        self.loction = loction
-        self.fly = fly
-        print self.name, "have been init."
+    def __init__(self, food):
+        self.__food = food
 
-    def live(self):
-        print self.name, "living in", self.loction, "and it", self.fly, "fly"
+    def run(self):
+        print "Dog running..."
+
+    def eat(self):
+        print "Dog eating ", self.__food
+
+
+class cat(animal):
+    def __init__(self, food):
+        self.__food = food
+
+    def run(self):
+        print "Cat running..."
+
+    def eat(self):
+        print "Cat eating...", self.__food

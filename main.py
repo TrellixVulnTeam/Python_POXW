@@ -74,16 +74,12 @@ iPhone_v.how_many()
 from Animal.animal import *
 
 print ("\n{0:_^64}".format("class Animal"))
-bird = bird("鹦鹉", "jugle", "can")
-bird.live()
-
-dog = dog("哈士奇", "home", "maybe")
-dog.live()
-
-print ""
-animals = [bird, dog]
-for animal in animals:
-    animal.live()
+dog = dog("meat")
+cat = cat("fish")
+dog.run()
+cat.run()
+dog.eat()
+cat.eat()
 
 # NEW LINE,File_func
 from Function.io import io_using_file
@@ -121,23 +117,30 @@ print [i for i in fib(10)]
 
 # NEW LINE,map()/reduce()
 print ("\n{0:_^64}".format("map()/reduce()"))
-#map(f,[x1, x2, x3, x4])) = [f(x1),f(x2),f(x3),f(x4)] // map()的f()只能接受一个参数
+
+
+# map(f,[x1, x2, x3, x4])) = [f(x1),f(x2),f(x3),f(x4)] // map()的f()只能接受一个参数
 def func_map(name):
     if not isinstance(name, str):
         return ""
     return name.capitalize()
 
+
 print map(func_map, [43, 'LISA', 'barT'])
 
 
-#reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4) // reduce()的f()需要两个参数
+# reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4) // reduce()的f()需要两个参数
 def func_mul(x, y):
     return x * y
+
+
 print reduce(func_mul, [1, 2, 3, 4, 5, 6])
 
 # NEW LINE,filter()
 print ("\n{0:_^64}".format("filter()"))
-#filter(f, [x1, x2, x3, x4])  // filter()的f()只能接收1个参数
+
+
+# filter(f, [x1, x2, x3, x4])  // filter()的f()只能接收1个参数
 def judge_prime(n):
     if n == 1:
         return False
@@ -145,13 +148,16 @@ def judge_prime(n):
         if n % i == 0:
             return False
     return True
-print filter(judge_prime,range(100,1000))
+
+
+print filter(judge_prime, range(100, 1000))
 
 # NEW LINE,sorted()
 print ("\n{0:_^64}".format("sorted()"))
-print sorted([34,23,4,2,1,65,77])[::-1]
+print sorted([34, 23, 4, 2, 1, 65, 77])[::-1]
 
-def com_string(str1,str2):
+
+def com_string(str1, str2):
     str1 = str1.upper()
     str2 = str2.upper()
     if str1 < str2:
@@ -161,13 +167,11 @@ def com_string(str1,str2):
     else:
         return 0
 
-print sorted(['bob', 'about', 'Zoo', 'Credit'],com_string)
+
+print sorted(['bob', 'about', 'Zoo', 'Credit'], com_string)
 
 # NEW LINE,lambda
 print ("\n{0:_^64}".format("lambda"))
-#求阶乘
-print reduce(lambda x, y: x * y,range(1,6))
-print sorted(map(lambda name:name.capitalize(),["sdsdfs", 'LISA', 'barT']))[::-1]
-
-
-
+# 求阶乘
+print reduce(lambda x, y: x * y, range(1, 6))
+print sorted(map(lambda name: name.capitalize(), ["sdsdfs", 'LISA', 'barT']))[::-1]
