@@ -163,5 +163,11 @@ def com_string(str1,str2):
 
 print sorted(['bob', 'about', 'Zoo', 'Credit'],com_string)
 
+# NEW LINE,lambda
+print ("\n{0:_^64}".format("lambda"))
+#求阶乘
+print reduce(lambda x, y: x * y,range(1,6))
+print sorted(map(lambda name:name.capitalize(),["sdsdfs", 'LISA', 'barT']))[::-1]
+
 
 
