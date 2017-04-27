@@ -137,8 +137,7 @@ print reduce(func_mul, [1, 2, 3, 4, 5, 6])
 
 # NEW LINE,filter()
 print ("\n{0:_^64}".format("filter()"))
-
-
+#filter(f, [x1, x2, x3, x4])  // filter()的f()只能接收1个参数
 def judge_prime(n):
     if n == 1:
         return False
@@ -149,6 +148,7 @@ def judge_prime(n):
 print filter(judge_prime,range(100,1000))
 
 # NEW LINE,sorted()
+print ("\n{0:_^64}".format("sorted()"))
 print sorted([34,23,4,2,1,65,77])[::-1]
 
 def com_string(str1,str2):
@@ -162,5 +162,6 @@ def com_string(str1,str2):
         return 0
 
 print sorted(['bob', 'about', 'Zoo', 'Credit'],com_string)
+
 
 
