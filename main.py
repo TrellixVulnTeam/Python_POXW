@@ -74,8 +74,8 @@ iPhone_v.how_many()
 from Animal.animal import *
 
 print ("\n{0:_^64}".format("class Animal"))
-dog = dog("meat")
-cat = cat("fish")
+dog = Dog("meat")
+cat = Cat("fish")
 dog.run()
 cat.run()
 dog.eat()
@@ -175,3 +175,17 @@ print ("\n{0:_^64}".format("lambda"))
 # 求阶乘
 print reduce(lambda x, y: x * y, range(1, 6))
 print sorted(map(lambda name: name.capitalize(), ["sdsdfs", 'LISA', 'barT']))[::-1]
+
+str_zfill_test = "hds"
+print "dsfsdfdsfsdds".zfill(200)
+print "sds".zfill(200)
+
+str = u"你f反对撒 "
+print type(str)
+str_1 = str.encode("utf_8")
+print type(str_1)
+print str_1
+print u"地方撒"
+import sys
+print sys.getdefaultencoding()
+

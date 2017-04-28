@@ -9,28 +9,32 @@
 """
 
 
-class animal:
+class Animal(object):
+    pass
+
+
+class Mammal(Animal):
     def run(self):
-        print "Animal running..."
+        print "Mammal running..."
 
 
-class dog(animal):
+class Bird(Animal):
+    def fly(self):
+        print "Birds running..."
+
+
+class Dog(Mammal):
     def __init__(self, food):
         self.__food = food
-
-    def run(self):
-        print "Dog running..."
 
     def eat(self):
         print "Dog eating ", self.__food
 
 
-class cat(animal):
+class Cat(Mammal):
     def __init__(self, food):
         self.__food = food
 
-    def run(self):
-        print "Cat running..."
-
     def eat(self):
         print "Cat eating...", self.__food
+
