@@ -189,3 +189,7 @@ print u"地方撒"
 import sys
 print sys.getdefaultencoding()
 
+
+# NEW LINE,MySQLdb
+print ("\n{0:_^64}".format("MySQLdb"))
+import MySQLdb
