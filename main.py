@@ -180,12 +180,11 @@ str_zfill_test = "hds"
 print "dsfsdfdsfsdds".zfill(200)
 print "sds".zfill(200)
 
-str = u"你f反对撒 "
-print type(str)
-str_1 = str.encode("utf_8")
-print type(str_1)
-print str_1
-print u"地方撒"
-import sys
-print sys.getdefaultencoding()
+import MySQLdb
 
+myDB = MySQLdb.connect(host="localhost",user="root",passwd="xiaohui")
+cHandler = myDB.cursor()
+cHandler.execute("SHOW DATABASES")
+results = cHandler.fetchall()
+for items in results:
+    print items[0]
