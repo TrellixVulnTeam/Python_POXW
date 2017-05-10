@@ -180,6 +180,10 @@ str_zfill_test = "hds"
 print "dsfsdfdsfsdds".zfill(200)
 print "sds".zfill(200)
 
+
+# NEW LINE,MySQLdb
+print ("\n{0:_^64}".format("MySQLdb"))
+
 import MySQLdb
 
 myDB = MySQLdb.connect(host="localhost",user="root",passwd="xiaohui")
@@ -188,7 +192,3 @@ cHandler.execute("SHOW DATABASES")
 results = cHandler.fetchall()
 for items in results:
     print items[0]
-
-# NEW LINE,MySQLdb
-print ("\n{0:_^64}".format("MySQLdb"))
-
