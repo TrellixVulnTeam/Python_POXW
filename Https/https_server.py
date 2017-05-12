@@ -17,6 +17,7 @@ import BaseHTTPServer
 import SimpleHTTPServer
 from SimpleHTTPServer import SimpleHTTPRequestHandler
 import ssl
+import json
 
 class S(SimpleHTTPRequestHandler):
     RecvData = ""
@@ -29,10 +30,13 @@ class S(SimpleHTTPRequestHandler):
     def do_POST(self):
         self._set_headers()
         length = int(self.headers.getheader('content-length'))
-        data = self.rfile.read(length)
-        if length > 100:
+        data = json.loads(self.rfile.read(length))
+        datalen = len(data)
+        data2 = json.dumps(data, ensure_ascii = False)
+        data2len = len(data2)
+        if length:
             self.wfile.write("success!")
-        elif length < 100:
+        else:
             self.wfile.write("empty data!")
 
 
