@@ -181,14 +181,21 @@ print "dsfsdfdsfsdds".zfill(200)
 print "sds".zfill(200)
 
 from collections import namedtuple
-cricle = namedtuple('cricle',['x','y','r'])
-cricleA = cricle(1,2,3)
+
+cricle = namedtuple('cricle', ['x', 'y', 'r'])
+cricleA = cricle(1, 2, 3)
 print cricleA
 
+import logging
+import traceback
 
 
+def func1():
+    raise Exception("helsd")
 
 
-
-
-pass
+try:
+    func1()
+except:
+    logging.error("Error : %s" % traceback.format_exc())
+    pass

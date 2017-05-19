@@ -19,9 +19,14 @@ from SimpleHTTPServer import SimpleHTTPRequestHandler
 import ssl
 import json
 
+res_dict_1 = {"changeAp": "0"}
+res_dict_2 = {"changeAp": "1", "ssid": "Ti国际邀请赛", "pt": "OPN", "p": ""}
+
+
 class S(SimpleHTTPRequestHandler):
     RecvData = ""
     RecvNum = 0
+
     def _set_headers(self):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
@@ -34,8 +39,15 @@ class S(SimpleHTTPRequestHandler):
         datalen = len(data)
         data2 = json.dumps(data, ensure_ascii = False)
         data2len = len(data2)
-        if length:
-            self.wfile.write("success!")
+        if self.requestline == "POST /feedbackJson HTTP/1.1":
+            print "feedbackJson:-------"
+            print data2
+            self.wfile.write("OK")
+        elif self.requestline == "POST /deviceStatus HTTP/1.1":
+            print "-------------deviceStatus:-------"
+            print data2
+            # self.wfile.write(json.dumps(res_dict_1))
+            self.wfile.write(json.dumps(res_dict_1))
         else:
             self.wfile.write("empty data!")
 

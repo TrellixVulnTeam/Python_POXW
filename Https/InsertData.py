@@ -36,4 +36,4 @@ while True:
     db.commit()
     n += 1
     print "commit number:" + str(n)
-    time.sleep(60)
+    time.sleep(10)
