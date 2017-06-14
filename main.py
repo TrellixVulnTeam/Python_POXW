@@ -199,3 +199,7 @@ try:
 except:
     logging.error("Error : %s" % traceback.format_exc())
     pass
+
+import Socket.SocketTest
+Socket.SocketTest.run()
+
