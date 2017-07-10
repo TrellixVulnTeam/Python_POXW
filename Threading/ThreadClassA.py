@@ -32,6 +32,9 @@ def FuncA(name,param):
             myThreadA.all_Thread.remove(thread)
 
 if __name__ == "__main__":
+
+    SER = "yes" if 5>22 else "no"
+    pass
     para = 1
     thread_1 = myThreadA("First1 thread",para)
     thread_1.start()
