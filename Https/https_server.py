@@ -13,6 +13,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+import os
 import BaseHTTPServer
 import SimpleHTTPServer
 from SimpleHTTPServer import SimpleHTTPRequestHandler
@@ -20,7 +21,7 @@ import ssl
 import json
 
 res_dict_1 = {"changeAp": "0"}
-res_dict_2 = {"changeAp": "1", "ssid": "Ti国际邀请赛", "pt": "OPN", "p": ""}
+res_dict_2 = {"changeAp": "1", "ssid": "wifimima:henhen1234567", "pt": "OPN", "p": ""}
 
 
 class S(SimpleHTTPRequestHandler):
@@ -34,20 +35,33 @@ class S(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         self._set_headers()
-        length = int(self.headers.getheader('content-length'))
-        data = json.loads(self.rfile.read(length))
-        datalen = len(data)
-        data2 = json.dumps(data, ensure_ascii = False)
-        data2len = len(data2)
-        if self.requestline == "POST /feedbackJson HTTP/1.1":
+
+        if self.requestline == "POST /feadbackJson/ HTTP/1.1":
             print "feedbackJson:-------"
+            length = int(self.headers.getheader('content-length'))
+            data = json.loads(self.rfile.read(length))
+            data2 = json.dumps(data, ensure_ascii = False)
             print data2
             self.wfile.write("OK")
-        elif self.requestline == "POST /deviceStatus HTTP/1.1":
+        elif self.requestline == "POST /deviceStatus/ HTTP/1.1":
             print "-------------deviceStatus:-------"
+            length = int(self.headers.getheader('content-length'))
+            data = json.loads(self.rfile.read(length))
+            data2 = json.dumps(data, ensure_ascii = False)
             print data2
             # self.wfile.write(json.dumps(res_dict_1))
             self.wfile.write(json.dumps(res_dict_1))
+        elif "POST /feadbackEntity&DeviceID=" in self.requestline:
+            length = int(self.headers.getheader('content-length'))
+            data = self.rfile.read(length)
+            path = "C:/Users/shangchenhui/Desktop/TransferData/"\
+                   + self.requestline[self.requestline.find("filePath=")+len("filePath="):self.requestline.find(" HTTP/1.1")]
+            dir_path = path[:path.rfind('/')]
+            if not os.path.isdir(dir_path):
+                os.makedirs(dir_path)
+            with open(path, "wb") as f:
+                f.write(data)
+            self.wfile.write("OK")
         else:
             self.wfile.write("empty data!")
 
@@ -61,5 +75,5 @@ class S(SimpleHTTPRequestHandler):
 # httpd = BaseHTTPServer.HTTPServer(('192.168.2.40', 4443), SimpleHTTPServer.SimpleHTTPRequestHandler)
 
 httpd = BaseHTTPServer.HTTPServer(('192.168.2.40', 4443), S)
-httpd.socket = ssl.wrap_socket(httpd.socket, certfile = './server.pem', server_side = True)
+# httpd.socket = ssl.wrap_socket(httpd.socket, certfile = './server.pem', server_side = True)
 httpd.serve_forever()

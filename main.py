@@ -7,6 +7,10 @@
 @time: 2017/4/25 11:40 
 @version: v1.0 
 """
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 
 print("hell sa")
 i = 4 + 1
@@ -202,4 +206,32 @@ except:
 
 import Socket.SocketTest
 Socket.SocketTest.run()
+
+
+str_find = "find_first_second_thresa"
+sub_str = str_find[str_find.find("qqq")+ len("qqq"):]
+
+print "begin"
+import time
+import datetime
+print datetime.datetime.now()
+time_i = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(1499310653))
+print time_i
+
+str_tmp = "1|2|3|4"
+str_tmp_2 = "1"
+st_list_1 = []
+st_list_2 = str_tmp_2.split('|')
+
+st_list_1.extend(st_list_2)
+
+with open("C:/Users/shangchenhui/Desktop/17710/1499650587_00001/1_DATA_HTTP_2dc9bb12-6510-11e7-9196-3f9243109861.html","rb" ) as f:
+    print f.read()
+
+import os
+os.makedirs("C:/Users/shangchenhui/Desktop/17710/1499650587_00002")
+pass
+
+
+
 
