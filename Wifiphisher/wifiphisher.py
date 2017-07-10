@@ -4,8 +4,8 @@
 @author: Alfons
 @contact: alfons_xh@163.com
 @file: Wifiphisher.py
-@time: 17-6-22 上午9:22
-@version: v1.0
+@time: 17-6-22 上午9:22 
+@version: v1.0 
 """
 import sys
 
