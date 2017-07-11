@@ -9,6 +9,7 @@
 """
 import requests
 import re
+import os
 
 
 class Model_Spider:
@@ -20,23 +21,50 @@ class Model_Spider:
         response = requests.get(single_page_url)
         return response.content
 
-    def __GetAllPersonalInfo(self,page_data):
-        pattern = re.compile('<div class="list-item">.*?<div class="personal-info">.*?')
-        pass
+    def __GetAllInfo(self, page_data):
+        pattern = re.compile('<div class="list-item">.*?<a class="lady-name" href="(.*?)".*?>(.*?)</a>.*?<strong>'
+                             + '(.*?)</strong>.*?<span>(.*?)</span>.*? <div class="pic w610">.*?<a href="(.*?)" '
+                             + 'target="_blank">', re.S)
+        items = re.findall(pattern, page_data)
 
-    def __GetPersonalInfo(self,personal_url):
+        ladys_info = {}
+        for item in items:
+            info_page = item[0]
+            name = item[1]
+            age = item[2]
+            address = item[3]
+            img_page = item[4]
+            ladys_info.update({name + '_' + age + '_' + address: (info_page, img_page)})
+        return ladys_info
+
+    def __GetPersonalInfo(self, personal_url):
         pass
 
     def __GetAllImage(self):
         pass
 
-    def __SaveImages(self):
-        pass
+    def __SaveImages(self, dirname, filename, image):
+        try:
+            if not os.path.isdir(dirname):
+                os.makedirs(dirname)
+            with open(filename, "wb") as f:
+                f.write(image)
+        except:
+            print "Save image error:" + dirname + "\t" + filename
 
     def Start(self):
+        start = 1
+        end = 10
+        for i in range(start, end):
+            page_info = self.__GetSinglePage(i)
+            ladys_info = self.__GetAllInfo(page_info.decode("gbk"))
+            pass
+        pass
 
 
+spider = Model_Spider( )
+spider.Start()
 
-spider = Model_Spider()
-with open("taobao_model.html","w") as f:
-    pass
+with open("taobao_model.html", "w") as f:
+    response = requests.get("https://mm.taobao.com/json/request_top_list.htm?page=1")
+    f.write(response.content)
