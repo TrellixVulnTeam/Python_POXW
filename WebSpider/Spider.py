@@ -8,6 +8,7 @@
 @version: v1.0 
 """
 import urllib2
+import requests
 
 # 1、直接访问
 # response = urllib2.urlopen("http://192.168.2.183")
@@ -19,11 +20,16 @@ import urllib2
 # print response.read()
 
 # 3、使用代理服务器访问
-proxy_handler = urllib2.ProxyHandler({"http": "192.168.2.40:8787"})
-opener = urllib2.build_opener(proxy_handler)
-urllib2.install_opener(opener)
+# proxy_handler = urllib2.ProxyHandler({"http": "192.168.2.40:8787"})
+# opener = urllib2.build_opener(proxy_handler)
+# urllib2.install_opener(opener)
+#
+# request = urllib2.Request("https://www.cnblogs.com")
+# response = urllib2.urlopen(request)
+# print response.read()
 
-request = urllib2.Request("https://www.cnblogs.com")
-response = urllib2.urlopen(request)
-print response.read()
+# proxies = {"https": "http://192.168.2.40:8787"}
+# r = requests.get('https://www.google.com', proxies = proxies)
+# print r.text
+
 pass
