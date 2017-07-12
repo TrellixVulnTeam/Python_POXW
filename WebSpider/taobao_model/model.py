@@ -52,12 +52,15 @@ class Model_Spider:
         pass
 
     def __GetPersionalImages(self, dirname, image_page):
-        if not os.path.isdir(dirname):
-            os.makedirs(dirname)
-
         response = self.__GetPageByURL(image_page)
         pattern = re.compile('<img.*?style=".*?src="(.*?)"', re.S)
         items = re.findall(pattern, response)
+
+        if not items:
+            return
+
+        if not os.path.isdir(dirname):
+            os.makedirs(dirname)
 
         image_num = 0
         for item in items:
@@ -94,7 +97,7 @@ class Model_Spider:
         pass
 
 
-spider = Model_Spider( )
+spider = Model_Spider()
 spider.Start()
 
 with open("taobao_model.html", "w") as f:
