@@ -225,11 +225,12 @@ st_list_2 = str_tmp_2.split('|')
 
 st_list_1.extend(st_list_2)
 
-with open("C:/Users/shangchenhui/Desktop/17710/1499650587_00001/1_DATA_HTTP_2dc9bb12-6510-11e7-9196-3f9243109861.html","rb" ) as f:
-    print f.read()
-
-import os
-os.makedirs("C:/Users/shangchenhui/Desktop/17710/1499650587_00002")
+# path = r"C:\Users\shangchenhui\Downloads\2007-02-06-xyq\2007-02-06-xyq\Files\xyq"
+# filelist = os.listdir(path)
+# for file in filelist:
+#     if 'Fixed' in file:
+#         continue
+#     os.rename(path + '/' + file,path + '/' + file + '.gif')
 pass
 
 

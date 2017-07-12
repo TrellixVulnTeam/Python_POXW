@@ -13,6 +13,9 @@ import os
 import logging
 import traceback
 
+user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
+headers = {'User-Agent': user_agent}
+
 
 class Model_Spider:
     def __init__(self):
@@ -57,6 +60,8 @@ class Model_Spider:
         items = re.findall(pattern, response)
 
         if not items:
+            with open("taobao_model.html", "w") as f:
+                f.write(response)
             return
 
         if not os.path.isdir(dirname):
@@ -65,7 +70,7 @@ class Model_Spider:
         image_num = 0
         for item in items:
             prex = item[item.rfind('.'):]
-            image_url = "http:" + item.strip('\t')
+            image_url = "https:" + item.strip('\t')
             filename = dirname + '/' + str(image_num) + prex
             self.__SaveImages(filename, image_url)
             image_num = image_num + 1
@@ -82,7 +87,7 @@ class Model_Spider:
 
     def Start(self):
         start = 1
-        end = 10
+        end = 2
         try:
             for i in range(start, end):
                 page_info = self.__GetPageByNum(i)
@@ -90,7 +95,7 @@ class Model_Spider:
 
                 for dirname, pages_info in ladys_info.items():
                     image_page = pages_info[1]
-                    self.__GetPersionalImages(self.__dir + dirname, "http:" + image_page)
+                    self.__GetPersionalImages(self.__dir + dirname, "https:" + image_page)
                 pass
         except:
             print traceback.format_exc()
@@ -100,6 +105,8 @@ class Model_Spider:
 spider = Model_Spider()
 spider.Start()
 
-with open("taobao_model.html", "w") as f:
-    response = requests.get("https://mm.taobao.com/photo-141234233-10001069307.htm?pic_id=10007138677")
-    f.write(response.content)
+
+
+# with open("taobao_model.html", "w") as f:
+#     response = requests.get("https://mm.taobao.com/photo-141234233-10001069307.htm?pic_id=10007138677")
+#     f.write(response.content)
