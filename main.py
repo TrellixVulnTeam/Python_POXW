@@ -231,6 +231,9 @@ st_list_1.extend(st_list_2)
 #     if 'Fixed' in file:
 #         continue
 #     os.rename(path + '/' + file,path + '/' + file + '.gif')
+
+list_s = ["23","32","1","6"]
+list_s.append("4")
 pass
 
 
