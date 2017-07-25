@@ -7,14 +7,40 @@
 @time: 2017/7/11 16:58 
 @version: v1.0 
 """
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 import requests
 import re
 import os
+import threading
 import logging
 import traceback
+from WebSpider import SpiderBase
 
 user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
 headers = {'User-Agent': user_agent}
+
+
+def GetPageByURL(url):
+    try:
+        response = requests.get(url).content
+    except:
+        print traceback.format_exc()
+        return ""
+    return response
+
+
+def SaveImages(filename, image_url):
+    try:
+        image = GetPageByURL(image_url)
+        if not image:
+            return
+        with open(filename, "wb") as f:
+            f.write(image)
+    except:
+        print "Save image error:" + filename
 
 
 class Model_Spider:
@@ -22,17 +48,9 @@ class Model_Spider:
         self.__main_url = "https://mm.taobao.com/json/request_top_list.htm"
         self.__dir = "LadysImage/"
 
-    def __GetPageByURL(self, url):
-        try:
-            response = requests.get(url).content
-        except:
-            print traceback.format_exc()
-            return ""
-        return response
-
     def __GetPageByNum(self, page_num):
         single_page_url = self.__main_url + "?page=" + str(page_num)
-        return self.__GetPageByURL(single_page_url)
+        return GetPageByURL(single_page_url)
 
     def __GetAllInfo(self, page_data):
         pattern = re.compile('<div class="list-item".*?pic s60.*?href="(.*?)".*?<img src="(.*?)".*?class' +
@@ -55,7 +73,7 @@ class Model_Spider:
         pass
 
     def __GetPersionalImages(self, dirname, image_page):
-        response = self.__GetPageByURL(image_page)
+        response = GetPageByURL(image_page)
         pattern = re.compile('<img.*?style=".*?src="(.*?)"', re.S)
         items = re.findall(pattern, response)
 
@@ -72,22 +90,13 @@ class Model_Spider:
             prex = item[item.rfind('.'):]
             image_url = "https:" + item.strip('\t')
             filename = dirname + '/' + str(image_num) + prex
-            self.__SaveImages(filename, image_url)
+            SaveImages(filename, image_url)
+            # threading.Thread(target = SaveImages, args = (filename, image_url), name = filename).start()
             image_num = image_num + 1
-
-    def __SaveImages(self, filename, image_url):
-        try:
-            image = self.__GetPageByURL(image_url)
-            if not image:
-                return
-            with open(filename, "wb") as f:
-                f.write(image)
-        except:
-            print "Save image error:" + filename
 
     def Start(self):
         start = 1
-        end = 2
+        end = 20
         try:
             for i in range(start, end):
                 page_info = self.__GetPageByNum(i)
@@ -95,7 +104,10 @@ class Model_Spider:
 
                 for dirname, pages_info in ladys_info.items():
                     image_page = pages_info[1]
-                    self.__GetPersionalImages(self.__dir + dirname, "https:" + image_page)
+                    threading.Thread(target = self.__GetPersionalImages,
+                                     args = (self.__dir + dirname, "https:" + image_page),
+                                     name = self.__dir + dirname).start()
+                    # self.__GetPersionalImages(self.__dir + dirname, "https:" + image_page)
                 pass
         except:
             print traceback.format_exc()
@@ -104,6 +116,14 @@ class Model_Spider:
 
 spider = Model_Spider()
 spider.Start()
+
+# 判断文件夹是否有文件存在
+# dirs = os.listdir("LadysImage")
+# for dir in dirs:
+#     dir_path = "LadysImage/" + dir
+#     if SpiderBase.IsDirEmpty(dir_path):
+#         os.rmdir(dir_path)
+pass
 
 
 

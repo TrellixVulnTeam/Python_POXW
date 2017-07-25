@@ -234,6 +234,11 @@ st_list_1.extend(st_list_2)
 
 list_s = ["23","32","1","6"]
 list_s.append("4")
+
+time_s = time.mktime(time.localtime())
+time_s = time.time()
+print type(time_s)
+print time_s
 pass
 
 
