@@ -11,7 +11,7 @@ import requests
 import json
 import urllib
 
-server_url = "http://192.168.2.162"
+server_url = "http://192.168.2.191"
 
 if __name__ == '__main__':
     sys_resouce = json.loads(requests.get(url = server_url + "/SysResourceInfo.json").content)
@@ -21,12 +21,15 @@ if __name__ == '__main__':
     print dicts_info_json
 
     # 字典上传
-    # upload_dict_url = server_url + "/Settings/crackdict/UploadDict?name=" \
-    #                   + urllib.quote("user_dict_3") + "&des=" \
-    #                   + urllib.quote("this is user dict")
-    # files = {"data": open("dict2", "rb")}
-    # dicts_upload = requests.post(url = upload_dict_url, files = files)
-    # print dicts_upload.content
+    upload_dict_url = server_url + "/Settings/crackdict/UploadDict?name=" \
+                      + urllib.quote("最好的字典2") + "&des=" \
+                      + urllib.quote("this is user dict")
+    files = {"data": open("dict2", "rb")}
+    dicts_upload = requests.post(url = upload_dict_url, files = files)
+    if json.loads(dicts_upload.content)["result"] == '0':
+        print "dict upload success!"
+    else:
+        print "dict upload fail!"
 
     # 字典次序修改
     # dicts_info = json.loads(dicts_info_json)
@@ -40,12 +43,18 @@ if __name__ == '__main__':
     # dicts_seq = {"dict": dicts_seq_list}
     # dicts_seq_content = requests.post(url = server_url + "/Settings/crackdict/adjustDicts",
     #                                   json = json.dumps(dicts_seq))
-    # print dicts_seq_content.content
+    # if json.loads(dicts_seq_content.content)["result"] == '0':
+    #     print "dict change seq success!"
+    # else:
+    #     print "dict change seq fail!"
 
     # 删除字典
-    idlist = raw_input("idlist is :")
-    dicts_del_info = requests.get(url = server_url+"/Settings/crackdict/DelDict?idlist="+ urllib.quote(idlist))
-    print dicts_del_info.content
+    # idlist = raw_input("idlist is :")
+    # dicts_del_info = requests.get(url = server_url+"/Settings/crackdict/DelDict?idlist="+ urllib.quote(idlist))
+    # if json.loads(dicts_del_info.content)["result"] == '0':
+    #     print "del dict success!"
+    # else:
+    #     print "del dict fail!"
 
     dicts_info_json = requests.get(url = server_url + "/Settings/crackdict/GetDict").content
     print dicts_info_json
