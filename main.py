@@ -239,6 +239,16 @@ time_s = time.mktime(time.localtime())
 time_s = time.time()
 print type(time_s)
 print time_s
+
+print type(time_s)
+
+for i in range(1):
+    print i
+
+results_row = 2**15
+sheet_num = results_row / 65535 + 1 if results_row % 65535 else 0
+
+tuple
 pass
 
 
