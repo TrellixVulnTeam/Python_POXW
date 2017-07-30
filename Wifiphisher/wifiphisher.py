@@ -14,7 +14,7 @@ sys.setdefaultencoding('utf-8')
 import time
 import logging
 import traceback
-import WWSGC
+# import WWSGC
 import threading
 import subprocess
 from subprocess import Popen
