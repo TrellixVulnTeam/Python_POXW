@@ -8,9 +8,9 @@
 @version: v1.0 
 """
 import sys
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
-
 
 print("hell sa")
 i = 4 + 1
@@ -205,17 +205,18 @@ except:
     pass
 
 import Socket.SocketTest
+
 Socket.SocketTest.run()
 
-
 str_find = "find_first_second_thresa"
-sub_str = str_find[str_find.find("qqq")+ len("qqq"):]
+sub_str = str_find[str_find.find("qqq") + len("qqq"):]
 
 print "begin"
 import time
 import datetime
+
 print datetime.datetime.now()
-time_i = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(1499310653))
+time_i = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(1499310653))
 print time_i
 
 str_tmp = "1|2|3|4"
@@ -232,7 +233,7 @@ st_list_1.extend(st_list_2)
 #         continue
 #     os.rename(path + '/' + file,path + '/' + file + '.gif')
 
-list_s = ["23","32","1","6"]
+list_s = ["23", "32", "1", "6"]
 list_s.append("4")
 
 time_s = time.mktime(time.localtime())
@@ -245,12 +246,52 @@ print type(time_s)
 for i in range(1):
     print i
 
-results_row = 2**15
+results_row = 2 ** 15
 sheet_num = results_row / 65535 + 1 if results_row % 65535 else 0
 
 tuple
+
+import socket
+import struct
+
+ip_4 = struct.unpack("=I", socket.inet_aton("192.168.2.1"))
+print ip_4
+
+dict_s = {"channel": "2",
+          "count": "4",
+          "aps": [
+              {
+                  "ssid": "mulwifi1",
+                  "opn": "wpa",
+                  "password": "12345678"
+              },
+              {
+                  "ssid": "mulwifi2",
+                  "opn": "wpa",
+                  "password": "12345678"
+              }
+          ]}
+aps = dict_s.get("aps")
+print len(aps)
+
+time_s = datetime.datetime.now()
+print time_s
+
+ap_mac = "dd:ac:3d:c5:aa:9a"
+ap_mac = "02" + ap_mac[2:16] + "0"
+
+config = (
+             'interface=%s\n'
+             'driver=nl80211\n'
+             'ssid=%s\n'
+             'hw_mode=g\n'
+             'channel=%s\n'
+             'macaddr_acl=0\n'
+             'ignore_broadcast_ssid=0\n'
+         ) % ("sdfa", "asdfa", "ss")
+print config
+
+# keyperson_list = ["lgd", "eg", "vg"]
+keyperson_list = []
+keyperson_str = ','.join(keyperson_list)
 pass
-
-
-
-
