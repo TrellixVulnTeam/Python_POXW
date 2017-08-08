@@ -298,4 +298,9 @@ keyperson_str = ','.join(keyperson_list)
 
 u_type = type(u"fdsaf")
 print u_type
+
+list_a = []
+list_a.append("sa")
+list_a.append("sa")
+print list_a
 pass
