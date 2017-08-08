@@ -294,4 +294,8 @@ print config
 # keyperson_list = ["lgd", "eg", "vg"]
 keyperson_list = []
 keyperson_str = ','.join(keyperson_list)
+
+
+u_type = type(u"fdsaf")
+print u_type
 pass

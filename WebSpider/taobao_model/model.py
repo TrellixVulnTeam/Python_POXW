@@ -14,6 +14,7 @@ sys.setdefaultencoding('utf-8')
 import requests
 import re
 import os
+import time
 import threading
 import logging
 import traceback
@@ -25,7 +26,7 @@ headers = {'User-Agent': user_agent}
 
 def GetPageByURL(url):
     try:
-        response = requests.get(url).content
+        response = requests.get(url = url,timeout = 0.5).content
     except:
         print traceback.format_exc()
         return ""
@@ -73,36 +74,44 @@ class Model_Spider:
         pass
 
     def __GetPersionalImages(self, dirname, image_page):
-        response = GetPageByURL(image_page)
-        pattern = re.compile('<img.*?style=".*?src="(.*?)"', re.S)
-        items = re.findall(pattern, response)
+        try:
+            response = GetPageByURL(image_page)
+            pattern = re.compile('<img.*?style=".*?src="(.*?)"', re.S)
+            items = re.findall(pattern, response)
 
-        if not items:
-            with open("taobao_model.html", "w") as f:
-                f.write(response)
-            return
+            if not items:
+                with open("taobao_model.html", "w") as f:
+                    f.write(response)
+                return
 
-        if not os.path.isdir(dirname):
-            os.makedirs(dirname)
+            if not os.path.isdir(dirname):
+                os.makedirs(dirname)
 
-        image_num = 0
-        for item in items:
-            prex = item[item.rfind('.'):]
-            image_url = "https:" + item.strip('\t')
-            filename = dirname + '/' + str(image_num) + prex
-            SaveImages(filename, image_url)
-            # threading.Thread(target = SaveImages, args = (filename, image_url), name = filename).start()
-            image_num = image_num + 1
+            image_num = 0
+            for item in items:
+                if image_num % 10 == 0:
+                    time.sleep(3)
+                prex = item[item.rfind('.'):]
+                image_url = "https:" + item.strip('\t')
+                filename = dirname + '/' + str(image_num) + prex
+                SaveImages(filename, image_url)
+                # threading.Thread(target = SaveImages, args = (filename, image_url), name = filename).start()
+                image_num = image_num + 1
+        except:
+            print traceback.format_exc()
 
     def Start(self):
         start = 1
-        end = 20
+        end = 200
         try:
             for i in range(start, end):
                 page_info = self.__GetPageByNum(i)
                 ladys_info = self.__GetAllInfo(page_info.decode("gbk"))
 
+                img_num = 0
                 for dirname, pages_info in ladys_info.items():
+                    if img_num % 10 == 0:
+                        time.sleep(5)
                     image_page = pages_info[1]
                     threading.Thread(target = self.__GetPersionalImages,
                                      args = (self.__dir + dirname, "https:" + image_page),

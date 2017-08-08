@@ -1,27 +1,41 @@
-#!/usr/bin/env python  
-# encoding: utf-8  
+#!/usr/bin/env python
+# encoding: utf-8
 """
 @author: Alfons
 @contact: alfons_xh@163.com
-@file: http_client.py 
-@time: 2017/7/21 11:36 
-@version: v1.0 
+@file: http_client.py
+@time: 2017/7/21 11:36
+@version: v1.0
 """
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 import requests
 import json
-import urllib
+import time
 
-server_url = "http://192.168.2.191"
 
-if __name__ == '__main__':
-    sys_resouce = json.loads(requests.get(url = server_url + "/SysResourceInfo.json").content)
+def DictFileUpdate():
+    """
+    wifilz字典文件上传、使用测试
+    :return:
+    """
+    server_url = "http://192.168.2.191"
+    system_status_url = "/SysResourceInfo.json"
+    get_dict_url = "/Settings/crackdict/GetDict"
+    update_dict_url = "/Settings/crackdict/UploadDict?name="
+    change_dict_seq_url = "/Settings/crackdict/adjustDicts"
+    del_dict_url = "/Settings/crackdict/DelDict?idlist="
+
+    sys_resouce = json.loads(requests.get(url = server_url + system_status_url).content)
     print sys_resouce
 
-    dicts_info_json = requests.get(url = server_url + "/Settings/crackdict/GetDict").content
+    dicts_info_json = requests.get(url = server_url + get_dict_url).content
     print dicts_info_json
 
     # 字典上传
-    # upload_dict_url = server_url + "/Settings/crackdict/UploadDict?name=" \
+    # upload_dict_url = server_url + update_dict_url \
     #                   + urllib.quote("License.txt") + "&des=" \
     #                   + urllib.quote("123456789")
     # files = {"data": open("License.txt", "rb")}
@@ -41,7 +55,7 @@ if __name__ == '__main__':
         seq = str(input("dict_seq:"))
         dicts_seq_list.append({"id": id, "s": seq})
     dicts_seq = {"dict": dicts_seq_list}
-    dicts_seq_content = requests.post(url = server_url + "/Settings/crackdict/adjustDicts",
+    dicts_seq_content = requests.post(url = server_url + change_dict_seq_url,
                                       json = json.dumps(dicts_seq))
     if json.loads(dicts_seq_content.content)["result"] == '0':
         print "dict change seq success!"
@@ -50,7 +64,7 @@ if __name__ == '__main__':
 
     # 删除字典
     # idlist = raw_input("idlist is :")
-    # dicts_del_info = requests.get(url = server_url+"/Settings/crackdict/DelDict?idlist="+ urllib.quote(idlist))
+    # dicts_del_info = requests.get(url = server_url+ del_dict_url + urllib.quote(idlist))
     # if json.loads(dicts_del_info.content)["result"] == '0':
     #     print "del dict success!"
     # else:
@@ -58,4 +72,68 @@ if __name__ == '__main__':
 
     dicts_info_json = requests.get(url = server_url + "/Settings/crackdict/GetDict").content
     print dicts_info_json
+
+
+def SetMultipleSSID():
+    """
+    wifilz多SSID测试
+    :return:
+    """
+    server_url = "http://192.168.2.182"
+    start_mulSSID_url = "/Operation/Scan/StartMultipleSSIDAttack"
+    get_mulSSID_status = "/Operation/Attack/MultipleSSIDAttackStatus"
+    stop_mulSSID_url = "/Operation/Attack/MultipleAttackStop"
+
+    # 发起多ssid取证
+    channel = "3"
+    count = "8"
+    aps = [
+        {
+            "ssid": "LGD",
+            "protype": "WPA",
+            "password": "lgdforthedream"
+        },
+        {
+            "ssid": "LGD_1",
+            "protype": "WPA",
+            "password": "lgdforthedream"
+        },
+        {
+            "ssid": "LGD_2",
+            "protype": "OPN",
+            "password": "lgdforthedream"
+        },
+        {
+            "ssid": "老干爹",
+            "protype": "WPA",
+            "password": "lgdforthedream"
+        }
+    ]
+    param_dict = {
+        "channel": channel,
+        "count": len(aps),
+        "aps": aps
+    }
+
+    param_json = json.dumps(param_dict)
+    start_content = requests.post(url = server_url + start_mulSSID_url, json = param_json).content
+    print start_content
+
+    # 获取多ssid取证状态
+    status_content = requests.get(url = server_url + get_mulSSID_status).content
+    print status_content
+
+    # 停止多ssid取证
+    stop_content = requests.get(url = server_url + stop_mulSSID_url).content
+    print stop_content
+    pass
+
+
+if __name__ == '__main__':
+    # 上传字典测试
+    # DictFileUpdate()
+
+    # 多SSID测试
+    SetMultipleSSID()
+
     pass
