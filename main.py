@@ -303,4 +303,13 @@ list_a = []
 list_a.append("sa")
 list_a.append("sa")
 print list_a
+
+str_a = "sd:cd:12:ed:fa:13"
+print str_a.upper()
+
+
+str_1 = ["1","2","3"]
+str_2 = ["fds","21"]
+str_2 += ["fassss","gfd"]
+print str_2
 pass
