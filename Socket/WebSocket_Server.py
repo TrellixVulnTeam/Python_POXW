@@ -20,6 +20,8 @@ def Receive(socket, nickname):
         BroadData(socket, "%s: %s" % (nickname, data))
     socket.close()
     CONNECTION_LIST.remove(socket)
+    print nickname + " leaved chatroom."
+    BroadData(socket, nickname + " leaved chatroom.")
 
 
 def SendData(sock):
@@ -27,6 +29,7 @@ def SendData(sock):
 
 
 def BroadData(sock, message):
+    print message
     for socket in CONNECTION_LIST:
         if socket != sock:
             try:
@@ -41,17 +44,17 @@ if __name__ == "__main__":
 
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind(('0.0.0.0', 7899))
-    server.listen(3)
+    server.listen(5)
 
     CONNECTION_LIST.append(server)
     print "Waiting NEW connection..."
 
     while True:
         sock, addr = server.accept()
-        nickname = sock.recv(1024)
-        BroadData(server, "Wlecome" + nickname + "enter chatroom.")
         CONNECTION_LIST.append(sock)
+        nickname = sock.recv(1024)
+        BroadData(server, "Wlecome " + nickname + " enter chatroom.")
         r = threading.Thread(target = Receive, args = (sock, nickname))
-        s = threading.Thread(target = SendData, args = sock)
+        s = threading.Thread(target = SendData, args = (sock,))
         r.start()
         s.start()
