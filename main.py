@@ -204,10 +204,6 @@ except:
     logging.error("Error : %s" % traceback.format_exc())
     pass
 
-import Socket.SocketTest
-
-Socket.SocketTest.run()
-
 str_find = "find_first_second_thresa"
 sub_str = str_find[str_find.find("qqq") + len("qqq"):]
 

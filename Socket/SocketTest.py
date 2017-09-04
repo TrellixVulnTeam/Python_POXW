@@ -8,9 +8,9 @@
 @version: v1.0 
 """
 import socket
-def run():
+if __name__ == "__main__":
     host_name = socket.gethostname()
-    host_name = "www.google.com"
+    host_name = "www.baidu.com"
     host_ip = socket.gethostbyname(host_name)
     print host_ip
 
