@@ -14,13 +14,15 @@ import time
 
 def Receive(socket, nickname):
     while True:
-        data = socket.recv(1024)
-        if data == 'exit' or not data:
-            break
-        BroadData(socket, "%s: %s" % (nickname, data))
+        try:
+            data = socket.recv(1024)
+            if data == 'exit' or not data:
+                break
+            BroadData(socket, "%s >>  %s" % (nickname, data))
+        except:
+            pass
     socket.close()
     CONNECTION_LIST.remove(socket)
-    print nickname + " leaved chatroom."
     BroadData(socket, nickname + " leaved chatroom.")
 
 
@@ -31,7 +33,7 @@ def SendData(sock):
 def BroadData(sock, message):
     print message
     for socket in CONNECTION_LIST:
-        if socket != sock:
+        if socket != sock and socket != server:
             try:
                 socket.send(message)
             except:
@@ -53,8 +55,6 @@ if __name__ == "__main__":
         sock, addr = server.accept()
         CONNECTION_LIST.append(sock)
         nickname = sock.recv(1024)
-        BroadData(server, "Wlecome " + nickname + " enter chatroom.")
-        r = threading.Thread(target = Receive, args = (sock, nickname))
-        s = threading.Thread(target = SendData, args = (sock,))
-        r.start()
-        s.start()
+        BroadData(server, "Wlecome " + nickname + "(%s:%s)" % addr + " enter chatroom.")
+        r = threading.Thread(target = Receive, args = (sock, nickname)).start()
+        s = threading.Thread(target = SendData, args = (sock,)).start()
