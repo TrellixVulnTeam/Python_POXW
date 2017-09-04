@@ -11,14 +11,15 @@ import socket
 import threading
 
 
-def SendData(sock):
+def SendData(sock, receiver):
     while True:
         data = raw_input()
         if data == "exit":
             break
         sock.send(data)
-        print "Me : %s" % data
+        print "Me >>  %s" % data
     sock.close()
+    receiver.join()
 
 
 def ReceiveData(sock):
@@ -29,10 +30,8 @@ def ReceiveData(sock):
 
 if __name__ == "__main__":
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client.connect(("192.168.2.41", 7899))
+    client.connect(("192.168.2.174", 7899))
     nickname = raw_input("Input your nickname:")
     client.send(nickname)
-    r = threading.Thread(target = SendData, args = (client,))
-    s = threading.Thread(target = ReceiveData, args = (client,))
-    r.start()
-    s.start()
+    r = threading.Thread(target = SendData, args = (client,)).start()
+    s = threading.Thread(target = ReceiveData, args = (client, r)).start()
