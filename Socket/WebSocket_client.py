@@ -33,5 +33,5 @@ if __name__ == "__main__":
     client.connect(("192.168.2.174", 7899))
     nickname = raw_input("Input your nickname:")
     client.send(nickname)
-    r = threading.Thread(target = SendData, args = (client,)).start()
-    s = threading.Thread(target = ReceiveData, args = (client, r)).start()
+    r = threading.Thread(target = ReceiveData, args = (client,)).start()
+    s = threading.Thread(target = SendData, args = (client, r)).start()
