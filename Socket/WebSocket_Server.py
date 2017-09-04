@@ -12,25 +12,46 @@ import threading
 import time
 
 
-def tcplink(sock, addr):
-    print "Accept new connection from %s:%s..." % addr
-    sock.send('hello %s!' % addr)
+def Receive(socket, nickname):
     while True:
-        data = sock.recv(1024)
-        time.sleep(1)
+        data = socket.recv(1024)
         if data == 'exit' or not data:
             break
-        sock.send("%s: %s" % addr, data)
-    sock.close()
-    print "Connection from %s:%s closed." % addr
+        BroadData(socket, "%s: %s" % (nickname, data))
+    socket.close()
+    CONNECTION_LIST.remove(socket)
 
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind(('0.0.0.0', 7899))
-s.listen(3)
-print "Waiting NEW connection..."
+def SendData(sock):
+    pass
 
-while True:
-    sock, addr = s.accept()
-    t = threading.Tread(target = tcplink, args = (sock, addr))
-    t.start
+
+def BroadData(sock, message):
+    for socket in CONNECTION_LIST:
+        if socket != sock:
+            try:
+                socket.send(message)
+            except:
+                socket.close()
+                CONNECTION_LIST.remove(socket)
+
+
+if __name__ == "__main__":
+    CONNECTION_LIST = []
+
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.bind(('0.0.0.0', 7899))
+    server.listen(3)
+
+    CONNECTION_LIST.append(server)
+    print "Waiting NEW connection..."
+
+    while True:
+        sock, addr = server.accept()
+        nickname = sock.recv(1024)
+        BroadData(server, "Wlecome" + nickname + "enter chatroom.")
+        CONNECTION_LIST.append(sock)
+        r = threading.Thread(target = Receive, args = (sock, nickname))
+        s = threading.Thread(target = SendData, args = sock)
+        r.start()
+        s.start()
