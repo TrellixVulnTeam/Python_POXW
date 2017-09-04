@@ -13,21 +13,28 @@ import time
 
 
 def Receive(socket, nickname):
-    while True:
-        try:
+    try:
+        while True:
             data = socket.recv(1024)
             if data == 'exit' or not data:
                 break
             BroadData(socket, "%s >>  %s" % (nickname, data))
-        except:
-            pass
+    except:
+        pass
     socket.close()
     CONNECTION_LIST.remove(socket)
     BroadData(socket, nickname + " leaved chatroom.")
 
 
 def SendData(sock):
-    pass
+    try:
+        while True:
+            data = raw_input()
+            if data == "":
+                continue
+            BroadData(server, "*" * 25 + "%s" % data + "*" * 25)
+    except:
+        pass
 
 
 def BroadData(sock, message):
