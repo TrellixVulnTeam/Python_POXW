@@ -3,49 +3,75 @@
 """
 @author: Alfons
 @contact: alfons_xh@163.com
-@file: AES.py 
-@time: 2017/9/5 9:48 
-@version: v1.0 
+@file: AES.py
+@time: 2017/9/5 9:48
+@version: v1.0
 """
-import sys
 from Crypto.Cipher import AES
 from binascii import b2a_hex, a2b_hex
+import hashlib
+import logging
+import traceback
 
-AES_SECRET_KEY = 'f1$s(m@q^9*r%#y-iz=l!k$vu%7@vc7+'
-IV = 16 * '\x00'
-
-
-class AES_ENCRYPT(object):
-    def __init__(self):
-        self.key = AES_SECRET_KEY
-        self.mode = AES.MODE_ECB
-
-    # 加密函数，如果text不是16的倍数【加密文本text必须为16的倍数！】，那就补足为16的倍数
-    def encrypt(self, text):
-        cryptor = AES.new(self.key, self.mode)
-        length = 16
-        count = len(text)
-        add = length - (count % length)
-        text = text + ('\0' * add)
-        print len(text)
-        self.ciphertext = cryptor.encrypt(text)
-        # 因为AES加密时候得到的字符串不一定是ascii字符集的，输出到终端或者保存时候可能存在问题
-        # 所以这里统一把加密后的字符串转化为16进制字符串
-        return b2a_hex(self.ciphertext)
-
-    def decrypt(self, text):
-        print len(AES_SECRET_KEY)
-        cryptor = AES.new(self.key, self.mode)
-        plain_text = cryptor.decrypt(a2b_hex(text))
-        # 解密后，去掉补足的空格用strip() 去掉
-        return plain_text.rstrip('\0')
+BLOCK_SIZE = 32
 
 
-if __name__ == '__main__':
-    aes_encrypt = AES_ENCRYPT()  # 初始化密钥
-    customer_id = "大吉大利，今晚吃鸡！"
-    e = aes_encrypt.encrypt(customer_id)
-    d = aes_encrypt.decrypt(e)
-    print customer_id
-    print e
-    print d
+def AES_ECB_ENCRYPT(plain_text, key, mode = AES.MODE_ECB):
+    """
+    AES ECB模式 ZeroPadding 加密，块大小为32byte
+    :param plain_text: 加密的字符串
+    :param key: 加密密钥
+    :param mode: AES模式，默认ECB模式
+    :return: 成功返回加密后的hex字符串，失败返回None
+    """
+    if len(key) != BLOCK_SIZE:
+        logging.error("AES加密参数错误：%s" % traceback.format_exc())
+        return None
+
+    cryptor = AES.new(key, mode)
+    plain_text += (BLOCK_SIZE - len(plain_text) % BLOCK_SIZE) * '\0'
+    cipher_text = cryptor.encrypt(plain_text)
+    # 因为AES加密时候得到的字符串不一定是ascii字符集的，输出到终端或者保存时候可能存在问题
+    # 所以这里统一把加密后的字符串转化为16进制字符串
+    return b2a_hex(cipher_text)
+
+
+def AES_ECB_DECRYPT(cipher_text, key, mode = AES.MODE_ECB):
+    """
+    AES ECB模式 解密，块大小为32byte
+    :param cipher_text: 解密的hex字符串
+    :param key: 解密密钥
+    :param mode: AES模式，默认ECB模式
+    :return: 成功返回解密后的字符串，失败返回None
+    """
+    if len(key) != BLOCK_SIZE \
+            or len(cipher_text) % BLOCK_SIZE != 0:
+        logging.error("AES解密参数错误：%s" % traceback.format_exc())
+        return None
+
+    cryptor = AES.new(key, mode)
+    plain_text = cryptor.decrypt(a2b_hex(cipher_text))
+    return plain_text.rstrip('\0')
+
+
+def md5(plaintext):
+    """
+    md5加密
+    :param plaintext: 加密的字符串
+    :return: 加密后的结果
+    """
+    m = hashlib.md5()
+    m.update(plaintext)
+    return m.hexdigest()
+
+
+if __name__ == "__main__":
+    str = "dajidali jinwan chiji"
+    key = md5(md5(str))
+    print "KEY:" + key
+    plaintext = "第九阿佛教"
+    print "Plaintext:" + plaintext
+    ciphertext = AES_ECB_ENCRYPT(plaintext, key)
+    print "Ciphertext:" + ciphertext
+    decodetext = AES_ECB_DECRYPT(ciphertext, key)
+    print "Decodetext:" + decodetext
