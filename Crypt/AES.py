@@ -75,3 +75,4 @@ if __name__ == "__main__":
     print "Ciphertext:" + ciphertext
     decodetext = AES_ECB_DECRYPT(ciphertext, key)
     print "Decodetext:" + decodetext
+

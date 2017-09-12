@@ -211,8 +211,11 @@ print "begin"
 import time
 import datetime
 
-print datetime.datetime.now()
-time_i = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(1499310653))
+time_now = datetime.datetime.now()
+# time_str = time.mktime(time_now.strptime)
+time_str = time.mktime(time_now.utctimetuple())
+
+time_i = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(time_str)))
 print time_i
 
 str_tmp = "1|2|3|4"
@@ -257,7 +260,7 @@ dict_s = {"channel": "2",
           "count": "4",
           "aps": [
               {
-                  "ssid": "mulwifi1",
+                  "ssid": "ssssssssssssssssflasjfladsjlkfjl",
                   "opn": "wpa",
                   "password": "12345678"
               },
@@ -291,7 +294,6 @@ print config
 keyperson_list = []
 keyperson_str = ','.join(keyperson_list)
 
-
 u_type = type(u"fdsaf")
 print u_type
 
@@ -303,9 +305,43 @@ print list_a
 str_a = "sd:cd:12:ed:fa:13"
 print str_a.upper()
 
-
-str_1 = ["1","2","3"]
-str_2 = ["fds","21"]
-str_2 += ["fassss","gfd"]
+str_1 = ["1", "2", "3"]
+str_2 = ["fds", "21"]
+str_2 += ["fassss", "gfd"]
 print str_2
+pass
+
+expiredate = "20092071"
+a = expiredate[::2]
+b = expiredate[1::2]
+
+hostname = socket.gethostname()
+ip_a = socket.gethostbyname(hostname)
+ipList = socket.gethostbyname_ex(hostname)
+print ip_a
+print ipList
+
+import pickle
+
+# with open("txt", "wb") as f:
+#     pickle.dump(dict_s, f)
+
+with open("LastAttack.record", "rb") as f2:
+    aps__s = pickle.load(f2)
+    print aps__s
+
+import random
+
+import string
+
+ran_str = ''.join(random.sample(string.ascii_letters + string.digits+ string.punctuation, 24))
+
+print ran_str
+
+if -1 == True:
+    print "2 is Tru"
+pass
+
+ap_info = {}
+ap_info.update({"ssid": 1, "protect":2, "password": 3})
 pass

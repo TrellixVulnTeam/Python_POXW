@@ -9,6 +9,8 @@
 """
 import socket
 import threading
+import websocket
+
 
 
 def SendData(sock, receiver):
@@ -16,7 +18,7 @@ def SendData(sock, receiver):
         data = raw_input()
         if data == "exit":
             break
-        sock.send(data)
+        sock.send(data,)
         print "Me >>  %s" % data
     sock.close()
     receiver.join()
@@ -24,14 +26,27 @@ def SendData(sock, receiver):
 
 def ReceiveData(sock):
     while True:
-        data = sock.recv(1024)
+        data = sock.recv()
         print data
 
 
 if __name__ == "__main__":
-    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client.connect(("192.168.2.174", 7899))
-    nickname = raw_input("Input your nickname:")
-    client.send(nickname)
-    r = threading.Thread(target = ReceiveData, args = (client,)).start()
+    #
+    #
+    # client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # client.connect(("ws://192.168.2.24/RcsDataSys/ws/httpsData/command",8088))
+    # nickname = raw_input("Input your nickname:")
+    # client.send(nickname)
+    # r = threading.Thread(target = ReceiveData, args = (client,))
+    # r.start()
+    # s = threading.Thread(target = SendData, args = (client, r)).start()
+
+    client = websocket.WebSocket()
+    # ws.connect(url ="ws://192.168.2.24:8088/RcsDataSys/ws/httpsData/command")
+    client.connect(url = "ws://127.0.0.1:9001")
+    client.recv()
+    client.send()
+    r = threading.Thread(target = ReceiveData, args = (client,))
+    r.start()
     s = threading.Thread(target = SendData, args = (client, r)).start()
+    pass
