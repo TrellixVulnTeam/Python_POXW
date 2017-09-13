@@ -128,12 +128,19 @@ def SetMultipleSSID():
     print stop_content
     pass
 
+def GetSystemUpdate():
+    update_url = "http://192.168.2.41:4443/Device/UpdatePack"
+    res = requests.get(url = update_url)
+    pass
+
 
 if __name__ == '__main__':
     # 上传字典测试
     # DictFileUpdate()
 
     # 多SSID测试
-    SetMultipleSSID()
+    # SetMultipleSSID()
 
+    # 获取系统更新包
+    GetSystemUpdate()
     pass
