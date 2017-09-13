@@ -81,15 +81,25 @@ class S(SimpleHTTPRequestHandler):
             print "PlaintText:" + AES_ECB_DECRYPT(data, encrypt_key)
 
             self.wfile.write(json.dumps(res_dict_3))
-        elif "GET /Device/UpdatePack" in self.requestline:
+        else:
+            self.wfile.write("empty data!")
+
+    def do_GET(self):
+        # f = self.send_head()
+        # if f:
+        #     try:
+        #         self.copyfile(f, self.wfile)
+        #     finally:
+        #         f.close()
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+        if "GET /Device/UpdatePack" in self.requestline:
             length = int(self.headers.getheader('content-length'))
             data = self.rfile.read(length)
             print data
             with open("dict1") as f:
                 self.wfile.write(f.read())
-        else:
-            self.wfile.write("empty data!")
-
 
 # str_test = "hello"
 # str_1 = str_test.read(3)
