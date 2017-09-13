@@ -18,16 +18,19 @@ def SendData(sock, receiver):
         data = raw_input()
         if data == "exit":
             break
-        sock.send(data,)
+        sock.send(data)
         print "Me >>  %s" % data
     sock.close()
     receiver.join()
 
 
 def ReceiveData(sock):
-    while True:
-        data = sock.recv()
-        print data
+    try:
+        while True:
+            data = sock.recv()
+            print data
+    except:
+        pass
 
 
 if __name__ == "__main__":
@@ -43,9 +46,9 @@ if __name__ == "__main__":
 
     client = websocket.WebSocket()
     # ws.connect(url ="ws://192.168.2.24:8088/RcsDataSys/ws/httpsData/command")
-    client.connect(url = "ws://127.0.0.1:9001")
+    client.connect(url = "ws://192.168.2.41:9001")
     client.recv()
-    client.send()
+    client.send("hfdas")
     r = threading.Thread(target = ReceiveData, args = (client,))
     r.start()
     s = threading.Thread(target = SendData, args = (client, r)).start()
