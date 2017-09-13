@@ -128,11 +128,16 @@ def SetMultipleSSID():
     print stop_content
     pass
 
+
 def GetSystemUpdate():
     update_url = "http://192.168.2.41:4443/Device/UpdatePack"
-    res = requests.get(url = update_url)
+    body = json.dumps({"version": "fasfas", "isFully": True})
+    res = requests.get(url = update_url, verify = False, data = body, stream=True)
+    with open("update","a") as f:
+        for chunk in res.iter_content(chunk_size = 5):
+            f.write(chunk)
+            print chunk
     pass
-
 
 if __name__ == '__main__':
     # 上传字典测试
