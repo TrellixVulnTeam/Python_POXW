@@ -7,7 +7,6 @@
 @time: 2017/5/10 11:03 
 @version: v1.0 
 """
-"""heldsldf"""
 import sys
 
 reload(sys)
@@ -80,7 +79,7 @@ class S(SimpleHTTPRequestHandler):
             print "KEY:" + encrypt_key
             print "PlaintText:" + AES_ECB_DECRYPT(data, encrypt_key)
 
-            self.wfile.write(json.dumps(res_dict_3))
+            self.wfile.write(AES_ECB_ENCRYPT(json.dumps(res_dict_3), encrypt_key))
         else:
             self.wfile.write("empty data!")
 
@@ -98,7 +97,7 @@ class S(SimpleHTTPRequestHandler):
             length = int(self.headers.getheader('content-length'))
             data = self.rfile.read(length)
             print data
-            with open("dict1") as f:
+            with open("wifilz3", "rb") as f:
                 self.wfile.write(f.read())
 
 # str_test = "hello"

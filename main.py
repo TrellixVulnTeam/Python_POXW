@@ -345,3 +345,6 @@ pass
 ap_info = {}
 ap_info.update({"ssid": 1, "protect":2, "password": 3})
 pass
+
+with open("text.txt","a") as f:
+    f.write("dafas")

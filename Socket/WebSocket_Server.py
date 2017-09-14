@@ -7,13 +7,20 @@
 @time: 2017/9/4 10:02
 @version: v1.0
 """
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 import socket
 import threading
 import time
 import logging
 from websocket_server import WebsocketServer
 import json
+from Crypt.AES import *
+import threading
 
+encrypt_key = "84c3e271c596b5a4288b685c0ae40f00"
 
 # Called for every client connecting (after handshake)
 def new_client(client, server):
@@ -28,9 +35,11 @@ def client_left(client, server):
 
 # Called when a client sends a message
 def message_received(client, server, message):
-    print("Client(%d) said: %s" % (client['id'], len(message)))
-    print("Client(%d) said: %s" % (client['id'], message))
-    server.send_message_to_all(json.dumps({"type": 1}))
+    print("Client(%d) said[length]: %s" % (client['id'], len(message)))
+    print("Client(%d) said[cryptotext]: %s" % (client['id'], message))
+    print("Client(%d) said[plaintext]: %s" % (client['id'], AES_ECB_DECRYPT(message, key = encrypt_key).decode("unicode-escape")))
+    server.send_message(client, AES_ECB_ENCRYPT(json.dumps({"type": 1}), key = encrypt_key))
+
 
 
 PORT = 9001
@@ -38,7 +47,30 @@ server = WebsocketServer(PORT, host = "192.168.2.41")
 server.set_fn_new_client(new_client)
 server.set_fn_client_left(client_left)
 server.set_fn_message_received(message_received)
-server.run_forever()
+threading.Thread(target = server.run_forever, args = ()).start()
+
+cmd_dict = {1: "restart", 2: "shutdown", 3: "startap", 4: "update", 5: "startap"}
+while True:
+    command = input()
+    cmd = {"command": cmd_dict.get(command), "id": 999, "type": 2}
+    if command == 3:
+        cmd.update({"aps": [{"ssid": "啊打发回家送饭", "protect": "WPA", "password": "doadssvdf56"}
+                            # {"ssid": "大吉大利今晚吃鸡", "protect": "OPN", "password": ""}
+                            ],
+                    "channel": 3})
+
+        cmd.update({"count": len(cmd.get("aps"))})
+    elif command == 5:
+        cmd.update({"aps": [{"ssid": "啊打发回家送饭", "protect": "WPA", "password": "doadssvdf56"},
+                            {"ssid": "大吉大利今晚吃鸡", "protect": "OPN", "password": ""},
+                            {"ssid": "大利大吉，今晚吃鸡！", "protect": "OPN", "password": ""},
+                            {"ssid": "今晚吃鸡，大吉大利！", "protect": "WPA", "password": "123456789898654654646514489465184163146fdsfasfasddseefdsaf"}
+                            ],
+                    "channel": 5})
+        cmd.update({"count": len(cmd.get("aps"))})
+    elif command == 4:
+        cmd.update({"version": "V 3.6.1", "isFully": True})
+    server.send_message_to_all(AES_ECB_ENCRYPT(json.dumps(cmd), key = encrypt_key))
 
 #
 # def Receive(socket, nickname):
