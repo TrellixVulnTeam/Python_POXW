@@ -54,18 +54,23 @@ class S(SimpleHTTPRequestHandler):
             print data2
             # self.wfile.write(json.dumps(res_dict_1))
             self.wfile.write(json.dumps(res_dict_1))
-        elif "POST /feadbackEntity&DeviceID=" in self.requestline:
+        elif "POST /Data/FileUpload?device=" in self.requestline:
             length = int(self.headers.getheader('content-length'))
             data = self.rfile.read(length)
             path = "C:/Users/shangchenhui/Desktop/TransferData/" \
                    + self.requestline[
-                     self.requestline.find("filePath=") + len("filePath="):self.requestline.find(" HTTP/1.1")]
+                     self.requestline.find("filename=") + len("filename="):self.requestline.find(" HTTP/1.1")]
             dir_path = path[:path.rfind('/')]
             if not os.path.isdir(dir_path):
                 os.makedirs(dir_path)
+
+            match_res = re.match(r'.*?device=(.*?)&rnd=(.*?)&.* HTTP.*?', self.requestline)
+            device_id = match_res.group(1)
+            random_str = urllib.unquote(match_res.group(2))
+            encrypt_key = md5(md5(device_id + random_str))
             with open(path, "wb") as f:
-                f.write(data)
-            self.wfile.write("OK")
+                f.write(AES_ECB_DECRYPT(data, encrypt_key))
+            self.wfile.write(AES_ECB_ENCRYPT(json.dumps(res_dict_3), encrypt_key))
         elif "POST /Data/Upload" in self.requestline:
             length = int(self.headers.getheader('content-length'))
             data = self.rfile.read(length)
