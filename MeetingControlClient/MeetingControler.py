@@ -33,8 +33,13 @@ class MeetingControler:
         self.__db_char = None
 
         self.__socketer = None       # socket连接
-        self.__sock_host = None      # socket地址
-        self.__sock_port = None      # socket端口
+        self.__sock_dev_host = None      # 设备端socket的ip地址
+        self.__sock_dev_port = None      # 设备端socket端口
+        self.__sock_con_host = None      # 控制端socket的ip地址
+        self.__sock_con_port = None      # 控制端socket端口
+
+        self.__dev_address = None   # 设备地址
+        self.__con_address = None   # 本地监听地址
 
         if config_path is None:
             self.__config_path = "./MeetingControl.xml"
@@ -58,8 +63,11 @@ class MeetingControler:
         初始化socket连接
         :return:
         """
-        self.__address = (self.__sock_host, self.__sock_port)
+        self.__dev_address = (self.__sock_dev_host, self.__sock_dev_port)
+
         self.__socketer = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.__con_address = (self.__sock_con_host, self.__sock_con_port)
+        self.__socketer.bind(self.__con_address)
 
     def SetConfig(self):
         """
@@ -98,10 +106,13 @@ class MeetingControler:
         :return:
         """
         socket_node = root.getElementsByTagName('Socket')[0]
-        self.__sock_host = socket_node.getAttribute("host")
-        self.__sock_port = int(socket_node.getAttribute("port"))
+        self.__sock_dev_host = socket_node.getAttribute("dev_host")
+        self.__sock_dev_port = int(socket_node.getAttribute("dev_port"))
+        self.__sock_con_host = socket_node.getAttribute("control_host")
+        self.__sock_con_port = int(socket_node.getAttribute("control_port"))
 
-    def __SendMessage(self):
+    def __SendMessage(self, message):
+        self.__socketer.sendto()
         pass
 
     def __ReceiveMessage(self):

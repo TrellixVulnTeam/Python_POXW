@@ -349,27 +349,32 @@ pass
 with open("text.txt","a") as f:
     f.write("dafas")
 
-# import xml.dom.minidom
-#
-# dom = xml.dom.minidom.parse("./FeedbackConfig.xml")
-# root = dom.documentElement
-#
-# docCreater = xml.dom.minidom.Document()
-# root.appendChild(docCreater.createTextNode("\t"))
-# version = docCreater.createElement("Version")
-# version.appendChild(docCreater.createTextNode("32.2"))
-# root.appendChild(version)
-# root.appendChild(docCreater.createComment("设备版本信息"))
-# root.appendChild(docCreater.createTextNode("\n\t"))
-# expireDate = docCreater.createElement("ExpireDate")
-# expireDate.appendChild(docCreater.createTextNode("32.2"))
-# root.appendChild(expireDate)
-# root.appendChild(docCreater.createComment("设备过期日期"))
-# root.appendChild(docCreater.createTextNode("\n"))
-#
-# with open("./FeedbackConfig.xml", "w") as f:
-#     dom.writexml(f, encoding = "utf-8")
-# pass
+import xml.dom.minidom
+
+dom = xml.dom.minidom.parse("./FeedbackConfig.xml")
+root = dom.documentElement
+try:
+    root.removeChild(root.getElementsByTagName('FeedbackDeviceStatus')[0])
+    root.removeChild(root.getElementsByTagName('FeedbackDB')[0])
+except:
+    print "nothing"
+
+docCreater = xml.dom.minidom.Document()
+root.appendChild(docCreater.createTextNode("\t"))
+version = docCreater.createElement("Version")
+version.appendChild(docCreater.createTextNode("32.2"))
+root.appendChild(version)
+root.appendChild(docCreater.createComment("设备版本信息"))
+root.appendChild(docCreater.createTextNode("\n\t"))
+expireDate = docCreater.createElement("ExpireDate")
+expireDate.appendChild(docCreater.createTextNode("32.2"))
+root.appendChild(expireDate)
+root.appendChild(docCreater.createComment("设备过期日期"))
+root.appendChild(docCreater.createTextNode("\n"))
+
+with open("./FeedbackConfig.xml", "w") as f:
+    dom.writexml(f, encoding = "utf-8")
+pass
 
 
 def getip():
