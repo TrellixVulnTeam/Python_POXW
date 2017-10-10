@@ -348,3 +348,43 @@ pass
 
 with open("text.txt","a") as f:
     f.write("dafas")
+
+# import xml.dom.minidom
+#
+# dom = xml.dom.minidom.parse("./FeedbackConfig.xml")
+# root = dom.documentElement
+#
+# docCreater = xml.dom.minidom.Document()
+# root.appendChild(docCreater.createTextNode("\t"))
+# version = docCreater.createElement("Version")
+# version.appendChild(docCreater.createTextNode("32.2"))
+# root.appendChild(version)
+# root.appendChild(docCreater.createComment("设备版本信息"))
+# root.appendChild(docCreater.createTextNode("\n\t"))
+# expireDate = docCreater.createElement("ExpireDate")
+# expireDate.appendChild(docCreater.createTextNode("32.2"))
+# root.appendChild(expireDate)
+# root.appendChild(docCreater.createComment("设备过期日期"))
+# root.appendChild(docCreater.createTextNode("\n"))
+#
+# with open("./FeedbackConfig.xml", "w") as f:
+#     dom.writexml(f, encoding = "utf-8")
+# pass
+
+
+def getip():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(('www.baidu.com', 0))
+        sock_name = s.getsockname()
+        ip = sock_name[0]
+    except:
+        ip = "x.x.x.x"
+    finally:
+        s.close()
+    return ip
+
+ip = getip()
+if not "":
+    print "heolo"
+pass
