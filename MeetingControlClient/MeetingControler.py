@@ -137,8 +137,13 @@ def ParseArgs():
 
 
 if __name__ == "__main__":
-    args = ParseArgs()
-    mettingControl = MeetingControler(args.config)
-    if mettingControl.SetConfig():
-        mettingControl.Start()
-    pass
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.bind(("127.0.0.1", 6544))
+    for data in ["lgdgod", "nvgod", "大吉大利"]:
+        s.sendto(data, ("192.168.2.174", 6555))
+        rece = s.recv(1024)
+    # args = ParseArgs()
+    # mettingControl = MeetingControler(args.config)
+    # if mettingControl.SetConfig():
+    #     mettingControl.Start()
+    # pass
