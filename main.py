@@ -216,6 +216,7 @@ time_now = datetime.datetime.now()
 time_str = time.mktime(time_now.utctimetuple())
 
 time_i = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(time_str)))
+print time_now
 print time_i
 
 str_tmp = "1|2|3|4"
@@ -334,7 +335,7 @@ import random
 
 import string
 
-ran_str = ''.join(random.sample(string.ascii_letters + string.digits+ string.punctuation, 24))
+ran_str = ''.join(random.sample(string.ascii_letters + string.digits + string.punctuation, 24))
 
 print ran_str
 
@@ -343,38 +344,39 @@ if -1 == True:
 pass
 
 ap_info = {}
-ap_info.update({"ssid": 1, "protect":2, "password": 3})
+ap_info.update({"ssid": 1, "protect": 2, "password": 3})
 pass
 
-with open("text.txt","a") as f:
+with open("text.txt", "a") as f:
     f.write("dafas")
 
-import xml.dom.minidom
 
-dom = xml.dom.minidom.parse("./FeedbackConfig.xml")
-root = dom.documentElement
-try:
-    root.removeChild(root.getElementsByTagName('FeedbackDeviceStatus')[0])
-    root.removeChild(root.getElementsByTagName('FeedbackDB')[0])
-except:
-    print "nothing"
-
-docCreater = xml.dom.minidom.Document()
-root.appendChild(docCreater.createTextNode("\t"))
-version = docCreater.createElement("Version")
-version.appendChild(docCreater.createTextNode("32.2"))
-root.appendChild(version)
-root.appendChild(docCreater.createComment("设备版本信息"))
-root.appendChild(docCreater.createTextNode("\n\t"))
-expireDate = docCreater.createElement("ExpireDate")
-expireDate.appendChild(docCreater.createTextNode("32.2"))
-root.appendChild(expireDate)
-root.appendChild(docCreater.createComment("设备过期日期"))
-root.appendChild(docCreater.createTextNode("\n"))
-
-with open("./FeedbackConfig.xml", "w") as f:
-    dom.writexml(f, encoding = "utf-8")
-pass
+# import xml.dom.minidom
+#
+# dom = xml.dom.minidom.parse("./FeedbackConfig.xml")
+# root = dom.documentElement
+# try:
+#     root.removeChild(root.getElementsByTagName('FeedbackDeviceStatus')[0])
+#     root.removeChild(root.getElementsByTagName('FeedbackDB')[0])
+# except:
+#     print "nothing"
+#
+# docCreater = xml.dom.minidom.Document()
+# root.appendChild(docCreater.createTextNode("\t"))
+# version = docCreater.createElement("Version")
+# version.appendChild(docCreater.createTextNode("32.2"))
+# root.appendChild(version)
+# root.appendChild(docCreater.createComment("设备版本信息"))
+# root.appendChild(docCreater.createTextNode("\n\t"))
+# expireDate = docCreater.createElement("ExpireDate")
+# expireDate.appendChild(docCreater.createTextNode("32.2"))
+# root.appendChild(expireDate)
+# root.appendChild(docCreater.createComment("设备过期日期"))
+# root.appendChild(docCreater.createTextNode("\n"))
+#
+# with open("./FeedbackConfig.xml", "w") as f:
+#     dom.writexml(f, encoding = "utf-8")
+# pass
 
 
 def getip():
@@ -389,7 +391,38 @@ def getip():
         s.close()
     return ip
 
+
 ip = getip()
 if not "":
     print "heolo"
+pass
+
+import struct
+from binascii import b2a_hex, a2b_hex
+import binascii
+
+proto_hdr = struct.Struct('< I c I H H c c')
+data_hdr = struct.Struct('< H H')
+
+COM_BEG = 0
+COM_END = 15
+MES_BEG = 15
+MES_END = 19
+
+COM_LEN_INDEX = 0
+CMD_INDEX = 5
+MES_LEN_INDEX = 0
+MES_INDEX = 1
+data = binascii.unhexlify(
+    "5700000003000000002800910b220018005000343630303131383537363136393231000000000018005100383632303936303331333632323230000000000018005d0045522062617272696e6700000000000000000000")
+
+cmd_obj = proto_hdr.unpack(data[COM_BEG:COM_END])
+cmd_len = cmd_obj[COM_LEN_INDEX]
+cmd = cmd_obj[CMD_INDEX]
+print cmd_len, cmd
+
+mes_unit_obj = data_hdr.unpack(data[MES_BEG:MES_END])
+mes_len = mes_unit_obj[MES_LEN_INDEX]
+mes_cmd = mes_unit_obj[MES_INDEX]
+print mes_len, mes_cmd
 pass
