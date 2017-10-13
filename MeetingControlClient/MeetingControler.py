@@ -178,7 +178,7 @@ class MeetingControler:
         self.__socketer.sendto()
         pass
 
-    def __MySqlStore(self, imei, imsi, phone, mac):
+    def __MySqlStore(self, imsi, imei, phone, mac):
         """
         存入mysql
         :param imei: imei
