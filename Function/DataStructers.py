@@ -88,3 +88,10 @@ def seq_function():
     print 'characters start to end is', name[:]
 
     print '_*_'.join(store)
+
+
+if __name__ == "__main__":
+    list_func()
+    tuple_func()
+    dictionary_func()
+    seq_function()

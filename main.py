@@ -291,8 +291,8 @@ config = (
          ) % ("sdfa", "asdfa", "ss")
 print config
 
-# keyperson_list = ["lgd", "eg", "vg"]
-keyperson_list = []
+keyperson_list = ["lgd", "eg", "vg"]
+# keyperson_list = []
 keyperson_str = ','.join(keyperson_list)
 
 u_type = type(u"fdsaf")
@@ -425,4 +425,16 @@ mes_unit_obj = data_hdr.unpack(data[MES_BEG:MES_END])
 mes_len = mes_unit_obj[MES_LEN_INDEX]
 mes_cmd = mes_unit_obj[MES_INDEX]
 print mes_len, mes_cmd
+pass
+
+# file_stat = os.stat(u"C:/Users/shangchenhui/Desktop/Wifilz_ARMv7打包平台搭建流程.md.html")
+# from selenium import
+
+starttime = datetime.datetime(2017, 10, 24)
+timenow = datetime.datetime.now()
+days = (timenow - starttime).days
+hours = (timenow - starttime).seconds / 3600
+minutes = ((timenow - starttime).seconds % 3600) / 60
+seconds = (timenow - starttime).seconds % 60
+time_str = "%sD %sH%sM%sS" % (str(days), str(hours), str(minutes), str(seconds))
 pass

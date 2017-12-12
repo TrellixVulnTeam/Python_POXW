@@ -9,16 +9,19 @@ import os
 import hashlib
 
 
-def ReadFiles(rootDir, level = 1):
+def ReadFiles(rootDir, level = 1, file_dict = {}):
     if level == 1:
         print rootDir
     for lists in os.listdir(rootDir):
         filepath = os.path.join(rootDir, lists)
-        print '│  ' * (level - 1) + '│--' + lists
+        # print '│  ' * (level - 1) + '│--' + lists
+        print filepath
+        md5 = ""
         if os.path.isdir(filepath):
-            ReadFiles(filepath, level + 1)
+            ReadFiles(filepath, level + 1, file_dict)
         else:
-            CalMD5(filepath)
+            md5 = CalMD5(filepath)
+        file_dict.update({filepath: md5})
 
 
 def CalMD5(filepath):
@@ -28,5 +31,8 @@ def CalMD5(filepath):
         return m.hexdigest()
 
 
-rootDir = "/home/xiaohui/svn/Wifi/trunk/Codes/wifilz.pack"
-ReadFiles(rootDir)
+if __name__ == "__main__":
+    rootDir = "D:/svn\Wifi/trunk/Codes/wifilz.pack"
+    files_dict = dict()
+    ReadFiles(rootDir, file_dict = files_dict)
+    pass

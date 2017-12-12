@@ -8,36 +8,28 @@
 @version: v1.0 
 """
 
-import socket
+import requests
+import time
+import logging
+import traceback
 
 
-def testConnection(ipAddr, portNum):
-    s = socket.socket()
-    s.settimeout(1.0)
-    try:
-        s.connect((ipAddr, portNum))
-        s.close()
-        return True
-    except:
-        return False
+def testConnection():
+    content = requests.get(url="http://download.aircrack-ng.org/aircrack-ng-1.2-rc3.tar.gz").content
+    pass
+    with open("hostapd-2.4.tar.gz", "wb") as f:
+        f.write(content)
 
 
 if __name__ == "__main__":
-    ports = {42203: "1栋里", 42205: "1栋外", 42202: "2栋里", 42218: "2栋外", 42201: "3栋里", 42215: "3栋外", 42214: "配电房"}
-    # get IP addr：cat *.log | awk '{print $9}' | sort | uniq -c | awk '{print $2}'
-    IpAddrs = ["114.221.177.40 "
-,"180.109.252.200"
-,"180.109.252.200"
-,"222.95.209.40	 "
-,"222.95.209.40	 "
-,"222.95.213.19	 "
-,"222.95.213.19	 "]
-    connect_port_list = []
-    for i in IpAddrs:
-        for p, q in ports.items():
-            if p in connect_port_list:
-                continue
-            if testConnection(i.strip(), p):
-                connect_port_list.append(p)
-                print 'SUCCESS:', i, p, q
+    while True:
+        try:
+            testConnection()
+        except:
+            with open("log.txt", "a") as f:
+                f.write("Except:%s" % traceback.format_exc())
+                f.write(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
+                f.write("\n")
+        finally:
+            time.sleep(30)
 
