@@ -438,3 +438,36 @@ minutes = ((timenow - starttime).seconds % 3600) / 60
 seconds = (timenow - starttime).seconds % 60
 time_str = "%sD %sH%sM%sS" % (str(days), str(hours), str(minutes), str(seconds))
 pass
+
+# src_dir = os.path.join("/home", (x for x in ["d","s","r"]))
+new_Sofile_list = []
+for SoFilename in ['libAndroidTricker.so', 'libCmdSet.so', 'libCommonSender.so', 'libConfigGenerator.so',
+                   'libCVEDigger.so', 'libFileReplace.so', 'libHttpsCrack.so', 'libInfoMining.so', 'libIptables.so',
+                   'libMainDll.so', 'libMitmSocket.so', 'libPacketDriver.so', 'libSoftMining.so', 'libSysLogWriter.so',
+                   'libTargetMain.so', 'libUploadSocket.so', 'libUtility.so', 'libWebDeceive.so', 'libWebJumper.so',
+                   'libWebRedirect.so']:
+    new_Sofile_list.append([SoFilename[3:-3]])
+print new_Sofile_list
+
+dict_a = {"a": 1, "b": 3, "c": 5}
+dict_b = {"a": 1, "d": 3, "c": 5}
+dict_c = set(dict_a.keys()) - set(dict_b.keys())
+dict_d = {}
+import json
+json_a = json.dumps(dict_a)
+pass
+
+# import requests
+# ip = "117.62.138.207:48015"
+# mac_list =  ["60:91:F3:08:DE:8E", "00:0C:E7:82:1F:53", "38:29:5A:02:14:67", "4C:49:E3:12:42:2F", "50:8F:4C:61:85:F6",
+#              "64:CC:2E:BE:E3:F9", "A4:44:D1:1D:27:2B", "C0:85:4C:91:14:0E", "DC:6D:CD:C4:08:A7", "2C:57:31:50:1E:32"]
+# url = "http://%s/Task/TaskNewObj?taskid=2&name=%s&description=%s&keytype=0&key=%s"
+# for mac_a in mac_list:
+#     uri = url % (ip, mac_list.index(mac_a), mac_list.index(mac_a), mac_a)
+#     content = requests.get(uri).content
+
+with open("updateLog.txt", "r") as f:
+    str_b = f.read()
+    dict_a = json.loads(str_b)
+
+pass

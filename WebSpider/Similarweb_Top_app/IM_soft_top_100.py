@@ -9,6 +9,7 @@
 """
 import requests
 import re
+import json
 from collections import OrderedDict
 
 Similarweb_URL = "https://pro.similarweb.com/#/appcategory/leaderboard/Google/840/Communication/AndroidPhone/Top%20Grossing"
@@ -40,3 +41,8 @@ if __name__ == "__main__":
         for key, value in soft_dict.items():
             f.write("| %s | %s | %s | %s |\n" % (key+1, value[0], value[1], value[2]))
             pass
+
+    with open("Top_100_dict.json", "wb") as f:
+        f.write(json.dumps(soft_dict))
+
+    pass

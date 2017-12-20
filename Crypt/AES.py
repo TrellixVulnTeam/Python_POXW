@@ -81,19 +81,25 @@ def md5(plaintext, time = 1):
 
 
 if __name__ == "__main__":
-    str = "dajidali jinwan chiji"
-    key1 = md5(md5(str))
-    print key1
-    key2 = md5(str, time = 2)
-    print key2
-    print key1 == key2
-    print "KEY:" + key1
-    plaintext = "第九阿佛教"
-    print "Plaintext:" + plaintext
-    # ciphertext = AES_ECB_ENCRYPT(plaintext, key)
-    key1 = "bc0ef838ed0acd1a31ce55b043a1c14c"
-    ciphertext = "55c781e86644e99aed984ad12a53a0a2fcc7b4bea42f2a7ee0cd384ba6e33d41df1d1034645130984d199243cc4e9643cea2be30c07a4c851b7092a02c8c98526d4dde88e7c73832dd7348771700530207937d5b986864c7ca56b4cfaff6e78a427e3841a660bca306c22f267033d2f2f659fa01529d329e3287a1999a104b17229bc22476d1dd8fb609f804fcec489504207c2119d0730223851ae7a3fb34ad6b4b942573892c96b64b2372be552fc91eccea5fba818f6cdc1990c7f3f1eac0b364651413be0159eb741d465ad00e23fd9c1e1f6e5482f7930c4145a96f295e "
-    print "Ciphertext:" + ciphertext
-    decodetext = AES_ECB_DECRYPT(ciphertext, key1).decode("unicode-escape")
-    print "Decodetext:" + decodetext
+    # str = "dajidali jinwan chiji"
+    # key1 = md5(md5(str))
+    # print key1
+    # key2 = md5(str, time = 2)
+    # print key2
+    # print key1 == key2
+    # print "KEY:" + key1
+    # plaintext = "第九阿佛教"
+    # print "Plaintext:" + plaintext
+    # # ciphertext = AES_ECB_ENCRYPT(plaintext, key)
+    # key1 = "bc0ef838ed0acd1a31ce55b043a1c14c"
+    # ciphertext = "55c781e86644e99aed984ad12a53a0a2fcc7b4bea42f2a7ee0cd384ba6e33d41df1d1034645130984d199243cc4e9643cea2be30c07a4c851b7092a02c8c98526d4dde88e7c73832dd7348771700530207937d5b986864c7ca56b4cfaff6e78a427e3841a660bca306c22f267033d2f2f659fa01529d329e3287a1999a104b17229bc22476d1dd8fb609f804fcec489504207c2119d0730223851ae7a3fb34ad6b4b942573892c96b64b2372be552fc91eccea5fba818f6cdc1990c7f3f1eac0b364651413be0159eb741d465ad00e23fd9c1e1f6e5482f7930c4145a96f295e "
+    # print "Ciphertext:" + ciphertext
+    # decodetext = AES_ECB_DECRYPT(ciphertext, key1).decode("unicode-escape")
+    # print "Decodetext:" + decodetext
 
+    url_list = ["https://play.google.com/store/apps/details?id=com.facebook.orca",
+                "https://play.google.com/store/apps/details?id=com.adhoclabs.burner"]
+    for url_a in url_list:
+        print md5(url_a) + ":" + url_a
+
+    pass
