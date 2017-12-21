@@ -1,0 +1,9 @@
+APScheduler
+Flask
+requests
+lxml
+
+pymongo
+redis
+
+

@@ -1,0 +1,9 @@
+
+com.facebook.orca
+com.sparklingapps.translatorkeyboard
+com.truconnect.communicator
+com.allinone.callerid
+com.smstext.messaging
+com.androminigsm.fscifree
+hoahong.facebook.messenger
+com.glitch.stitchandshare
