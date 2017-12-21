@@ -470,4 +470,5 @@ with open("updateLog.txt", "r") as f:
     str_b = f.read()
     dict_a = json.loads(str_b)
 
+dict_e = dict({1:"r"})
 pass
