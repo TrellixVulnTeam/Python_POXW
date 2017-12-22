@@ -120,7 +120,7 @@ def DownloadAPK(download_soft_dict):
                 print soft_name + ' reponse_dict["status"] == "error" %s' % reponse_dict["data"]
                 proxies = get_proxy()
                 # session = requests.session()
-                time.sleep(random.randint(60, 70))
+                time.sleep(20)
                 continue
 
             # 如果成功，则开始下载
@@ -169,6 +169,11 @@ if __name__ == "__main__":
         f.write(apk_files)
 
     with open("Top_100_dict.json", "rb") as f:
+        soft_dict = json.loads(f.read())
+    #
+    DownloadAPK(soft_dict)
+
+    with open("Top_free_dict.json", "rb") as f:
         soft_dict = json.loads(f.read())
     #
     DownloadAPK(soft_dict)

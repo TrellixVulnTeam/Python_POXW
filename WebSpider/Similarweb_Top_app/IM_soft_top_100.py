@@ -16,7 +16,7 @@ Similarweb_URL = "https://pro.similarweb.com/#/appcategory/leaderboard/Google/84
 
 if __name__ == "__main__":
     # content = requests.get(Similarweb_URL).content
-    with open("similarweb.html", "r") as f:
+    with open("similarweb_top_free.html", "r") as f:
         content = f.read()
 
     soft_name = re.compile('<div class="swTable-content">(.*?)</div>', re.S)
@@ -35,14 +35,14 @@ if __name__ == "__main__":
     for i in range(0, len(soft_name_list)):
         soft_dict.update({i: (soft_name_list[i], company_name_list[i], download_url_list[i])})
 
-    with open("Top_100.md", "wb") as f:
+    with open("Top_free.md", "wb") as f:
         f.write("| ID   | 软件名    |  开发公司  | 下载地址 |\n")
         f.write("| --------   | --------   | -----:   | :----: |\n")
         for key, value in soft_dict.items():
             f.write("| %s | %s | %s | %s |\n" % (key+1, value[0], value[1], value[2]))
             pass
 
-    with open("Top_100_dict.json", "wb") as f:
+    with open("Top_free_dict.json", "wb") as f:
         f.write(json.dumps(soft_dict))
 
     pass

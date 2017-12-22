@@ -6,6 +6,8 @@ co.loklok
 com.acapelagroup.android.tts
 com.adhoclabs.burner
 com.allinone.callerid
+com.androidream.hcalls
+com.androirc
 com.androminigsm.fscifree
 com.appfour.wearbrowser
 com.appsverse.photon
@@ -38,6 +40,7 @@ com.ecnetwork.crma
 com.edatech.securechat
 com.elf8000.android.cheapCalls
 com.emoji.keyboard.touchpal
+com.enflick.android.tn2ndLine
 com.etech.whatstrack
 com.facebook.orca
 com.fineapptech.ttalk
@@ -55,6 +58,7 @@ com.hb.dialer.free
 com.hello.hellochat
 com.hillman.out_loud
 com.hitalkphone.hitalk
+com.hnib.smslater
 com.hsv.freeadblockerbrowser
 com.hushed.release
 com.icubadevelopers.siju
@@ -62,6 +66,7 @@ com.ideationdesignservices.txtbook
 com.ievaphone.android
 com.ihk.whatsonline
 com.iplum.android
+com.isharing.isharing
 com.jb.gosms
 com.joliper.uc
 com.juphoon.justalk
@@ -123,6 +128,7 @@ com.steelkiwi.bvpn
 com.steganos.onlineshield
 com.syncme.syncmeapp
 com.syntomo.email
+com.talkatone.android
 com.telos.app.im
 com.tencent.mm
 com.tenta.android
@@ -143,6 +149,7 @@ com.vladlee.easyblacklist
 com.vonage.TimeToCall
 com.voxofon
 com.voyagerinnovation.talk2
+com.wa.whatsagent
 com.wephoneapp
 com.wescan.alo
 com.wifi.hotspot
@@ -177,6 +184,7 @@ me.sync.callerid
 me.talkyou.app.im
 me.truecontact.free
 mobi.drupe.app
+net.anei.cadpage
 net.devking.randomchat.android
 net.idt.um.android.bossrevapp
 net.momentcam.aimee
@@ -192,11 +200,10 @@ polis.app.callrecorder
 polis.app.callrecorder.pro
 rpkandrodev.yaata
 soalib.android.location
+tuogol.textbyvoice
 uk.co.digitalclockwork.apps.android.anonymoustexting
 us.textr.Anonytext
 v.d.d.answercall
 vixr.bermuda
 ws.coverme.im
 xyz.klinker.messenger
-com.androirc
-com.androidream.hcalls
