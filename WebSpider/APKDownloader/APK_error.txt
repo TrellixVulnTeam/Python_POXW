@@ -317,3 +317,15 @@ com.zerolab.gearfitmessages
 net.i2p.android.donate
 com.a1pager.pro
 pl.rfbenchmark.rfbenchmarkpro
+de.ncp.vpn.basic
+g.example.android.BluetoothChat
+com.eonsportsvr.lionvisionvr
+com.vishalmobitech.vblocker.callblocker
+com.videonasocialmedia.vimojo.main
+com.iiordanov.aRDP
+com.lemi.smsautoreplytextmessagepro
+com.azya.garmin.watchdialer
+net.newsoftwares.SMSandCallAnnouncerPro
+me.truecontact.pro
+com.elm.scan.obd.arny
+net.cm3d.dmv.ca.free

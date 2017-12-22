@@ -6,6 +6,7 @@ co.loklok
 com.acapelagroup.android.tts
 com.adhoclabs.burner
 com.allinone.callerid
+com.android.chrome
 com.androidream.hcalls
 com.androirc
 com.androminigsm.fscifree
@@ -84,9 +85,11 @@ com.mathrawk.calleridfaker
 com.matthew.rice.voice.text
 com.mdr.sms_integration_for_messages
 com.media5corp.m5f.Media5fone
+com.microsoft.exchange.mowa
 com.moez.QKSMS
 com.moplus.gvphone
 com.moplus.moplusapp
+com.muhappet.android
 com.myip.vpnroot
 com.mysms.android.sms
 com.nettia
@@ -101,6 +104,7 @@ com.p1.chompsms
 com.palmerperformance.DashCommand
 com.palringo.android
 com.paphus.julie
+com.phone.caller.locator
 com.pickaxe.android
 com.plugmind.cbtest
 com.primo.mobile.android.app
@@ -117,6 +121,7 @@ com.server.auditor.ssh.client
 com.sharetheworld.quicksms
 com.smsBlocker
 com.smstext.messaging
+com.sochat
 com.softlab.livetalk
 com.softvidia.moodi.responder
 com.sonelli.juicessh
@@ -128,6 +133,7 @@ com.steelkiwi.bvpn
 com.steganos.onlineshield
 com.syncme.syncmeapp
 com.syntomo.email
+com.szkct.weloopbtnotifition.main
 com.talkatone.android
 com.telos.app.im
 com.tencent.mm
@@ -162,6 +168,7 @@ de.fax.freefax
 de.phl.whoscalling
 de.resolution.yf_android
 de.shapeservices.implusfull
+de.tutao.tutanota
 dk.tacit.android.foldersync.lite
 express.whatson
 fahrbot.apps.rootcallblocker.beta
@@ -177,6 +184,7 @@ io.miltec.vodi
 io.oversec.one
 jp.naver.line.android
 kha.prog.mikrotik
+kr.core.technology.wifi.hotspot
 lifeisbetteron.com
 lv.indycall.client
 me.nextplus.smsfreetext.phonecalls

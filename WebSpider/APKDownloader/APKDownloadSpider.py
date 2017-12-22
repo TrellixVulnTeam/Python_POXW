@@ -118,15 +118,24 @@ def DownloadAPK(download_soft_dict):
                     f.write("\n")
 
                 print soft_name + ' reponse_dict["status"] == "error" %s' % reponse_dict["data"]
+                # 如果需要休息一段时间，则休息一段时间。
+                time_str = str(reponse_dict["data"])
+                sleep_time = time_str[time_str.find("again in "): time_str.find("minutes")].strip()
+                if sleep_time:
+                    time.sleep(float(sleep_time) * 60)
+                time.sleep(20)
+
                 proxies = get_proxy()
                 # session = requests.session()
-                time.sleep(20)
                 continue
 
             # 如果成功，则开始下载
             time.sleep(5)
             print "Download %s begining......" % soft_name
             apk_file = session.get(url = "https:" + reponse_dict["url"]).content
+            if not os.path.exists("Top_100_aps/"):
+                os.mkdir("Top_100_aps")
+
             with open("Top_100_aps/" + soft_name + ".apk", "wb") as f:
                 f.write(apk_file)
 
@@ -164,24 +173,24 @@ def dict_slice(adict, start, end):
 
 if __name__ == "__main__":
 
-    apk_files = "".join(os.listdir("Top_100_aps/")).replace(".apk", "\n")
-    with open("APK_status.txt", "w") as f:
-        f.write(apk_files)
+    # apk_files = "".join(os.listdir("Top_100_aps/")).replace(".apk", "\n")
+    # with open("APK_status.txt", "w") as f:
+    #     f.write(apk_files)
 
-    with open("Top_100_dict.json", "rb") as f:
-        soft_dict = json.loads(f.read())
-    #
-    DownloadAPK(soft_dict)
+    # with open("Top_100_dict.json", "rb") as f:
+    #     soft_dict = json.loads(f.read())
+    # DownloadAPK(soft_dict)
 
     with open("Top_free_dict.json", "rb") as f:
         soft_dict = json.loads(f.read())
-    #
     DownloadAPK(soft_dict)
     #
-    # thread_num = 20
-    # part_num = 540 / thread_num
+    # thread_num = 3
+    # part_num = len(soft_dict) / thread_num
     # for i in range(0, thread_num, 1):
     #     part_dict = dict_slice(soft_dict, i * part_num, (i + 1) * part_num)
+    #     with open("Top_free_dict_" + str(i) + ".json", "w") as f:
+    #         f.write(json.dumps(part_dict))
     #
     #     threading.Thread(target = DownloadAPK,
     #                      args = (part_dict,),
