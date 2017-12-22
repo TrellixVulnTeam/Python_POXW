@@ -120,7 +120,7 @@ def DownloadAPK(download_soft_dict):
                 print soft_name + ' reponse_dict["status"] == "error" %s' % reponse_dict["data"]
                 # 如果需要休息一段时间，则休息一段时间。
                 time_str = str(reponse_dict["data"])
-                sleep_time = time_str[time_str.find("again in "): time_str.find("minutes")].strip()
+                sleep_time = time_str[time_str.find("again in ") + len("again in "): time_str.find("minutes")].strip()
                 if sleep_time:
                     time.sleep(float(sleep_time) * 60)
                 time.sleep(20)
