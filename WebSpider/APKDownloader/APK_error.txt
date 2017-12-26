@@ -12,7 +12,6 @@ com.melonsapp.messenger.pro
 com.wolphi.cw
 com.kerryn.autoforwardsms
 org.mistergroup.muzutozvednoutdonationgold
-com.speechlogger.ttsreader
 com.datafile
 com.ceruleanstudios.trillian.android
 com.hwaggun3
@@ -33,6 +32,7 @@ com.apps.pvt.formalfloatsms
 uk.co.replyasap.alarm
 garminsmssender.rs.com.garminsmssender
 br.com.msapp.mycurriculumvitae
+com.greythinker.punchback.donotdisturb
 com.zing.messages.text.sms.mms.go.spinner.theme.pro
 com.androidbull.incognito.browser
 net.chatp
@@ -52,7 +52,6 @@ com.joyend.freygo
 tma.contactswidgetplus
 com.lw.hightechdialer.pro
 com.liveghostbox.stream2
-com.greythinker.punchback.donotdisturb
 lp.messengerfacebook.facebook.messenger.lite
 com.gooclient.eviewspro
 privatecontacts.pro
@@ -89,6 +88,7 @@ com.melonsapp.privacymessenger.pro
 com.go4yu
 com.apdroid.tabtalk
 com.tbeasy.mojisms
+ru.shuisky.toggles.pebble
 toto.gvcreditp
 io.hobnob.hobnob
 com.nomorobo
@@ -138,8 +138,6 @@ com.tele0.client
 com.fulminesoftware.handwrite.pro
 com.nick.mowen.texpert
 kha.prog.root
-com.cool.sms
-org.netTalk.smartphone
 com.anonymous.texting.fast.fish
 com.fongo.international
 com.devsite.mailcal
@@ -147,6 +145,7 @@ com.bitdeck.emailtextmessages
 com.thinkyeah.privatespace
 com.majedev.superbeampro
 greengow.alphacode.com.br
+com.grapplearts.bjjformula1
 ir.androidsoftware.telemember
 com.mdrs.airtext
 com.bestitguys.BetterYouMailPro
@@ -172,7 +171,6 @@ com.teltechcorp.tapeacall
 call.free.international.phone.call
 Scantech.CarGaugePro
 com.nam.fbwrapper.pro
-com.killermobile.totalrecall
 net.mugcat.everychat
 com.legaltextcollector
 de.devarc.hiddencall.unlocker
@@ -186,8 +184,6 @@ com.perracolabs.tccp
 com.n3wg.hamlog
 com.sasopoljansek.easycall
 it.nikodroid.offlinepro
-com.korrisoft.voice.recorder
-org.mistergroup.muzutozvednoutdonationsilver
 com.nulana.android.remotix
 com.srvrco.mobilesoftphone.androidmobilesoftphone.quickcall
 com.criticall
@@ -196,8 +192,6 @@ net.kismetwireless.android.smarterwifimanager
 com.lemi.callsautoresponderpro
 com.iu4apc.wsprbeacon
 com.jmarstudios.txtautoresponder.donate
-ru.shuisky.toggles.pebble
-com.grapplearts.bjjformula1
 ws.coverme.sentry
 abs.spread.sheet.docs
 wi721soft.paleokeyboard
@@ -205,7 +199,6 @@ com.artemkaxboy.android.autoredial
 fr.unix_experience.owncloud_sms
 com.jamworks.quickreply.pro
 com.lw.win10dialer.pro
-org.taiga.avesha.videocallid
 com.inetric.anonify
 com.mstream.etpc
 com.ideeo.nsnremote
@@ -237,8 +230,6 @@ com.heyemoji.onemms.pro
 com.esmobile.reverselookupplus
 com.wolphi.psk31
 com.mobile.viting
-com.smsplus.app
-com.validio.kontaktkarte.dialer
 com.androidbull.incognitobrowser.paid
 com.easyovpn.easyovpn.unlocker
 com.kwippit.android
@@ -258,7 +249,6 @@ com.pupsidedown.collegemoji2
 com.senstic.pocketcam
 com.tohsoft.callrecorderpro
 com.limeavenue.torque.mazda.speed.gen1
-com.inetric.orxy
 uk.co.bitninja.kmtpro
 com.faveset.klink_blue
 us.random.chat
@@ -297,10 +287,8 @@ de.bulling.smstalk
 com.whatslogin
 com.stevehultay.shackhack12469
 com.datingnode.gayxchange
+com.zerolab.gearfitmessages
 com.john.xmessengerprivacypremium
-com.revesoft.mobiledialer.fanytel.fanytel
-de.wgsoft.scanmaster
-com.trifecta.spaxtel
 cz.acrobits.softphone.aliengroundwire
 com.earfy.earfy
 eu.siacs.conversations
@@ -313,7 +301,6 @@ com.zifero.ftpclientpro
 com.kerio.voip
 com.appsverse.phoner
 com.seamlesssolutions.englishtranslator
-com.zerolab.gearfitmessages
 net.i2p.android.donate
 com.a1pager.pro
 pl.rfbenchmark.rfbenchmarkpro
@@ -328,4 +315,4 @@ com.azya.garmin.watchdialer
 net.newsoftwares.SMSandCallAnnouncerPro
 me.truecontact.pro
 com.elm.scan.obd.arny
-net.cm3d.dmv.ca.free
+org.mistergroup.muzutozvednoutdonationsilver

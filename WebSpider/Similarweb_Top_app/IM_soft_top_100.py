@@ -14,7 +14,20 @@ from collections import OrderedDict
 
 Similarweb_URL = "https://pro.similarweb.com/#/appcategory/leaderboard/Google/840/Communication/AndroidPhone/Top%20Grossing"
 
+
+def ExceptKey(soft_name):
+    for key_world in ["browser", "sms", "emoji", "vpn", "email", "wifi", "mail", "phone", "voip",
+                      "number", "mobile", "internet", "bluetooth", "dial", "caller", "firefox", "international call",
+                      "calling", "shar"]:
+        if key_world in soft_name.lower():
+            return True
+    return False
+
+
 if __name__ == "__main__":
+    with open("soft_info.json", "r") as f:
+        soft_pool = json.loads(f.read()).keys()
+
     # content = requests.get(Similarweb_URL).content
     with open("similarweb_top_free.html", "r") as f:
         content = f.read()
@@ -35,14 +48,21 @@ if __name__ == "__main__":
     for i in range(0, len(soft_name_list)):
         soft_dict.update({i: (soft_name_list[i], company_name_list[i], download_url_list[i])})
 
-    with open("Top_free.md", "wb") as f:
+    test_soft_list = list()
+    with open("Test_softs_infomation.md", "wb") as f:
         f.write("| ID   | 软件名    |  开发公司  | 下载地址 |\n")
         f.write("| --------   | --------   | -----:   | :----: |\n")
         for key, value in soft_dict.items():
+            if ExceptKey(value[0]):
+                continue
+            if value[2][value[2].find("id=") + 3:] not in soft_pool:
+                continue
             f.write("| %s | %s | %s | %s |\n" % (key+1, value[0], value[1], value[2]))
-            pass
+            test_soft_list.append(value[2][value[2].find("id=") + 3:])
 
     with open("Top_free_dict.json", "wb") as f:
         f.write(json.dumps(soft_dict))
 
+    with open("test_softs.txt", "w") as f:
+        f.write("\n".join(test_soft_list))
     pass
