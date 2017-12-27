@@ -457,17 +457,27 @@ import json
 json_a = json.dumps(dict_a)
 pass
 
-# import requests
-# ip = "180.109.185.165:48005"
-# mac_list =  ["60:91:F3:08:DE:8E", "00:0C:E7:82:1F:53", "38:29:5A:02:14:67", "4C:49:E3:12:42:2F", "50:8F:4C:61:85:F6",
-#              "64:CC:2E:BE:E3:F9", "A4:44:D1:1D:27:2B", "C0:85:4C:91:14:0E", "DC:6D:CD:C4:08:A7", "2C:57:31:50:1E:32"]
-# url = "http://%s/Task/TaskNewObj?taskid=2&name=%s&description=%s&keytype=0&key=%s"
-# for mac_a in mac_list:
-#     uri = url % (ip, mac_list.index(mac_a), mac_list.index(mac_a), mac_a)
-#     content = requests.get(uri).content
+import requests
+
+one_in = ":48003"
+one_out = "121.225.222.11:48005"
+two_in = ":48002"
+two_out = ":48018"
+thrid_in = ":48001"
+thrid_out = ":48015"
+ele_room = ":48014"
+ip = one_out
+mac_list = ["9C:FB:D5:EA:FF:47", "1C:DA:27:6C:DB:E6", "00:0C:E7:80:39:9F", "08:23:B2:57:7B:F6",
+            "18:E2:9F:1F:43:D6", "34:78:D7:9F:73:45", "EC:5A:86:A2:9E:42", "EC:DF:3A:75:A0:9C",
+            "E8:BB:A8:A0:0F:D5", "38:A4:ED:AB:38:16", "C4:0B:CB:87:C0:61", "14:36:C6:E8:68:82",
+            "DC:6D:CD:9A:95:EC", "3C:F5:91:75:A7:B1", "A4:44:D1:D0:FF:A9"]
+url = "http://%s/Task/TaskNewObj?taskid=2&name=%s&description=%s&keytype=0&key=%s"
+for mac_a in mac_list:
+    uri = url % (ip, mac_list.index(mac_a) + 10, mac_list.index(mac_a) + 10, mac_a)
+    content = requests.get(uri).content
 
 
-time_str = "dfsa again in 5.6 minutes"
-sleep_time = time_str[time_str.find("again in ") + len("again in "): time_str.find("minutes")].strip()
-time.sleep(float(sleep_time) * 60)
-pass
+# time_str = "dfsa again in 5.6 minutes"
+# sleep_time = time_str[time_str.find("again in ") + len("again in "): time_str.find("minutes")].strip()
+# time.sleep(float(sleep_time) * 60)
+# pass
