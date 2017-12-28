@@ -40,8 +40,8 @@ print("")
 from Function.Tuple import print_tuple
 
 print(print_tuple(3, 1, 2, 3, alfons = 12, aal = 32))
-print print_tuple.__name__
-print print_tuple.__doc__
+print(print_tuple.__name__)
+print(print_tuple.__doc__)
 print('')
 
 # NEW LINE,Function DataStruct
@@ -63,12 +63,12 @@ print ("\n{0:_^64}".format("class iPhone_v"))
 iPhone_3G = iPhone_v("iPhone_3G")
 iPhone_3G.say_hi()
 iPhone_v.how_many()
-print ""
+print("")
 
 iPhone_4s = iPhone_v("iPhone_4s")
 iPhone_4s.say_hi()
 iPhone_v.how_many()
-print ""
+print("")
 
 iPhone_3G.recycle()
 iPhone_4s.recycle()
@@ -90,14 +90,14 @@ from Function.io import io_using_file
 
 print ("\n{0:_^64}".format("File_func"))
 io_using_file.file_w_r()
-print ""
+print("")
 
 # NEW LINE,Produce List
 print ("{0:_^64}".format("列表生成式"))
 list_a = [x * x for x in range(1, 11)]
-print list_a
+print(list_a)
 list_a = [x * x for x in range(1, 11) if x % 2 == 0]
-print list_a
+print(list_a)
 n_list = ['X', 4, 'Y', 'Z']
 print ("\n{0:_^64}".format("通过[for...in...for...in...]完成"))
 list_a = [m + n.lower() for m in "ABC" for n in n_list if isinstance(n, str)]
@@ -457,27 +457,36 @@ import json
 json_a = json.dumps(dict_a)
 pass
 
-import requests
-
-one_in = ":48003"
-one_out = "121.225.222.11:48005"
-two_in = ":48002"
-two_out = ":48018"
-thrid_in = ":48001"
-thrid_out = ":48015"
-ele_room = ":48014"
-ip = one_out
-mac_list = ["9C:FB:D5:EA:FF:47", "1C:DA:27:6C:DB:E6", "00:0C:E7:80:39:9F", "08:23:B2:57:7B:F6",
-            "18:E2:9F:1F:43:D6", "34:78:D7:9F:73:45", "EC:5A:86:A2:9E:42", "EC:DF:3A:75:A0:9C",
-            "E8:BB:A8:A0:0F:D5", "38:A4:ED:AB:38:16", "C4:0B:CB:87:C0:61", "14:36:C6:E8:68:82",
-            "DC:6D:CD:9A:95:EC", "3C:F5:91:75:A7:B1", "A4:44:D1:D0:FF:A9"]
-url = "http://%s/Task/TaskNewObj?taskid=2&name=%s&description=%s&keytype=0&key=%s"
-for mac_a in mac_list:
-    uri = url % (ip, mac_list.index(mac_a) + 10, mac_list.index(mac_a) + 10, mac_a)
-    content = requests.get(uri).content
+# import requests
+#
+# one_in = ":48003"
+# one_out = "121.225.222.11:48005"
+# two_in = ":48002"
+# two_out = ":48018"
+# thrid_in = ":48001"
+# thrid_out = ":48015"
+# ele_room = "117.88.76.252:48014"
+# ip = ele_room
+# mac_list = ["9C:FB:D5:EA:FF:47", "1C:DA:27:6C:DB:E6", "00:0C:E7:80:39:9F", "08:23:B2:57:7B:F6",
+#             "18:E2:9F:1F:43:D6", "34:78:D7:9F:73:45", "EC:5A:86:A2:9E:42", "EC:DF:3A:75:A0:9C",
+#             "E8:BB:A8:A0:0F:D5", "38:A4:ED:AB:38:16", "C4:0B:CB:87:C0:61", "14:36:C6:E8:68:82",
+#             "DC:6D:CD:9A:95:EC", "3C:F5:91:75:A7:B1", "A4:44:D1:D0:FF:A9"]
+# url = "http://%s/Task/TaskNewObj?taskid=2&name=%s&description=%s&keytype=0&key=%s"
+# for mac_a in mac_list:
+#     uri = url % (ip, mac_list.index(mac_a) + 10, mac_list.index(mac_a) + 10, mac_a)
+#     content = requests.get(uri).content
 
 
 # time_str = "dfsa again in 5.6 minutes"
 # sleep_time = time_str[time_str.find("again in ") + len("again in "): time_str.find("minutes")].strip()
 # time.sleep(float(sleep_time) * 60)
 # pass
+
+import array
+num_1 = bytearray("abcdefghijk")
+mmv = memoryview(num_1)
+print(num_1)
+print(mmv.readonly)
+mmv[2] = "o"
+print(num_1)
+pass
