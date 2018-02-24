@@ -50,8 +50,10 @@ def AES_ECB_DECRYPT(cipher_text, key, mode = AES.MODE_ECB):
         return None
 
     cryptor = AES.new(key, mode)
-    plain_text = cryptor.decrypt(a2b_hex(cipher_text))
-    return plain_text.rstrip('\0')
+    # plain_text = cryptor.decrypt(a2b_hex(cipher_text))
+    plain_text = cryptor.decrypt(cipher_text)
+    # return plain_text.rstrip('\0')
+    return plain_text
 
 def md5(plaintext):
     """
@@ -74,7 +76,7 @@ def md5(plaintext, time = 1):
     m = hashlib.md5()
     m.update(plaintext)
     while tmp_time < time:
-        print m.hexdigest()
+        # print m.hexdigest()
         m.update(m.hexdigest())
         tmp_time += 1
     return m.hexdigest()
@@ -97,9 +99,6 @@ if __name__ == "__main__":
     # decodetext = AES_ECB_DECRYPT(ciphertext, key1).decode("unicode-escape")
     # print "Decodetext:" + decodetext
 
-    url_list = ["https://play.google.com/store/apps/details?id=com.facebook.orca",
-                "https://play.google.com/store/apps/details?id=com.adhoclabs.burner"]
-    for url_a in url_list:
-        print md5(url_a) + ":" + url_a
+
 
     pass

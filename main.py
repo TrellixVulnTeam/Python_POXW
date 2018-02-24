@@ -457,36 +457,59 @@ import json
 json_a = json.dumps(dict_a)
 pass
 
-# import requests
-#
-# one_in = ":48003"
-# one_out = "121.225.222.11:48005"
-# two_in = ":48002"
-# two_out = ":48018"
-# thrid_in = ":48001"
-# thrid_out = ":48015"
-# ele_room = "117.88.76.252:48014"
-# ip = ele_room
-# mac_list = ["9C:FB:D5:EA:FF:47", "1C:DA:27:6C:DB:E6", "00:0C:E7:80:39:9F", "08:23:B2:57:7B:F6",
-#             "18:E2:9F:1F:43:D6", "34:78:D7:9F:73:45", "EC:5A:86:A2:9E:42", "EC:DF:3A:75:A0:9C",
-#             "E8:BB:A8:A0:0F:D5", "38:A4:ED:AB:38:16", "C4:0B:CB:87:C0:61", "14:36:C6:E8:68:82",
-#             "DC:6D:CD:9A:95:EC", "3C:F5:91:75:A7:B1", "A4:44:D1:D0:FF:A9"]
-# url = "http://%s/Task/TaskNewObj?taskid=2&name=%s&description=%s&keytype=0&key=%s"
-# for mac_a in mac_list:
-#     uri = url % (ip, mac_list.index(mac_a) + 10, mac_list.index(mac_a) + 10, mac_a)
-#     content = requests.get(uri).content
-
 
 # time_str = "dfsa again in 5.6 minutes"
 # sleep_time = time_str[time_str.find("again in ") + len("again in "): time_str.find("minutes")].strip()
 # time.sleep(float(sleep_time) * 60)
-# pass
+# # pass
 
-import array
-num_1 = bytearray("abcdefghijk")
-mmv = memoryview(num_1)
-print(num_1)
-print(mmv.readonly)
-mmv[2] = "o"
-print(num_1)
+# import array
+# num_1 = bytearray("abcdefghijk")
+# mmv = memoryview(num_1)
+# print(num_1)
+# print(mmv.readonly)
+# mmv[2] = "o"
+# print(num_1)
+
+ChannelLimit = range(1, 14) + [222,333]
+
+print(ChannelLimit)
+print(ChannelLimit.index(333))
+print(ChannelLimit[-1 + 1])
+
+ChannelLimitTmp = list()
+ChannelLimitTmp += ChannelLimit
+channel = 6
+ChannelLimitTmp.remove(channel)
+print(ChannelLimitTmp)
+print(ChannelLimit)
+
+ChannelNum = random.choice([2])
+print(ChannelLimitTmp)
+print(ChannelLimit)
+
+ChannelLimit += ["dsa", 12321]
+
+OtherChans = ""
+if OtherChans:
+    other_chan_list = OtherChans.split(',')
+    AuxiChans = [int(x) for x in other_chan_list]
+
+dnses = "8.8.8.8,114.114.114.114,192.168.2.4"
+staticIpCfgStr = (
+            "auto {nic}\niface {nic} inet static\n\taddress {address}\n\tnetmask {netmask}\n\tgateway {gateway}\n\t"
+            ).format(nic = "wlan0", address = "192.168.2.41", netmask = "255.255.255.0", gateway = "192.168.2.1")
+staticIpCfgStr += "dns-nameservers %s\n" % (" ".join(dnses.split(",")))
+with open("test.txt", "wb") as f:
+    f.write(staticIpCfgStr)
+
+from random import choice
+nicList = [1]
+nic = choice(nicList)
+
+
+str_a = "haskjdfakjs"
+str_a = str_a.encode(encoding = "unicode-escape")
+str_b = str_a.decode(encoding = "unicode-escape")
+
 pass
