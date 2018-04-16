@@ -87,7 +87,7 @@ def Test_User():
     userID = loginResponseDict["data"]["user"]["userId"]
 
     # 更新列表
-    listUrl = "https://192.168.2.223/RcsViewSys/transfer//RcsDataSys/client/aos/phantom-list?SK={sk}&page=1&size=5&sort=id&order=DESC&phone-system-type=1&user-id={userID}".format(sk=sk, userID=userID)
+    listUrl = "https://192.168.2.223/RcsDataSys/client/aos/phantomListWifi?SK={sk}&page=1&size=5&sort=id&order=DESC&phone-system-type=1&user-id={userID}".format(sk=sk, userID=userID)
     listResponse = session.get(url = listUrl, verify = False)
     listContentDict = json.loads(listResponse.content)
     clientID = str(listContentDict["data"]["rows"][1]["id"])
@@ -130,10 +130,10 @@ if __name__ == '__main__':
     # Test_GetTrojanStat()
     # Test_RememberUserInfo()
     # Test_ForgetUserInfo()
-    Test_DeleteTrojan()
-    Test_Download()
+    # Test_DeleteTrojan()
+    # Test_Download()
 
     # 测试用户登陆
-    # Test_User()
+    Test_User()
     print("over")
     pass

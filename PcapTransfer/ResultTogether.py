@@ -7,29 +7,56 @@
 @time: 2018/4/9 16:54 
 @version: v1.0 
 """
-
 import os
 import json
 
-# dir_name = "E:/SignatureAnalysis/result"
-# result_list = [os.path.join(dir_name, f) for f in os.listdir(dir_name) if f[f.rfind(".") + 1:] == "json"]
-#
-# result_dict = dict()
-# for result_file in result_list:
-#     result_name = os.path.basename(result_file)
-#     with open(result_file, "r") as f:
-#         result_dict.update({result_name: json.loads(f.read())})
-#
-# with open(os.path.join(os.path.dirname(dir_name), "result.json"), "w") as f:
-#     f.write(json.dumps(result_dict))
-# pass
+threshold = 1      # 文件出现的临界值，大于等于此值需要记录
 
-import shutil
+resultDir = "E:/SignatureAnalysis/result"
+pcapSaveDir = "E:/SignatureAnalysis/pcapSave"
+resultList = [os.path.join(resultDir, f) for f in os.listdir(resultDir) if f[f.rfind(".") + 1:] == "json"]
 
-dir_name = "E:/SignatureAnalysis/pcap"
+countList = list()          # 记录文件出现的数量
+resultDict = dict()         # 记录文件的基本信息
+for resultFile in resultList:
+    resultJsonName = os.path.basename(resultFile)
+    with open(resultFile, "r") as f:
+        singleResult = json.loads(f.read())
 
-file_list = [os.path.join(dir_name, f) for f in os.listdir(dir_name) if f[f.find("."):] == ".pcap.pcap"]
-for file in file_list:
-    tmp_name = file[:file.rfind('.')]
-    shutil.move(file, tmp_name)
+    for fileName, fileInfo in singleResult.items():
+        if not fileInfo.get("files"):
+            continue
+
+        if fileName in countList:
+            resultDict[fileName]["count"] += 1
+            resultDict[fileName]["pcap"].update({resultJsonName[:resultJsonName.rfind('.')] + ".pcap": fileInfo.get("pduNumber")})
+            # result_dict[fileName]["host"].add(fileInfo.get("host"))
+            resultDict[fileName]["url"].add(fileInfo.get("url"))
+            resultDict[fileName]["file"] |= {f for f in fileInfo.get("files")}
+        else:
+            resultDict.update({fileName: {
+                "count": 1,
+                "file": {f for f in fileInfo.get("files")},
+                # "host": {fileInfo.get("host")},
+                "url": {fileInfo.get("url")},
+                "pcap": {resultJsonName[:resultJsonName.rfind('.')] + ".pcap": fileInfo.get("pduNumber")}
+            }})
+            countList.append(fileName)
+
+key_list = list(resultDict.keys())
+for key in key_list:
+    if resultDict[key]["count"] < threshold:
+        del resultDict[key]
+        continue
+    # result_dict[key]["host"] = list(value["host"])
+    resultDict[key]["url"] = list(resultDict[key]["url"])
+    resultDict[key]["file"] = list(resultDict[key]["file"])
+
+with open(os.path.join(os.path.dirname(resultDir), "SummaryResult.json"), "w") as f:
+    f.write(json.dumps(resultDict))
+
+# for key, value in result_dict.items():
+#     pcapName = os.path.join(pcap_dir, key[:key.rfind('.json')] + ".pcap")
+#     dstPath = os.path.join(pcap_analysis_dir, os.path.basename(pcapName))
+#     shutil.copy(pcapName, dstPath)
 pass

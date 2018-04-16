@@ -8,6 +8,7 @@
 @version: v1.0
 """
 import json
+import time
 
 list_a = ["sd", 43, 65]
 list_json = json.dumps(list_a)
@@ -93,7 +94,7 @@ def printHello(name):
     print("hello: %s" % name)
 
 
-threading.Timer(3, printHello, {"name": "xiaohui"}).start()
+threading.Timer(3, printHello, ["xiaohui"]).start()
 
 expiredtime = "2018-04-10 17:00:00"
 expireddate = datetime.strptime(expiredtime, "%Y-%m-%d %H:%M:%S")
@@ -103,5 +104,17 @@ if expireddate < datetime.now():
     print(sec, day)
 
 str_a = "1234"
-str_b = str_a[-5]
+str_b = str_a[-1]
+
+import os
+
+# os.remove("./1.txt")
+pass
+
+time_a = str(int(time.time()))
+
+expiredtime = datetime.strptime("2018-04-10 08:05:02", "%Y-%m-%d %H:%M:%S")
+if not isinstance(expiredtime, timedelta):
+    pass
+
 pass
