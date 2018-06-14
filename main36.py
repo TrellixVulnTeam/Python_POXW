@@ -13,9 +13,8 @@ import time
 list_a = ["sd", 43, 65]
 list_json = json.dumps(list_a)
 
-set_a = {(254, "2018-03-29 19:05:19", "123456789", "wifi.apk"),
-         # (255, "2018.04.27 11-12-30", "1234567823", "lib.so"),
-         (254, "2018-03-29 11:12:30", "123456789", "wifi.apk")}
+set_a = {(254, "2018.03.29 11-12-30", "123456789", "wifi.apk"),
+         (255, "2018.03.27 11-12-30", "1234567823", "lib.so")}
 
 set_b = {(254, "2018.03.29 11-12-30", "123456789", "wifi.apk"),
          (255, "2018.03.27 11-12-30", "1234567823", "lib.so")}
@@ -26,7 +25,7 @@ print(diffSet)
 set_json = json.dumps(list(diffSet))
 diffSet2 = {tuple(e) for e in json.loads(set_json)}
 
-lastUpdateTime = max(set_a, key = lambda p: p[1])[1]
+lastUpdateTime = max(set_a, key=lambda p: p[1])[1]
 
 from collections import namedtuple
 
@@ -63,7 +62,7 @@ def SetExpiredtime(expiredtime):
         hours = float(expiredtime[expiredtime.find('d') + 1:expiredtime.find('h')])
         mins = float(expiredtime[expiredtime.find('h') + 1:expiredtime.find('m')])
 
-        expiredDateStr = (datetime.now() + timedelta(days = days, hours = hours, minutes = mins)).strftime(
+        expiredDateStr = (datetime.now() + timedelta(days=days, hours=hours, minutes=mins)).strftime(
             "%Y-%m-%d %H:%M:%S")
         pass
     except:
@@ -116,5 +115,68 @@ time_a = str(int(time.time()))
 expiredtime = datetime.strptime("2018-04-10 08:05:02", "%Y-%m-%d %H:%M:%S")
 if not isinstance(expiredtime, timedelta):
     pass
+
+import base64
+
+# with open("libadd.so", "rb") as f:
+#     encodedZip = base64.b64encode(f.read())
+#     with open("tmp.txt", "w") as f2:
+#         f2.write(encodedZip.decode())
+encodeZip = "90m74mD7r2qZQQoTA6G97Q=="
+with open("libadd2.so", "wb") as f:
+    f.write(base64.b64decode(encodeZip))
+pass
+
+list_a = [1, 2, 3, 4]
+list_b = [4, 5, 6, 7]
+list_a.extend(list_b)
+pass
+
+a = 5
+b = 2
+print("a / b=", a / b)
+print("type(a)", type(a))
+
+import threading
+
+i = "dsafa".upper()
+j = "".lower()
+
+
+def OperationSuccess(**kwargs):
+    """
+    web接口返回处理成功信息
+    :param kwargs: 其他字段
+    :return:
+    """
+    successDict = dict(result=True)
+    successDict.update({key: value for key, value in kwargs.items()})
+    return json.dumps(successDict)
+
+
+print(OperationSuccess())
+
+
+def FindLast(srcList):
+    dstList = list()
+    for i in srcList[::-1]:
+        if i not in dstList:
+            dstList.append(i)
+    return dstList[::-1]
+
+
+if __name__ == "__main__":
+    # os.removedirs("./1a")
+    srcList = [1, 8, 7, 3, 8, 3, 1]
+    tmpList = list()
+    dstList = [tmpList.append(i) for i in srcList if i not in tmpList]
+    print(dstList)
+    print(FindLast(srcList))
+    list_a = list()
+    list_a.append(1)
+    list_a.append(2)
+    list_a.append(3)
+    list_a.append(4)
+    list_a.append(5)
 
 pass

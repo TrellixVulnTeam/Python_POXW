@@ -8,22 +8,36 @@
 @version: v1.0 
 """
 import threading, time, random
+
 count = 0
 lock = threading.Lock()
 
 
 def doAdd():
-    '''@summary: 将全局变量count 逐一的增加10000。
-    '''
+    """
+    将全局变量count 逐一的增加10000。
+    :return:
+    """
     global count, lock
-    lock.acquire()
-    for i in xrange(10000):
+    # lock.acquire()
+    # for i in range(10000000):
+    #     count = count + 1
+    # lock.release()
+    #
+    # with lock:
+    #     for i in range(1000000000):
+    #         count = count + 1
+
+    for i in range(1000000000):
         count = count + 1
-        print threading.currentThread(),count
-    lock.release()
 
+threadList = list()
+for _ in range(10):
+    threadTmp = threading.Thread(target=doAdd, name='thread')
+    threadTmp.start()
+    threadList.append(threadTmp)
 
-threading.Thread
-threading.Thread(target = doAdd, args = (), name = 'thread').start()
-time.sleep(2)  # 确保线程都执行完毕
-print count
+for thread in threadList:
+    thread.join()
+
+print(count)
