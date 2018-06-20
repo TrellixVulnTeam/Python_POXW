@@ -164,6 +164,7 @@ def FindLast(srcList):
             dstList.append(i)
     return dstList[::-1]
 
+from subprocess import Popen
 
 if __name__ == "__main__":
     # os.removedirs("./1a")
@@ -174,9 +175,7 @@ if __name__ == "__main__":
     print(FindLast(srcList))
     list_a = list()
     list_a.append(1)
-    list_a.append(2)
-    list_a.append(3)
-    list_a.append(4)
-    list_a.append(5)
+
+    Popen("")
 
 pass
