@@ -176,6 +176,21 @@ if __name__ == "__main__":
     list_a = list()
     list_a.append(1)
 
-    Popen("")
+    json1 = "C:\\Users\\xiaohui\\Desktop\\南京pcap文件处理结果\\SummaryResult.json"
+    json2 = "E:\\SignatureAnalysis\\SummaryResult.json"
+    with open(json1, "r") as f1, open(json2, "r") as f2:
+        result1_dict = json.loads(f1.read())
+        result2_dict = json.loads(f2.read())
+        result = set(result1_dict.keys()) & set(result2_dict.keys())
+
+        key = json1[json1.rfind('.'):]
+        importResult = {key: result2_dict[key] for key in result if key[key.rfind('.'):] not in [".exe", ".apk", ".dll"]}
+
+        from collections import OrderedDict
+
+        importResult = OrderedDict(sorted(importResult.items(), key=lambda t: t[1]["count"], reverse=True))
+
+        with open("./Important.json", "w") as f:
+            f.write(json.dumps(importResult))
 
 pass
