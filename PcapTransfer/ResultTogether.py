@@ -12,11 +12,15 @@ import json
 
 threshold = 1      # 文件出现的临界值，大于等于此值需要记录
 
-resultDir = "E:/SignatureAnalysis/result"
+resultDir = "C:/Users/xiaohui/Desktop/南京pcap文件处理结果"
 pcapSaveDir = "E:/SignatureAnalysis/pcapSave"
-resultList = [os.path.join(resultDir, f) for f in os.listdir(resultDir) if f[f.rfind(".") + 1:] == "json"]
 
-countList = list()          # 记录文件出现的数量
+resultList = list()
+subDir = [dir for dir in os.listdir(resultDir) if not os.path.isfile(os.path.join(resultDir, dir))]
+for dir in subDir:
+    resultList += [os.path.join(resultDir, dir, f) for f in os.listdir(os.path.join(resultDir, dir)) if f.endswith(".json")]
+
+countList = list()  # 记录文件出现的数量
 resultDict = dict()         # 记录文件的基本信息
 for resultFile in resultList:
     resultJsonName = os.path.basename(resultFile)
@@ -24,20 +28,20 @@ for resultFile in resultList:
         singleResult = json.loads(f.read())
 
     for fileName, fileInfo in singleResult.items():
-        if not fileInfo.get("files"):
-            continue
+        # if not fileInfo.get("files"):
+        #     continue
 
         if fileName in countList:
             resultDict[fileName]["count"] += 1
             resultDict[fileName]["pcap"].update({resultJsonName[:resultJsonName.rfind('.')] + ".pcap": fileInfo.get("pduNumber")})
-            # result_dict[fileName]["host"].add(fileInfo.get("host"))
+            resultDict[fileName]["host"].add(fileInfo.get("host"))
             resultDict[fileName]["url"].add(fileInfo.get("url"))
             resultDict[fileName]["file"] |= {f for f in fileInfo.get("files")}
         else:
             resultDict.update({fileName: {
                 "count": 1,
                 "file": {f for f in fileInfo.get("files")},
-                # "host": {fileInfo.get("host")},
+                "host": {fileInfo.get("host")},
                 "url": {fileInfo.get("url")},
                 "pcap": {resultJsonName[:resultJsonName.rfind('.')] + ".pcap": fileInfo.get("pduNumber")}
             }})
@@ -48,12 +52,19 @@ for key in key_list:
     if resultDict[key]["count"] < threshold:
         del resultDict[key]
         continue
-    # result_dict[key]["host"] = list(value["host"])
+    resultDict[key]["host"] = list(resultDict[key]["host"])
     resultDict[key]["url"] = list(resultDict[key]["url"])
     resultDict[key]["file"] = list(resultDict[key]["file"])
 
-with open(os.path.join(os.path.dirname(resultDir), "SummaryResult.json"), "w") as f:
-    f.write(json.dumps(resultDict))
+# 过滤非apk后缀的信息
+resultDict = {key: value for key, value in resultDict.items() if not key.endswith(".apk")}
+
+from collections import OrderedDict
+
+orderResult = OrderedDict(sorted(resultDict.items(), key=lambda t: t[1]["count"], reverse=True))
+
+with open(os.path.join(resultDir, "SummaryResult.json"), "w") as f:
+    f.write(json.dumps(orderResult))
 
 # for key, value in result_dict.items():
 #     pcapName = os.path.join(pcap_dir, key[:key.rfind('.json')] + ".pcap")
