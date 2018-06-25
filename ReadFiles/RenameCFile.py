@@ -49,6 +49,6 @@ for rt, dirs, files in os.walk("""D://svn//Wifi//trunk//Codes//Xplico"""):
                 str += line
             with open(file_path, "w") as f:
                 f.write(str)
-    print rt, dirs, files
+    print(rt, dirs, files)
 
 pass

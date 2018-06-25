@@ -11,11 +11,11 @@ import hashlib
 
 def ReadFiles(rootDir, level = 1, file_dict = {}):
     if level == 1:
-        print rootDir
+        print(rootDir)
     for lists in os.listdir(rootDir):
         filepath = os.path.join(rootDir, lists)
         # print '│  ' * (level - 1) + '│--' + lists
-        print filepath
+        print(filepath)
         md5 = ""
         if os.path.isdir(filepath):
             ReadFiles(filepath, level + 1, file_dict)

@@ -43,16 +43,16 @@ try:
                          'stats.*?class="number">(.*?)</i>', re.S)
     items = re.findall(pattern, content)
     for item in items:
-        print item[1] + u":" + item[0]
-        print ""
-        print item[2]
-        print item[3] + u" 人觉得好笑"
-        print "\n" * 3
+        print(item[1] + u":" + item[0])
+        print("")
+        print(item[2])
+        print(item[3] + u" 人觉得好笑")
+        print("\n" * 3)
         SaveImg(item[0])
 except urllib2.URLError, e:
     if hasattr(e, "code"):
-        print e.code
+        print(e.code)
     if hasattr(e, "reason"):
-        print e.reason
+        print(e.reason)
 
 pass
