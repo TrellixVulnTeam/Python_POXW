@@ -7,10 +7,6 @@
 @time: 2017/9/4 10:02
 @version: v1.0
 """
-import sys
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
 import socket
 import threading
 import time

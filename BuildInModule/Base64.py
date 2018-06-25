@@ -8,8 +8,8 @@
 @version: v1.0 
 """
 import base64
-str_1 = "helloworld++//"
-base64_A = base64.encodestring(str_1)
-base64_B = base64.decodestring(base64_A)
+str_1 = b"helloworld++//"
+base64_A = base64.encodebytes(str_1)
+base64_B = base64.decodebytes(base64_A)
 base64_C = base64.urlsafe_b64decode(base64_A)
 pass

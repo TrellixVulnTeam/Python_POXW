@@ -32,7 +32,7 @@ dequeA.pop()
 dequeA.popleft()
 dequeA.append('shd')
 dequeA.clear()
-print dequeA.maxlen
+print(dequeA.maxlen)
 pass
 
 print ("\n{0:_^64}".format("Build-in mould:defaultdict"))

@@ -10,9 +10,10 @@
 import socket
 if __name__ == "__main__":
     host_name = socket.gethostname()
+    print(host_name)
     host_name = "www.baidu.com"
     host_ip = socket.gethostbyname(host_name)
-    print host_ip
+    print(host_ip)
 
     DstPort = 20480
     converPort = socket.htons(DstPort)
