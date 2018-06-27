@@ -29,7 +29,7 @@ if __name__ == "__main__":
     QueueManager.register("get_task_queue", callable=get_task_queue)
     QueueManager.register("get_result_queue", callable=get_result_queue)
 
-    manager = QueueManager(address=("127.0.0.1", 5000), authkey=b"chick")
+    manager = QueueManager(address=("192.168.2.53", 5000), authkey=b"chick")
 
     manager.start()
 
@@ -46,5 +46,6 @@ if __name__ == "__main__":
         r = result.get(timeout=100)
         print("Result is ", r)
 
+    time.sleep(10)
     manager.shutdown()
     print("Manager exit.")
