@@ -46,6 +46,5 @@ if __name__ == "__main__":
         r = result.get(timeout=100)
         print("Result is ", r)
 
-    time.sleep(10)
     manager.shutdown()
     print("Manager exit.")
