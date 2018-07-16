@@ -129,6 +129,9 @@ if __name__ == "__main__":
     plaintext = "大吉大利，晚上吃鸡！"
     print("Plaintext:", plaintext)
     ciphertext = AES_ENCRYPT(plaintext, key)
-    print("Ciphertext:", ciphertext.decode)
+    print("Ciphertext:", ciphertext.decode())
     decodetext = AES_DECRYPT(ciphertext, key)
-    print("Decodetext:", decodetext.decode())
+    print("Decodetext:", decodetext.decode('gb2312', 'replace'))
+
+    WeChat = "866184028560766-458746054"
+    print("WeChat SQL password:", md5(WeChat)[:7])
