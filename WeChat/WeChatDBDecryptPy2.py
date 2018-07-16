@@ -14,6 +14,7 @@ logging.basicConfig(filename='EnMicroMsg-decrypted.log', format="%(asctime)s %(l
                     datefmt="%d-%b-%Y %I:%M:%S %p", level=logging.DEBUG)
 
 
+
 def decrypt(key):
     logging.info("Connecting database...")
     conn = sqlite.connect("EnMicroMsg.db")
