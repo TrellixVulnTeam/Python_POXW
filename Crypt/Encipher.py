@@ -14,7 +14,7 @@ import random
 import string
 import os
 
-BLOCK_SIZE = 32
+BLOCK_SIZE = 16
 
 
 def AES_ENCRYPT(plain_text, keyWord, mode=AES.MODE_ECB, blockSize = BLOCK_SIZE):
@@ -126,12 +126,19 @@ if __name__ == "__main__":
     str = "dajidali jinwan chiji"
     key = md5(md5(str))
     print("KEY:", key)
-    plaintext = "大吉大利，晚上吃鸡！"
-    print("Plaintext:", plaintext)
-    ciphertext = AES_ENCRYPT(plaintext, key)
-    print("Ciphertext:", ciphertext.decode())
-    decodetext = AES_DECRYPT(ciphertext, key)
-    print("Decodetext:", decodetext.decode('gb2312', 'replace'))
 
-    WeChat = "866184028560766-458746054"
-    print("WeChat SQL password:", md5(WeChat)[:7])
+    plaintext = "100"
+    print("Plaintext:", plaintext)
+
+    ciphertext = AES_ENCRYPT(plaintext, key[:16])
+    print("Ciphertext:", ciphertext.decode())
+
+    # plaintext = "大吉大利，晚上吃鸡！"
+    # print("Plaintext:", plaintext)
+    # ciphertext = AES_ENCRYPT(plaintext, key)
+    # print("Ciphertext:", ciphertext.decode())
+    # decodetext = AES_DECRYPT(ciphertext, key)
+    # print("Decodetext:", decodetext.decode('gb2312', 'replace'))
+    #
+    # WeChat = "866184028560766-458746054"
+    # print("WeChat SQL password:", md5(WeChat)[:7])

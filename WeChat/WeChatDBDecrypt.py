@@ -24,6 +24,7 @@ def decrypt(key):
     c.execute("PRAGMA key = '" + key + "';")
     c.execute("PRAGMA cipher_use_hmac = OFF;")
     c.execute("PRAGMA cipher_page_size = 1024;")
+
     c.execute("PRAGMA kdf_iter = 4000;")
     try:
         logging.info("Decrypting...")
@@ -40,7 +41,7 @@ def decrypt(key):
 
 
 def generate_key():
-    imei = input("IMEI: ")
+    imei = "866184028560766"
     logging.info("IMEI: " + str(imei))
     uin = get_uin()
     logging.info("UIN: " + str(uin))
