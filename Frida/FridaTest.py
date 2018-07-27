@@ -8,7 +8,7 @@ import frida
 
 jscode = """
 console.log("[*] Starting script");
-Java.perform(function () {
+Java.perform(function () {              // 生成java虚拟机的环境
     Java.enumerateLoadedClasses(
     {
     "onMatch": function(className){
