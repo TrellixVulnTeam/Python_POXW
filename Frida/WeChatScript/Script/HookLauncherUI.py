@@ -24,6 +24,8 @@ pid = device.spawn("com.tencent.mm")  # 重新启动应用
 session = device.attach(pid)  # 附着的usb设备的对应的程序的进程，返回会话
 device.resume(pid)
 
+# session = device.attach("com.tencent.mm")
+
 with open("HookLauncherUI.js", "r", encoding="utf-8") as f:
     script = session.create_script(f.read())  # 创建执行的脚本
 
