@@ -31,5 +31,37 @@ Java.perform(function () {
     //     return this.i(str1, str2, str3);
     // };
 
+    // var logClass = Java.use("com.tencent.mm.sdk.platformtools.x");
+    // logClass.d.overload("java.lang.String", "java.lang.String", "[Ljava.lang.Object;").implementation = function (str1, str2, strArr) {
+    //     // if ("MicroMsg.RsaInfo" === str1) {
+    //         console.log("*************************************");
+    //         console.log("Original arg1: " + str1);
+    //         console.log("Original arg2: " + str2);
+    //         console.log("Original arg3: " + strArr);
+    //         console.log("\n");
+    //     // }
+    //     this.d(str1, str2, strArr);
+    // };
 
+    var TbsLogClass = Java.use("com.tencent.smtt.utils.TbsLog");
+    TbsLogClass.i.overload("java.lang.String", "java.lang.String", "boolean").implementation = function (str1, str2, strArr) {
+        // if ("MicroMsg.RsaInfo" === str1) {
+            console.log("**************（str, str, bool）***********************");
+            console.log("Original arg1: " + str1);
+            console.log("Original arg2: " + str2);
+            console.log("Original arg3: " + strArr);
+            console.log("\n");
+        // }
+        this.i(str1, str2, strArr);
+    };
+
+    TbsLogClass.i.overload("java.lang.String", "java.lang.String").implementation = function (str1, str2) {
+        // if ("MicroMsg.RsaInfo" === str1) {
+            console.log("***************(str, str)**********************");
+            console.log("Original arg1: " + str1);
+            console.log("Original arg2: " + str2);
+            console.log("\n");
+        // }
+        this.i(str1, str2);
+    };
 });

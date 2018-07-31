@@ -41,7 +41,7 @@ def spinner_func(before='', after=''):
     while True:
         pos = (pos + 1) % len(DISPLAY)
         msg = before + DISPLAY[pos] + after
-        write(msg);
+        write(msg)
         flush()
         write('\x08' * len(msg))
         time.sleep(DELAY)
@@ -53,6 +53,15 @@ def long_computation():
 
 
 if __name__ == '__main__':
+    cipher = 225
+    D = 29
+    N = 323
+
+    plaintxt = cipher**10 % N
+
+    h = int("E161DA03D0B6AAD21F9A4FB27C32A3208AF25A707BB0E8ECE79506FBBAF97519D9794B7E1B44D2C6F2588495C4E040303B4C915F172DD558A49552762CB28AB309C08152A8C55A4DFC6EA80D1F4D860190A8EE251DF8DECB9B083674D56CD956FF652C3C724B9F02BE5C7CBC63FC0124AA260D889A73E91292B6A02121D25AAA7C1A87752575C181FFB25A6282725B0C38A2AD57676E0884FE20CF56256E14529BC7E82CD1F4A1155984512BD273D68F769AF46E1B0E3053816D39EB1F0588384F2F4B286E5CFAFB4D0435BDF7D3AA8D3E0C45716EAD190FDC66884B275BA08D8ED94B1F84E7729C25BD014E7FA3A23123E10D3A93B4154452DDB9EE5F8DAB67", 16)
+    print(h)
+
     spinner = multiprocessing.Process(None, spinner_func, args=('Please wait ... ', ''))
     spinner.start()
     try:
@@ -63,7 +72,7 @@ if __name__ == '__main__':
 
 from threading import Thread
 
-import asyncio
-
-@asyncio.coroutine
+# import asyncio
+#
+# @asyncio.coroutine
 
