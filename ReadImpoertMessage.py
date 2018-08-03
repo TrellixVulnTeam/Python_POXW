@@ -53,6 +53,15 @@ def long_computation():
 
 
 if __name__ == '__main__':
+    import xmltodict
+    import dicttoxml
+    with open("Config2.xml", "r", encoding="utf-8") as f1:
+        config_dict = xmltodict.parse(f1.read())
+
+    print(config_dict)
+
+    with open("Config3.xml", "w") as f2:
+        f2.write(xmltodict.unparse(config_dict,  pretty=True))
     cipher = 225
     D = 29
     N = 323

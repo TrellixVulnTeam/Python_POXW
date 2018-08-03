@@ -70,11 +70,11 @@ address_books = test_pb2.AddressBook()
 # 从文件中反序列化
 if os.path.isfile(ADDRESS_BOOK):
     with open(ADDRESS_BOOK, "rb") as f:
-        address_books.ParseFromString(f.read())
+        address_books.ParseFromString(f.read())         # 从字符串中读取
 
 ListPeople(address_books)
 PromptForAddress(address_books.people.add())  # 传入值为个人信息的列表增量，关键字为repeated
 
 # 序列化数据至文件
 with open(ADDRESS_BOOK, "wb") as f:
-    f.write(address_books.SerializeToString())
+    f.write(address_books.SerializeToString())          # 序列化到字符串，用于存储
