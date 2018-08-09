@@ -7,6 +7,8 @@
 import frida
 import json
 
+classNameList = list()
+
 
 def MessageHandle(message, payload):
     if message["type"] == "error":
@@ -16,6 +18,7 @@ def MessageHandle(message, payload):
     elif message["type"] == "send":
         classname = json.loads(message["payload"])["classname"]
         if "tencent" in classname:
+            classNameList.append(classname)
             print("[*]", classname)
     else:
         print("[*]Message: ", message)
@@ -34,3 +37,5 @@ script.on("message", MessageHandle)  # 添加返回错误的回调显示函数
 script.load()
 
 input("Press enter to continue...")
+with open("ClassName.txt", "w") as f:
+    f.write("\n".join(sorted(classNameList)))

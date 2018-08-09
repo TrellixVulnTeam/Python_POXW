@@ -9,59 +9,56 @@ Java.perform(function () {
     //         return this.n(customSmileyPreviewUI);
     // }
 
-    // var logClass = Java.use("com.tencent.mm.sdk.platformtools.x");
-    // logClass.i.overload("java.lang.String", "java.lang.String").implementation = function (str1, str2) {
-    //     if ("MicroMsg.LauncherUI" === str1) {
-    //         console.log("*************************************");
-    //         console.log("Original arg1: " + str1);
-    //         console.log("Original arg2: " + str2);
-    //         console.log("\n");
-    //     }
-    //     this.i(str1, str2);
-    // };
+    function PrintValue(name, argValue) {
+        console.log("[*] " + name + ":");
+        for (var i in argValue) {
+            console.log("   " + name + "[" + i + "] -> " + argValue[i]);
+        }
+        console.log("\n");
+    }
 
-    // logClass.i.overload("java.lang.String", "java.lang.String", '[Ljava.lang.Object').implementation = function (str1, str2, str3) {
-    //     if ("MicroMsg.LauncherUI" === str1) {
-    //         console.log("*************************************");
-    //         console.log("Original arg1: " + str1);
-    //         console.log("Original arg2: " + str2);
-    //         console.log("Original arg3: " + str3);
-    //         console.log("\n");
-    //     }
-    //     return this.i(str1, str2, str3);
-    // };
+    function PrintBytes(arg) {
+        var memory_regions = new Array();
+        for (var i = 0; i < arg.length; i++) {
+            memory_regions.push(arg[i]);
+        }
 
-    // var logClass = Java.use("com.tencent.mm.sdk.platformtools.x");
-    // logClass.d.overload("java.lang.String", "java.lang.String", "[Ljava.lang.Object;").implementation = function (str1, str2, strArr) {
-    //     // if ("MicroMsg.RsaInfo" === str1) {
-    //         console.log("*************************************");
-    //         console.log("Original arg1: " + str1);
-    //         console.log("Original arg2: " + str2);
-    //         console.log("Original arg3: " + strArr);
-    //         console.log("\n");
-    //     // }
-    //     this.d(str1, str2, strArr);
-    // };
+        var str = "";
+        for (var i = 0; i < memory_regions.length; i++) {
+            str += (memory_regions[i].toString(16) + " ");
+        }
+        console.log(arg + " -> " + str);
+    }
 
-    var TbsLogClass = Java.use("com.tencent.smtt.utils.TbsLog");
-    TbsLogClass.i.overload("java.lang.String", "java.lang.String", "boolean").implementation = function (str1, str2, strArr) {
-        // if ("MicroMsg.RsaInfo" === str1) {
-            console.log("**************（str, str, bool）***********************");
-            console.log("Original arg1: " + str1);
-            console.log("Original arg2: " + str2);
-            console.log("Original arg3: " + strArr);
-            console.log("\n");
-        // }
-        this.i(str1, str2, strArr);
+    var unpackClass = Java.use("com.tencent.mm.protocal.MMProtocalJni");
+    unpackClass.unpack.implementation = function (arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8) {
+        console.log("\n[*] com.tencent.mm.protocal.MMProtocalJni.unpack :");
+        PrintBytes(arg1);
+        PrintBytes(arg2);
+        PrintBytes(arg3);
+        PrintBytes(arg4);
+        PrintBytes(arg5);
+        PrintBytes(arg6);
+        PrintBytes(arg7);
+        PrintBytes(arg8);
+        return this.unpack(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
     };
 
-    TbsLogClass.i.overload("java.lang.String", "java.lang.String").implementation = function (str1, str2) {
-        // if ("MicroMsg.RsaInfo" === str1) {
-            console.log("***************(str, str)**********************");
-            console.log("Original arg1: " + str1);
-            console.log("Original arg2: " + str2);
-            console.log("\n");
-        // }
-        this.i(str1, str2);
-    };
+    var packClass = Java.use("com.tencent.mm.protocal.MMProtocalJni");
+    packClass.pack.implementation = function (arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12) {
+        console.log("\n[*] com.tencent.mm.protocal.MMProtocalJni.pack :");
+        PrintValue(arg1, arg1);
+        PrintValue(arg2, arg2);
+        PrintValue(arg3, arg3);
+        PrintValue(arg4, arg4);
+        PrintValue(arg5, arg5);
+        PrintValue(arg6, arg6);
+        PrintValue(arg7, arg7);
+        PrintValue(arg8, arg8);
+        PrintValue(arg9, arg9);
+        PrintValue(arg10, arg10);
+        PrintValue(arg11, arg11);
+        PrintValue(arg12, arg12);
+        return this.pack(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12);
+    }
 });

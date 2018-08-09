@@ -78,3 +78,4 @@ PromptForAddress(address_books.people.add())  # 传入值为个人信息的列�
 # 序列化数据至文件
 with open(ADDRESS_BOOK, "wb") as f:
     f.write(address_books.SerializeToString())          # 序列化到字符串，用于存储
+

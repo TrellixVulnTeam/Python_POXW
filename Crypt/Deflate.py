@@ -7,10 +7,11 @@
 @time: 2018/1/25 16:04 
 @version: v1.0 
 """
-import urllib2
-from gzip import GzipFile
-from StringIO import StringIO
+# from gzip import GzipFile
+# from StringIO import StringIO
+import os
 import zlib
+
 
 # def loadData(url):
 #     request = urllib2.Request(url)
@@ -24,10 +25,10 @@ import zlib
 #         content = deflate(content)
 #     return content
 
-def gzip(data):
-    buf = StringIO(data)
-    f = GzipFile(fileobj=buf)
-    return f.read()
+# def gzip(data):
+#     buf = StringIO(data)
+#     f = GzipFile(fileobj=buf)
+#     return f.read()
 
 def deflate(data):
     try:
@@ -35,9 +36,11 @@ def deflate(data):
     except zlib.error:
         return zlib.decompress(data)
 
+
 def main():
-    with open("reponse", "rb") as f:
-        print(deflate(f.read()))
+    zipFileName = [zipFile for zipFile in os.listdir("./") if zipFile.endswith(".zip")][-1]
+    with open(zipFileName, "rb") as f, open("target.zip", "wb") as f2:
+        f2.write(deflate(f.read()))
 
 
 if __name__ == '__main__':

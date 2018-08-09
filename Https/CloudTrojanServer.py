@@ -12,6 +12,7 @@ import json
 
 server = Bottle()
 
+
 @server.route("/website/home")
 def WebsiteHome():
     resDict = dict()
@@ -28,28 +29,28 @@ def PhantomList():
         u"data":
             {
                 u"rows": [
-                        {
-                            u"id": 132,
-                            u"clientType": 1,
-                            u"wifilz-file":
-                                {
-                                    u"file-name": u"wifilz.apk"
-                                },
-                            u"md5": u"7007659a88d8a7e3080354d9eb5fa354",
-                            u"create-time": u"2018-03-12 08:01:20",
-                            u"effectiveTime": u"1D2H0M0S"
-                        },
-                        {
-                            u"id": 133,
-                            u"clientType": 2,
-                            u"wifilz-file":
-                                {
-                                    u"file-name": u"0002.zip"
-                                },
-                            u"md5": u"0825dddf4238bd55a75da84c086cdb54",
-                            u"create-time": u"2018-03-12 08:01:20",
-                            u"effectiveTime": u"1D2H0M0S"
-                        }
+                    {
+                        u"id": 132,
+                        u"clientType": 1,
+                        u"wifilz-file":
+                            {
+                                u"file-name": u"wifilz.apk"
+                            },
+                        u"md5": u"7007659a88d8a7e3080354d9eb5fa354",
+                        u"create-time": u"2018-03-12 08:01:20",
+                        u"effectiveTime": u"1D2H0M0S"
+                    },
+                    {
+                        u"id": 133,
+                        u"clientType": 2,
+                        u"wifilz-file":
+                            {
+                                u"file-name": u"0002.zip"
+                            },
+                        u"md5": u"0825dddf4238bd55a75da84c086cdb54",
+                        u"create-time": u"2018-03-12 08:01:20",
+                        u"effectiveTime": u"1D2H0M0S"
+                    }
                 ]
             }
     })
@@ -77,4 +78,4 @@ def Logout():
 
 
 if __name__ == "__main__":
-    server.run(host = '127.0.0.1', port = 8081)
+    server.run(host='127.0.0.1', port=8081)
