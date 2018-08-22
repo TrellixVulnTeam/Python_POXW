@@ -30,17 +30,28 @@ import zlib
 #     f = GzipFile(fileobj=buf)
 #     return f.read()
 
-def deflate(data):
+def DeflateDecompress(data):
     try:
         return zlib.decompress(data, -zlib.MAX_WBITS)
     except zlib.error:
         return zlib.decompress(data)
 
 
+def DeflateCompress(data):
+    try:
+        return zlib.compress(data, -zlib.MAX_WBITS)
+    except zlib.error:
+        return zlib.compress(data)
+
+
 def main():
-    zipFileName = [zipFile for zipFile in os.listdir("./") if zipFile.endswith(".zip")][-1]
-    with open(zipFileName, "rb") as f, open("target.zip", "wb") as f2:
-        f2.write(deflate(f.read()))
+    # zipFileName = [zipFile for zipFile in os.listdir("./") if zipFile.endswith(".zip")][-1]
+    oriName = "WeChat_Dns"
+    # with open(zipFileName, "rb") as f, open(zipFileName[:-4], "wb") as f2:
+    #     f2.write(DeflateDecompress(f.read()))
+
+    with open(oriName + ".xml", "rb")as f1, open(oriName, "wb") as f2:
+        f2.write(DeflateCompress(f1.read())[2:-4])
 
 
 if __name__ == '__main__':

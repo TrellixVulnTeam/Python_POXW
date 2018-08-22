@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    function setupWebViewJavascriptBridge(callback) {//ios的桥接
+        if (window.WebViewJavascriptBridge) {
+            return callback(WebViewJavascriptBridge);
+        }
+        if (window.WVJBCallbacks) {
+            return window.WVJBCallbacks.push(callback);
+        }
+        window.WVJBCallbacks = [callback];
+        var WVJBIframe = document.createElement('iframe');
+        WVJBIframe.style.display = 'none';
+        WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+        document.documentElement.appendChild(WVJBIframe);
+        setTimeout(function () {
+            document.documentElement.removeChild(WVJBIframe)
+        }, 0)
+    }
+
+    function getAppinfor(data, callback) {//数据，回调
+        document.write("getAppinfor begin" + "</br>");
+
+        // for (var i in window) {
+        //     document.write("[*] window[" + i + "] = " + window[i] + "</br>");
+        // }
+        document.write(window.postMessage("hello", "hello") + "</br>");
+        document.write(Date() + "</br>");
+        if (window.android != undefined) {//android挂载的对象
+            document.write("window.android != undefined");
+            data.userid = window.android.getUserId();//用户userid
+            document.write(data.userid);
+            if (callback != undefined) {
+                callback();
+            }
+            ;
+        } else {//ios
+            setupWebViewJavascriptBridge(function (bridge) { //js回调 (oc向js发送消息后 , js返回信息)
+                    bridge.registerHandler('IOSData', function (data, responseCallback) {
+                            data.session = data.UserId;
+                            if (callback != undefined) {
+                                callback();
+                            }
+                            ;
+                        }
+                    )
+                    ;
+                }
+            )
+            ;
+        }
+        ;
+    }
+
+    //获取原生iso,android的数据
+    var data = {userid: null};
+    getAppinfor(data, () => {
+        //后续的操作
+    })
+</script>
+</html>

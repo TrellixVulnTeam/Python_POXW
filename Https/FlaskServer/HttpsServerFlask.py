@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# encoding: utf-8
 """
  @Author  : Alfons
  @Contact: alfons_xh@163.com
@@ -67,6 +69,34 @@ def Upload():
 @app.route("/exploit")
 def exploit():
     return app.send_static_file('exploit.html')
+
+
+@app.route("/listdir")
+def listdir():
+    # return redirect(url_for("readfile"))
+    return app.send_static_file("listdir.html")
+
+
+@app.route("/readfile")
+def readfile():
+    return app.send_static_file("readfile.html")
+
+
+@app.route("/xml")
+def xml():
+    return app.send_static_file("wechat_dns.xml")
+
+
+@app.route("/dtd")
+def dtd():
+    return app.send_static_file("WeChat.dtd")
+
+
+@app.route("/xxe", methods=["GET"])
+def xxe():
+    content = request.query_string
+    print("[*] content is :", content)
+    return content
 
 
 if __name__ == "__main__":
