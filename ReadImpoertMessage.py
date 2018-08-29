@@ -4,6 +4,21 @@
  @File    : ReadImpoertMessage.py
  @Time    : 2018/6/29 15:21
 """
+
+
+def func(data=[]):
+    datatmp = list(data)
+    datatmp.append(0)
+    return datatmp
+
+
+print(func())
+print(func([1]))
+print(func())
+print(func([1]))
+print(func())
+
+pass
 import os
 
 # dir_a = "C:\\Users\\xiaohui\\Desktop\\Android远程植入调研（2018-06-25）\\植入测试\\download"
