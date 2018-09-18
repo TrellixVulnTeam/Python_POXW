@@ -1,3 +1,4 @@
+psutil
 beautifulsoup4==4.6.0
 bottle==0.12.13
 certifi==2018.4.16

@@ -17,7 +17,7 @@ import os
 BLOCK_SIZE = 16
 
 
-def AES_ENCRYPT(plain_text, keyWord, mode=AES.MODE_ECB, blockSize = BLOCK_SIZE):
+def AES_ENCRYPT(plain_text, keyWord, mode=AES.MODE_ECB, blockSize=BLOCK_SIZE):
     """
     AES ECB模式 ZeroPadding 加密，块大小为32byte
     :param plain_text: 加密的字符串
