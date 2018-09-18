@@ -123,6 +123,9 @@ def RandomSrting(num, seed=string.ascii_letters + string.digits + string.punctua
 
 
 if __name__ == "__main__":
+    mima = "e10adc3949ba59abbe56e057f20f883e"
+    print(md5("123456"))
+
     str = "dajidali jinwan chiji"
     key = md5(md5(str))
     print("KEY:", key)

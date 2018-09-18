@@ -13,10 +13,10 @@ import hashlib
 import logging
 import traceback
 
-BLOCK_SIZE = 32
+BLOCK_SIZE = 16
 
 
-def AES_ECB_ENCRYPT(plain_text, key, mode = AES.MODE_ECB):
+def AES_ECB_ENCRYPT(plain_text, key, mode=AES.MODE_ECB):
     """
     AES ECB模式 ZeroPadding 加密，块大小为32byte
     :param plain_text: 加密的字符串
@@ -24,19 +24,20 @@ def AES_ECB_ENCRYPT(plain_text, key, mode = AES.MODE_ECB):
     :param mode: AES模式，默认ECB模式
     :return: 成功返回加密后的hex字符串，失败返回None
     """
-    if len(key) != BLOCK_SIZE:
+    block_size = len(key)
+    if len(key) != block_size:
         logging.error("AES加密参数错误：%s" % traceback.format_exc())
         return None
 
     cryptor = AES.new(key, mode)
-    plain_text += (BLOCK_SIZE - len(plain_text) % BLOCK_SIZE) * '\0'
+    plain_text += (block_size - len(plain_text) % block_size) * b'\0'
     cipher_text = cryptor.encrypt(plain_text)
     # 因为AES加密时候得到的字符串不一定是ascii字符集的，输出到终端或者保存时候可能存在问题
     # 所以这里统一把加密后的字符串转化为16进制字符串
     return b2a_hex(cipher_text)
 
 
-def AES_ECB_DECRYPT(cipher_text, key, mode = AES.MODE_ECB):
+def AES_ECB_DECRYPT(cipher_text, key, mode=AES.MODE_ECB):
     """
     AES ECB模式 解密，块大小为32byte
     :param cipher_text: 解密的hex字符串
@@ -44,16 +45,18 @@ def AES_ECB_DECRYPT(cipher_text, key, mode = AES.MODE_ECB):
     :param mode: AES模式，默认ECB模式
     :return: 成功返回解密后的字符串，失败返回None
     """
-    if len(key) != BLOCK_SIZE \
-            or len(cipher_text) % BLOCK_SIZE != 0:
+    block_size = len(key)
+    if len(key) != block_size \
+            or len(cipher_text) % block_size != 0:
         logging.error("AES解密参数错误：%s" % traceback.format_exc())
         return None
 
     cryptor = AES.new(key, mode)
-    # plain_text = cryptor.decrypt(a2b_hex(cipher_text))
-    plain_text = cryptor.decrypt(cipher_text)
+    plain_text = cryptor.decrypt(a2b_hex(cipher_text))
+    # plain_text = cryptor.decrypt(cipher_text)
     # return plain_text.rstrip('\0')
     return plain_text
+
 
 def md5(plaintext):
     """
@@ -65,7 +68,8 @@ def md5(plaintext):
     m.update(plaintext)
     return m.hexdigest()
 
-def md5(plaintext, time = 1):
+
+def md5(plaintext, time=1):
     """
     md5加密
     :param plaintext: 加密的字符串
@@ -98,7 +102,5 @@ if __name__ == "__main__":
     # print "Ciphertext:" + ciphertext
     # decodetext = AES_ECB_DECRYPT(ciphertext, key1).decode("unicode-escape")
     # print "Decodetext:" + decodetext
-
-
 
     pass

