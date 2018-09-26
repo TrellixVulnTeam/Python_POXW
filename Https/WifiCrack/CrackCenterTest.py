@@ -8,6 +8,7 @@ import requests
 import json
 
 host = "http://192.168.2.68:5000"
+# host = "http://112.86.129.67:5000"
 UploadCrackTaskUrl = host + "/UploadCrackTask"
 GetCrackStatusUrl = host + "/GetCrackStatus?taskId={taskId}"
 GetCrackDeviceStatusUrl = host + "/GetCrackDeviceStatus"
@@ -29,7 +30,8 @@ def Test_GetCrackStatus(taskId):
 
 
 def Test_GetCrackDeviceStatus():
-    pass
+    content = requests.get(GetCrackDeviceStatusUrl).content
+    print("CrackPause:", content.decode("unicode-escape"))
 
 
 def Test_CrackPause(taskId):
@@ -45,14 +47,19 @@ def Test_CrackResume(taskId):
 if __name__ == "__main__":
     import time
 
-    taskId = "1"
+    test = list(range(19)) or list()
+
+    taskId = "14"
     Test_UploadCrackTask(taskId, "helloworld", "12:34:12:12:34:12")
     # Test_UploadCrackTask(taskId, "helloworld", "12:34:12:12:34:12", json.dumps(["?1?2?d", "?l?h?d"]))
+    # Test_UploadCrackTask(taskId, "helloworld", "12:34:12:12:34:12", json.dumps(["?d?d?d?d?d?d?d?d?d?d?d"]))
     # Test_GetCrackStatus(taskId)
     #
     # time.sleep(3)
     Test_CrackPause(taskId)
     Test_GetCrackStatus(taskId)
+    #
+    # Test_CrackResume(taskId)
+    # Test_GetCrackStatus(taskId)
 
-    Test_CrackResume(taskId)
-    Test_GetCrackStatus(taskId)
+    Test_GetCrackDeviceStatus()

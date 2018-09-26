@@ -6,6 +6,32 @@
 """
 from Crypt import Md5Check, AES
 import json
+import os
+
+defaultRuleList = [
+    "-1 1 -2 345789 ?1?2?d?d?d?d?d?d?d?d?d",
+    "?l?l?l?d?d?d?d?d?d",
+    "?l?l?d?d?d?d?d?d"
+]
+
+
+def GetDefaultRules():
+    file = "rules"
+    otherRules = list()
+    if os.path.isfile(file):
+        with open(file, "r") as f:
+            otherRules = f.read().splitlines()
+
+    otherRules = [rule for rule in otherRules if rule and rule.count("?")>=8]
+
+    for rule in defaultRuleList:
+        if rule in otherRules or not rule:
+            continue
+        otherRules.append(rule)
+    return otherRules
+
+rules = GetDefaultRules()
+
 
 wifi_name = b"Wifi_111"
 
@@ -30,6 +56,7 @@ plain_text = AES.AES_ECB_DECRYPT(cipher_text=cipher_text.encode(), key=AES_key)
 # plain_text_json = json.loads(plain_text)
 print(plain_text)
 pass
+
 
 def func(data=[]):
     datatmp = list(data)
@@ -91,43 +118,42 @@ def long_computation():
     # emulate a long computation
     time.sleep(3)
 
-
 # if __name__ == '__main__':
-    # with open("WeChat.html", "rb") as fRead, open("Tmp.html", "w") as fWrite:
-    #     fWrite.write(fRead.read().decode(encoding="utf-8"))
-    #
-    # import struct
-    #
-    # hearder = struct.pack(">I", 1024 + 16)
-    # print(hearder)
-    #
-    # i = b'\\u6d59\\u6c5f\\u7701'.decode("unicode_escape")
-    # print(i)
-    # import xmltodict
-    # import dicttoxml
-    #
-    # with open("Config2.xml", "r", encoding="utf-8") as f1:
-    #     config_dict = xmltodict.parse(f1.read())
-    #
-    # print(config_dict)
-    #
-    # with open("Config3.xml", "w") as f2:
-    #     f2.write(xmltodict.unparse(config_dict, pretty=True))
-    # cipher = 225
-    # D = 29
-    # N = 323
-    #
-    # plaintxt = cipher ** 10 % N
-    #
-    # h = int(
-    #     "E161DA03D0B6AAD21F9A4FB27C32A3208AF25A707BB0E8ECE79506FBBAF97519D9794B7E1B44D2C6F2588495C4E040303B4C915F172DD558A49552762CB28AB309C08152A8C55A4DFC6EA80D1F4D860190A8EE251DF8DECB9B083674D56CD956FF652C3C724B9F02BE5C7CBC63FC0124AA260D889A73E91292B6A02121D25AAA7C1A87752575C181FFB25A6282725B0C38A2AD57676E0884FE20CF56256E14529BC7E82CD1F4A1155984512BD273D68F769AF46E1B0E3053816D39EB1F0588384F2F4B286E5CFAFB4D0435BDF7D3AA8D3E0C45716EAD190FDC66884B275BA08D8ED94B1F84E7729C25BD014E7FA3A23123E10D3A93B4154452DDB9EE5F8DAB67",
-    #     16)
-    # print(h)
-    #
-    # spinner = multiprocessing.Process(None, spinner_func, args=('Please wait ... ', ''))
-    # spinner.start()
-    # try:
-    #     long_computation()
-    #     print('Computation done')
-    # finally:
-    #     spinner.terminate()
+# with open("WeChat.html", "rb") as fRead, open("Tmp.html", "w") as fWrite:
+#     fWrite.write(fRead.read().decode(encoding="utf-8"))
+#
+# import struct
+#
+# hearder = struct.pack(">I", 1024 + 16)
+# print(hearder)
+#
+# i = b'\\u6d59\\u6c5f\\u7701'.decode("unicode_escape")
+# print(i)
+# import xmltodict
+# import dicttoxml
+#
+# with open("Config2.xml", "r", encoding="utf-8") as f1:
+#     config_dict = xmltodict.parse(f1.read())
+#
+# print(config_dict)
+#
+# with open("Config3.xml", "w") as f2:
+#     f2.write(xmltodict.unparse(config_dict, pretty=True))
+# cipher = 225
+# D = 29
+# N = 323
+#
+# plaintxt = cipher ** 10 % N
+#
+# h = int(
+#     "E161DA03D0B6AAD21F9A4FB27C32A3208AF25A707BB0E8ECE79506FBBAF97519D9794B7E1B44D2C6F2588495C4E040303B4C915F172DD558A49552762CB28AB309C08152A8C55A4DFC6EA80D1F4D860190A8EE251DF8DECB9B083674D56CD956FF652C3C724B9F02BE5C7CBC63FC0124AA260D889A73E91292B6A02121D25AAA7C1A87752575C181FFB25A6282725B0C38A2AD57676E0884FE20CF56256E14529BC7E82CD1F4A1155984512BD273D68F769AF46E1B0E3053816D39EB1F0588384F2F4B286E5CFAFB4D0435BDF7D3AA8D3E0C45716EAD190FDC66884B275BA08D8ED94B1F84E7729C25BD014E7FA3A23123E10D3A93B4154452DDB9EE5F8DAB67",
+#     16)
+# print(h)
+#
+# spinner = multiprocessing.Process(None, spinner_func, args=('Please wait ... ', ''))
+# spinner.start()
+# try:
+#     long_computation()
+#     print('Computation done')
+# finally:
+#     spinner.terminate()

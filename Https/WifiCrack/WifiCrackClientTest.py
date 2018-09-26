@@ -12,8 +12,8 @@ import json
 import time
 from urllib.parse import quote, unquote, urlencode
 
-host = "http://192.168.43.249/"
-# host = "http://192.168.2.67/"
+# host = "http://192.168.43.249/"
+host = "http://192.168.2.67/"
 # host = "http://192.168.2.189/"
 LoginUrl = host + "Login?password={password}"
 
@@ -33,6 +33,8 @@ StartCloudCrackFromOfflineUrl = host + "StartCloudCrackFromOffline"
 
 DownloadPcapFileUrl = host + "DownloadPcapFile?ssid={ssid}&mac={mac}"
 ClearCrackRecordUrl = host + "ClearCrackRecord?password={password}"
+
+UpdateCloudCrackUrl = host + "UpdateCloudCrackUrl?cloudCrackUrl={url}&password=yg_root@9985"
 
 session = requests.session()
 
@@ -132,10 +134,40 @@ def Test_ClearCrackRecord():
     print(url)
 
 
+def Test_UpdateCloudCrackUrl():
+    newUrl = "https://yagooforum.meibu.net:2008"
+    url = UpdateCloudCrackUrl.format(url=newUrl)
+    content = session.get(url).content
+    print(content.decode("unicode-escape"))
+
+
+def Test_TaskAdd():
+    from Crypt.Encipher import FileMd5
+    url = "http://192.168.2.45:8080/WifiCrackYjc/task/add"
+
+    pcapPath = "wpa.cap"
+    pcapfileMd5 = FileMd5(pcapPath)
+    crackFile = {"file": open(pcapPath, "rb")}
+    values = dict(deviceSerial="500013180814",
+                  mac="12:34:56:78:90:12",
+                  ssid="helloworld",
+                  lat=0,
+                  lng=0,
+                  address="",
+                  crackType=1,
+                  fileContentMd5=pcapfileMd5 if pcapfileMd5 else "")
+    content = requests.post(url=url, files=crackFile, data=values, verify=False).content
+    print(content)
+    result = json.loads(content)
+    pass
+
+
+Test_TaskAdd()
+
 if __name__ == "__main__":
-    Test_Login()
+    # Test_Login()
     # Test_StartWifiphishing("Microsoft", "40:A5:EF:79:FB:61")
-    Test_GetScanStatus()
+    # Test_GetScanStatus()
     # Test_StartCloudCrack(ssid="helloworld", mac="C8:3A:35:CF:03:73")
     # Test_StartCloudCrack(ssid="helloworld", mac="C8:3A:35:CF:03:73", useNewCap=False)
     # Test_StopCloudCrack(ssid="helloworld", mac="C8:3A:35:CF:03:73")
@@ -147,10 +179,10 @@ if __name__ == "__main__":
     # Test_StartOfflineCrack(ssid="helloworld")
     # Test_StopOfflineCrack()
     # time.sleep(10)
-    Test_GetOfflineCrackStatus()
+    # Test_GetOfflineCrackStatus()
     # Test_StartCloudCrackFromOffline()
 
-    Test_GetCrackHistory()
+    # Test_GetCrackHistory()
     # Test_DownloadPcapFile("Microsoft", "40:A5:EF:79:FB:61")
     # Test_ClearCrackRecord()
     pass
