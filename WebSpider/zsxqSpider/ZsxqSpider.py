@@ -12,26 +12,26 @@ from urllib.parse import unquote
 
 videoStoreDict = dict()
 
-ZsxqUrl1 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20"
-ZsxqUrl2 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2018-03-17T17%3A22%3A04.942%2B0800"
-ZsxqUrl3 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2018-01-16T20%3A05%3A21.286%2B0800"
-ZsxqUrl4 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2017-12-20T20%3A19%3A18.707%2B0800"
-ZsxqUrl5 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2017-12-04T17%3A28%3A16.428%2B0800"
-ZsxqUrl6 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2017-11-19T10%3A27%3A55.452%2B0800"
-ZsxqUrl7 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2017-11-08T09%3A39%3A05.633%2B0800"
-ZsxqUrl8 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2017-10-29T19%3A31%3A04.691%2B0800"
-
-ZsxqUrlList = [ZsxqUrl1, ZsxqUrl2, ZsxqUrl3, ZsxqUrl4, ZsxqUrl5, ZsxqUrl6, ZsxqUrl7, ZsxqUrl8]
+ZsxqUrl0 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20"
+ZsxqUrl1 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2018-05-28T02%3A55%3A41.644%2B0800"
+ZsxqUrl2 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2018-02-17T11%3A34%3A23.856%2B0800"
+ZsxqUrl3 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2018-01-04T12%3A52%3A23.050%2B0800"
+ZsxqUrl4 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2017-12-14T20%3A52%3A42.373%2B0800"
+ZsxqUrl5 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2017-11-27T18%3A01%3A27.247%2B0800"
+ZsxqUrl6 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2017-11-15T13%3A28%3A52.456%2B0800"
+ZsxqUrl7 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2017-11-04T17%3A27%3A54.307%2B0800"
+ZsxqUrl8 = "https://api.zsxq.com/v1.10/groups/881142514122/topics?count=20&end_time=2017-10-23T14%3A52%3A47.216%2B0800"
+ZsxqUrlList = [ZsxqUrl0, ZsxqUrl1, ZsxqUrl2, ZsxqUrl3, ZsxqUrl4, ZsxqUrl5, ZsxqUrl6, ZsxqUrl7, ZsxqUrl8]
 
 ZsxqHearders = {
     "Connection": "keep-alive",
-    "X-Version": "1.10.0",
+    "X-Version": "1.10.7",
     "Origin": "https://wx.zsxq.com",
-    "Authorization": "3793782B-5B9C-DC8E-BCAD-F2F989A0A3FC",
+    "Authorization": "70A52A39-EE87-40E4-9AAE-1F5079009294",
     "Accept": "application/json, text/plain, */*",
-    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36",
-    "X-Request-Id": "11fef5df-03f0-68d7-0f43-cff1f411bd8b",
-    "Referer": "https://wx.zsxq.com/dweb-alpha/",
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36",
+    "X-Request-Id": "39ee9da6-5bce-5f5a-1c6d-d4bdd4ea7f69",
+    "Referer": "https://wx.zsxq.com/dweb/",
     "Accept-Encoding": "gzip, deflate, br",
     "Accept-Language": "zh-CN,zh;q=0.9",
 }
@@ -49,17 +49,33 @@ def ReadVideoInfo(url, headers=ZsxqHearders):
         if "第" not in text or "讲" not in text or "href=" not in text:
             continue
 
-        title = text[text.find("第") + 1:text.find("讲")]
+        num = text[text.find("第") + 1:text.find("讲")]
+        try:
+            num = int(num)
+        except:
+            continue
+
+        title = text[text.rfind("/>", 0, text.find('<e type="web"')) + 2:text.find('<e type="web"')].strip().replace("\n", " ")
         videoUrl = unquote(text[text.find("href=") + len("href=") + 1:text.find("\" title", text.find("href="))])
-        code = text[text.find("密码") + len("密码"):].strip() if "密码" in text else ""
-        videoStoreDict.update({title: {"videoUrl": videoUrl, "code": code[:10]}})
+
+        code = text if "密码" in text else ""
+        if '密码：' in code:
+            code = code[code.find("密码：") + len("密码："):].strip()
+        elif '密码' in code:
+            code = code[code.find("密码") + + len("密码"):].strip()
+
+        if '见评论' in code:
+            code = topic["show_comments"][0]["text"]
+            code = code[code.find("密码") + len("密码"):].strip()
+
+        videoStoreDict.update({num: {"title": title, "videoUrl": videoUrl, "code": code[:10]}})
 
 
 for url in ZsxqUrlList:
     ReadVideoInfo(url)
 
 with open("AlgorithmSpace.json", "w") as f:
-    content = json.dumps(videoStoreDict)
+    content = json.dumps(videoStoreDict).encode().decode("unicode_escape")
     f.write(content)
 
 # for video in videoStoreDict.values():
