@@ -65,25 +65,25 @@ def md5(plaintext):
     :return: 加密后的结果
     """
     m = hashlib.md5()
-    m.update(plaintext)
+    m.update(plaintext.encode())
     return m.hexdigest()
 
 
-def md5(plaintext, time=1):
-    """
-    md5加密
-    :param plaintext: 加密的字符串
-    :param time: 加密迭代次数
-    :return: 加密后的结果
-    """
-    tmp_time = 1
-    m = hashlib.md5()
-    m.update(plaintext)
-    while tmp_time < time:
-        # print m.hexdigest()
-        m.update(m.hexdigest())
-        tmp_time += 1
-    return m.hexdigest()
+# def md5(plaintext, time=1):
+#     """
+#     md5加密
+#     :param plaintext: 加密的字符串
+#     :param time: 加密迭代次数
+#     :return: 加密后的结果
+#     """
+#     tmp_time = 1
+#     m = hashlib.md5()
+#     m.update(plaintext.encode())
+#     while tmp_time < time:
+#         # print m.hexdigest()
+#         m.update(m.hexdigest().encode())
+#         tmp_time += 1
+#     return m.hexdigest()
 
 
 if __name__ == "__main__":
