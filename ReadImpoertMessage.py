@@ -8,6 +8,23 @@ from Crypt import Md5Check, AES
 import json
 import os
 
+import traceback
+from queue import Queue
+
+qu = Queue(maxsize=3)
+qu.put(1)
+qu.put(2)
+qu.put(3)
+print(qu.full())
+try:
+    qu.put(4, False)
+    qu.put(5)
+except:
+    traceback.print_exc()
+
+name = dict(name="hell")
+print("hello {name}".format(name = name))
+
 defaultRuleList = [
     "-1 1 -2 345789 ?1?2?d?d?d?d?d?d?d?d?d",
     "?l?l?l?d?d?d?d?d?d",
