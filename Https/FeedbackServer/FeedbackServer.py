@@ -11,7 +11,7 @@ from Crypt.AES import AES_ECB_DECRYPT,AES_ECB_ENCRYPT, md5
 app = Flask(__name__)
 
 
-@app.route("/Data/Upload", methods=["POST"])
+@app.route("/rest/Upload", methods=["POST"])
 def DataUpload():
     data = request.data
 

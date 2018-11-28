@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--回传设备状态信息-->
+<FeedbackDeviceStatus>
+    <FeedbackURL>/Device/Manage</FeedbackURL>                               <!--回传设备心跳数据URL-->
+    <UpdatePack>/Device/UpdatePack</UpdatePack>                             <!--获取更新包文件-->
+
+    <!--设备功能-->
+    <Function>
+        <SysResource>/SysResourceInfo.json</SysResource>                    <!--当前系统资源状态-->
+        <CurrentStatus>/CurrentStatus</CurrentStatus>                       <!--当前系统状态-->
+        <Restart>/RestartSystem</Restart>                                   <!--重启设备-->
+        <Shutdown>/ShutdownDevice</Shutdown>                                <!--关闭设备-->
+        <StopLocate>/Operation/Locate/LocateStop</StopLocate>               <!--停止定位-->
+        <StopMirror>/Operation/Mirror/StopMirror</StopMirror>               <!--停止镜像采集-->
+        <StopCrack>/Operation/Crack/StopCrack</StopCrack>                   <!--停止破解-->
+        <AttackHistory>/Operation/Scan/AttackHistory?max=10</AttackHistory> <!--获取以前发起过主动取证的历史记录（AP信息），max为最大条数-->
+        <StartAttack>/Operation/Scan/StartAttack</StartAttack>              <!--开始单AP取证-->
+        <StopAttack>/Operation/Attack/AttackStop</StopAttack>               <!--停止单AP取证-->
+        <AttackStatus>/Operation/Attack/AttackStatus</AttackStatus>         <!-- 获取单AP取证基本信息-->
+        <StartMulAttack>/Operation/Scan/StartMultipleSSIDAttack</StartMulAttack> <!--开始多AP取证-->
+        <StopMulAttack>/Operation/Attack/MultipleAttackStop</StopMulAttack>    <!--停止多AP取证-->
+        <MulAttackStatus>/Operation/Attack/MultipleSSIDAttackStatus</MulAttackStatus>  <!--获取多AP取证状态-->
+        <SysUpdate>/Settings/Update/UpdateSystem</SysUpdate>                           <!--上传系统更新文件-->
+        <ConfirmUpdate>/Settings/Update/ConfirmUpdate</ConfirmUpdate>                  <!--确认系统更新-->
+    </Function>
+
+    <!--取证AP初始设置，仅当设备无任何取证AP历史时使用-->
+    <InitAttackAP ssid="aWiFi" ch="2" pt="OPN" p=""></InitAttackAP>
+</FeedbackDeviceStatus>

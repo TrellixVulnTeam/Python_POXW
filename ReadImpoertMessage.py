@@ -10,6 +10,16 @@ import os
 
 import traceback
 from queue import Queue
+import binascii
+
+with open("C:\\Users\\xiaohui\\Desktop\\working\\lantern_分析(2018-10-08)\\Fabric\\.lantern\\proxies.yaml", "rb") as f:
+    content = f.read()
+
+hexList = [hex(char)[1:] for char in content]
+hexstr = "\\".join(hexList)
+
+with open("text.txt", "w") as f:
+    f.write(hexstr)
 
 qu = Queue(maxsize=3)
 qu.put(1)
@@ -23,7 +33,7 @@ except:
     traceback.print_exc()
 
 name = dict(name="hell")
-print("hello {name}".format(name = name))
+print("hello {name}".format(name=name))
 
 defaultRuleList = [
     "-1 1 -2 345789 ?1?2?d?d?d?d?d?d?d?d?d",
@@ -39,7 +49,7 @@ def GetDefaultRules():
         with open(file, "r") as f:
             otherRules = f.read().splitlines()
 
-    otherRules = [rule for rule in otherRules if rule and rule.count("?")>=8]
+    otherRules = [rule for rule in otherRules if rule and rule.count("?") >= 8]
 
     for rule in defaultRuleList:
         if rule in otherRules or not rule:
@@ -47,8 +57,8 @@ def GetDefaultRules():
         otherRules.append(rule)
     return otherRules
 
-rules = GetDefaultRules()
 
+rules = GetDefaultRules()
 
 wifi_name = b"Wifi_111"
 
