@@ -6,8 +6,6 @@
 """
 from bs4 import BeautifulSoup
 
-config_name = "DataCfgWifi.xml"
-
 html_content = """
 <html>
     <head>
