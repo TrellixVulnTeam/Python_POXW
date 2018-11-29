@@ -185,3 +185,6 @@ data_soup = BeautifulSoup('<div data-foo="value">foo!</div>', "lxml")
 print('data_soup.find_all(attrs={"data-foo": "value"}) -> ', data_soup.find_all(attrs={"data-foo": "value"}))
 
 print('soup.find_all("a", class_="body")) -> ', soup.find_all("a", class_="sister"))
+
+print('soup.find_all("a", class_="body", limit=1)) -> ', soup.find_all("a", class_="sister", limit=1))
+
