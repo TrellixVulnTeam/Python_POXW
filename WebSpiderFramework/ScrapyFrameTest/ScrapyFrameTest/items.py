@@ -16,16 +16,16 @@ class ScrapyframetestItem(scrapy.Item):
     novel_name = scrapy.Field()  # 小说名称
     novel_link = scrapy.Field()  # 小说链接
     novel_id = scrapy.Field()  # 小说ID标识
-    author = scrapy.Field()  # 作者名称
+    author_name = scrapy.Field()  # 作者名称
     author_link = scrapy.Field()  # 作者链接
     author_id = scrapy.Field()  # 作者ID标识
 
-    def __init__(self, man_type, sub_type, novel_name, novel_link, novel_id, author, author_link, author_id):
-        self.man_type = man_type
-        self.sub_type = sub_type
-        self.novel_name = novel_name
-        self.novel_link = novel_link
-        self.novel_id = novel_id
-        self.author = author
-        self.author_link = author_link
-        self.author_id = author_id
+    # def Init(self, man_type, sub_type, novel_name, novel_link, novel_id, author_name, author_link, author_id):
+    #     self.man_type = man_type.
+    #     self.sub_type = sub_type
+    #     self.novel_name = novel_name
+    #     self.novel_link = novel_link
+    #     self.novel_id = novel_id
+    #     self.author_name = author_name
+    #     self.author_link = author_link
+    #     self.author_id = author_id

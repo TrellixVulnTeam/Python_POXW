@@ -5,6 +5,7 @@
 """
 import scrapy
 from items import ScrapyframetestItem
+from QidianPipelines import qidianSql
 
 
 class QidianSpider(scrapy.Spider):
@@ -28,13 +29,18 @@ class QidianSpider(scrapy.Spider):
             novel_name = book_info.xpath(".//a[@class='name']/text()").extract()[0]
             novel_link = "https:" + book_info.xpath(".//a[@class='name']/@href").extract()[0]
             novel_id = book_info.xpath(".//a[@class='name']/@data-bid").extract()[0]
-            author = book_info.xpath(".//a[@class='author']/text()").extract()[0]
+            author_name = book_info.xpath(".//a[@class='author']/text()").extract()[0]
             author_link = "https:" + book_info.xpath(".//a[@class='author']/@href").extract()[0]
             author_id = author_link.split('/')[-1]
 
-            yield ScrapyframetestItem(man_type = man_type, sub_type = sub_type, novel_name = novel_name, novel_link = novel_link,
-                                       novel_id = novel_id, author = author, author_link = author_link, author_id = author_id)
+            if qidianSql.IsNovelExist(novel_id):
+                self.log("{id} 重复，跳过数据库插入过程。".format(id = novel_id))
+                continue
 
+            qidianItem = ScrapyframetestItem(man_type = man_type, sub_type = sub_type, novel_name = novel_name, novel_link = novel_link,
+                                             novel_id = novel_id, author_name = author_name, author_link = author_link, author_id = author_id)
+
+            yield qidianItem
 
     def parse_novel(self, response):
         pass
