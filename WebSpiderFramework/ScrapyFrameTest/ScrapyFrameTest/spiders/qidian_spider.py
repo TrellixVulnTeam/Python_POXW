@@ -43,7 +43,9 @@ class QidianSpider(scrapy.Spider):
             yield qidianItem
 
     def parse_novel(self, response):
+        # todo: 小说目录分析
         pass
 
     def parse_author(self, response):
+        # todo： 作者信息分析
         pass
