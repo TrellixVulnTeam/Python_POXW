@@ -19,3 +19,14 @@ class ScrapyframetestItem(scrapy.Item):
     author_link = scrapy.Field()  # 作者链接
     author_id = scrapy.Field()  # 作者ID标识
 
+
+if __name__ == '__main__':
+    item = ScrapyframetestItem(man_type = "科幻", sub_type = "机甲", novel_name = "One pis", novel_link = "http://1234.com",
+                               novel_id = "123", author_name = "lufei", author_link = "http://232455.com", author_id = "321")
+    print("item:\n", item)
+    print("\nOld name:\n", item["novel_name"])
+
+    item["novel_name"] = "Dragon Ball"
+    print("\nNew name:\n", item.get("novel_name", "attr not exist!"))
+
+    print("\nNew name:\n", item.get("novel", "attr not exist!"))

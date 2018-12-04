@@ -6,6 +6,8 @@
 from scrapy import cmdline
 
 name = 'qidian'
-cmd = 'scrapy crawl {0}'.format(name)
+# cmd = 'scrapy crawl {0} --nolog'.format(name)
+
+cmd = 'scrapy bench'
 
 cmdline.execute(cmd.split())

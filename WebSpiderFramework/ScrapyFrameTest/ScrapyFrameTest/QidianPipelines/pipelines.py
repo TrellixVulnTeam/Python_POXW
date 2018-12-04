@@ -5,6 +5,7 @@
 """
 from items import ScrapyframetestItem
 from QidianPipelines.qidianSql import QidianDb
+from scrapy.exceptions import DropItem
 
 
 class ScrapyframetestPipeline(object):
@@ -28,3 +29,14 @@ class ScrapyframetestPipeline(object):
                                   author_id = author_id,
                                   author_name = author_name,
                                   author_link = author_link)
+            return item
+        else:
+            raise DropItem("Item type not allow!")
+
+    def open_spider(self, spider):
+        print("Begin Spider!")
+        QidianDb.OpenDB()
+
+    def close_spider(self, spider):
+        print("End Spider!")
+        QidianDb.CloseDB()

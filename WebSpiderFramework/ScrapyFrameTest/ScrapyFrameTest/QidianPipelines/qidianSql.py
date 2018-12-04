@@ -3,6 +3,7 @@
 @time: 2018/11/30
 @author: sch
 """
+import sys
 import pymysql
 
 sql_host = "127.0.0.1"
@@ -12,17 +13,37 @@ sql_port = "3306"
 sql_dbname = "qidian"
 sql_charset = "utf8"
 
-db = pymysql.connect(host = sql_host,
-                     port = int(sql_port),
-                     db = sql_dbname,
-                     user = sql_username,
-                     passwd = sql_password,
-                     charset = sql_charset)
-
-cursor = db.cursor()  # 游标
-
 
 class QidianDb:
+    db = None
+    cursor = None  # 游标
+
+    @classmethod
+    def OpenDB(cls):
+        """
+        打开数据库
+        :return:
+        """
+        try:
+            cls.db = pymysql.connect(host = sql_host,
+                                     port = int(sql_port),
+                                     db = sql_dbname,
+                                     user = sql_username,
+                                     passwd = sql_password,
+                                     charset = sql_charset)
+
+            cls.cursor = cls.db.cursor()  # 游标
+        except:
+            print("Open db fail!")
+            sys.exit(0)
+
+    @classmethod
+    def CloseDB(cls):
+        """
+        关闭数据库
+        :return:
+        """
+        cls.db.close()
 
     @classmethod
     def insert_table(cls, novel_id, novel_name, novel_link, man_type, sub_type, author_id, author_name, author_link):
@@ -32,15 +53,15 @@ class QidianDb:
                       man_type = man_type, sub_type = sub_type,
                       author_id = author_id, author_name = author_name, author_link = author_link)
 
-        cursor.execute(insert_sql, values)
-        db.commit()
+        cls.cursor.execute(insert_sql, values)
+        cls.db.commit()
 
     @classmethod
     def select_unique_novel_id(cls, novel_id):
         select_sql = "select exists(select 1 from novel_info where novel_id=%(novel_id)s)"
         value = dict(novel_id = novel_id)
-        cursor.execute(select_sql, value)
-        target = cursor.fetchall()[0]
+        cls.cursor.execute(select_sql, value)
+        target = cls.cursor.fetchall()[0]
         return target
 
 
