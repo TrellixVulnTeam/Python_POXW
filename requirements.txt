@@ -1,3 +1,4 @@
+redis
 pymysql
 scrapy
 aiohttp==3.3.2
