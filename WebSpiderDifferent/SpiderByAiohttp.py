@@ -24,7 +24,7 @@ def ResponseParse(content):
         author_link = "https:" + book_info.xpath(".//a[@class='author']/@href")[0]
         author_id = author_link.split('/')[-1]
 
-        # print("{novel_name} [{man_type}*{sub_type}]".format(novel_name = novel_name, man_type = man_type, sub_type = sub_type))
+        print("{novel_name} [{man_type}*{sub_type}]".format(novel_name = novel_name, man_type = man_type, sub_type = sub_type))
 
 
 headers = {
@@ -35,33 +35,40 @@ headers = {
 }
 
 
-async def Spider(url):
+async def Parser(session, index, url):
+    try:
+        async with session.get(url, timeout = 10, verify_ssl = False) as resp:
+            # async with session.get(url, timeout = 10, verify_ssl = False, proxy="http://192.168.2.53:1080") as resp:
+            ResponseParse(await resp.text())
+            return index, "success"
+        # print("Connect success! {}".format(url))
+    except aiohttp.client_exceptions.ClientConnectorError:
+        print(index, "aiohttp.client_exceptions.ClientConnectorError! {}".format(url))
+        return index, "ClientConnectorError"
+    except asyncio.TimeoutError:
+        print(index, "Time out! {}".format(url))
+        return index, "Timeout"
+
+
+async def Spider(index, url):
     async with aiohttp.ClientSession() as session:
-        try:
-            async with session.get(url, headers = headers, timeout = 10, verify_ssl = False) as resp:
-                if resp.status != 404:
-                    content = await resp.text()
-                    ResponseParse(content)
-        except aiohttp.client_exceptions.ClientConnectorError:
-            print("aiohttp.client_exceptions.ClientConnectorError!@!")
-            print("url is :", url)
-        except asyncio.TimeoutError:
-            print("Time out!")
+        return await Parser(session, index, url)
 
 
 def AsyncSpider():
     start_time = time.time()
-
-    loop = asyncio.get_event_loop()
     tasks = list()
 
-    # for page in range(1, 1000):
-    #     page_url = "https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page={page}".format(page = page)
-    #     tasks.append(Spider(page_url))
+    loop = asyncio.get_event_loop()
+    for page in range(1, 10):
+        page_url = "https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page={page}".format(page = page)
+        tasks.append(Spider(page, page_url))
 
-    tasks.append(Spider("https://twitter.com"))
-    loop.run_until_complete(asyncio.wait(tasks))
+    finished, _ = loop.run_until_complete(asyncio.wait(tasks))
     loop.close()
+
+    for result in (task.result() for task in finished):
+        print(result)
 
     print("Use time: ", time.time() - start_time)
 

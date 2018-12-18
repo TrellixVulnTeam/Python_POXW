@@ -29,9 +29,10 @@ def doAdd():
     for i in range(1000000000):
         count = count + 1
 
+
 threadList = list()
 for _ in range(10):
-    threadTmp = threading.Thread(target=doAdd, name='thread')
+    threadTmp = threading.Thread(target = doAdd, name = 'thread')
     threadTmp.start()
     threadList.append(threadTmp)
 

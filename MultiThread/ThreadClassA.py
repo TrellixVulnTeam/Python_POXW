@@ -7,33 +7,35 @@
 """
 from threading import Thread
 
+
 class myThreadA(Thread):
     all_Thread = []
-    def __init__(self,name,param):
-        Thread.__init__(self,name = name)
+
+    def __init__(self, name, param):
+        Thread.__init__(self, name = name)
         self.__param = param
         self.isRunning = True
         myThreadA.all_Thread.append(self)
         # myThreadA.all_Thread.append(self)
 
     def run(self):
-        FuncA(self.name,self.__param)
+        FuncA(self.name, self.__param)
 
     def stop(self):
         self.isRunning = False
 
-def FuncA(name,param):
+
+def FuncA(name, param):
     for thread in myThreadA.all_Thread:
         if thread.name == name:
-            print name
+            print(name)
             thread.stop()
             myThreadA.all_Thread.remove(thread)
 
-if __name__ == "__main__":
 
-    SER = "yes" if 5>22 else "no"
+if __name__ == "__main__":
+    SER = "yes" if 5 > 22 else "no"
     pass
     para = 1
-    thread_1 = myThreadA("First1 thread",para)
+    thread_1 = myThreadA("First1 thread", para)
     thread_1.start()
-
