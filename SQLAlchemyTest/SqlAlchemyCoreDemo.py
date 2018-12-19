@@ -12,6 +12,8 @@ engine = create_engine("sqlite:///./memory.db", echo = True)
 # 元数据绑定引擎
 metadata = MetaData(engine)
 
+print("Before load:", metadata.tables)
+
 # 创建表结构
 users = Table("users", metadata,
               Column("id", Integer, autoincrement = True, default = 0, primary_key = True, comment = "用户ID"),
@@ -22,6 +24,10 @@ addresses = Table("addresses", metadata,
                   Column("id", Integer, primary_key = True, comment = "地址ID"),
                   Column("user_id", None, ForeignKey("users.id"), comment = "关联的用户ID"),
                   Column("email_address", String, nullable = False, comment = "邮箱地址"))
+
+# users = Table("users", metadata, autoload = True)
+# addresses = Table("addresses", metadata, autoload = True)
+print("After load:", metadata.tables)
 
 
 def GetTables():
@@ -122,7 +128,7 @@ def UseTextSql():
     from sqlalchemy.sql import text
     from sqlalchemy.sql import bindparam
 
-    sel = text("select * from users where users.id < :a").bindparams(bindparam('a', value=1000, type_= Integer))
+    sel = text("select * from users where users.id < :a").bindparams(bindparam('a', value = 1000, type_ = Integer))
     res = engine.execute(sel).fetchall()
     # res = engine.execute(sel, a = 1000).fetchall()
     for c in res:
@@ -135,7 +141,7 @@ def UsePureTextSql():
     sel = "select * from users where users.id < 1000"
     res = engine.execute(sel).fetchall()
     for c in res:
-        print(c.id, c.name)     # 效果一样
+        print(c.id, c.name)  # 效果一样
 
 
 if __name__ == '__main__':
