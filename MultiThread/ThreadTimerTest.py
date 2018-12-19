@@ -12,7 +12,7 @@ i = 0
 def PrintOnTime(interval):
     print("hello", time.strftime("%Y-%m-%d %X", time.localtime()))
 
-    timer = threading.Timer(interval, PrintOnTime, args = (interval,))
+    timer = threading.Timer(interval, PrintOnTime, args = [interval])
     timer.start()
 
     global i
