@@ -1,5 +1,5 @@
 """
-@file: GetTargetHost.py
+@file: DnsParser.py
 @time: 2018/12/26
 @author: sch
 """
@@ -61,5 +61,24 @@ def DnsResolver():
                 pass
 
 
+def IPSort():
+    import sys
+    print(os.getcwd())
+    host_store_file = "./host.txt"
+    host_sort_file = "./host2.txt"
+    host_list = list()
+
+    if os.path.exists(host_store_file):
+        with open(host_store_file, 'r') as f:
+            for line in f.readlines():
+                host_list.append(line.split(":")[-1].strip())
+
+    host_list = sorted(host_list)
+
+    with open(host_sort_file, 'w') as f:
+        f.write("\n".join(host_list))
+
+
 if __name__ == '__main__':
-    DnsResolver()
+    # DnsResolver()
+    IPSort()
