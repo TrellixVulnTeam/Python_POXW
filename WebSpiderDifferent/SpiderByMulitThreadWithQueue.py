@@ -28,7 +28,7 @@ def ResponseParse(content):
 
 url_queue = Queue()
 run = True
-thread_num = 100
+thread_num = 1000
 
 
 def Spider():
