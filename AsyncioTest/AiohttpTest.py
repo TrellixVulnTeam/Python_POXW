@@ -34,7 +34,7 @@ async def AiohttpTest(url):
 
 
 for i in range(10):
-    url = "https://{ip}:{port}".format(ip = "67.230.179.42", port = 1992)
+    url = "https://{ip}:{port}".format(ip = "108.173.200.174", port = 61878)
 
     loop = asyncio.new_event_loop()
     loop.run_until_complete(AiohttpTest(url))
