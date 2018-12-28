@@ -61,3 +61,6 @@ for p_node in p_node_list:
             a_class = a_node.attrib["class"],
             a_id = a_node.attrib["id"],
             a_text = a_node.text))
+
+p = root_node_parse.xpath("//p[@class='title story']")[0].text
+pass

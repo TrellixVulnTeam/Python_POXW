@@ -26,6 +26,7 @@ class QidianSpider(scrapy.Spider):
             yield scrapy.Request(url = page_url, callback = self.parse_page)
 
     def parse_page(self, response):
+        # print(type(response))
         book_list = response.css(".all-book-list").xpath(".//tbody/tr")
         for book_info in book_list:
             man_type = book_info.xpath(".//a[@class='type']/text()").extract()[0]

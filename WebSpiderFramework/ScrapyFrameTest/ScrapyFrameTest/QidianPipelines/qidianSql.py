@@ -7,8 +7,8 @@ import sys
 import pymysql
 
 sql_host = "127.0.0.1"
-sql_username = "root"
-sql_password = "ygwifidb_password"
+sql_username = "alfons"
+sql_password = "xiaohui"
 sql_port = "3306"
 sql_dbname = "qidian"
 sql_charset = "utf8"
