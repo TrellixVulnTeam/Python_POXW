@@ -271,7 +271,7 @@ console.log("[*] cache_block.protection -> " + cache_block.protection); // 原�
     //         // 使用JavaScript引用类的功能，包括：
     //         // $new：new 运算符，初始化新对象。注意与 $init 区分
     //         // $alloc：分配内存，但不不初始化
-    //         // $init：构造器器⽅方法，⽤用来 hook ⽽而不不是给 js 调⽤用
+    //         // $init：构造器器⽅方法，⽤用来 hook ⽽而不不是给 js 调⽤用，可以用来返回类实例化对象，return this.$init(args...)
     //         // $dispose：析构函数
     //         // $isSameObject：是否与另⼀一个 Java 对象相同
     //         // $className：类名
