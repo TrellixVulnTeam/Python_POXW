@@ -26,9 +26,9 @@ def ResponseParse(content):
 
 
 def Spider(url):
-    with requests.get(url) as resp:
+    with requests.get(url, timeout = 0.5) as resp:
         content = resp.content
-        ResponseParse(content)
+        # ResponseParse(content)
 
 
 def MulitThreadSpider():

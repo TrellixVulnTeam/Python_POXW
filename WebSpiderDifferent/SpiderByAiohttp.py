@@ -37,9 +37,9 @@ headers = {
 
 async def Parser(session, index, url):
     try:
-        async with session.get(url, timeout = 10, verify_ssl = False) as resp:
+        async with session.get(url, timeout = 0.5, verify_ssl = False) as resp:
             # async with session.get(url, timeout = 10, verify_ssl = False, proxy="http://192.168.2.53:1080") as resp:
-            ResponseParse(await resp.text())
+            # ResponseParse(await resp.text())
             return index, "success"
         # print("Connect success! {}".format(url))
     except aiohttp.client_exceptions.ClientConnectorError:

@@ -1,0 +1,7 @@
+prod-nr1449.voxer.com
+one.voxer.com
+ns4.voxer.com
+sjc1-stage.voxer.com
+web.voxer.com
+business.voxer.com
+voxer-buildbot-android-public.s3.amazonaws.com

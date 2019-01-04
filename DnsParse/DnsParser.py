@@ -56,6 +56,8 @@ def DnsResolver():
                         print(i.name, " CNAME: ", j.target)
             except dns.resolver.NoAnswer:
                 continue
+            except dns.resolver.NXDOMAIN:
+                continue
             except:
                 traceback.print_exc()
                 pass
@@ -80,5 +82,5 @@ def IPSort():
 
 
 if __name__ == '__main__':
-    # DnsResolver()
+    DnsResolver()
     IPSort()
