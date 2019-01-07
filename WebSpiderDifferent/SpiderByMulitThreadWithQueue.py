@@ -37,7 +37,7 @@ def Spider():
             url = url_queue.get()
             with requests.get(url) as resp:
                 content = resp.content
-                # ResponseParse(content)
+                ResponseParse(content)
 
 
 def MulitThreadSpider():
