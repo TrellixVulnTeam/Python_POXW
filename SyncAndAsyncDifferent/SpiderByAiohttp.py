@@ -35,23 +35,19 @@ headers = {
 }
 
 
-async def Parser(session, index, url):
-    try:
-        async with session.get(url, verify_ssl = False) as resp:
-            # async with session.get(url, timeout = 10, verify_ssl = False, proxy="http://192.168.2.53:1080") as resp:
-            ResponseParse(await resp.text())
-
-    except aiohttp.client_exceptions.ClientConnectorError:
-        print(index, "aiohttp.client_exceptions.ClientConnectorError! {}".format(url))
-        return index, "ClientConnectorError"
-    except asyncio.TimeoutError:
-        print(index, "Time out! {}".format(url))
-        return index, "Timeout"
-
-
 async def Spider(index, url):
     async with aiohttp.ClientSession() as session:
-        return await Parser(session, index, url)
+        try:
+            async with session.get(url, verify_ssl = False) as resp:
+                # async with session.get(url, timeout = 10, verify_ssl = False, proxy="http://192.168.2.53:1080") as resp:
+                ResponseParse(await resp.text())
+                # await resp.text()
+                print(index, "over")
+
+        except aiohttp.client_exceptions.ClientConnectorError:
+            print(index, "ClientConnectorError")
+        except asyncio.TimeoutError:
+            print(index, "Timeout")
 
 
 def AsyncSpider():
@@ -64,6 +60,7 @@ def AsyncSpider():
         tasks.append(Spider(page, page_url))
 
     loop.run_until_complete(asyncio.wait(tasks))
+
     loop.close()
 
     print("Use time: ", time.time() - start_time)
