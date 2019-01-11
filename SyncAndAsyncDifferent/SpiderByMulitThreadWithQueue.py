@@ -34,10 +34,13 @@ thread_num = 1000
 def Spider():
     while run:
         if url_queue.qsize() != 0:
-            url = url_queue.get()
-            with requests.get(url) as resp:
-                content = resp.content
-                ResponseParse(content)
+            try:
+                url = url_queue.get(timeout = 0.1)
+                with requests.get(url) as resp:
+                    content = resp.content
+                    ResponseParse(content)
+            except:
+                pass
 
 
 def MulitThreadSpider():
@@ -49,7 +52,7 @@ def MulitThreadSpider():
 
     start_time = time.time()
 
-    for page in range(1, 100):
+    for page in range(1, 1000):
         page_url = "https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page={page}".format(page = page)
         url_queue.put(page_url)
 

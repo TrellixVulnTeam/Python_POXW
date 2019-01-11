@@ -55,13 +55,13 @@ def AsyncSpider():
     tasks = list()
 
     loop = asyncio.get_event_loop()
-    for page in range(1, 1000):
+    for page in range(1000, 2000):
         page_url = "https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page={page}".format(page = page)
         tasks.append(Spider(page, page_url))
 
     loop.run_until_complete(asyncio.wait(tasks))
 
-    loop.close()
+    # loop.close()
 
     print("Use time: ", time.time() - start_time)
 
