@@ -49,12 +49,12 @@ async def Spider(index, url):
             print(index, "Timeout")
 
 
-def AsyncSpider():
-    start_time = time.time()
+def AsyncSpider(start = 0, end = 1000):
+    # start_time = time.time()
     tasks = list()
 
     loop = asyncio.get_event_loop()
-    for page in range(0, 1000):
+    for page in range(start, end):
         page_url = "https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page={page}".format(page = page)
         tasks.append(Spider(page, page_url))
 
@@ -62,8 +62,22 @@ def AsyncSpider():
 
     # loop.close()
 
-    print("Use time: ", time.time() - start_time)
+    # print("Use time: ", time.time() - start_time)
 
 
 if __name__ == '__main__':
-    AsyncSpider()
+    # AsyncSpider()
+
+    from multiprocessing import Process
+
+    start_time = time.time()
+    process_list = list()
+    for i in range(4):
+        p = Process(target = AsyncSpider, args = (i * 250, (i + 1) * 250), name = "Process {}".format(i))
+        p.start()
+        process_list.append(p)
+
+    for p in process_list:
+        p.join()
+
+    print("Use time: ", time.time() - start_time)
