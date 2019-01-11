@@ -22,14 +22,16 @@ def ResponseParse(content):
         author_link = "https:" + book_info.xpath(".//a[@class='author']/@href")[0]
         author_id = author_link.split('/')[-1]
 
-        print("{novel_name} [{man_type}*{sub_type}]".format(novel_name = novel_name, man_type = man_type, sub_type = sub_type))
+        print("{novel_name} [{man_type}*{sub_type}]".format(novel_name=novel_name, man_type=man_type, sub_type=sub_type))
 
 
 def Spider(url):
     try:
         with requests.get(url) as resp:
-            content = resp.content
-            ResponseParse(content)
+            # content = resp.content
+            # ResponseParse(content)
+            print(url, "over")
+            pass
     except:
         pass
 
@@ -39,8 +41,8 @@ def MulitThreadSpider():
 
     spider_list = list()
     for page in range(1, 1000):
-        page_url = "https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page={page}".format(page = page)
-        spider = Thread(target = Spider, args = (page_url,), name = "Spider {page}".format(page = page))
+        page_url = "https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page={page}".format(page=page)
+        spider = Thread(target=Spider, args=(page_url,), name="Spider {page}".format(page=page))
         spider.start()
         spider_list.append(spider)
 

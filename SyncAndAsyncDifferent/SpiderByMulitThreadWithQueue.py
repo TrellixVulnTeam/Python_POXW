@@ -28,7 +28,7 @@ def ResponseParse(content):
 
 url_queue = Queue()
 run = True
-thread_num = 1000
+thread_num = 100
 
 
 def Spider():
@@ -37,8 +37,9 @@ def Spider():
             try:
                 url = url_queue.get(timeout = 0.1)
                 with requests.get(url) as resp:
-                    content = resp.content
-                    ResponseParse(content)
+                    # content = resp.content
+                    # ResponseParse(content)
+                    print(url, "over")
             except:
                 pass
 

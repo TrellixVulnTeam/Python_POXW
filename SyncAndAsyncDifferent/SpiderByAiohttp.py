@@ -40,8 +40,7 @@ async def Spider(index, url):
         try:
             async with session.get(url, verify_ssl = False) as resp:
                 # async with session.get(url, timeout = 10, verify_ssl = False, proxy="http://192.168.2.53:1080") as resp:
-                ResponseParse(await resp.text())
-                # await resp.text()
+                # ResponseParse(await resp.text())
                 print(index, "over")
 
         except aiohttp.client_exceptions.ClientConnectorError:
@@ -55,7 +54,7 @@ def AsyncSpider():
     tasks = list()
 
     loop = asyncio.get_event_loop()
-    for page in range(1000, 2000):
+    for page in range(0, 1000):
         page_url = "https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page={page}".format(page = page)
         tasks.append(Spider(page, page_url))
 
