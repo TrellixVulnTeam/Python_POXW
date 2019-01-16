@@ -145,6 +145,7 @@ def long_computation():
     # emulate a long computation
     time.sleep(3)
 
+
 # if __name__ == '__main__':
 # with open("WeChat.html", "rb") as fRead, open("Tmp.html", "w") as fWrite:
 #     fWrite.write(fRead.read().decode(encoding="utf-8"))
@@ -184,3 +185,12 @@ def long_computation():
 #     print('Computation done')
 # finally:
 #     spinner.terminate()
+
+s_1 = [1, 2, 3, 4]
+s_2 = [5, 6, 7]
+
+s_1[len(s_1):len(s_1)] = s_2
+print(s_1)
+
+d_1 = {'apple': 1, 'egg': 2}
+print(2 in d_1)
