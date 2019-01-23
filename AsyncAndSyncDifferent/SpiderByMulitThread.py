@@ -33,6 +33,7 @@ def Spider(url):
             print(url, "over")
             pass
     except:
+        print(url, "Exception")
         pass
 
 

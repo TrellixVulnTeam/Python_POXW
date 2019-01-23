@@ -23,7 +23,7 @@ def ResponseParse(content):
         author_link = "https:" + book_info.xpath(".//a[@class='author']/@href")[0]
         author_id = author_link.split('/')[-1]
 
-        print("{novel_name} [{man_type}*{sub_type}]".format(novel_name = novel_name, man_type = man_type, sub_type = sub_type))
+        print("{novel_name} [{man_type}*{sub_type}]".format(novel_name=novel_name, man_type=man_type, sub_type=sub_type))
 
 
 url_queue = Queue()
@@ -35,26 +35,27 @@ def Spider():
     while run:
         if url_queue.qsize() != 0:
             try:
-                url = url_queue.get(timeout = 0.1)
+                url = url_queue.get(timeout=0.1)
                 with requests.get(url) as resp:
                     # content = resp.content
                     # ResponseParse(content)
                     print(url, "over")
             except:
+                print("Exception")
                 pass
 
 
 def MulitThreadSpider():
     spider_pool = list()
     for i in range(thread_num):
-        spider = Thread(target = Spider, args = (), name = "Thread {}.".format(i))
+        spider = Thread(target=Spider, args=(), name="Thread {}.".format(i))
         spider.start()
         spider_pool.append(spider)
 
     start_time = time.time()
 
     for page in range(1, 1000):
-        page_url = "https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page={page}".format(page = page)
+        page_url = "https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page={page}".format(page=page)
         url_queue.put(page_url)
 
     while url_queue.qsize() != 0:
