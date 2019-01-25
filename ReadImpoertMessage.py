@@ -4,6 +4,11 @@
  @File    : ReadImpoertMessage.py
  @Time    : 2018/6/29 15:21
 """
+
+l_1 = ['s', 'd', 'f', 'g']
+index_s = l_1.index('s')
+pass
+
 from Crypt import Md5Check, AES
 import json
 import os
@@ -21,7 +26,7 @@ hexstr = "\\".join(hexList)
 with open("text.txt", "w") as f:
     f.write(hexstr)
 
-qu = Queue(maxsize=3)
+qu = Queue(maxsize = 3)
 qu.put(1)
 qu.put(2)
 qu.put(3)
@@ -32,8 +37,8 @@ try:
 except:
     traceback.print_exc()
 
-name = dict(name="hell")
-print("hello {name}".format(name=name))
+name = dict(name = "hell")
+print("hello {name}".format(name = name))
 
 defaultRuleList = [
     "-1 1 -2 345789 ?1?2?d?d?d?d?d?d?d?d?d",
@@ -78,14 +83,14 @@ cipher_text = "db52ad58e8d5d682e868fa58a0bba0ed8dc790a1c99aa05f402ed86fa136905c3
 cipher_text2 = AES.AES_ECB_ENCRYPT("package_name".encode(), AES_key)
 print(cipher_text2)
 
-plain_text = AES.AES_ECB_DECRYPT(cipher_text=cipher_text.encode(), key=AES_key)
+plain_text = AES.AES_ECB_DECRYPT(cipher_text = cipher_text.encode(), key = AES_key)
 # plain_text = AES.AES_ECB_DECRYPT(cipher_text=cipher_text2, key=AES_key)
 # plain_text_json = json.loads(plain_text)
 print(plain_text)
 pass
 
 
-def func(data=[]):
+def func(data = []):
     datatmp = list(data)
     datatmp.append(0)
     return datatmp
@@ -129,7 +134,7 @@ DELAY = 0.1
 DISPLAY = ['|', '/', '-', '\\']
 
 
-def spinner_func(before='', after=''):
+def spinner_func(before = '', after = ''):
     write, flush = sys.stdout.write, sys.stdout.flush
     pos = -1
     while True:
