@@ -37,6 +37,7 @@ def AddHtmlTag(tag, *args, **kwargs):
 
         def Wrapper(*args):
             print(fn.__name__)
+            print(fn(*args))
             return "<{tag} {css}>{fn}</{tag}>".format(tag = tag, css = css_class, fn = fn(*args))
 
         return Wrapper
@@ -47,7 +48,7 @@ def AddHtmlTag(tag, *args, **kwargs):
 @AddHtmlTag(tag = 'div', css_class = "center")
 @AddHtmlTag(tag = 'b', css_class = "black")
 def Hello(name):
-    return "hello world!" + name
+    return "hello world! " + name
 
 
 if __name__ == '__main__':
