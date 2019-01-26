@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
 
     class TestObj:
-        __slots__ = ["age"]
+        # __slots__ = ["age"]
 
         def __init__(self, age):
             self.age = age
