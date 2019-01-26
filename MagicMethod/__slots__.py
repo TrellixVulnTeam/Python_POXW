@@ -28,3 +28,26 @@ print("salary is -> ", e.salary)
 
 e.sex = "male"
 print("sex is -> ", e.sex)
+
+print("\n\n")
+
+if __name__ == '__main__':
+    import sys
+
+
+    class TestObj:
+        __slots__ = ["age"]
+
+        def __init__(self, age):
+            self.age = age
+
+
+    l_list = [TestObj(i) for i in range(2 ** 20)]
+
+    print("sys.getsizeof(l_list) -> ", sys.getsizeof(l_list))
+
+    s = 0
+    for l in l_list:
+        s += sys.getsizeof(l)
+
+    print("sys.getsizeof(obj_in_list)", s)
