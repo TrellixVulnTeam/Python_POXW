@@ -46,8 +46,6 @@ if __name__ == '__main__':
 
     print("sys.getsizeof(l_list) -> ", sys.getsizeof(l_list))
 
-    s = 0
-    for l in l_list:
-        s += sys.getsizeof(l)
+    s = sum(sys.getsizeof(l) for l in l_list)
 
     print("sys.getsizeof(obj_in_list)", s)
