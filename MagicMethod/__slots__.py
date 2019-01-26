@@ -41,11 +41,11 @@ if __name__ == '__main__':
         def __init__(self, age):
             self.age = age
 
+    print(sys.getsizeof(TestObj(12)))
 
-    l_list = [TestObj(i) for i in range(2 ** 20)]
+    for length in range(1120, 1122):
+        l_list = [TestObj(i) for i in range(length)]
+        print("len is -> {l}, sys.getsizeof(l_list) -> {s}".format(s = sys.getsizeof(l_list), l = len(l_list)))       # 计算整个list的大小
 
-    print("sys.getsizeof(l_list) -> ", sys.getsizeof(l_list))
-
-    s = sum(sys.getsizeof(l) for l in l_list)
-
-    print("sys.getsizeof(obj_in_list)", s)
+        s = sum(sys.getsizeof(l) for l in l_list)       # 统计list中所有元素的大小
+        print("len is -> {l}, sys.getsizeof(obj_in_list) -> {s}".format(s = s, l = len(l_list)))
