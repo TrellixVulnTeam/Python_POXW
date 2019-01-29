@@ -1,10 +1,10 @@
 """
-@file: GIL_multi_thread.py
+@file: GIL_multi_process.py
 @time: 2019/01/29
 @author: sch
 """
 import time
-from threading import Thread
+from multiprocessing import Process
 
 
 def single_thread(n):
@@ -12,10 +12,10 @@ def single_thread(n):
         pass
 
 
-def multi_thread(n, thread_num):
+def multi_process(n, thread_num):
     thread_list = list()
     for _ in range(thread_num):
-        t = Thread(target = single_thread, args = (int(n / thread_num),))
+        t = Process(target = single_thread, args = (int(n / thread_num),))
         t.start()
         thread_list.append(t)
 
@@ -25,5 +25,5 @@ def multi_thread(n, thread_num):
 
 if __name__ == '__main__':
     start_time = time.time()
-    multi_thread(10 ** 8, 2)
+    multi_process(10 ** 8, 2)
     print("use time: {}'s.".format(time.time() - start_time))
