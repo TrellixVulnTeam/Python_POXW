@@ -1,18 +1,10 @@
 Java.perform(function () {
     console.log("Begin Javascript.");
 
-    var shareddata = Java.use("com.lib.common.sharedata.b");
-    shareddata.a.overload('java.lang.String', 'int').implementation = function (str1, int1) {
-        var res = this.a(str1, int1);
-        console.log("\n[*] this.a(" + str1 + "," + int1 + ") -> " + res);
-        return res
-    }
-
-    var PPJSCallUpIntentService = Java.use("com.pp.assistant.worker.PPJSCallUpIntentService");
-    PPJSCallUpIntentService.onHandleIntent.implementation = function (arg1) {
-        console.log("[*]  this.d ->" + this.d);
-        var res = this.onHandleIntent(arg1);
-        console.log("[*]  this.d ->" + this.d);
+    var TbsDownloader = Java.use("com.tencent.smtt.sdk.TbsDownloader");
+    TbsDownloader.readResponse.overload('java.lang.String', 'int', 'boolean', 'boolean', 'boolean').implementation = function (str1, int1, b1, b2, b3) {
+        var res = this.readResponse(str1, int1, b1, b2, b3);
+        console.log("\n[*] str -> " + str1);
         return res
     }
 });
