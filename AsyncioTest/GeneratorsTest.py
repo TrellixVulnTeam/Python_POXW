@@ -5,6 +5,7 @@
 """
 import time
 
+print((4800 + 5550+6450)/3)
 
 def TailF(file_handle):
     while True:
