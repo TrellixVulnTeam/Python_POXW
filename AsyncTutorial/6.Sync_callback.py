@@ -25,7 +25,8 @@ class Crawler:
             self.sock.connect((self.url, 80))
         except BlockingIOError:
             pass
-        selector.register(self.sock.fileno(), EVENT_WRITE, self.connected)      # 写回调，对方服务器有返回时，会对socket的文件描述符产生变化，触发写回调
+        selector.register(self.sock.fileno(), EVENT_WRITE, self.connected)
+        # selector.register(self.sock.fileno(), EVENT_READ, self.connected)      # 写回调，对方服务器有返回时，会对socket的文件描述符产生变化，触发写回调
 
     def connected(self, key, mask):
         selector.unregister(key.fd)
@@ -41,15 +42,17 @@ class Crawler:
         if chunk:
             self.response += chunk
         else:
+            print(self.response)
             selector.unregister(key.fd)         # 接收结束后，注销socket的文件描述符
             urls_todo -= 1
             if not urls_todo:               # 如果所有的次数都用完了，则停止
+                raise KeyError("hello")
                 stopped = True
 
 
 def loop():
     while not stopped:
-        events = selector.select()
+        events = selector.select()      # 此处会从之前注册的事件中，选择已经触发的事件，内部实现依赖于底层的select、poll、epoll、kqueue
         for event_key, event_mask in events:
             callback = event_key.data
             callback(event_key, event_mask)

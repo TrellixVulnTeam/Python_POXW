@@ -43,10 +43,8 @@ def nonblocking_way():
 
 
 def sync_way():
-    res = []
     for i in range(10):
-        res.append(nonblocking_way())
-    return len(res)
+        print(nonblocking_way(), flush=True)
 
 
 if __name__ == '__main__':

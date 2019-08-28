@@ -23,10 +23,8 @@ def blocking_way():
 
 
 def sync_way():
-    res = []
     for i in range(10):
-        res.append(blocking_way())
-    return len(res)
+        print(blocking_way(), flush=True)
 
 
 if __name__ == '__main__':
