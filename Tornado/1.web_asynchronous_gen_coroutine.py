@@ -25,13 +25,15 @@ class MainHandler(tornado.web.RequestHandler):
 class NoBlockingHandler(tornado.web.RequestHandler):
     @gen.coroutine
     def get(self, *args, **kwargs):
-        yield gen.sleep(10)
+        yield gen.sleep(10)     # 此处yield右侧的方法或函数必须是非阻塞的，否则程序仍是阻塞状态，会卡在里面
         self.write("No Blocking Request")
 
 
 class BlockingHandler(tornado.web.RequestHandler):
     def get(self):
         time.sleep(10)
+        #for i in range(2**100):
+        #    pass
         self.write("Blocking Request")
 
 

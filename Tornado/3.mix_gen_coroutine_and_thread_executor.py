@@ -1,10 +1,11 @@
 """
-@file: 2.thread_pool_executor.py
-@time: 2019/8/28
+@file: 3.mix_gen_coroutine_and_thread_executor.py
+@time: 2019/8/29
 @author: alfons
 """
 import time
-import logging
+
+import asyncio
 
 import tornado.ioloop
 import tornado.web
@@ -24,12 +25,12 @@ class MainHandler(tornado.web.RequestHandler):
         self.finish()
 
 
-class NoBlockingHandler(tornado.web.RequestHandler):
-    executor = ThreadPoolExecutor(4)  # 此处必须为executor，在 run_on_executor 装饰器函数中，会在self中获取executor属性，
+class ExecutorWithGen(tornado.web.RequestHandler):
+    executor = ThreadPoolExecutor(4)
 
     @run_on_executor
     def sleep(self, second):
-        time.sleep(second)      # 此处的sleep可以是阻塞的，因为run_on_executor装饰过后的方法，会被转换为Future
+        gen.sleep(second)
         return second
 
     @gen.coroutine
@@ -38,10 +39,32 @@ class NoBlockingHandler(tornado.web.RequestHandler):
         self.write("noblocking Request: {}".format(second))
 
 
+class Executor(tornado.web.RequestHandler):
+    executor = ThreadPoolExecutor(4)
+
+    def func_y(self):
+        for i in range(10):
+            yield i
+
+    async def sleep(self, second):
+        # time.sleep(second)
+        for i in self.func_y():
+            pass
+
+        await asyncio.sleep(second)
+        return second
+
+    @gen.coroutine
+    def get(self, *args, **kwargs):
+        second = yield self.executor.submit(self.sleep, second=5)
+        self.write("noblocking Request: {}".format(second))
+
+
 def make_app():
     return tornado.web.Application([
         (r'/', MainHandler),
-        (r'/noblock', NoBlockingHandler),
+        (r'/noblock', ExecutorWithGen),
+        (r'/executor', Executor),
     ])
 
 

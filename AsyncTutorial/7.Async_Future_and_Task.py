@@ -33,13 +33,14 @@ class Runner:
         self.coro = coro
 
     def run(self):
+        print("run run run")
         f = Future()
         f.set_result(None)
         self.step(f)        # 3 coro为一个生成器，这一步，其实就是为了 send(None) 给 #2 处的生成器
 
     def step(self, future):
         try:
-            next_future = self.coro.send(future.result)     # 4 将暂停的生成器继续启用，并接收 Future实例，调用完后，程序主体跳转到下一个yield语句处
+            next_future = self.coro.send(future.result)     # 4 返回result结果，将暂停的生成器继续启用，并接收 Future实例，调用完后，程序主体跳转到下一个yield语句处
         except StopIteration:
             return
         next_future.add_done_callback(self.step)        # 6 next_future为 下一个生成器返回的 Future实例
@@ -53,7 +54,7 @@ class Crawler:
     def fetch(self):
         sock = socket.socket()
         sock.setblocking(False)
-
+        print("dasdasddasdas")
         try:
             sock.connect((self.url, 80))
         except BlockingIOError:
