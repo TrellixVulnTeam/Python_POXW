@@ -29,3 +29,8 @@ class User(Base):
 
 print(repr(User.__table__))
 Base.metadata.create_all()
+
+Session = sessionmaker(bind=engine)
+session = Session()
+res = session.query(User).filter(User.name.in_(['hell', 'hh'])).one()
+pass
