@@ -76,3 +76,7 @@ dict_a = dict(a=1, b=2)
 print(dict_a)
 dict_a.pop('a')
 print(dict_a)
+
+ssh_str = "OpenSSH_7.6p1 Ubuntu-4ubuntu0.3, OpenSSL 1.0.2n  7 Dec 2017"
+res = ssh_str[8:ssh_str.find('.')]
+print(res)
