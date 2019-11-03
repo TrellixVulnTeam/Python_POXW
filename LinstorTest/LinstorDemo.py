@@ -14,4 +14,6 @@
 """
 import linstor
 
-with linstor.Linstor("linstor://10.10.90.152") as lin:
+with linstor.Linstor("linstor://10.10.90.152:3370") as lin:
+    node_list = lin.node_list()
+    pass
