@@ -5,5 +5,7 @@
 """
 import redis
 
-redis_object = redis.Redis(db=1)
-redis_object.mset({"zzzzzzz": "hello1", "zz": "hello2"})
+redis_object = redis.Redis(host="192.168.1.52")
+r = redis_object.keys("*")
+redis_object.set("rebalance_after_del_disk_task", 43)
+pass
