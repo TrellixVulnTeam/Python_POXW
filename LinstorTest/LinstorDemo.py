@@ -12,8 +12,10 @@
 # History:
 #=============================================================================
 """
+import re
 import logging
 import linstor
+import datetime
 import random
 from linstor import ResourceData
 from linstor import sharedconsts as api_consts
@@ -54,102 +56,108 @@ class LinstorManager(object):
         return res, error_msg
 
 
+expansion_time_dict = defaultdict(dict)
+
+
+def parse_capacity_bytes(s, is_iec=False):
+    """
+    去掉单位，返回 单位为 B 的数值
+    :param s: 带单位size
+    :param is_iec: 是否使用IEC标准，默认不使用，进制是1000
+    * -- 国际电工协会（IEC）拟定了"KiB"、“MiB”、“GiB"的二进制单位，专用来标示“1024进位”的数据大小;
+         而硬盘厂商在计算容量方面是以每1000为一进制的，每1000字节为1KB，每1000KB为1MB，每1000MB为1GB，每1000GB为1T;
+         在操作系统中对容量的计算是以1024为进位的，并且并未改为"KiB"、“MiB”、“GiB"的二进制单位
+    :return:
+    """
+    # 获取数值 和 单位
+    system = 1024 if is_iec else 1000
+    pattern = re.compile(r"(\d+\.?\d*)\s*(\w+)")
+    match = pattern.search(s)
+    if match:
+        size, units = match.group(1), match.group(2)
+    else:
+        return float(s)
+    size = float(size)
+    if "B" not in units:
+        units += "B"
+    multiplier = {
+        'PB': 5,
+        'TB': 4,
+        'GB': 3,
+        'MB': 2,
+        'KB': 1,
+        'B': 0
+    }.get(units.upper(), 0)
+
+    return int(size * pow(system, multiplier))
+
+
 class LinstorRebalanceManager(LinstorManager):
     """Linstor存储节点重平衡管理"""
 
-    def __get_nodes(self, filter_by_status=None):
+    def cal_pool_sync_target_on_time(self, pool_name, rebalance_rate="5 GB"):
         """
-        获取指定状态的节点
-        :param List[str] filter_by_status: 节点状态
-        :return list[Node]: 成功返回linstor节点信息列表
+        通过时间计算重平衡状态
+        :param str pool_name: 存储池的名字
+        :param str rebalance_rate: 重平衡速率，单位秒
+        :return: 重平衡进度
         """
-        try:
-            # 从linstor中查询出列表结果
-            nodes_info_list = self.lin_api.node_list()[0].data_v1
+        global expansion_time_dict
 
-            if filter_by_status is not None:
-                return [node_info for node_info in nodes_info_list if node_info["connection_status"] in filter_by_status]
-            else:
-                return nodes_info_list
-        except Exception as e:
-            logger.warning("获取{status}节点发生异常：{error}".format(status=filter_by_status, error=str(e)))
-            return list()
+        # 计算时间差
+        expansion_time = expansion_time_dict[pool_name]["time"]
+        time_now = datetime.datetime.now()
+        time_interval = (time_now - expansion_time).total_seconds()
 
-    def get_online_nodes(self):
-        """获取在线的节点信息列表"""
-        return self.__get_nodes(filter_by_status=["ONLINE"])
+        # 按条件遍历卷信息，找出所有的同步盘的磁盘大小
+        device_size_dict = dict()
+        for node_name, sp_list in expansion_time_dict[pool_name]["nodes"].iteritems():
+            resource_info_list = self.lin_api.volume_list(filter_by_stor_pools=sp_list)[0].data_v1
+            for resource_info in resource_info_list:
+                for volume_info in resource_info.get("volumes", list()):
+                    device_size_dict[volume_info.get("device_path", "")] = volume_info.get("allocated_size_kib", 0) * 1024
 
-    def __get_node_absence_lvs_info_dict(self):
-        """
-        从linstor中获取卷信息，得到卷在各个节点上的分布情况，
-        比较在线的节点列表与卷分布的节点情况，得到卷不能存在的节点信息字典
-        :return: 卷不能存在的节点信息集合
-        {
-            "sto1": {
-                "vg2": ["lv2_1"]
-            },
-            "sto2": {
-                "vg1": ["lv1_2"]
-            },
-            "sto3": {
-                "vg1": ["lv1_1", "lv1_2", "lv1_3"],
-                "vg2": ["lv2_1", "lv2_2", "lv2_3"]
-            }
-        }
-        """
-        # 获取卷存在的节点信息字典
-        # {
-        #     "lv1_1": {
-        #         "vg1": ["sto1", "sto2", "sto3"]
-        #     },
-        #     "lv1_2": {
-        #         "vg1": ["sto1", "sto2", "sto3"]
-        #     },
-        #     "lv2_1": {
-        #         "vg2": ["sto1", "sto2"]
-        #     }
-        # }
-        lvs_vg_node_dict = defaultdict(lambda: defaultdict(list))
-        node_vol_info_list = self.lin_api.volume_list()[0].data_v1
-        for node_vol_info in node_vol_info_list:
-            node_name = node_vol_info["node_name"]
-            for vol_info in node_vol_info.get("volumes", list()):
-                for lvs_info in vol_info.get("layer_data_list", list()):
-                    backing_device_name = lvs_info.get("data", dict()).get("backing_device", "")
-                    if backing_device_name.count('/') < 2:
-                        continue
+        # 计算同步进度
+        total_rebalance_size_bytes = sum(device_size_dict.values())  # 待同步的数据量，单位B
+        rebalance_rate_bytes = parse_capacity_bytes(rebalance_rate, is_iec=True)  # 同步速率，单位B
+        if rebalance_rate_bytes * time_interval >= total_rebalance_size_bytes:
+            del expansion_time_dict[pool_name]
+            return 100
+        else:
+            return float(100 * (rebalance_rate_bytes * time_interval / total_rebalance_size_bytes))
 
-                    # 正常情况下，返回的字符串为 /dev/vg1/lv1_1 这种格式
-                    backing_device_name_list = backing_device_name.split('/')
-                    vg_name = backing_device_name_list[-2]
-                    lv_name = backing_device_name_list[-1]
-                    lvs_vg_node_dict[lv_name][vg_name].append(node_name)
+class test:
+    time_dict = defaultdict(dict)
 
-        # 获取在线节点列表
-        online_node_list = [node["name"] for node in self.get_online_nodes()]
-
-        # 计算出在线节点中，卷不可能存在的节点
-        node_vg_lvs_dict = defaultdict(lambda: defaultdict(list))
-        for lv_name, vg_info_dict in lvs_vg_node_dict.iteritems():
-            for vg_name, node_list in vg_info_dict.iteritems():
-                # 遍历 不可能存在的 节点，将信息补全
-                for node_name in (set(online_node_list) - set(node_list)):
-                    node_vg_lvs_dict[node_name][vg_name].append(lv_name)
-
-        return node_vg_lvs_dict
-
-    def clean_lvs_info_from_system(self):
-        node_vg_lvs_dict = self.__get_node_absence_lvs_info_dict()
-        for node_name, vg_info_dict in node_vg_lvs_dict.iteritems():
-            for vg_name, lv_list in vg_info_dict.iteritems():
-                pass
-        pass
+    def change(self):
+        self.time_dict["time"] = 100
 
 
 if __name__ == '__main__':
     # print "{t}".format(t=("sto1", "rd0", "sp0"))
-    linstor_rebalance_manager = LinstorRebalanceManager(ip="10.10.160.13")
+    linstor_rebalance_manager = LinstorRebalanceManager(ip="192.168.1.70")
     # vol_list = linstor_rebalance_manager.__get_node_absence_lvs_info_dict()
-    r = linstor_rebalance_manager.lin_api.resource_list(filter_by_resources=["ch_test"])[0].data_v1
+    # r = linstor_rebalance_manager.lin_api.resource_list(filter_by_resources=["ch_test"])[0].data_v1
+    # sp_list = linstor_rebalance_manager.lin_api.storage_pool_list_raise().data_v1
+    # r_list = linstor_rebalance_manager.lin_api.resource_list(filter_by_resources=["rd4"])[0].data_v1
+    # v_list = linstor_rebalance_manager.lin_api.volume_list(filter_by_nodes=["china-mobile-sto204"],
+    #                                                        filter_by_stor_pools=["sp3"])[0].data_v1
+    # sp_list = linstor_rebalance_manager.lin_api.storage_pool_list()[0].data_v1
+    # expansion_time_dict["poola"] = dict(nodes={"china-mobile-sto205": ["sp10", "sp11", "sp12"],
+    #                                            "china-mobile-sto204": ["sp10"], },
+    #                                     time=datetime.datetime.now() - datetime.timedelta(seconds=25))
+    # del expansion_time_dict["poola"]
+    # print datetime.datetime.now()
+    # print expansion_time_dict["poola"]["time"]
+    #
+    # res = linstor_rebalance_manager.cal_pool_sync_target_on_time("poola")
+    # print "{:2} %".format(res)
+    t_1 = test()
+    t_1.time_dict["time"] = datetime.datetime.now()
+
+    t_2 = test()
+    t_2.change()
+
+    print t_1.time_dict
 
     pass
