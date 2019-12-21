@@ -6,6 +6,14 @@
 """
 import zipfile
 
+i = 0 ^ 1
+j = 1 ^ 2
+
+dict_a = {1: 2}
+print(dict_a.get(None, "nod"))
+
 f = zipfile.ZipFile("./test.zip")
-print("\n".join(f.filelist))
+name_info = f.NameToInfo
+# file_info = f.getinfo("libmupdf.so2")
+# print("\n".join(f.filelist))
 pass
