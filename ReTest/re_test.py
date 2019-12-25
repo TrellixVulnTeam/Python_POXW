@@ -5,12 +5,15 @@
 """
 import re
 
-# 获取版本号
-with open("qdata_version.conf", 'r') as f:
-    codes_str = f.read()
+p = re.search(r".*?drbd([0-9]*)", "/dev1002")
+res = p.group(1)
 
-pattern = re.compile(r'[.\n]*VERSION = "([\d.]+)".*')
-result = pattern.match(codes_str)
-r = result.group(2)
-print(r)
+# # 获取版本号
+# with open("qdata_version.conf", 'r') as f:
+#     codes_str = f.read()
+#
+# pattern = re.compile(r'[.\n]*VERSION = "([\d.]+)".*')
+# result = pattern.match(codes_str)
+# r = result.group(2)
+# print(r)
 pass

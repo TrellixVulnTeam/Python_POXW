@@ -1,0 +1,55 @@
+╭─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+┊ Node                ┊ Resource ┊ StoragePool ┊ VolumeNr ┊ MinorNr ┊ DeviceName    ┊ Allocated   ┊ InUse  ┊    State ┊
+╞═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╡
+┊ china-mobile-sto203 ┊ rd0      ┊ spp0        ┊ 0        ┊ 1000    ┊ /dev/drbd1000 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto204 ┊ rd0      ┊ spp0        ┊ 0        ┊ 1000    ┊ /dev/drbd1000 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto205 ┊ rd0      ┊ spp0        ┊ 0        ┊ 1000    ┊ /dev/drbd1000 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto203 ┊ rd1      ┊ spp1        ┊ 0        ┊ 1001    ┊ /dev/drbd1001 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto204 ┊ rd1      ┊ spp1        ┊ 0        ┊ 1001    ┊ /dev/drbd1001 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto206 ┊ rd1      ┊ spp1        ┊ 0        ┊ 1001    ┊ /dev/drbd1001 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto203 ┊ rd10     ┊ spp1        ┊ 0        ┊ 1010    ┊ /dev/drbd1010 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto205 ┊ rd10     ┊ spp1        ┊ 0        ┊ 1010    ┊ /dev/drbd1010 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto206 ┊ rd10     ┊ spp1        ┊ 0        ┊ 1010    ┊ /dev/drbd1010 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto204 ┊ rd11     ┊ spp2        ┊ 0        ┊ 1011    ┊ /dev/drbd1011 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto205 ┊ rd11     ┊ spp2        ┊ 0        ┊ 1011    ┊ /dev/drbd1011 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto206 ┊ rd11     ┊ spp2        ┊ 0        ┊ 1011    ┊ /dev/drbd1011 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto203 ┊ rd12     ┊ spp3        ┊ 0        ┊ 1012    ┊ /dev/drbd1012 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto204 ┊ rd12     ┊ spp3        ┊ 0        ┊ 1012    ┊ /dev/drbd1012 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto205 ┊ rd12     ┊ spp3        ┊ 0        ┊ 1012    ┊ /dev/drbd1012 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto203 ┊ rd13     ┊ spp4        ┊ 0        ┊ 1013    ┊ /dev/drbd1013 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto204 ┊ rd13     ┊ spp4        ┊ 0        ┊ 1013    ┊ /dev/drbd1013 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto206 ┊ rd13     ┊ spp4        ┊ 0        ┊ 1013    ┊ /dev/drbd1013 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto203 ┊ rd14     ┊ spp5        ┊ 0        ┊ 1014    ┊ /dev/drbd1014 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto205 ┊ rd14     ┊ spp5        ┊ 0        ┊ 1014    ┊ /dev/drbd1014 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto206 ┊ rd14     ┊ spp5        ┊ 0        ┊ 1014    ┊ /dev/drbd1014 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto204 ┊ rd15     ┊ spp6        ┊ 0        ┊ 1015    ┊ /dev/drbd1015 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto205 ┊ rd15     ┊ spp6        ┊ 0        ┊ 1015    ┊ /dev/drbd1015 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto206 ┊ rd15     ┊ spp6        ┊ 0        ┊ 1015    ┊ /dev/drbd1015 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto203 ┊ rd2      ┊ spp2        ┊ 0        ┊ 1002    ┊ /dev/drbd1002 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto205 ┊ rd2      ┊ spp2        ┊ 0        ┊ 1002    ┊ /dev/drbd1002 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto206 ┊ rd2      ┊ spp2        ┊ 0        ┊ 1002    ┊ /dev/drbd1002 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto204 ┊ rd3      ┊ spp3        ┊ 0        ┊ 1003    ┊ /dev/drbd1003 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto205 ┊ rd3      ┊ spp3        ┊ 0        ┊ 1003    ┊ /dev/drbd1003 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto206 ┊ rd3      ┊ spp3        ┊ 0        ┊ 1003    ┊ /dev/drbd1003 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto203 ┊ rd4      ┊ spp4        ┊ 0        ┊ 1004    ┊ /dev/drbd1004 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto204 ┊ rd4      ┊ spp4        ┊ 0        ┊ 1004    ┊ /dev/drbd1004 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto205 ┊ rd4      ┊ spp4        ┊ 0        ┊ 1004    ┊ /dev/drbd1004 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto203 ┊ rd5      ┊ spp5        ┊ 0        ┊ 1005    ┊ /dev/drbd1005 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto204 ┊ rd5      ┊ spp5        ┊ 0        ┊ 1005    ┊ /dev/drbd1005 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto206 ┊ rd5      ┊ spp5        ┊ 0        ┊ 1005    ┊ /dev/drbd1005 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto203 ┊ rd6      ┊ spp6        ┊ 0        ┊ 1006    ┊ /dev/drbd1006 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto205 ┊ rd6      ┊ spp6        ┊ 0        ┊ 1006    ┊ /dev/drbd1006 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto206 ┊ rd6      ┊ spp6        ┊ 0        ┊ 1006    ┊ /dev/drbd1006 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto204 ┊ rd7      ┊ spp7        ┊ 0        ┊ 1007    ┊ /dev/drbd1007 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto205 ┊ rd7      ┊ spp7        ┊ 0        ┊ 1007    ┊ /dev/drbd1007 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto206 ┊ rd7      ┊ spp7        ┊ 0        ┊ 1007    ┊ /dev/drbd1007 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto203 ┊ rd8      ┊ spp8        ┊ 0        ┊ 1008    ┊ /dev/drbd1008 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto204 ┊ rd8      ┊ spp8        ┊ 0        ┊ 1008    ┊ /dev/drbd1008 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto205 ┊ rd8      ┊ spp8        ┊ 0        ┊ 1008    ┊ /dev/drbd1008 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto203 ┊ rd9      ┊ spp0        ┊ 0        ┊ 1009    ┊ /dev/drbd1009 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto204 ┊ rd9      ┊ spp0        ┊ 0        ┊ 1009    ┊ /dev/drbd1009 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto206 ┊ rd9      ┊ spp0        ┊ 0        ┊ 1009    ┊ /dev/drbd1009 ┊ 1000.21 GiB ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto203 ┊ vote     ┊ vote        ┊ 0        ┊ 1016    ┊ /dev/drbd1016 ┊ 10.00 GiB   ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto204 ┊ vote     ┊ vote        ┊ 0        ┊ 1016    ┊ /dev/drbd1016 ┊ 10.00 GiB   ┊ Unused ┊ UpToDate ┊
+┊ china-mobile-sto205 ┊ vote     ┊ vote        ┊ 0        ┊ 1016    ┊ /dev/drbd1016 ┊ 10.00 GiB   ┊ Unused ┊ UpToDate ┊
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
