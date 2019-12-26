@@ -22,12 +22,15 @@ def parse(file_name):
                     block_device = item.replace('└─', '').replace('├─', '')
                     if block_device.startswith("drbd"):
                         block_num = int(block_device.replace('drbd', ''))
-                        block_device = "LUN{}".format(block_num-1000+1)
+                        block_device = "LUN{}".format(block_num - 1000 + 1)
 
-                    result[block_device] = physical_device
+                        result[block_device] = physical_device
     return result
 
 
 if __name__ == '__main__':
     res = parse("./lsblk_output.txt")
+    need = ["LUN{}".format(i) for i in [1, 2, 3, 4, 8, 41]]
+    need_nvme = [res.get(n, "") for n in need]
+    print('\n'.join(need_nvme))
     pass
