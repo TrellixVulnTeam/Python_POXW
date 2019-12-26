@@ -1,0 +1,53 @@
+sda                       8:0     0  893.8G  0 disk 
+├─sda1                    8:1     0      1M  0 part 
+├─sda2                    8:2     0    500M  0 part /boot
+└─sda3                    8:3     0  893.3G  0 part 
+  ├─VolGroup-root       253:0     0     50G  0 lvm  /
+  ├─VolGroup-swap       253:1     0     16G  0 lvm  [SWAP]
+  ├─VolGroup-oswbb      253:2     0     50G  0 lvm  /oswbb
+  ├─VolGroup-home       253:3     0     20G  0 lvm  /home
+  ├─VolGroup-voting     253:4     0      6G  0 lvm  
+  ├─VolGroup-mgmt       253:5     0     40G  0 lvm  
+  └─VolGroup-redo       253:6     0    100G  0 lvm  
+nvme10n1                259:11    0    2.9T  0 disk 
+nvme11n1                259:7     0    2.9T  0 disk 
+├─vg4-lv_data_tmeta     253:10    0     10G  0 lvm  
+│ └─vg4-lv_data-tpool   253:19    0    2.9T  0 lvm  
+│   ├─vg4-yt_test_00001 253:12    0      5G  0 lvm  
+│   │ └─drbd1038        147:1038  0      5G  1 disk 
+│   ├─vg4-yt_test_00002 253:13    0      5G  0 lvm  
+│   │ └─drbd1039        147:1039  0      5G  1 disk 
+│   └─vg4-lv_data       253:20    0    2.9T  0 lvm  
+└─vg4-lv_data_tdata     253:11    0    2.9T  0 lvm  
+  └─vg4-lv_data-tpool   253:19    0    2.9T  0 lvm  
+    ├─vg4-yt_test_00001 253:12    0      5G  0 lvm  
+    │ └─drbd1038        147:1038  0      5G  1 disk 
+    ├─vg4-yt_test_00002 253:13    0      5G  0 lvm  
+    │ └─drbd1039        147:1039  0      5G  1 disk 
+    └─vg4-lv_data       253:20    0    2.9T  0 lvm  
+nvme0n1                 259:0     0    2.9T  0 disk 
+nvme1n1                 259:3     0    2.9T  0 disk 
+nvme2n1                 259:4     0    2.9T  0 disk 
+└─redo-redo_00000       253:9     0  222.1G  0 lvm  
+  └─drbd1001            147:1001  0    222G  1 disk 
+nvme3n1                 259:1     0    2.9T  0 disk 
+└─qos-qos_00000         253:23    0     30G  0 lvm  
+  └─drbd1004            147:1004  0     30G  1 disk 
+nvme4n1                 259:5     0    2.9T  0 disk 
+nvme5n1                 259:2     0    2.9T  0 disk 
+└─data3-data3_00000     253:21    0 1000.2G  0 lvm  
+  └─drbd1003            147:1003  0   1000G  1 disk 
+nvme6n1                 259:9     0    2.9T  0 disk 
+└─data2-data2_00000     253:17    0 1000.2G  0 lvm  
+  └─drbd1000            147:1000  0   1000G  1 disk 
+nvme7n1                 259:6     0    2.9T  0 disk 
+nvme8n1                 259:10    0    2.9T  0 disk 
+├─vg1-lv_data_tmeta     253:7     0     10G  0 lvm  
+│ └─vg1-lv_data-tpool   253:15    0    2.9T  0 lvm  
+│   └─vg1-lv_data       253:16    0    2.9T  0 lvm  
+└─vg1-lv_data_tdata     253:8     0    2.9T  0 lvm  
+  └─vg1-lv_data-tpool   253:15    0    2.9T  0 lvm  
+    └─vg1-lv_data       253:16    0    2.9T  0 lvm  
+nvme9n1                 259:8     0    2.9T  0 disk 
+└─vg2-oracle_00000      253:14    0    100G  0 lvm  
+  └─drbd1006            147:1006  0    100G  1 disk
