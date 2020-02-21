@@ -16,13 +16,15 @@ import re
 import redis
 import logging
 import linstor
+from linstor.sharedconsts import FLAG_DISKLESS
+from linstor import ResourceData
 import datetime
 import random
 from linstor import ResourceData
 from linstor import sharedconsts as api_consts
 import json
 import pprint
-from collections import defaultdict
+from collections import defaultdict, namedtuple
 
 import time
 from multiprocessing.pool import ThreadPool
@@ -37,6 +39,45 @@ class LinstorManager(object):
         self.timeout = timeout
         self.url = "linstor://{ip}:{port}".format(ip=self.ip, port=self.port)
         self._lin_api = linstor.Linstor(self.url, timeout=self.timeout)
+
+    def _get_nic_map(self):
+        """
+        获取节点下使用的同步网卡映射关系
+        :return:
+        {
+            "china-mobile-com201": "nic1",
+            "china-mobile-com202": "nic2",
+        }
+        """
+        node_list = self.lin_api.node_list()[0].data_v1
+
+        nic_map = dict()
+        for node_info in node_list:
+            node_name = node_info["name"]
+            default_nic = None
+            pref_nic = node_info.get("props", dict()).get("PrefNic", "")
+            other_nics = list()
+
+            for interface in node_info.get("net_interfaces", list()):
+                if interface.get("is_active"):
+                    default_nic = interface["name"]
+                else:
+                    other_nics.append(interface["name"])
+
+            # 优先选择预先设置的prefnic网卡
+            # 其次为默认网卡
+            # 再其次从设置的其他网卡中选择一块
+            # 如果没有，则置为None
+            if pref_nic:
+                nic_map.update({node_name: pref_nic})
+            elif other_nics:
+                nic_map.update({node_name: random.choice(other_nics)})
+            elif default_nic:
+                nic_map.update({node_name: default_nic})
+            else:
+                nic_map.update({node_name: None})
+
+        return nic_map
 
     @property
     def lin_api(self):
@@ -56,47 +97,87 @@ class LinstorManager(object):
             error_msg = "<br/>".join(error_msg)
         return res, error_msg
 
+    def __ssh_run(self):
+        return """
+        [
+    {
+        "target_name": "s01.3262.01",
+        "target_id": 1,
+        "driver": "nvmf",
+        "acl": [
+            "172.16.129.0/24",
+            "172.16.128.0/24"
+        ],
+        "target_state": "ready",
+        "lun_info": [
+            {
+                "healthy": true,
+                "path": "/dev/qdisk/LUN2",
+                "id": 1,
+                "size": "238374 MB"
+            }
+        ],
+        "external": "NO",
+        "port": "3262"
+    },
+    {
+        "target_name": "s01.3263.01",
+        "target_id": 1,
+        "driver": "nvmf",
+        "acl": [
+            "172.16.129.0/24",
+            "172.16.128.0/24"
+        ],
+        "target_state": "ready",
+        "lun_info": [
+            {
+                "healthy": true,
+                "path": "/dev/qdisk/LUN3",
+                "id": 1,
+                "size": "10739 MB"
+            }
+        ],
+        "external": "NO",
+        "port": "3263"
+    },
+    {
+        "target_name": "s01.3264.01",
+        "target_id": 1,
+        "driver": "nvmf",
+        "acl": [
+            "172.16.129.0/24",
+            "172.16.128.0/24"
+        ],
+        "target_state": "ready",
+        "lun_info": [
+            {
+                "healthy": true,
+                "path": "/dev/qdisk/LUN39",
+                "id": 1,
+                "size": "5372 MB"
+            }
+        ],
+        "external": "NO",
+        "port": "3264"
+    }
+]
+"""
 
-expansion_time_dict = defaultdict(dict)
+    def dump_rsc_info(self, bin_name):
+        import pickle
 
+        rsc_info_list = self.lin_api.volume_list()[0].data_v1
+        with open(bin_name, "wb") as f:
+            pickle.dump(rsc_info_list, f)
 
-def parse_capacity_bytes(s, is_iec=False):
-    """
-    去掉单位，返回 单位为 B 的数值
-    :param s: 带单位size
-    :param is_iec: 是否使用IEC标准，默认不使用，进制是1000
-    * -- 国际电工协会（IEC）拟定了"KiB"、“MiB”、“GiB"的二进制单位，专用来标示“1024进位”的数据大小;
-         而硬盘厂商在计算容量方面是以每1000为一进制的，每1000字节为1KB，每1000KB为1MB，每1000MB为1GB，每1000GB为1T;
-         在操作系统中对容量的计算是以1024为进位的，并且并未改为"KiB"、“MiB”、“GiB"的二进制单位
-    :return:
-    """
-    # 获取数值 和 单位
-    system = 1024 if is_iec else 1000
-    pattern = re.compile(r"(\d+\.?\d*)\s*(\w+)")
-    match = pattern.search(s)
-    if match:
-        size, units = match.group(1), match.group(2)
-    else:
-        return float(s)
-    size = float(size)
-    if "B" not in units:
-        units += "B"
-    multiplier = {
-        'PB': 5,
-        'TB': 4,
-        'GB': 3,
-        'MB': 2,
-        'KB': 1,
-        'B': 0
-    }.get(units.upper(), 0)
+    def load_rsc_info(self, bin_name):
+        import pickle
 
-    return int(size * pow(system, multiplier))
+        with open(bin_name, "rb") as f:
+            rsc_info_list = pickle.load(f)
 
+        return rsc_info_list
 
-class LinstorRebalanceManager(LinstorManager):
-    """Linstor存储节点重平衡管理"""
-
-    # ======================按需要获取相关节点============================
     def __get_nodes(self, filter_by_status=None):
         """
         获取指定状态的节点
@@ -108,7 +189,8 @@ class LinstorRebalanceManager(LinstorManager):
             nodes_info_list = self.lin_api.node_list()[0].data_v1
 
             if filter_by_status is not None:
-                return [node_info for node_info in nodes_info_list if node_info["connection_status"] in filter_by_status]
+                return [node_info for node_info in nodes_info_list if
+                        node_info["connection_status"] in filter_by_status]
             else:
                 return nodes_info_list
         except Exception as e:
@@ -119,8 +201,7 @@ class LinstorRebalanceManager(LinstorManager):
         """获取在线的节点信息列表"""
         return self.__get_nodes(filter_by_status=["ONLINE"])
 
-    # ======================重平衡针对lv错误进行的相关相关=============================
-    def __get_node_absence_lvs_info_dict(self):
+    def get_node_absence_lvs_info_dict(self):
         """
         从linstor中获取卷信息，得到卷在各个节点上的分布情况，
         比较在线的节点列表与卷分布的节点情况，得到卷不能存在的节点信息字典
@@ -179,71 +260,63 @@ class LinstorRebalanceManager(LinstorManager):
 
         return node_vg_lvs_dict
 
-    def clean_lvs_info_from_system(self):
-        """清除不应该存在于节点上的lv卷"""
-        # 获取节点不应存在的卷信息
-        node_vg_lvs_dict = self.__get_node_absence_lvs_info_dict()
+    @staticmethod
+    def wait_drbd_connecting(ssh, lun_path, wait_time=30):
+        """
+        等待drbd资源同步
+        :param ssh: ssh对象
+        :param str lun_path: 对应的lun路径
+        :param int wait_time: 等待时间
+        :return:
+        """
+        drbd_number = int(lun_path[lun_path.rfind('LUN') + 3:]) - 1 + 1000
+        drbd_name = "drbd{num}".format(num=drbd_number)
 
-        # 遍历卷信息，执行 lvremove 操作
-        for node_name, vg_info_dict in node_vg_lvs_dict.iteritems():
-            for vg_name, lv_list in vg_info_dict.iteritems():
-                # fixme： 为防止删除过程中linstor刚好创建了对应的资源卷，需要再次判断lv是否存在于linstor中
-                pass
+        for _ in range(2 * wait_time):
+            try:
+                time.sleep(0.5)
+                rsc_name_str = ssh.run_cmd("linstor v l 2>/dev/null | grep %s | awk '{print $4}' | uniq " % drbd_name)
+                rsc_name_list = rsc_name_str.splitlines()
+                for rsc_name in rsc_name_list:
+                    drbd_status_str = ssh.run_cmd("drbdadm status {} 2>/dev/null".format(rsc_name))
+                    connect_flag_num = drbd_status_str.count("Connecting")
 
+                    if connect_flag_num > 0:
+                        break
+                    else:
+                        return
 
-DEL_DISK_TASK_NAME = "rebalance_after_del_disk_task"
-DEL_NODE_TASK_NAME = "rebalance_after_del_node_task"
-r_client = redis.Redis(host="192.168.1.16")
+            except Exception as e:
+                logger.warning("等待drbd块设备({lun})同步发生异常！{error}".format(lun=lun_path, error=str(e)))
+        else:
+            logger.warning("drbd块设备({lun})在 {sec}'s 内未发生同步！".format(lun=lun_path, sec=wait_time))
 
-
-def _task_name(func_name, *args):
-    """任务名称format"""
-    return "{func}_{args}".format(func=func_name, args="_".join(str(a) for a in args))
-
-
-def get_task(func_name, *args):
-    """获取任务"""
-    value = r_client.get(_task_name(func_name, *args))
-    return int(value) if value is not None else 0
-
-
-def set_task(func_name, ex, value, *args):
-    """
-    在redis中设置任务名称
-    :param str func_name: 功能的名字
-    :param timedelta ex: 过期时间
-    :param int value: 设置的值
-    """
-    key = _task_name(func_name, *args)
-    if ex:
-        r_client.set(key, value, ex=datetime.timedelta(seconds=int(ex + 3600)))  # 过期时间
-    else:
-        r_client.set(key, value, ex=datetime.timedelta(seconds=10 * 60))
-    logger.debug("👈Linstor定时任务，设置{k}参数".format(k=key))
-
-
-set_task(DEL_DISK_TASK_NAME, 1, 1, "name", "spool")
 
 if __name__ == '__main__':
     # print "{t}".format(t=("sto1", "rd0", "sp0"))
-    linstor_rebalance_manager = LinstorRebalanceManager(ip="192.168.1.70")
-    # vol_list = linstor_rebalance_manager.__get_node_absence_lvs_info_dict()
-    # r = linstor_rebalance_manager.lin_api.resource_list(filter_by_resources=["ch_test"])[0].data_v1
-    # sp_list = linstor_rebalance_manager.lin_api.storage_pool_list_raise().data_v1
-    # r_list = linstor_rebalance_manager.lin_api.resource_list(filter_by_resources=["rd4"])[0].data_v1
-    # v_list = linstor_rebalance_manager.lin_api.volume_list(filter_by_nodes=["sto4"],
-    #                                                        filter_by_stor_pools=["ls_pool_ls"])[0].data_v1
-    linstor_rebalance_manager.clean_lvs_info_from_system()
-    pass
-    # sp_list = linstor_rebalance_manager.lin_api.storage_pool_list()[0].data_v1
-    # expansion_time_dict["poola"] = dict(nodes={"china-mobile-sto205": ["sp10", "sp11", "sp12"],
-    #                                            "china-mobile-sto204": ["sp10"], },
-    #                                     time=datetime.datetime.now() - datetime.timedelta(seconds=25))
-    # del expansion_time_dict["poola"]
-    # print datetime.datetime.now()
-    # print expansion_time_dict["poola"]["time"]
-    #
-    # res = linstor_rebalance_manager.cal_pool_sync_target_on_time("poola")
-    # print "{:2} %".format(res)
+    linstor_rebalance_manager = LinstorManager(ip="10.10.99.60")
 
+    # linstor_rebalance_manager.lin_api.resource_delete()
+    nic_map = linstor_rebalance_manager._get_nic_map()
+
+    #
+    # linstor_rebalance_manager._stop_error_disk_qlink(1, "china-mobile-sto203", "spp6", "rd6")
+
+    # linstor_rebalance_manager = LinstorManager(ip="10.10.100.11")
+
+    # linstor_rebalance_manager.get_node_absence_lvs_info_dict()
+
+    # linstor_rebalance_manager.dump_rsc_info(bin_name="./volume_info_del_node.bin")
+    # linstor_rebalance_manager.load_rsc_info(bin_name="./volume_info_del_node.bin")
+
+    # node_list = linstor_rebalance_manager.lin_api.node_list()[0].data_v1
+
+    # linstor_rebalance_manager._resource_create_and_modify_nic(rscs=[ResourceData(node_name="cn203", storage_pool="stop0", rsc_name="ewa0")])
+
+    # del_sto_pool = linstor_rebalance_manager.del_storage_pool_with_error_disk(cluster_id=1, filter_by_stor_pools=["stop0"])
+    # d_1 = linstor_rebalance_manager._resource_info_dict(filter_by_stor_pools=["stop1"])
+    # linstor_rebalance_manager._stop_error_disk_qlink(1, "qdata-sto31-dev", "poolB_vg4", "yt_test")
+    # linstor_rebalance_manager._start_qlink_after_resource_create(1, "qdata-sto31-dev", "poolB_vg4", "yt_test")
+    # d = linstor_rebalance_manager.lin_api.volume_list()[0].data_v1
+    # linstor_rebalance_manager.lin_api.resource_auto_place()
     pass
