@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 @author: Alfons
 @contact: alfons_xh@163.com
@@ -44,6 +46,7 @@ def PoolByModule():
     # print([i for i in res])
 
     # 多输入参数方法实现调用
+    print([i for i in enumerate(range(20))])
     res = pool.starmap(add, enumerate(range(20)))
     print(res)
 
@@ -98,5 +101,6 @@ def PoolUseTaskQueue():
 
 
 if __name__ == '__main__':
-    PoolByUser()
+    # PoolByUser()
+    PoolByModule()
     # PoolUseTaskQueue()

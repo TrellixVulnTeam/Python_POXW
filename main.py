@@ -1,10 +1,65 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 @file: main.py
 @time: 2019/9/11
 @author: alfons
 """
+attr = {
+    "hca": {
+        "0x98039b0300c87c90L": {
+            "name": None,
+            "ports": [
+                {
+                    "bond": True,
+                    "name": "mlx5_0",
+                    "port": 1,
+                    "status": "Active",
+                    "ib_port": "ib0",
+                    "switch_id": "0xb8599f0300a60a10L",
+                    "switch_port": "9"
+                }
+            ],
+            "ca_type": "MT4119",
+            "port_count": 1
+        },
+        "0x98039b0300c87e80L": {
+            "name": None,
+            "ports": [
+                {
+                    "bond": True,
+                    "name": "mlx5_1",
+                    "port": 1,
+                    "status": "Active",
+                    "ib_port": "ib1",
+                    "switch_id": "0xb8599f0300a609b0L",
+                    "switch_port": "9"
+                }
+            ],
+            "ca_type": "MT4119",
+            "port_count": 1
+        }
+    },
+}
 
 
+def get_ibcard_ips():
+    """返回该结点下的ib网卡连接信息"""
+    ibcard_ip_list = attr.get("ibcard_ip", list())
+    if ibcard_ip_list:
+        return ibcard_ip_list
+
+    hca_info = attr.get("hca", dict())
+    for hca_value_info in hca_info.values():
+        ib_info_list = hca_value_info.get("ports", list())
+        ib_ip_list = [ib_info.get("ip", "") for ib_info in ib_info_list]
+        ib_ip_list = [ib_str[:ib_str.rfind('/')] for ib_str in ib_ip_list if ib_str]
+        ibcard_ip_list.extend(ib_ip_list)
+
+    return list(set(ibcard_ip_list))
+
+
+get_ibcard_ips()
 # disk_name = "/dev/VolGroup/voting"
 # print(disk_name[disk_name.rfind('/'):])
 #

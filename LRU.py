@@ -43,7 +43,3 @@ class LRU:
 
 
 c = LRU(5)
-
-import sys
-
-sys.setcheckinterval()

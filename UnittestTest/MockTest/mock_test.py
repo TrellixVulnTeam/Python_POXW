@@ -66,17 +66,17 @@ print(mock_obj.do_something("alfons"))   # <Mock name='mock.do_something()' id='
 
 
 # ===================patch使用==================
-# class Foo:
-#     def method(self):
-#         return "hello"
-#
-#
-# def do_something():
-#     instance = Foo()
-#     return instance.method()
-#
-#
-# with mock.patch("__main__.Foo") as mock:  # 将Foo类模拟成mock类
-#     mock.return_value.method.return_value = "mock return"  # mock.return_value实际等于 Foo() 返回的实例，method.return_value实际等于 method()，此处将method方法调用后返回的结果设置为 "mock return"
-#     result = do_something()
-#     assert result == "mock return"  # 上面已经将返回的结果设置成了 "mock return"，所以断言通过
+class Foo:
+    def method(self):
+        return "hello"
+
+
+def do_something():
+    instance = Foo()
+    return instance.method()
+
+
+with mock.patch("__main__.Foo") as mock:  # 将Foo类模拟成mock类
+    mock.return_value.method.return_value = "mock return"  # mock.return_value实际等于 Foo() 返回的实例，method.return_value实际等于 method()，此处将method方法调用后返回的结果设置为 "mock return"
+    result = do_something()
+    assert result == "mock return"  # 上面已经将返回的结果设置成了 "mock return"，所以断言通过
