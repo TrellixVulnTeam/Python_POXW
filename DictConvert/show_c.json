@@ -26,6 +26,27 @@
                                 "size": "10G"
                             }
                         ],
+                        "lun_list_2": [
+                            {
+                                "m_path": "/dev/qdata/mpath-s01.6666.01.LUN12",
+                                "disks": [
+                                    {
+                                        "mapped_disk": "/dev/nvme6666n1",
+                                        "status": "active",
+                                        "ib_ip": "172.16.128.66",
+                                        "port": 3272
+                                    },
+                                    {
+                                        "mapped_disk": "/dev/nvme2222n1",
+                                        "status": "active",
+                                        "ib_ip": "172.16.128.65",
+                                        "port": 3272
+                                    }
+                                ],
+                                "m_status": "enabled",
+                                "size": "10G"
+                            }
+                        ],
                         "targetname": "s01.3272.01"
                     }
                 ]

@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# encoding: utf-8
 """
 @file: dict_to_list.py
 @time: 2020/3/24
