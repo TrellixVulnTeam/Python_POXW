@@ -79,9 +79,24 @@ def flatten_data(data, index="", cache=None):
         [cache.pop(0) for _ in range(len(cache))]
         cache.extend(cache_tmp)
     elif isinstance(data, dict):
-        cache_tmp = list()
+        # 针对一个dict下多个list对象进行特殊处理
+        func_list = list()  # 存放dict下的list对象列表
+        func_dict = list()  # 存放dict其他数据对象的列表
         for key, value in data.iteritems():
-            flatten_data(value, get_flatten_index(index, key), cache_tmp)
+            if isinstance(value, list):
+                func_list.append([get_flatten_index(index, key), value])
+            else:
+                func_dict.append([get_flatten_index(index, key), value])
+
+        cache_tmp = list()  # 临时存放归档数据的列表
+        for v in func_list:
+            cache_list_tmp = list()
+            flatten_data(v[1], v[0], cache_list_tmp)
+            cache_tmp.extend(cache_list_tmp)
+
+        for v in func_dict:
+            flatten_data(v[1], v[0], cache_tmp)
+
         cache.extend(cache_tmp)
     else:
         if cache:
