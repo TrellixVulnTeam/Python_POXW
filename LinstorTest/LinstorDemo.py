@@ -296,8 +296,11 @@ if __name__ == '__main__':
     # print "{t}".format(t=("sto1", "rd0", "sp0"))
     linstor_rebalance_manager = LinstorManager(ip="10.10.99.60")
 
+    # volume_info_list = linstor_rebalance_manager.lin_api.volume_list(filter_by_resources=["rdvdtest0"])[0].data_v1
+    res = linstor_rebalance_manager.lin_api.storage_pool_list(filter_by_stor_pools=["cachesp_cachevg0"])[0].data_v1
+    pass
     # linstor_rebalance_manager.lin_api.resource_delete()
-    nic_map = linstor_rebalance_manager._get_nic_map()
+    # nic_map = linstor_rebalance_manager._get_nic_map()
 
     #
     # linstor_rebalance_manager._stop_error_disk_qlink(1, "china-mobile-sto203", "spp6", "rd6")
