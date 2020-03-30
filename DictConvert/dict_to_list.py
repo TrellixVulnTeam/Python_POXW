@@ -13,13 +13,14 @@ def get_flatten_index(*args):
     return '.'.join([a for a in args if a])
 
 
-def flatten_data(data, index="", cache=None):
+def flatten_data(data, cache, index="", is_first=True):
     """
     把数据铺平
     :param data: 数据可以是list或者dict
-    :param index: key的前缀
     :param list cache: 用作缓存，传入的为空列表
+    :param index: key的前缀
     :return list[dict]: 返回list类型
+    :param bool is_first: 是否为首次数据，针对单纯的list数据进行处理
 
     用法：
     input = {
@@ -72,9 +73,14 @@ def flatten_data(data, index="", cache=None):
     ]
     """
     if isinstance(data, list):
+        # 针对单纯的list数据只需进行扩展处理
+        if is_first and all([not isinstance(d, list) and not isinstance(d, dict) for d in data]):
+            cache.extend(data)
+            return
+
         cache_tmp = list()
         for i in data:
-            flatten_data(i, index, cache_tmp)
+            flatten_data(data=i, cache=cache_tmp, index=index, is_first=False)
         [c.update(t) for t in cache for c in cache_tmp]
         [cache.pop(0) for _ in range(len(cache))]
         cache.extend(cache_tmp)
@@ -91,11 +97,11 @@ def flatten_data(data, index="", cache=None):
         cache_tmp = list()  # 临时存放归档数据的列表
         for v in func_list:
             cache_list_tmp = list()
-            flatten_data(v[1], v[0], cache_list_tmp)
+            flatten_data(data=v[1], cache=cache_list_tmp, index=v[0], is_first=False)
             cache_tmp.extend(cache_list_tmp)
 
         for v in func_dict:
-            flatten_data(v[1], v[0], cache_tmp)
+            flatten_data(data=v[1], cache=cache_tmp, index=v[0], is_first=False)
 
         cache.extend(cache_tmp)
     else:

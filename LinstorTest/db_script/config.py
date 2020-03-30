@@ -4,11 +4,11 @@
 @author: alfons
 """
 node_id_dict = {
-    "china-mobile-sto203": 5,
-    "china-mobile-sto204": 7,
-    "china-mobile-sto205": 9,
-    "china-mobile-sto206": 11,
+    "cn203": 53,
+    "cn204": 55,
+    "cn205": 57,
+    "cn206": 59,
 }
 
-pool_id = 1
-cluster_id = 1
+pool_id = 105
+cluster_id = 9

@@ -1,0 +1,36 @@
+[
+    {
+        "qlink": [
+            {
+                "port": "3261",
+                "targets": [
+                    {
+                        "lun_list": [
+                            {
+                                "m_path": "/dev/qdata/mpath-s01.3261.01.LUN1",
+                                "disks": [
+                                    {
+                                        "mapped_disk": "/dev/nvme0n1",
+                                        "status": "active",
+                                        "ib_ip": "172.16.129.33",
+                                        "port": 3261
+                                    },
+                                    {
+                                        "mapped_disk": "/dev/nvme1n1",
+                                        "status": "active",
+                                        "ib_ip": "172.16.129.31",
+                                        "port": 3261
+                                    }
+                                ],
+                                "m_status": "active",
+                                "size": "10G"
+                            }
+                        ],
+                        "targetname": "s01.3261.01"
+                    }
+                ]
+            }
+        ],
+        "storage": "qdata-sto33-dev"
+    }
+]

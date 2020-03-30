@@ -1,44 +1,12 @@
-╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-┊ StoragePool ┊ Node                ┊ Driver ┊ PoolName ┊ FreeCapacity ┊ TotalCapacity ┊ SupportsSnapshots ┊ State ┊
-╞══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╡
-┊ spp0        ┊ china-mobile-sto203 ┊ LVM    ┊ vgg0     ┊   980.39 GiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp0        ┊ china-mobile-sto204 ┊ LVM    ┊ vgg0     ┊   980.39 GiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp0        ┊ china-mobile-sto205 ┊ LVM    ┊ vgg0     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp0        ┊ china-mobile-sto206 ┊ LVM    ┊ vgg0     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp1        ┊ china-mobile-sto203 ┊ LVM    ┊ vgg1     ┊   980.39 GiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp1        ┊ china-mobile-sto204 ┊ LVM    ┊ vgg1     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp1        ┊ china-mobile-sto205 ┊ LVM    ┊ vgg1     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp1        ┊ china-mobile-sto206 ┊ LVM    ┊ vgg1     ┊   980.39 GiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp2        ┊ china-mobile-sto203 ┊ LVM    ┊ vgg2     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp2        ┊ china-mobile-sto204 ┊ LVM    ┊ vgg2     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp2        ┊ china-mobile-sto205 ┊ LVM    ┊ vgg2     ┊   980.39 GiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp2        ┊ china-mobile-sto206 ┊ LVM    ┊ vgg2     ┊   980.39 GiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp3        ┊ china-mobile-sto203 ┊ LVM    ┊ vgg3     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp3        ┊ china-mobile-sto204 ┊ LVM    ┊ vgg3     ┊   980.39 GiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp3        ┊ china-mobile-sto205 ┊ LVM    ┊ vgg3     ┊   980.39 GiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp3        ┊ china-mobile-sto206 ┊ LVM    ┊ vgg3     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp4        ┊ china-mobile-sto203 ┊ LVM    ┊ vgg4     ┊   980.39 GiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp4        ┊ china-mobile-sto204 ┊ LVM    ┊ vgg4     ┊   980.39 GiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp4        ┊ china-mobile-sto205 ┊ LVM    ┊ vgg4     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp4        ┊ china-mobile-sto206 ┊ LVM    ┊ vgg4     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp5        ┊ china-mobile-sto203 ┊ LVM    ┊ vgg5     ┊   980.39 GiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp5        ┊ china-mobile-sto204 ┊ LVM    ┊ vgg5     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp5        ┊ china-mobile-sto205 ┊ LVM    ┊ vgg5     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp5        ┊ china-mobile-sto206 ┊ LVM    ┊ vgg5     ┊   980.39 GiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp6        ┊ china-mobile-sto203 ┊ LVM    ┊ vgg6     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp6        ┊ china-mobile-sto204 ┊ LVM    ┊ vgg6     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp6        ┊ china-mobile-sto205 ┊ LVM    ┊ vgg6     ┊   980.39 GiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp6        ┊ china-mobile-sto206 ┊ LVM    ┊ vgg6     ┊   980.39 GiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp7        ┊ china-mobile-sto203 ┊ LVM    ┊ vgg7     ┊     2.91 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp7        ┊ china-mobile-sto204 ┊ LVM    ┊ vgg7     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp7        ┊ china-mobile-sto205 ┊ LVM    ┊ vgg7     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp7        ┊ china-mobile-sto206 ┊ LVM    ┊ vgg7     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp8        ┊ china-mobile-sto203 ┊ LVM    ┊ vgg8     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp8        ┊ china-mobile-sto204 ┊ LVM    ┊ vgg8     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp8        ┊ china-mobile-sto205 ┊ LVM    ┊ vgg8     ┊     1.93 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ spp8        ┊ china-mobile-sto206 ┊ LVM    ┊ vgg8     ┊     2.91 TiB ┊      2.91 TiB ┊ false             ┊ Ok    ┊
-┊ vote        ┊ china-mobile-sto203 ┊ LVM    ┊ VolGroup ┊    33.25 GiB ┊    893.26 GiB ┊ false             ┊ Ok    ┊
-┊ vote        ┊ china-mobile-sto204 ┊ LVM    ┊ VolGroup ┊    51.25 GiB ┊    893.26 GiB ┊ false             ┊ Ok    ┊
-┊ vote        ┊ china-mobile-sto205 ┊ LVM    ┊ VolGroup ┊    51.25 GiB ┊    893.26 GiB ┊ false             ┊ Ok    ┊
-┊ vote        ┊ china-mobile-sto206 ┊ LVM    ┊ VolGroup ┊   611.26 GiB ┊    893.26 GiB ┊ false             ┊ Ok    ┊
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭────────────────────────────────────────────────────────────────────────────────────────────────────╮
+┊ StoragePool ┊ Node  ┊ Driver ┊ PoolName ┊ FreeCapacity ┊ TotalCapacity ┊ SupportsSnapshots ┊ State ┊
+╞════════════════════════════════════════════════════════════════════════════════════════════════════╡
+┊ vote        ┊ cn203 ┊ LVM    ┊ VolGroup ┊   601.25 GiB ┊    893.26 GiB ┊ false             ┊ Ok    ┊
+┊ vote        ┊ cn204 ┊ LVM    ┊ VolGroup ┊   601.25 GiB ┊    893.26 GiB ┊ false             ┊ Ok    ┊
+┊ vote        ┊ cn205 ┊ LVM    ┊ VolGroup ┊   611.26 GiB ┊    893.26 GiB ┊ false             ┊ Ok    ┊
+┊ vote        ┊ cn206 ┊ LVM    ┊ VolGroup ┊   601.25 GiB ┊    893.26 GiB ┊ false             ┊ Ok    ┊
+┊ xksp_xkvg   ┊ cn203 ┊ LVM    ┊ xkvg     ┊     2.76 TiB ┊     26.20 TiB ┊ false             ┊ Ok    ┊
+┊ xksp_xkvg   ┊ cn204 ┊ LVM    ┊ xkvg     ┊     3.73 TiB ┊     26.20 TiB ┊ false             ┊ Ok    ┊
+┊ xksp_xkvg   ┊ cn205 ┊ LVM    ┊ xkvg     ┊     3.73 TiB ┊     26.20 TiB ┊ false             ┊ Ok    ┊
+┊ xksp_xkvg   ┊ cn206 ┊ LVM    ┊ xkvg     ┊     3.73 TiB ┊     26.20 TiB ┊ false             ┊ Ok    ┊
+╰────────────────────────────────────────────────────────────────────────────────────────────────────╯
