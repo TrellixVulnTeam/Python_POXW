@@ -12,6 +12,8 @@ import subprocess
 import paramiko
 import time
 
+webhook_url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=7440f764-7b9c-4421-955c-eab3475fb907"
+
 
 def urllib_post(url, message):
     data = {
