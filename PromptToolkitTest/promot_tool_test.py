@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 @file: promot_tool_test.py
 @time: 2020/4/1

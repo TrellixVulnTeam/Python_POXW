@@ -10,13 +10,17 @@ import os
 import fcntl
 
 
-class my_lock:
-    def __init__(self, filename="./rebalance.lock"):
-        self.filename = filename
-        # This will create it if it does not exist already
-        self.handle = open(filename, 'w')
+class LockUseFile:
+    filename = "/root/.rebalance.lock"
 
-        # Bitwise OR fcntl.LOCK_NB if you need a non-blocking lock
+    def __init__(self):
+        self.handle = open(self.filename, 'w')
+
+    def __enter__(self):
+        self.acquire()
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.release()
 
     def acquire(self):
         fcntl.flock(self.handle, fcntl.LOCK_EX)
@@ -70,14 +74,11 @@ class my_lock:
 #             os.remove(self.lock_file)
 
 
-m = my_lock()
-
-
 def func_a(name):
-    with m:
+    with my_lock():
         print("{}: i'm used\n".format(name))
         time.sleep(5)
-
+    time.sleep(1)
     print("{}: i'm out\n".format(name))
 
 

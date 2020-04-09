@@ -546,17 +546,21 @@ class StatusOperation(VDOOperation):
       vdos = {}
       perVdoStatus = { _("VDOs") : vdos }
       for vdo in self.getVdoServices(args, conf):
+        import time
+        start_time = time.time()
         try:
           vdos[vdo.getName()] = vdo.status()
         except VDOServiceError as ex:
           vdos[vdo.getName()] = str(ex)
+        print "time use: {}'s".format(time.time() - start_time)
 
       # YAML adds a newline at the end.  To maintain consistency with the
       # previous output we need to eliminate that.
-      print(yaml.dump(vdoStatus, default_flow_style = False)[:-1])
-      print(yaml.dump(kernelStatus, default_flow_style = False)[:-1])
-      print(yaml.dump(confStatus, default_flow_style = False)[:-1])
-      print(yaml.dump(perVdoStatus, default_flow_style = False)[:-1])
+      # print(yaml.dump(vdoStatus, default_flow_style = False)[:-1])
+      # print(yaml.dump(kernelStatus, default_flow_style = False)[:-1])
+      # print(yaml.dump(confStatus, default_flow_style = False)[:-1])
+      # print(yaml.dump(perVdoStatus, default_flow_style = False)[:-1])
+
 
       sys.stdout.flush()
       sys.stderr.flush()
