@@ -24,7 +24,7 @@ def fib(n):
         return fib(n - 1) + fib(n - 2)
 
 
-# @profile
+@profile
 def fib_seq(n):
     seq = []
     if n > 0:
