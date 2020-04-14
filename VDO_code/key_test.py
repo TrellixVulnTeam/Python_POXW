@@ -1,0 +1,20 @@
+"""
+@file: key_test.py
+@time: 2020/4/10
+@author: alfons
+"""
+key_map = {'1K-blocks used': 'oneKBlocksUsed', 'write policy': 'writePolicy', 'block map flush count': 'blockMap.flushCount', 'version': 'version', 'slabs opened': 'slabsOpened', 'compressed fragments written': 'compressedFragmentsWritten', 'physical blocks': 'physicalBlocks', '_recovery percentage': '_recoveryPercentage', 'journal entries written': 'journal.entries.written', 'slab journal blocked count': 'slabJournal.blockedCount', 'block map incoming pages': 'blockMap.incomingPages', 'slab journal disk full count': 'slabJournal.diskFullCount', '1K-blocks available': 'oneKBlocksAvailable', 'slabs reopened': 'slabsReopened', 'slab summary blocks written': 'slabSummary.blocksWritten', 'in recovery mode': 'inRecoveryMode', 'slab journal tail busy count': 'slabJournal.tailBusyCount', 'block map pages saved': 'blockMap.pagesSaved', 'block map dirty pages': 'blockMap.dirtyPages', 'block map free pages': 'blockMap.freePages', 'block map clean pages': 'blockMap.cleanPages', 'operating mode': 'mode', '_logical blocks used': '_logicalBlocksUsed', 'block map pages loaded': 'blockMap.pagesLoaded', 'block size': 'blockSize', 'journal blocks writing': 'journal.blocks.writing', 'journal commits requested count': 'journal.commitsRequestedCount', '_overhead blocks used': '_overheadBlocksUsed', 'invalid advice p b n count': 'invalidAdvicePBNCount', '1K-blocks': 'oneKBlocks', 'journal entries started': 'journal.entries.started', 'block map fetch required': 'blockMap.fetchRequired', 'journal blocks written': 'journal.blocks.written', '_data blocks used': '_dataBlocksUsed', 'slab journal flush count': 'slabJournal.flushCount', 'block map read outgoing': 'blockMap.readOutgoing', 'reference blocks written': 'reference.blocksWritten', 'block map failed writes': 'blockMap.failedWrites', 'journal blocks batching': 'journal.blocks.batching', 'invalid advice PBN count': 'errors.invalidAdvicePBNCount', 'journal entries committed': 'journal.entries.committed', 'block map failed reads': 'blockMap.failedReads', 'logical blocks': 'logicalBlocks', 'compressed fragments in packer': 'compressedFragmentsInPacker', 'block map wait for page': 'blockMap.waitForPage', 'block map failed pages': 'blockMap.failedPages', 'block map cache pressure': 'blockMap.cachePressure', 'read-only recovery count': 'readOnlyRecoveries', 'block map read count': 'blockMap.readCount', 'journal entries batching': 'journal.entries.batching', 'complete recoveries': 'completeRecoveries', 'journal entries writing': 'journal.entries.writing', 'read only recoveries': 'readOnlyRecoveries', 'block map write count': 'blockMap.writeCount', 'journal disk full count': 'journal.diskFullCount', 'block map reclaimed': 'blockMap.reclaimed', 'block map found in cache': 'blockMap.foundInCache', 'journal blocks committed': 'journal.blocks.committed', 'block map discard required': 'blockMap.discardRequired', 'block map outgoing pages': 'blockMap.outgoingPages', 'completed recovery count': 'completeRecoveries', 'no space error count': 'noSpaceErrorCount', 'compressed blocks written': 'compressedBlocksWritten', 'read only error count': 'readOnlyErrorCount', 'mode': 'mode', 'slab count': 'slabCount', 'journal blocks started': 'journal.blocks.started', 'block map cache size': 'blockMapCacheSize', 'release version': 'releaseVersion', 'recovery progress (%)': 'recoveryPercentage', 'slab journal blocks written': 'slabJournal.blocksWritten'}
+import yaml
+
+with open("./key_map.yaml", "r") as f:
+    key_map_yaml = yaml.load(f.read())
+
+print "key_map number: {}".format(len(key_map))
+print "key_map_yaml number: {}".format(len(key_map_yaml))
+
+print [k for k, v in key_map.items() if not v]
+
+not_in = list(set(key_map_yaml.keys()) - set(key_map.keys()))
+print "not in number: {}".format(len(not_in))
+print "set(key_map_yaml.keys()) - set(key_map.keys()) -> \n{}".format("\n".join(not_in))
+# print "set(key_map.keys()) - set(key_map_yaml.keys()) -> \n{}".format("\n".join(set(key_map.keys()) - set(key_map_yaml.keys())))

@@ -1,0 +1,67 @@
+  version                             : 26
+  release version                     : 131337
+  data blocks used                    : 0
+  overhead blocks used                : 732855
+  logical blocks used                 : 0
+  physical blocks                     : 46320768
+  logical blocks                      : 97517568
+  1K-blocks                           : 370566144
+  1K-blocks used                      : 5862840
+  1K-blocks available                 : 364703304
+  used percent                        : 1
+  saving percent                      : N/A
+  block map cache size                : 536870912
+  write policy                        : async
+  block size                          : 8192
+  completed recovery count            : 0
+  read-only recovery count            : 0
+  operating mode                      : normal
+  recovery progress (%)               : N/A
+  compressed fragments written        : 0
+  compressed blocks written           : 0
+  compressed fragments in packer      : 0
+  slab count                          : 87
+  slabs opened                        : 0
+  slabs reopened                      : 0
+  journal disk full count             : 0
+  journal commits requested count     : 0
+  journal entries batching            : 0
+  journal entries started             : 0
+  journal entries writing             : 0
+  journal entries written             : 0
+  journal entries committed           : 0
+  journal blocks batching             : 0
+  journal blocks started              : 0
+  journal blocks writing              : 0
+  journal blocks written              : 0
+  journal blocks committed            : 0
+  slab journal disk full count        : 0
+  slab journal flush count            : 0
+  slab journal blocked count          : 0
+  slab journal blocks written         : 0
+  slab journal tail busy count        : 0
+  slab summary blocks written         : 0
+  reference blocks written            : 0
+  block map dirty pages               : 0
+  block map clean pages               : 0
+  block map free pages                : 65536
+  block map failed pages              : 0
+  block map incoming pages            : 0
+  block map outgoing pages            : 0
+  block map cache pressure            : 0
+  block map read count                : 0
+  block map write count               : 0
+  block map failed reads              : 0
+  block map failed writes             : 0
+  block map reclaimed                 : 0
+  block map read outgoing             : 0
+  block map found in cache            : 0
+  block map discard required          : 0
+  block map wait for page             : 0
+  block map fetch required            : 0
+  block map pages loaded              : 0
+  block map pages saved               : 0
+  block map flush count               : 0
+  invalid advice PBN count            : 0
+  no space error count                : 0
+  read only error count               : 0

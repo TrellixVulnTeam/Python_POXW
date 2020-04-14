@@ -21,4 +21,4 @@ def analysis(prof_file):
 
 
 if __name__ == '__main__':
-    analysis(prof_file="./qbo_2.prof")
+    analysis(prof_file="./qdatamgr.prof")
