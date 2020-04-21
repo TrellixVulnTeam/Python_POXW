@@ -115,7 +115,7 @@ with open("show_c.json", "r") as f:
     j = json.loads(f.read())
     cache = list()
     flatten_data(j, cache=cache)
-    with open("show_c_old.json", "w") as f:
+    with open("json_flatten.json", "w") as f:
         f.write(json.dumps(cache, indent=4))
     # res_1 = parse_dict(j)
     pass

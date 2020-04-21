@@ -1,0 +1,1274 @@
+{
+    "cache": {
+        "create": {
+            "desc": "create a new flashcache volume.",
+            "items": {
+                "--auto": [
+                    "auto create flashcache",
+                    "storage#sanfree#unknown"
+                ],
+                "--log": [
+                    "watch mkpart log",
+                    "storage#sanfree#unknown"
+                ],
+                "--mapping": [
+                    "create cache disk <---> hdd disls mapping",
+                    "storage#sanfree#unknown"
+                ],
+                "-H": [
+                    "hdd disk name",
+                    "storage#sanfree#unknown"
+                ],
+                "-a": [
+                    "diskassociativity",
+                    "storage#sanfree#unknown"
+                ],
+                "-b": [
+                    "blocksize",
+                    "storage#sanfree#unknown"
+                ],
+                "-c": [
+                    "cache name",
+                    "storage#sanfree#unknown"
+                ],
+                "-f": [
+                    "force",
+                    "storage#sanfree#unknown"
+                ],
+                "-m": [
+                    "metadatablocksize",
+                    "storage#sanfree#unknown"
+                ],
+                "-p": [
+                    "cachemode",
+                    "storage#sanfree#unknown"
+                ],
+                "-s": [
+                    "cachesize",
+                    "storage#sanfree#unknown"
+                ],
+                "-v": [
+                    "verbose",
+                    "storage#sanfree#unknown"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "destroy": {
+            "desc": "Destroy an existing writeback flashcache. All data will be lost !!!",
+            "items": {
+                "-a": [
+                    "all",
+                    "storage#sanfree#unknown"
+                ],
+                "-c": [
+                    "cache name",
+                    "storage#sanfree#unknown"
+                ],
+                "-f": [
+                    "force",
+                    "storage#sanfree#unknown"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "get": {
+            "desc": "get key value for flashcache",
+            "items": {
+                "-a": [
+                    "all",
+                    "storage#sanfree#unknown"
+                ],
+                "-c": [
+                    "cache name",
+                    "storage#sanfree#unknown"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "load": {
+            "desc": "Load an existing writeback cache volume.",
+            "items": {
+                "-a": [
+                    "all",
+                    "storage#sanfree#unknown"
+                ],
+                "-c": [
+                    "cache name",
+                    "storage#sanfree#unknown"
+                ],
+                "-f": [
+                    "by force",
+                    "storage#sanfree#unknown"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "set": {
+            "desc": "set key value for flashcache",
+            "items": {
+                "-a": [
+                    "all",
+                    "storage#sanfree#unknown"
+                ],
+                "-c": [
+                    "cache name",
+                    "storage#sanfree#unknown"
+                ],
+                "-k": [
+                    "key",
+                    "storage#sanfree#unknown"
+                ],
+                "-v": [
+                    "value",
+                    "storage#sanfree#unknown"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "show": {
+            "desc": "show the flashcache infomation",
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "stat": {
+            "desc": "show flashcache stat on realtime",
+            "items": {
+                "-c": [
+                    "cache name",
+                    "storage#sanfree#unknown"
+                ],
+                "-i": [
+                    "interval",
+                    "storage#sanfree#unknown"
+                ],
+                "-t": [
+                    "times",
+                    "storage#sanfree#unknown"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "status": {
+            "desc": "show flashcache status",
+            "items": {
+                "-c": [
+                    "cache name",
+                    "storage#sanfree#unknown"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "unload": {
+            "desc": "Unload an existing writeback flashcache.",
+            "items": {
+                "-a": [
+                    "all",
+                    "storage#sanfree#unknown"
+                ],
+                "-c": [
+                    "cache",
+                    "storage#sanfree#unknown"
+                ],
+                "-f": [
+                    "force",
+                    "storage#sanfree#unknown"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        }
+    },
+    "check": {
+        "IB": {
+            "desc": "check the iblink health state",
+            "items": {
+                "-e": [
+                    "only display error",
+                    "compute#storage#sanfree"
+                ],
+                "-s": [
+                    "show ib connection",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "all": {
+            "desc": "check all",
+            "items": {
+                "-e": [
+                    "only display error",
+                    "compute#storage#sanfree"
+                ],
+                "-s": [
+                    "display check infomation in table",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree"
+            ]
+        },
+        "asm": {
+            "desc": "check the asm health state",
+            "items": {
+                "-e": [
+                    "only display error",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "sanfree"
+            ]
+        },
+        "cmd": {
+            "desc": "check the command state",
+            "items": {
+                "-e": [
+                    "only disaplay error",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree"
+            ]
+        },
+        "config": {
+            "desc": "check the config settings status",
+            "items": {
+                "-e": [
+                    "only display error",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree"
+            ]
+        },
+        "rpmpkg": {
+            "desc": "check the pakage install status",
+            "items": {
+                "-e": [
+                    "only display error",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree"
+            ]
+        },
+        "srv": {
+            "desc": "check the service  status",
+            "items": {
+                "-e": [
+                    "only display error",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "storage",
+                "compute",
+                "sanfree"
+            ]
+        },
+        "vol": {
+            "desc": "check the volumes size",
+            "items": {
+                "-e": [
+                    "only display error",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        }
+    },
+    "collect": {
+        "disk_info": {
+            "desc": "collect the disk health statuation",
+            "items": {
+                "-i": [
+                    "display information in json format",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "ib_info": {
+            "desc": "collect the ib health statuation",
+            "items": {
+                "-i": [
+                    "display information in json format",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "log_info": {
+            "desc": "collect the system infomation log",
+            "items": {
+                "-a": [
+                    "get log from all nodes",
+                    "compute#storage#sanfree"
+                ],
+                "-i": [
+                    "get log from specified ip"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        }
+    },
+    "conf": {
+        "add_ext": {
+            "desc": "add external target",
+            "items": {
+                "-d": [
+                    "driver[iser/iscsi], default: iser",
+                    "compute#storage#sanfree",
+                    "iser",
+                    "iscsi"
+                ],
+                "-i": [
+                    "ip",
+                    "compute#storage#sanfree"
+                ],
+                "-p": [
+                    "port",
+                    "compute#storage#sanfree"
+                ],
+                "-t": [
+                    "target",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "add_host": {
+            "desc": "add host into server table",
+            "items": {
+                "-i": [
+                    "ip",
+                    "compute#storage#sanfree"
+                ],
+                "-t": [
+                    "type <storage/compute/sanfree>",
+                    "compute#storage#sanfree",
+                    "storage",
+                    "compute",
+                    "sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "clear": {
+            "desc": "clear the config settings",
+            "items": {
+                "-e": [
+                    "clear external table",
+                    "compute#storage#sanfree"
+                ],
+                "-s": [
+                    "clear server table",
+                    "compute#storage#sanfree"
+                ],
+                "-t": [
+                    "clear target table",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "create_cfile": {
+            "desc": "create yaml config file from settings or default rules",
+            "items": {
+                "-e": [
+                    "craete external target config example",
+                    "compute#storage#sanfree"
+                ],
+                "-f": [
+                    "create config to a file",
+                    "compute#storage#sanfree"
+                ],
+                "-i": [
+                    "create inner target config",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "del_ext": {
+            "desc": "delete external target",
+            "items": {
+                "-i": [
+                    "ip",
+                    "compute#storage#sanfree",
+                    "<ext_ip>"
+                ],
+                "-t": [
+                    "target",
+                    "compute#storage#sanfree",
+                    "<ext_target>"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "del_host": {
+            "desc": "delete host from server table",
+            "items": {
+                "-i": [
+                    "ip",
+                    "compute#storage#sanfree",
+                    "<ip>"
+                ],
+                "-n": [
+                    "hostname",
+                    "compute#storage#sanfree",
+                    "<hostname>"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "export": {
+            "desc": "export config settings to a file",
+            "items": {
+                "-e": [
+                    "external",
+                    "compute#storage#sanfree"
+                ],
+                "-f": [
+                    "export to a file",
+                    "compute#storage#sanfree"
+                ],
+                "-i": [
+                    "inner",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "import": {
+            "desc": "apply the yaml file into config",
+            "items": {
+                "-e": [
+                    "import to external target table",
+                    "compute#storage#sanfree"
+                ],
+                "-f": [
+                    "import from a file",
+                    "compute#storage#sanfree"
+                ],
+                "-i": [
+                    "import to inner target table",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "set_ext": {
+            "desc": "set target external attribute",
+            "items": {
+                "-e": [
+                    "external <YES|NO>",
+                    "compute#storage#sanfree",
+                    "<ext_set>"
+                ],
+                "-t": [
+                    "target",
+                    "compute#storage#sanfree",
+                    "<target>"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "show": {
+            "desc": "show the config settings",
+            "items": {
+                "-e": [
+                    "show external target config",
+                    "compute#storage#sanfree"
+                ],
+                "-s": [
+                    "show server config",
+                    "compute#storage#sanfree"
+                ],
+                "-t": [
+                    "show target config",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "sync": {
+            "desc": "sync the config settings to all the servers",
+            "items": {
+                "-g": [
+                    "get the latest config",
+                    "compute#storage#sanfree"
+                ],
+                "-i": [
+                    "get config from ip",
+                    "compute#storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        }
+    },
+    "media": {
+        "attach_disk": {
+            "desc": "attach the disk in a slot from OS",
+            "items": {
+                "-c": [
+                    "with cache opened",
+                    "storage#sanfree"
+                ],
+                "-s": [
+                    "slot",
+                    "storage#sanfree",
+                    "<slot>"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "detach_disk": {
+            "desc": "detach the disk in a slot from OS",
+            "items": {
+                "-s": [
+                    "slot",
+                    "storage#sanfree",
+                    "<slot>"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "format_flash": {
+            "desc": "format flash disk",
+            "items": {
+                "-b": [
+                    "specify block size",
+                    "storage#sanfree"
+                ],
+                "-d": [
+                    "specify device name",
+                    "storage#sanfree"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "format_nvme": {
+            "desc": "format nvme disk",
+            "items": {
+                "-d": [
+                    "specify device name",
+                    "storage#sanfree"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "lightoff": {
+            "desc": "light off the disk in a slot",
+            "items": {
+                "-s": [
+                    "specify slot number",
+                    "storage#sanfree",
+                    "<slot>"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        },
+        "lighton": {
+            "desc": "light on the disk in a slot",
+            "items": {
+                "-s": [
+                    "specify slot number",
+                    "storage#sanfree",
+                    "<slot>"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        },
+        "mkpart": {
+            "desc": "divide disk into equal parts if the volume is over 2T",
+            "items": {
+                "-d": [
+                    "specify disk path",
+                    "storage#sanfree"
+                ],
+                "-l": [
+                    "display log",
+                    "storage#sanfree"
+                ],
+                "-n": [
+                    "number parted",
+                    "storage#sanfree"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "set_cache": {
+            "desc": "set the disk cache",
+            "items": {
+                "--disable": [
+                    "disable cache",
+                    "storage#sanfree"
+                ],
+                "--enable": [
+                    "enable cache",
+                    "storage#sanfree"
+                ],
+                "--ratio": [
+                    "set read/write ratio suchas 10/90",
+                    "storage#sanfree"
+                ],
+                "-s": [
+                    "specify slot name",
+                    "storage#sanfree",
+                    "<slot>"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "show": {
+            "desc": "show all the disk/flash infomation",
+            "items": {},
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "show_disk": {
+            "desc": "show the disk infomation",
+            "items": {
+                "-p": [
+                    "display disk pysical information",
+                    "storage#sanfree"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "show_flash": {
+            "desc": "show the flash infomation",
+            "items": {},
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "show_nvme": {
+            "desc": "show the nvme infomation",
+            "items": {},
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        }
+    },
+    "mxvote": {
+        "init": {
+            "desc": "Init mxvote disk, disk data maybe lost!!!"
+        },
+        "offline": {
+            "desc": "Offline mxvote disk."
+        },
+        "online": {
+            "desc": "Online mxvote disk."
+        },
+        "show": {
+            "desc": "Show mxvote disk status."
+        }
+    },
+    "qbo": {
+        "create": {
+            "desc": "Create QBO volume",
+            "items": {
+                "-a": "Use all disks",
+                "-e": "Exclude specific disks",
+                "-f": "ignores any existing file system or VDO signature already present in the storage device",
+                "-r": "Specify QBO volume ratio",
+                "-s": "specify one or more disks"
+            },
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        },
+        "delete": {
+            "desc": "Delete QBO volume",
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        },
+        "extend": {
+            "desc": "Extend QBO volume",
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        },
+        "show": {
+            "desc": "Show QBO volume info",
+            "items": {
+                "-c": "Show QBO volume info on compute node",
+                "-n": "Show qbo base info by specified qbo volume name"
+            },
+            "node": [
+                "storage",
+                "sanfree",
+                "compute",
+                "unknown"
+            ]
+        },
+        "start": {
+            "desc": "Start QBO volume",
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        },
+        "stop": {
+            "desc": "Stop QBO volume",
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        }
+    },
+    "qlink": {
+        "add_lun": {
+            "desc": "add a lun to a target in qlink",
+            "items": {
+                "-b": [
+                    "block device path",
+                    "storage#sanfree"
+                ],
+                "-p": [
+                    "port",
+                    "storage#sanfree"
+                ],
+                "-t": [
+                    "target id",
+                    "storage#sanfree"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        },
+        "add_target": {
+            "desc": "add a target to qlink",
+            "items": {
+                "-e": [
+                    "external",
+                    "storage#sanfree"
+                ],
+                "-p": [
+                    "port",
+                    "storage#sanfree"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        },
+        "del_lun": {
+            "desc": "delete a lun from a target in qlink",
+            "items": {
+                "-b": [
+                    "block device path",
+                    "storage#sanfree"
+                ],
+                "-p": [
+                    "port",
+                    "storage#sanfree"
+                ],
+                "-t": [
+                    "target id",
+                    "storage#sanfree"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        },
+        "del_target": {
+            "desc": "delete a target to qlink",
+            "items": {
+                "-n": [
+                    "target name",
+                    "storage#sanfree"
+                ],
+                "-p": [
+                    "port",
+                    "storage#sanfree"
+                ],
+                "-t": [
+                    "target id",
+                    "storage#sanfree"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        },
+        "load": {
+            "desc": "load target on computer node",
+            "items": {
+                "-i": [
+                    "ip",
+                    "compute#sanfree"
+                ],
+                "-p": [
+                    "port",
+                    "compute#sanfree"
+                ],
+                "-r": [
+                    "rescan if already loaded",
+                    "compute#sanfree"
+                ],
+                "-s": [
+                    "server",
+                    "compute#sanfree",
+                    "<hostname>"
+                ],
+                "-t": [
+                    "target",
+                    "compute#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "sanfree"
+            ]
+        },
+        "set_acl": {
+            "desc": "set a acl to a target",
+            "items": {
+                "-a": [
+                    "network address",
+                    "storage#sanfree"
+                ],
+                "-p": [
+                    "port",
+                    "storage#sanfree"
+                ],
+                "-t": [
+                    "target id",
+                    "storage#sanfree"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        },
+        "show": {
+            "desc": "show online qlink/target info",
+            "items": {
+                "-c": [
+                    "display loaded target infomation",
+                    "compute#sanfree"
+                ],
+                "-m": [
+                    "show with more",
+                    "storage#sanfree#storage"
+                ],
+                "-p": [
+                    "specify port",
+                    "storage#sanfree"
+                ],
+                "-q": [
+                    "qlink info",
+                    "storage#sanfree"
+                ],
+                "-s": [
+                    "show targets info of storage server",
+                    "compute#sanfree"
+                ],
+                "-t": [
+                    "display online target info",
+                    "storage#sanfree"
+                ]
+            },
+            "node": [
+                "compute",
+                "storage",
+                "sanfree"
+            ]
+        },
+        "start": {
+            "desc": "start a qlink",
+            "items": {
+                "-a": [
+                    "all",
+                    "compute#sanfree"
+                ],
+                "-d": [
+                    "driver",
+                    "storage#sanfree",
+                    "iser",
+                    "iscsi",
+                    "nvmf"
+                ],
+                "-p": [
+                    "port",
+                    "compute#sanfree"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        },
+        "stop": {
+            "desc": "stop qlink",
+            "items": {
+                "-a": [
+                    "all",
+                    "compute#storage#sanfree"
+                ],
+                "-p": [
+                    "port",
+                    "storage#sanfree"
+                ]
+            },
+            "node": [
+                "storage",
+                "sanfree"
+            ]
+        },
+        "unload": {
+            "desc": "unload a target on computer node",
+            "items": {
+                "-i": [
+                    "ibcard ip",
+                    "compute#sanfree"
+                ],
+                "-p": [
+                    "port",
+                    "compute#sanfree"
+                ],
+                "-s": [
+                    "server",
+                    "compute#sanfree",
+                    "<hostname>"
+                ],
+                "-t": [
+                    "target",
+                    "compute#sanfree",
+                    "<target>",
+                    "<ext_target>"
+                ]
+            },
+            "node": [
+                "compute",
+                "sanfree"
+            ]
+        }
+    },
+    "raid": {
+        "aroff": {
+            "desc": "disable auto rebuild",
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "aron": {
+            "desc": "enable auto rebuild",
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "ccoff": {
+            "desc": "disabled scheduled consistency check mode",
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "ccon": {
+            "desc": "set scheduled consistency check to concurrent mode",
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "proff": {
+            "desc": "disable patrol read mode",
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "pron": {
+            "desc": "set patrol read to automatic mode",
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "show": {
+            "desc": "show raid information",
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "show_bbu": {
+            "desc": "show raid BBU information",
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "show_cc": {
+            "desc": "show raid consistency check information",
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "show_ctrl": {
+            "desc": "show raid controller information",
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "show_pr": {
+            "desc": "show raid patrol read information",
+            "node": [
+                "storage",
+                "sanfree",
+                "unknown"
+            ]
+        }
+    },
+    "vote": {
+        "init": {
+            "desc": "Init vote disk, disk data maybe lost!!!",
+            "items": {
+                "-l": [
+                    "loglevel",
+                    "sanfree"
+                ]
+            },
+            "node": [
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "offline": {
+            "desc": "Offline vote disk.",
+            "items": {
+                "-l": [
+                    "loglevel",
+                    "sanfree"
+                ]
+            },
+            "node": [
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "online": {
+            "desc": "Online vote disk.",
+            "items": {
+                "-l": [
+                    "loglevel",
+                    "sanfree"
+                ]
+            },
+            "node": [
+                "sanfree",
+                "unknown"
+            ]
+        },
+        "status": {
+            "desc": "Show vote disk status.",
+            "items": {
+                "-l": [
+                    "loglevel",
+                    "sanfree"
+                ]
+            },
+            "node": [
+                "sanfree",
+                "unknown"
+            ]
+        }
+    }
+}

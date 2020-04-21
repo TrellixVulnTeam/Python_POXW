@@ -1,0 +1,189 @@
+[
+    {
+        "qlink": [
+            {
+                "port": "3261",
+                "targets": [
+                    {
+                        "lun_list": [
+                            {
+                                "m_path": "/dev/qdata/mpath-s01.3261.01.P0B00S02",
+                                "disks": [
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.129.4",
+                                        "port": "3261"
+                                    },
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.128.4",
+                                        "port": "3261"
+                                    }
+                                ],
+                                "m_status": "unload",
+                                "size": "-"
+                            },
+                            {
+                                "m_path": "/dev/qdata/mpath-s01.3261.01.P0B00S03",
+                                "disks": [
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.129.4",
+                                        "port": "3261"
+                                    },
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.128.4",
+                                        "port": "3261"
+                                    }
+                                ],
+                                "m_status": "unload",
+                                "size": "-"
+                            },
+                            {
+                                "m_path": "/dev/qdata/mpath-s01.3261.01.P0B00S04",
+                                "disks": [
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.129.4",
+                                        "port": "3261"
+                                    },
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.128.4",
+                                        "port": "3261"
+                                    }
+                                ],
+                                "m_status": "unload",
+                                "size": "-"
+                            },
+                            {
+                                "m_path": "/dev/qdata/mpath-s01.3261.01.P0B00S05",
+                                "disks": [
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.129.4",
+                                        "port": "3261"
+                                    },
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.128.4",
+                                        "port": "3261"
+                                    }
+                                ],
+                                "m_status": "unload",
+                                "size": "-"
+                            }
+                        ],
+                        "targetname": "s01.3261.01"
+                    }
+                ]
+            },
+            {
+                "port": "3263",
+                "targets": [
+                    {
+                        "lun_list": [
+                            {
+                                "m_path": "/dev/qdata/mpath-s01.3263.01.voting",
+                                "disks": [
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.129.4",
+                                        "port": "3263"
+                                    },
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.128.4",
+                                        "port": "3263"
+                                    }
+                                ],
+                                "m_status": "unload",
+                                "size": "-"
+                            },
+                            {
+                                "m_path": "/dev/qdata/mpath-s01.3263.01.voting1",
+                                "disks": [
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.129.4",
+                                        "port": "3263"
+                                    },
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.128.4",
+                                        "port": "3263"
+                                    }
+                                ],
+                                "m_status": "unload",
+                                "size": "-"
+                            },
+                            {
+                                "m_path": "/dev/qdata/mpath-s01.3263.01.voting2",
+                                "disks": [
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.129.4",
+                                        "port": "3263"
+                                    },
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.128.4",
+                                        "port": "3263"
+                                    }
+                                ],
+                                "m_status": "unload",
+                                "size": "-"
+                            }
+                        ],
+                        "targetname": "s01.3263.01"
+                    }
+                ]
+            },
+            {
+                "port": "3262",
+                "targets": [
+                    {
+                        "lun_list": [
+                            {
+                                "m_path": "/dev/qdata/mpath-s01.3262.01.P0B00S08",
+                                "disks": [
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.129.4",
+                                        "port": "3262"
+                                    },
+                                    {
+                                        "mapped_disk": "-",
+                                        "status": "unload",
+                                        "ib_ip": "172.16.128.4",
+                                        "port": "3262"
+                                    }
+                                ],
+                                "m_status": "unload",
+                                "size": "-"
+                            }
+                        ],
+                        "targetname": "s01.3262.01"
+                    }
+                ]
+            }
+        ],
+        "storage": "onekey-sto1"
+    }
+]

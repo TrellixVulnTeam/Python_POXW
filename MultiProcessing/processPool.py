@@ -16,8 +16,9 @@ class Test:
 
     def func_pool(self):
         p = Pool(processes=4)
-        r = p.apply_async(self.func_a, args=(1, 2))
-        print(r.get())
+        for i in range(10000):
+            r = p.apply_async(self.func_a, args=(i, i+1))
+        print(p.get())
 
 
 if __name__ == '__main__':

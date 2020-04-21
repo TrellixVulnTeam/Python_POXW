@@ -17,8 +17,9 @@ import pstats
 
 def analysis(prof_file):
     p = pstats.Stats(prof_file)
-    p.strip_dirs().sort_stats("cumtime").print_stats(20)
+    p.strip_dirs().sort_stats("cumtime").print_stats(30)
 
 
 if __name__ == '__main__':
     analysis(prof_file="./qdatamgr.prof")
+    analysis(prof_file="./qdatamgr_qlink_show_c.prof")
