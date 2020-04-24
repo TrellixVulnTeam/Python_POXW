@@ -4,11 +4,11 @@
 @author: alfons
 """
 node_id_dict = {
-    "cn203": 53,
-    "cn204": 55,
-    "cn205": 57,
-    "cn206": 59,
+    "tuwei-dp2-sto1": 5,
+    "tuwei-dp2-sto2": 7,
+    "tuwei-dp2-sto3": 9,
+    "tuwei-dp2-sto4": 11,
 }
 
-pool_id = 105
-cluster_id = 9
+pool_id = 23
+cluster_id = 1

@@ -1,12 +1,55 @@
-╭────────────────────────────────────────────────────────────────────────────────────────────────────╮
-┊ StoragePool ┊ Node  ┊ Driver ┊ PoolName ┊ FreeCapacity ┊ TotalCapacity ┊ SupportsSnapshots ┊ State ┊
-╞════════════════════════════════════════════════════════════════════════════════════════════════════╡
-┊ vote        ┊ cn203 ┊ LVM    ┊ VolGroup ┊   601.25 GiB ┊    893.26 GiB ┊ false             ┊ Ok    ┊
-┊ vote        ┊ cn204 ┊ LVM    ┊ VolGroup ┊   601.25 GiB ┊    893.26 GiB ┊ false             ┊ Ok    ┊
-┊ vote        ┊ cn205 ┊ LVM    ┊ VolGroup ┊   611.26 GiB ┊    893.26 GiB ┊ false             ┊ Ok    ┊
-┊ vote        ┊ cn206 ┊ LVM    ┊ VolGroup ┊   601.25 GiB ┊    893.26 GiB ┊ false             ┊ Ok    ┊
-┊ xksp_xkvg   ┊ cn203 ┊ LVM    ┊ xkvg     ┊     2.76 TiB ┊     26.20 TiB ┊ false             ┊ Ok    ┊
-┊ xksp_xkvg   ┊ cn204 ┊ LVM    ┊ xkvg     ┊     3.73 TiB ┊     26.20 TiB ┊ false             ┊ Ok    ┊
-┊ xksp_xkvg   ┊ cn205 ┊ LVM    ┊ xkvg     ┊     3.73 TiB ┊     26.20 TiB ┊ false             ┊ Ok    ┊
-┊ xksp_xkvg   ┊ cn206 ┊ LVM    ┊ xkvg     ┊     3.73 TiB ┊     26.20 TiB ┊ false             ┊ Ok    ┊
-╰────────────────────────────────────────────────────────────────────────────────────────────────────╯
+┊ StoragePool       ┊ Node           ┊ Driver ┊ PoolName  ┊ FreeCapacity ┊ TotalCapacity ┊ SupportsSnapshots ┊ State ┊
+╞════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╡
+┊ cachesp_cachevg0  ┊ tuwei-dp2-sto1 ┊ LVM    ┊ cachevg0  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg0  ┊ tuwei-dp2-sto2 ┊ LVM    ┊ cachevg0  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg0  ┊ tuwei-dp2-sto3 ┊ LVM    ┊ cachevg0  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg0  ┊ tuwei-dp2-sto4 ┊ LVM    ┊ cachevg0  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg1  ┊ tuwei-dp2-sto1 ┊ LVM    ┊ cachevg1  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg1  ┊ tuwei-dp2-sto2 ┊ LVM    ┊ cachevg1  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg1  ┊ tuwei-dp2-sto3 ┊ LVM    ┊ cachevg1  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg1  ┊ tuwei-dp2-sto4 ┊ LVM    ┊ cachevg1  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg10 ┊ tuwei-dp2-sto1 ┊ LVM    ┊ cachevg10 ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg10 ┊ tuwei-dp2-sto2 ┊ LVM    ┊ cachevg10 ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg10 ┊ tuwei-dp2-sto3 ┊ LVM    ┊ cachevg10 ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg10 ┊ tuwei-dp2-sto4 ┊ LVM    ┊ cachevg10 ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg11 ┊ tuwei-dp2-sto1 ┊ LVM    ┊ cachevg11 ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg11 ┊ tuwei-dp2-sto2 ┊ LVM    ┊ cachevg11 ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg11 ┊ tuwei-dp2-sto3 ┊ LVM    ┊ cachevg11 ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg11 ┊ tuwei-dp2-sto4 ┊ LVM    ┊ cachevg11 ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg2  ┊ tuwei-dp2-sto1 ┊ LVM    ┊ cachevg2  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg2  ┊ tuwei-dp2-sto2 ┊ LVM    ┊ cachevg2  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg2  ┊ tuwei-dp2-sto3 ┊ LVM    ┊ cachevg2  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg2  ┊ tuwei-dp2-sto4 ┊ LVM    ┊ cachevg2  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg3  ┊ tuwei-dp2-sto1 ┊ LVM    ┊ cachevg3  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg3  ┊ tuwei-dp2-sto2 ┊ LVM    ┊ cachevg3  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg3  ┊ tuwei-dp2-sto3 ┊ LVM    ┊ cachevg3  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg3  ┊ tuwei-dp2-sto4 ┊ LVM    ┊ cachevg3  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg4  ┊ tuwei-dp2-sto1 ┊ LVM    ┊ cachevg4  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg4  ┊ tuwei-dp2-sto2 ┊ LVM    ┊ cachevg4  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg4  ┊ tuwei-dp2-sto3 ┊ LVM    ┊ cachevg4  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg4  ┊ tuwei-dp2-sto4 ┊ LVM    ┊ cachevg4  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg5  ┊ tuwei-dp2-sto1 ┊ LVM    ┊ cachevg5  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg5  ┊ tuwei-dp2-sto2 ┊ LVM    ┊ cachevg5  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg5  ┊ tuwei-dp2-sto3 ┊ LVM    ┊ cachevg5  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg5  ┊ tuwei-dp2-sto4 ┊ LVM    ┊ cachevg5  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg6  ┊ tuwei-dp2-sto1 ┊ LVM    ┊ cachevg6  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg6  ┊ tuwei-dp2-sto2 ┊ LVM    ┊ cachevg6  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg6  ┊ tuwei-dp2-sto3 ┊ LVM    ┊ cachevg6  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg6  ┊ tuwei-dp2-sto4 ┊ LVM    ┊ cachevg6  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg7  ┊ tuwei-dp2-sto1 ┊ LVM    ┊ cachevg7  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg7  ┊ tuwei-dp2-sto2 ┊ LVM    ┊ cachevg7  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg7  ┊ tuwei-dp2-sto3 ┊ LVM    ┊ cachevg7  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg7  ┊ tuwei-dp2-sto4 ┊ LVM    ┊ cachevg7  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg8  ┊ tuwei-dp2-sto1 ┊ LVM    ┊ cachevg8  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg8  ┊ tuwei-dp2-sto2 ┊ LVM    ┊ cachevg8  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg8  ┊ tuwei-dp2-sto3 ┊ LVM    ┊ cachevg8  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg8  ┊ tuwei-dp2-sto4 ┊ LVM    ┊ cachevg8  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg9  ┊ tuwei-dp2-sto1 ┊ LVM    ┊ cachevg9  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg9  ┊ tuwei-dp2-sto2 ┊ LVM    ┊ cachevg9  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg9  ┊ tuwei-dp2-sto3 ┊ LVM    ┊ cachevg9  ┊     7.28 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ cachesp_cachevg9  ┊ tuwei-dp2-sto4 ┊ LVM    ┊ cachevg9  ┊     6.35 TiB ┊      7.28 TiB ┊ false             ┊ Ok    ┊
+┊ votesp_vote       ┊ tuwei-dp2-sto1 ┊ LVM    ┊ vote      ┊    14.52 GiB ┊     19.53 GiB ┊ false             ┊ Ok    ┊
+┊ votesp_vote       ┊ tuwei-dp2-sto2 ┊ LVM    ┊ vote      ┊    14.52 GiB ┊     19.53 GiB ┊ false             ┊ Ok    ┊
+┊ votesp_vote       ┊ tuwei-dp2-sto3 ┊ LVM    ┊ vote      ┊    14.52 GiB ┊     19.53 GiB ┊ false             ┊ Ok    ┊
+┊ votesp_vote       ┊ tuwei-dp2-sto4 ┊ LVM    ┊ vote      ┊    19.53 GiB ┊     19.53 GiB ┊ false             ┊ Ok    ┊
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯

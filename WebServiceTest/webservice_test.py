@@ -7,6 +7,6 @@
 """
 from suds.client import Client
 
-url = 'https://api.profitbricks.com/1.3/wsdl'
+url = 'http://ws.webxml.com.cn/WebServices/WeatherWS.asmx?wsdl'
 client = Client(url)
 print client
