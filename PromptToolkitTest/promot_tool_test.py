@@ -5,6 +5,7 @@
 @time: 2020/4/1
 @author: alfons
 """
+from __future__ import unicode_literals
 from prompt_toolkit import prompt
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
