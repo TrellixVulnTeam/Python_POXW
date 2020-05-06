@@ -14,11 +14,10 @@
 """
 import cProfile
 import pstats
-import os
 
 
 # 性能分析装饰器定义
-def do_cprofile(filename):
+def do_cprofile(filename, do_prof=True, sort_by="cumtime", print_stat=False, print_stat_count=100):
     """
     Decorator for function profiling.
     """
@@ -26,16 +25,16 @@ def do_cprofile(filename):
     def wrapper(func):
         def profiled_func(*args, **kwargs):
             # Flag for do profiling or not.
-            DO_PROF = os.getenv("PROFILING")
-            if DO_PROF:
+            if do_prof:
                 profile = cProfile.Profile()
                 profile.enable()
                 result = func(*args, **kwargs)
                 profile.disable()
-                # Sort stat by internal time.
-                sortby = "tottime"
-                ps = pstats.Stats(profile).sort_stats(sortby)
+
+                ps = pstats.Stats(profile).sort_stats(sort_by)
                 ps.dump_stats(filename)
+                if print_stat:
+                    ps.print_stats(print_stat_count)
             else:
                 result = func(*args, **kwargs)
             return result

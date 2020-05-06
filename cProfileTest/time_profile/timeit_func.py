@@ -15,5 +15,12 @@ def test_code():
     fib_seq(30)
 
 
-res = timeit.repeat(test_code, number=1, repeat=5)
-print res
+# res = timeit.repeat(test_code, number=1, repeat=5)
+res = timeit.timeit(test_code, number=1)
+print "timeit use -> {}'s.".format(res)
+
+import time
+
+start_time = time.time()
+fib_seq(30)
+print "time use -> {}'s.".format(time.time() - start_time)
