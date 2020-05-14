@@ -7,6 +7,7 @@
 @time: 2020/4/12 上午11:38
 @version: v1.0 
 """
+import sys
 
 
 def fib(n):
@@ -27,4 +28,5 @@ def fib_seq(n):
 
 
 if __name__ == '__main__':
-    print fib_seq(30)
+    # print(fib_seq(int(sys.argv[1])))
+    print(fib_seq(20))
