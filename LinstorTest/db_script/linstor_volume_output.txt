@@ -1,33 +1,42 @@
-┊ Node           ┊ Resource ┊ StoragePool       ┊ VolumeNr ┊ MinorNr ┊ DeviceName    ┊ Allocated  ┊ InUse  ┊    State ┊
-╞═════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╡
-┊ tuwei-dp2-sto2 ┊ rdtest0  ┊ cachesp_cachevg0  ┊ 0        ┊ 1000    ┊ /dev/drbd1000 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto3 ┊ rdtest0  ┊ cachesp_cachevg0  ┊ 0        ┊ 1000    ┊ /dev/drbd1000 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto2 ┊ rdtest1  ┊ cachesp_cachevg1  ┊ 0        ┊ 1001    ┊ /dev/drbd1001 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto4 ┊ rdtest1  ┊ cachesp_cachevg1  ┊ 0        ┊ 1001    ┊ /dev/drbd1001 ┊ 950.20 GiB ┊ Unused ┊ UpToDate ┊
-┊ tuwei-dp2-sto3 ┊ rdtest10 ┊ cachesp_cachevg10 ┊ 0        ┊ 1010    ┊ /dev/drbd1010 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto4 ┊ rdtest10 ┊ cachesp_cachevg10 ┊ 0        ┊ 1010    ┊ /dev/drbd1010 ┊ 950.20 GiB ┊ Unused ┊ UpToDate ┊
-┊ tuwei-dp2-sto2 ┊ rdtest11 ┊ cachesp_cachevg11 ┊ 0        ┊ 1011    ┊ /dev/drbd1011 ┊ 950.20 GiB ┊ Unused ┊ UpToDate ┊
-┊ tuwei-dp2-sto3 ┊ rdtest11 ┊ cachesp_cachevg11 ┊ 0        ┊ 1011    ┊ /dev/drbd1011 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto4 ┊ rdtest11 ┊ cachesp_cachevg11 ┊ 0        ┊ 1011    ┊ /dev/drbd1011 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto3 ┊ rdtest2  ┊ cachesp_cachevg2  ┊ 0        ┊ 1002    ┊ /dev/drbd1002 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto4 ┊ rdtest2  ┊ cachesp_cachevg2  ┊ 0        ┊ 1002    ┊ /dev/drbd1002 ┊ 950.20 GiB ┊ Unused ┊ UpToDate ┊
-┊ tuwei-dp2-sto2 ┊ rdtest3  ┊ cachesp_cachevg3  ┊ 0        ┊ 1003    ┊ /dev/drbd1003 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto3 ┊ rdtest3  ┊ cachesp_cachevg3  ┊ 0        ┊ 1003    ┊ /dev/drbd1003 ┊ 950.20 GiB ┊ Unused ┊ UpToDate ┊
-┊ tuwei-dp2-sto4 ┊ rdtest3  ┊ cachesp_cachevg3  ┊ 0        ┊ 1003    ┊ /dev/drbd1003 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto2 ┊ rdtest4  ┊ cachesp_cachevg4  ┊ 0        ┊ 1004    ┊ /dev/drbd1004 ┊ 950.20 GiB ┊ Unused ┊ UpToDate ┊
-┊ tuwei-dp2-sto3 ┊ rdtest4  ┊ cachesp_cachevg4  ┊ 0        ┊ 1004    ┊ /dev/drbd1004 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto2 ┊ rdtest5  ┊ cachesp_cachevg5  ┊ 0        ┊ 1005    ┊ /dev/drbd1005 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto4 ┊ rdtest5  ┊ cachesp_cachevg5  ┊ 0        ┊ 1005    ┊ /dev/drbd1005 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto3 ┊ rdtest6  ┊ cachesp_cachevg6  ┊ 0        ┊ 1006    ┊ /dev/drbd1006 ┊ 950.20 GiB ┊ Unused ┊ UpToDate ┊
-┊ tuwei-dp2-sto4 ┊ rdtest6  ┊ cachesp_cachevg6  ┊ 0        ┊ 1006    ┊ /dev/drbd1006 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto2 ┊ rdtest7  ┊ cachesp_cachevg7  ┊ 0        ┊ 1007    ┊ /dev/drbd1007 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto3 ┊ rdtest7  ┊ cachesp_cachevg7  ┊ 0        ┊ 1007    ┊ /dev/drbd1007 ┊ 950.20 GiB ┊ Unused ┊ UpToDate ┊
-┊ tuwei-dp2-sto4 ┊ rdtest7  ┊ cachesp_cachevg7  ┊ 0        ┊ 1007    ┊ /dev/drbd1007 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto2 ┊ rdtest8  ┊ cachesp_cachevg8  ┊ 0        ┊ 1008    ┊ /dev/drbd1008 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto3 ┊ rdtest8  ┊ cachesp_cachevg8  ┊ 0        ┊ 1008    ┊ /dev/drbd1008 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto2 ┊ rdtest9  ┊ cachesp_cachevg9  ┊ 0        ┊ 1009    ┊ /dev/drbd1009 ┊ 950.20 GiB ┊ Unused ┊ UpToDate ┊
-┊ tuwei-dp2-sto4 ┊ rdtest9  ┊ cachesp_cachevg9  ┊ 0        ┊ 1009    ┊ /dev/drbd1009 ┊ 950.20 GiB ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto1 ┊ rdvote   ┊ votesp_vote       ┊ 0        ┊ 1020    ┊ /dev/drbd1020 ┊ 5.00 GiB   ┊ Unused ┊ UpToDate ┊
-┊ tuwei-dp2-sto2 ┊ rdvote   ┊ votesp_vote       ┊ 0        ┊ 1020    ┊ /dev/drbd1020 ┊ 5.00 GiB   ┊ InUse  ┊ UpToDate ┊
-┊ tuwei-dp2-sto3 ┊ rdvote   ┊ votesp_vote       ┊ 0        ┊ 1020    ┊ /dev/drbd1020 ┊ 5.00 GiB   ┊ InUse  ┊ UpToDate ┊
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+┊ Node            ┊ Resource  ┊ StoragePool       ┊ VolumeNr ┊ MinorNr ┊ DeviceName    ┊ Allocated  ┊ InUse  ┊    State ┊
+╞═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╡
+┊ qdata-sto15-dev ┊ rdcache0  ┊ cachesp_cachesp0  ┊ 0        ┊ 1000    ┊ /dev/drbd1000 ┊ 300.07 GiB ┊ Unused ┊ UpToDate ┊
+┊ qdata-sto16-dev ┊ rdcache0  ┊ cachesp_cachesp0  ┊ 0        ┊ 1000    ┊ /dev/drbd1000 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto17-dev ┊ rdcache0  ┊ cachesp_cachesp0  ┊ 0        ┊ 1000    ┊ /dev/drbd1000 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto15-dev ┊ rdcache1  ┊ cachesp_cachesp1  ┊ 0        ┊ 1001    ┊ /dev/drbd1001 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto16-dev ┊ rdcache1  ┊ cachesp_cachesp1  ┊ 0        ┊ 1001    ┊ /dev/drbd1001 ┊ 300.07 GiB ┊ Unused ┊ UpToDate ┊
+┊ qdata-sto17-dev ┊ rdcache1  ┊ cachesp_cachesp1  ┊ 0        ┊ 1001    ┊ /dev/drbd1001 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto13-dev ┊ rdcache10 ┊ cachesp_cachesp10 ┊ 0        ┊ 1010    ┊ /dev/drbd1010 ┊ 300.07 GiB ┊ Unused ┊ UpToDate ┊
+┊ qdata-sto15-dev ┊ rdcache10 ┊ cachesp_cachesp10 ┊ 0        ┊ 1010    ┊ /dev/drbd1010 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto17-dev ┊ rdcache10 ┊ cachesp_cachesp10 ┊ 0        ┊ 1010    ┊ /dev/drbd1010 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto13-dev ┊ rdcache11 ┊ cachesp_cachesp11 ┊ 0        ┊ 1011    ┊ /dev/drbd1011 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto15-dev ┊ rdcache11 ┊ cachesp_cachesp11 ┊ 0        ┊ 1011    ┊ /dev/drbd1011 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto17-dev ┊ rdcache11 ┊ cachesp_cachesp11 ┊ 0        ┊ 1011    ┊ /dev/drbd1011 ┊ 300.07 GiB ┊ Unused ┊ UpToDate ┊
+┊ qdata-sto13-dev ┊ rdcache2  ┊ cachesp_cachesp2  ┊ 0        ┊ 1002    ┊ /dev/drbd1002 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto15-dev ┊ rdcache2  ┊ cachesp_cachesp2  ┊ 0        ┊ 1002    ┊ /dev/drbd1002 ┊ 300.07 GiB ┊ Unused ┊ UpToDate ┊
+┊ qdata-sto16-dev ┊ rdcache2  ┊ cachesp_cachesp2  ┊ 0        ┊ 1002    ┊ /dev/drbd1002 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto13-dev ┊ rdcache3  ┊ cachesp_cachesp3  ┊ 0        ┊ 1003    ┊ /dev/drbd1003 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto15-dev ┊ rdcache3  ┊ cachesp_cachesp3  ┊ 0        ┊ 1003    ┊ /dev/drbd1003 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto16-dev ┊ rdcache3  ┊ cachesp_cachesp3  ┊ 0        ┊ 1003    ┊ /dev/drbd1003 ┊ 300.07 GiB ┊ Unused ┊ UpToDate ┊
+┊ qdata-sto13-dev ┊ rdcache4  ┊ cachesp_cachesp4  ┊ 0        ┊ 1004    ┊ /dev/drbd1004 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto15-dev ┊ rdcache4  ┊ cachesp_cachesp4  ┊ 0        ┊ 1004    ┊ /dev/drbd1004 ┊ 300.07 GiB ┊ Unused ┊ UpToDate ┊
+┊ qdata-sto17-dev ┊ rdcache4  ┊ cachesp_cachesp4  ┊ 0        ┊ 1004    ┊ /dev/drbd1004 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto15-dev ┊ rdcache5  ┊ cachesp_cachesp5  ┊ 0        ┊ 1005    ┊ /dev/drbd1005 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto16-dev ┊ rdcache5  ┊ cachesp_cachesp5  ┊ 0        ┊ 1005    ┊ /dev/drbd1005 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto17-dev ┊ rdcache5  ┊ cachesp_cachesp5  ┊ 0        ┊ 1005    ┊ /dev/drbd1005 ┊ 300.07 GiB ┊ Unused ┊ UpToDate ┊
+┊ qdata-sto13-dev ┊ rdcache6  ┊ cachesp_cachesp6  ┊ 0        ┊ 1006    ┊ /dev/drbd1006 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto16-dev ┊ rdcache6  ┊ cachesp_cachesp6  ┊ 0        ┊ 1006    ┊ /dev/drbd1006 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto17-dev ┊ rdcache6  ┊ cachesp_cachesp6  ┊ 0        ┊ 1006    ┊ /dev/drbd1006 ┊ 300.07 GiB ┊ Unused ┊ UpToDate ┊
+┊ qdata-sto13-dev ┊ rdcache7  ┊ cachesp_cachesp7  ┊ 0        ┊ 1007    ┊ /dev/drbd1007 ┊ 300.07 GiB ┊ Unused ┊ UpToDate ┊
+┊ qdata-sto16-dev ┊ rdcache7  ┊ cachesp_cachesp7  ┊ 0        ┊ 1007    ┊ /dev/drbd1007 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto17-dev ┊ rdcache7  ┊ cachesp_cachesp7  ┊ 0        ┊ 1007    ┊ /dev/drbd1007 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto13-dev ┊ rdcache8  ┊ cachesp_cachesp8  ┊ 0        ┊ 1008    ┊ /dev/drbd1008 ┊ 300.07 GiB ┊ Unused ┊ UpToDate ┊
+┊ qdata-sto16-dev ┊ rdcache8  ┊ cachesp_cachesp8  ┊ 0        ┊ 1008    ┊ /dev/drbd1008 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto17-dev ┊ rdcache8  ┊ cachesp_cachesp8  ┊ 0        ┊ 1008    ┊ /dev/drbd1008 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto13-dev ┊ rdcache9  ┊ cachesp_cachesp9  ┊ 0        ┊ 1009    ┊ /dev/drbd1009 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto15-dev ┊ rdcache9  ┊ cachesp_cachesp9  ┊ 0        ┊ 1009    ┊ /dev/drbd1009 ┊ 300.07 GiB ┊ Unused ┊ UpToDate ┊
+┊ qdata-sto17-dev ┊ rdcache9  ┊ cachesp_cachesp9  ┊ 0        ┊ 1009    ┊ /dev/drbd1009 ┊ 300.07 GiB ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto13-dev ┊ rdvote    ┊ vote_vote         ┊ 0        ┊ 1035    ┊ /dev/drbd1035 ┊ 9.00 GiB   ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto15-dev ┊ rdvote    ┊ vote_vote         ┊ 0        ┊ 1035    ┊ /dev/drbd1035 ┊ 9.00 GiB   ┊ InUse  ┊ UpToDate ┊
+┊ qdata-sto16-dev ┊ rdvote    ┊ vote_vote         ┊ 0        ┊ 1035    ┊ /dev/drbd1035 ┊ 9.00 GiB   ┊ Unused ┊ UpToDate ┊
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯

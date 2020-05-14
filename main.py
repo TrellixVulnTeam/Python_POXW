@@ -7,6 +7,23 @@
 """
 import os
 
+
+def rule(size, part_num=None):
+    part_section = []
+    if not part_num:
+        part_num = int(size / (2 * 1024 * 1024)) + 1
+        if part_num <= 1:
+            return part_section
+    each_size = int(size / part_num)
+    for i in range(part_num):
+        part_section.append([i * each_size + 1, (i + 1) * each_size])
+    return part_section
+
+print rule(380928, 4)
+print rule(380928, 5)
+
+pass
+
 nvme_clean_cmd = """
                 echo '#!/bin/sh' > /tmp/clean.sh;
                 echo 'for i in {0..255}' >> /tmp/clean.sh;

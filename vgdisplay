@@ -1,0 +1,273 @@
+  --- Volume group ---
+  VG Name               cachesp6
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  1
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                0
+  Open LV               0
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <7.28 TiB
+  PE Size               4.00 MiB
+  Total PE              1907591
+  Alloc PE / Size       0 / 0
+  Free  PE / Size       1907591 / <7.28 TiB
+  VG UUID               qkmh0q-fSMe-CPY3-CkeT-cVPW-6SJZ-F5jBpc
+
+  --- Volume group ---
+  VG Name               cachesp4
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  7
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                0
+  Open LV               0
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <7.28 TiB
+  PE Size               4.00 MiB
+  Total PE              1907591
+  Alloc PE / Size       0 / 0
+  Free  PE / Size       1907591 / <7.28 TiB
+  VG UUID               qY1s3Z-fzMw-8vAC-YFRs-eQTd-7SJ9-LOUbXu
+
+  --- Volume group ---
+  VG Name               cachesp5
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  4
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                1
+  Open LV               1
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <7.28 TiB
+  PE Size               4.00 MiB
+  Total PE              1907591
+  Alloc PE / Size       76817 / <300.07 GiB
+  Free  PE / Size       1830774 / 6.98 TiB
+  VG UUID               lI1Fum-2lm8-9ohx-I4zs-bsyT-elCh-9o8O73
+
+  --- Volume group ---
+  VG Name               cachesp9
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  3
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                0
+  Open LV               0
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <7.28 TiB
+  PE Size               4.00 MiB
+  Total PE              1907591
+  Alloc PE / Size       0 / 0
+  Free  PE / Size       1907591 / <7.28 TiB
+  VG UUID               tAUvue-OF9N-tQ2M-y9fJ-1Jgf-9Gbj-rPmSs9
+
+  --- Volume group ---
+  VG Name               cachesp3
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  5
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                0
+  Open LV               0
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <7.28 TiB
+  PE Size               4.00 MiB
+  Total PE              1907591
+  Alloc PE / Size       0 / 0
+  Free  PE / Size       1907591 / <7.28 TiB
+  VG UUID               fq980W-ZSOU-h811-jzk4-0BRi-BkI4-nSd37Y
+
+  --- Volume group ---
+  VG Name               VolGroup
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  7
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                6
+  Open LV               4
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <873.73 GiB
+  PE Size               4.00 MiB
+  Total PE              223674
+  Alloc PE / Size       70656 / 276.00 GiB
+  Free  PE / Size       153018 / <597.73 GiB
+  VG UUID               C0V4MT-51db-JtdQ-7ehz-Q1Kr-9Cl6-syvS6u
+
+  --- Volume group ---
+  VG Name               cachesp0
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  1
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                0
+  Open LV               0
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <7.28 TiB
+  PE Size               4.00 MiB
+  Total PE              1907591
+  Alloc PE / Size       0 / 0
+  Free  PE / Size       1907591 / <7.28 TiB
+  VG UUID               rRpZAm-Ncqz-9h7r-WKIp-iME5-ndlV-3gR3t6
+
+  --- Volume group ---
+  VG Name               cachesp11
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  6
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                1
+  Open LV               1
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <7.28 TiB
+  PE Size               4.00 MiB
+  Total PE              1907591
+  Alloc PE / Size       76817 / <300.07 GiB
+  Free  PE / Size       1830774 / 6.98 TiB
+  VG UUID               QGq4i3-I66Z-36f1-x25I-NBtp-NTb9-OyQTwf
+
+  --- Volume group ---
+  VG Name               cachesp7
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  1
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                0
+  Open LV               0
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <7.28 TiB
+  PE Size               4.00 MiB
+  Total PE              1907591
+  Alloc PE / Size       0 / 0
+  Free  PE / Size       1907591 / <7.28 TiB
+  VG UUID               QAjKPt-bSJR-YEDf-c8ro-uAfk-ti2i-ufFpun
+
+  --- Volume group ---
+  VG Name               cachesp10
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  3
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                0
+  Open LV               0
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <7.28 TiB
+  PE Size               4.00 MiB
+  Total PE              1907591
+  Alloc PE / Size       0 / 0
+  Free  PE / Size       1907591 / <7.28 TiB
+  VG UUID               y3YweK-Zgu7-SSIb-7E7u-yvTS-IsZ0-ZlMOcj
+
+  --- Volume group ---
+  VG Name               vote
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  5
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                1
+  Open LV               1
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <19.53 GiB
+  PE Size               4.00 MiB
+  Total PE              4999
+  Alloc PE / Size       2305 / 9.00 GiB
+  Free  PE / Size       2694 / 10.52 GiB
+  VG UUID               X28dTg-YnIU-x3ME-eWZA-TTRd-NEvl-HBf4BM
+
+  --- Volume group ---
+  VG Name               cachesp2
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  5
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                0
+  Open LV               0
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <7.28 TiB
+  PE Size               4.00 MiB
+  Total PE              1907591
+  Alloc PE / Size       0 / 0
+  Free  PE / Size       1907591 / <7.28 TiB
+  VG UUID               6UYdrS-O3hi-bCSx-K3Sd-25zy-kRqt-CtvOyt
+
+  --- Volume group ---
+  VG Name               cachesp8
+  System ID
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  1
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                0
+  Open LV               0
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <7.28 TiB
+  PE Size               4.00 MiB
+  Total PE              1907591
+  Alloc PE / Size       0 / 0
+  Free  PE / Size       1907591 / <7.28 TiB
+  VG UUID               YKvcRB-I4et-jzxU-WvQv-YWJ0-y7e4-ZBYdsx
+

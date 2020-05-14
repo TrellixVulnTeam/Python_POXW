@@ -4,11 +4,14 @@
 @author: alfons
 """
 node_id_dict = {
-    "tuwei-dp2-sto1": 5,
-    "tuwei-dp2-sto2": 7,
-    "tuwei-dp2-sto3": 9,
-    "tuwei-dp2-sto4": 11,
+    "qdata-com11-dev": 1,
+    "qdata-com12-dev": 3,
+    "qdata-sto13-dev": 5,
+    "qdata-sto15-dev": 7,
+    "qdata-sto16-dev": 9,
+    "qdata-sto17-dev": 11,
 }
 
-pool_id = 23
+vote_id = 1
+pool_id = 3
 cluster_id = 1

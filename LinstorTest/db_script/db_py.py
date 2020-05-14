@@ -10,6 +10,7 @@ import re
 from collections import namedtuple, defaultdict
 from config import (node_id_dict,
                     pool_id,
+                    vote_id,
                     cluster_id)
 
 linstor_info_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
@@ -66,13 +67,27 @@ for node_name, sp_info in linstor_info_dict.items():
 
     for sp_name, sp_value in sp_info.items():
         for vg_name in sp_value.get("vg", list()):
-            resource_group_insert_list.append(
-                "({}, {}, {}, {}, '{}', {}, {}, '{}')".format(len(resource_group_insert_list) + 1, "'{}'", "NULL", "NULL", sp_name, pool_id, node_id, vg_name))
+            resource_group_insert_list.append("({}, {}, {}, {}, '{}', {}, {}, '{}')".format(len(resource_group_insert_list) + 1,
+                                                                                            "'{}'",
+                                                                                            "NULL",
+                                                                                            "NULL",
+                                                                                            sp_name,
+                                                                                            vote_id if vg_name == "vote" else pool_id,
+                                                                                            node_id,
+                                                                                            vg_name))
 
         for rsc_name in sp_value.get("rsc", list()):
-            volume_insert_list.append(
-                "({}, {}, {}, {}, '{}', {}, {}, '{}', '{}', {}, {})".format(len(volume_insert_list) + 1, "'{}'", "NULL", "NULL", '{}_{}'.format(rsc_name[0], rsc_name[1]),
-                                                                            pool_id, cluster_id, sp_name, rsc_name[0], rsc_name[1], 3))
+            volume_insert_list.append("({}, {}, {}, {}, '{}', {}, {}, '{}', '{}', {}, {})".format(len(volume_insert_list) + 1,
+                                                                                                  "'{}'",
+                                                                                                  "NULL",
+                                                                                                  "NULL",
+                                                                                                  '{}_{}'.format(rsc_name[0], rsc_name[1]),
+                                                                                                  vote_id if rsc_name[0] == "rdvote" else pool_id,
+                                                                                                  cluster_id,
+                                                                                                  sp_name,
+                                                                                                  rsc_name[0],
+                                                                                                  rsc_name[1],
+                                                                                                  3))
 
 with open("./resource_group_script.sql", 'w') as f:
     f.write("""DROP TABLE IF EXISTS `resource_group`;
