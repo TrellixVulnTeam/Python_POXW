@@ -15,6 +15,9 @@ def func_a(*args, **kwargs):
 parser = argparse.ArgumentParser(prog='PROG')
 parser.add_argument('--foo', action='store_true', help='foo help')
 
+parser.add_argument('--version', action='version')
+parser.set_defaults(func=func_a)
+
 # sub parser
 subparsers = parser.add_subparsers(help='sub-command help')
 
@@ -28,16 +31,16 @@ parser_b = subparsers.add_parser('b', help='b help')
 parser_b.add_argument('--baz', choices='XYZ', help='baz help')
 
 # parser.format_usage()
-help = parser.format_help()
-
-# for action in parser._actions:
-#     if not isinstance(action, _SubParsersAction):
-#         print("{} -> {}".format(action.option_strings, action.help))
+# help = parser.format_help()
 #
-for action_group in parser._action_groups:
-    pprint(action_group._actions)
-    pprint(action_group._group_actions)
-    pass
+# # for action in parser._actions:
+# #     if not isinstance(action, _SubParsersAction):
+# #         print("{} -> {}".format(action.option_strings, action.help))
+# #
+# for action_group in parser._action_groups:
+#     pprint(action_group._actions)
+#     pprint(action_group._group_actions)
+#     pass
 #
 #
 # print("parser._actions -> {}")
@@ -62,9 +65,9 @@ for action_group in parser._action_groups:
 # pprint(parser._get_kwargs())
 # pprint(subparsers._get_subactions())
 # pprint(subparsers._option_string_actions)
-# argv = ['-h']
-# args = parser.parse_args(argv)
-# args.func(argv)
+argv = ['--version']
+args = parser.parse_args(argv)
+args.func(argv)
 # parse some argument lists
 # parser.parse_args(['a', '12'])
 # parser.parse_args(['--foo', 'b', '--baz', 'Z'])
