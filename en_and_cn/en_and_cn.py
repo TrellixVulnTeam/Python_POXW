@@ -7,24 +7,25 @@
 @time: 2020/5/18 下午10:58
 @version: v1.0 
 """
-import os
+import sys
 
-src_dir = "./src_files"
 
-file_path_list = [os.path.join(src_dir, file_name) for file_name in os.listdir(src_dir)]
+def translate(file_path_list):
+    context_list = list()
+    for file_path in file_path_list:
+        with open(file_path, 'rb') as f:
+            context_list.append([s.strip() for s in f.readlines() if s.strip()])
 
-context_list = list()
-for file_path in file_path_list:
-    with open(file_path, 'rb') as f:
-        context_list.append([s.strip() for s in f.readlines() if s.strip()])
+    context_dst_list = list()
+    if context_list:
+        for j in range(len(context_list[0])):
+            for i in range(len(context_list)):
+                context_dst_list.append(context_list[i][j])
+            context_dst_list.append("\n")
 
-context_dst_list = list()
-if context_list:
-    for j in range(len(context_list[0])):
-        for i in range(len(context_list)):
-            context_dst_list.append(context_list[i][j])
-        context_dst_list.append("\n")
+    with open("./vv.txt", 'wb') as f:
+        f.write('\n'.join(context_dst_list))
 
-with open("en_and_cn.txt", 'wb') as f:
-    f.write('\n'.join(context_dst_list))
 
+if __name__ == '__main__':
+    translate(sys.argv[1:])
