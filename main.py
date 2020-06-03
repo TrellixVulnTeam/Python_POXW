@@ -6,7 +6,21 @@
 @author: alfons
 """
 import os
+import re
 
+B = 1
+KB = B << 10
+MB = KB << 10
+GB = MB << 10
+TB = GB << 10
+
+print B
+print KB
+print MB
+print GB
+print TB
+
+print set(dict(a=1, b=2, c=3))
 
 def rule(size, part_num=None):
     part_section = []
@@ -18,6 +32,7 @@ def rule(size, part_num=None):
     for i in range(part_num):
         part_section.append([i * each_size + 1, (i + 1) * each_size])
     return part_section
+
 
 print rule(380928, 4)
 print rule(380928, 5)
