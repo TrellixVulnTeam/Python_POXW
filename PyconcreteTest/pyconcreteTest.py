@@ -37,5 +37,6 @@ for file_name in os.listdir(pye_dir):
         magic = 8
 
     pyc_code = marshal.loads(data[magic:])
+    exec pyc_code
     with open(os.path.join(pyc_dir, file_name[:file_name.rfind('.')] + '.pyc'), 'wb') as f:
         f.write(data)
