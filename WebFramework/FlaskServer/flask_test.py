@@ -2,25 +2,24 @@
 # -*- coding: utf-8 -*-
 """
 #=============================================================================
-# FileName: fastapi_test.py
+# FileName: flask_test.py
 # Author: alfons
-# LastChange:  2020/6/16 下午5:28
+# LastChange:  2020/6/19 下午2:25
 #=============================================================================
 """
 import time
-import uvicorn
-from fastapi import FastAPI
+from flask import Flask
 
-app = FastAPI()
+app = Flask(__name__)
 
 
-@app.get("/")
+@app.route("/")
 def index():
     time.sleep(3)
     return "Hello world"
 
 
-@app.get("/items/{item_id}")
+@app.route("/items/{item_id}")
 def read_item(item_id: str, q: str = None, short: bool = False):
     """
 
@@ -39,4 +38,4 @@ def read_item(item_id: str, q: str = None, short: bool = False):
     return item
 
 
-uvicorn.run(app, host="0.0.0.0", port=8000)
+app.run(host="0.0.0.0", port=8000)
