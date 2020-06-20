@@ -63,4 +63,4 @@ def post_func(post_id: str, form_1: str = Form(default=None), form_2: str = Form
     return item
 
 
-uvicorn.run(app=app, host="0.0.0.0", port=8000)
+# uvicorn.run(app="fastapi_test:app", host="0.0.0.0", port=8000, workers=100)

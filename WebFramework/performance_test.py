@@ -20,14 +20,16 @@ def func_request(method: str = REQUEST_GET, url: str = None, num: int = None):
         response = requests.get(url)
         global total_num
         total_num += 1
-        # print("{}: {}".format(num, response.content))
+        print("{}: {}".format(num, response.content))
 
 
 start_time = time.time()
-with ThreadPool(10) as pool:
-    for i in range(10 ** 3):
-        pool.apply_async(func_request, (REQUEST_GET, "http://10.10.80.17:8000/?i=0", i))
-        # pool.apply_async(func_request, (REQUEST_GET, f"http://10.10.80.17:8000/items/{i}", i))
+with ThreadPool(100) as pool:
+    for i in range(10 ** 2):
+        pool.apply_async(func_request, (REQUEST_GET, f"http://127.0.0.1:8000/items/{i}", i))
+
+    # for i in range(10):
+    #     pool.apply_async(func_request, (REQUEST_GET, "http://127.0.0.1:8000/?i=0", i))
 
     pool.close()
     pool.join()
