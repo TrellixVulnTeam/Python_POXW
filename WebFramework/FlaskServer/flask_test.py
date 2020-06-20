@@ -8,29 +8,31 @@
 #=============================================================================
 """
 import time
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def index():
-    time.sleep(3)
+    time.sleep(0.003)
     return "Hello world"
 
 
-@app.route("/items/{item_id}")
-def read_item(item_id: str, q: str = None, short: bool = False):
+@app.route("/items/<item_id>")
+def read_item(item_id: str):
     """
 
     :param item_id:
-    :param q:
-    :param short:
     :return:
     """
     item = {"item_id": item_id}
+
+    q = request.args.get("q")
     if q:
         item.update({"q": q})
+
+    short = request.args.get("short")
     if not short:
         item.update(
             {"description": "This is an amazing item that has a long description"}

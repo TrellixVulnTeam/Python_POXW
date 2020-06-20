@@ -7,8 +7,13 @@
 @time: 2020/5/18 下午10:58
 @version: v1.0 
 """
-import sys
+from __future__ import unicode_literals
 
+import sys
+from prompt_toolkit import prompt
+
+text = prompt('Give me some input: ')
+print('You said: %s' % text)
 
 def translate(file_path_list):
     context_list = list()
