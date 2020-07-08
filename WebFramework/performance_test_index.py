@@ -7,7 +7,7 @@
 """
 import time
 import requests
-from multiprocessing.pool import ThreadPool
+# from multiprocessing.pool import ThreadPool
 import threading
 
 REQUEST_GET = "get"
@@ -32,7 +32,7 @@ def test_time(thread_num: int):
 
     thread_list = list()
     for i in range(thread_num):
-        t = threading.Thread(target=func_request, args=(REQUEST_GET, "http://127.0.0.1:8000/?i=0", i))
+        t = threading.Thread(target=func_request, args=(REQUEST_GET, "http://10.10.100.25:11100/qcs/io_check", i))
         t.start()
         thread_list.append(t)
 
@@ -63,5 +63,5 @@ def test_worker_time(worker_num: int, thread_one_worker: int = 20, max_thread: i
 
 
 worker_num = 10
-t_num = test_worker_time(worker_num, max_thread=60)
+t_num = test_worker_time(worker_num, max_thread=160)
 print("\nWorker {worker_num}, max thread {t_num}".format(worker_num=worker_num, t_num=t_num))

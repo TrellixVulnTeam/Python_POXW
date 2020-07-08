@@ -14,11 +14,15 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+i = 0
+
 
 @app.get("/")
 def index():
-    time.sleep(3)
-    return "Hello ld"
+    global i
+    i += 1
+    # time.sleep(3)
+    return i
 
 
 @app.get("/items/{item_id}")
@@ -63,4 +67,9 @@ def post_func(post_id: str, form_1: str = Form(default=None), form_2: str = Form
     return item
 
 
-# uvicorn.run(app="fastapi_test:app", host="0.0.0.0", port=8000, workers=100)
+def main():
+    uvicorn.run(app="fastapi_test:app", host="0.0.0.0", port=8000, workers=1)
+
+
+if __name__ == '__main__':
+    main()
