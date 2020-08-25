@@ -2,26 +2,28 @@
 # -*- coding: utf-8 -*-
 """
 #=============================================================================
-# FileName: tasks.py
+# FileName: pydantic_test.py
 # Desc:
 # Author: chenhui.shang
 # Email: chenhui.shang@woqutech.com
 # HomePage: www.woqutech.com
 # Version: 0.0.1
-# LastChange:  2020/2/21 下午2:26
+# LastChange:  2020/7/31 3:17 下午
 # History:
 #=============================================================================
 """
-import datetime
-from celery import Celery
 
-celery_app = Celery()
+from pydantic import BaseModel, Field, validator
 
 
-def func_a():
-    print(datetime.datetime.now())
+class test_a(BaseModel):
+    a: str = Field(..., alias="Is_a")
+
+    @validator("a")
+    def convent(cls, v):
+        return [v]
 
 
-task_func_a = celery_app.task(func_a, name="hello world")
-
-task_func_a.delay()
+a = test_a(Is_a="10")
+print(a.dict())
+print("".split())
