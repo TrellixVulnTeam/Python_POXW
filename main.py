@@ -5,119 +5,67 @@
 @time: 2019/9/11
 @author: alfons
 """
-import operator
-
-print(any([]))
-from enum import Enum
-
-
-
-import asyncio
-
-print(hash((1,2)))
-print(hash((1,2)))
-print(hash((1,3)))
-async def func_a():
-    await asyncio.sleep(3)
-    print("I'm sleep 10's.")
+import sys
+print(sys.version)
+print(sys.version_info)
+from  enum import Enum
 
 
-def func_b():
-    asyncio.run(func_a())
+class ProductTypeEnum(str, Enum):
+    QDATA_STANDARD = "qdata_standard"
+    QDATA_SANFREE = "qdata_sanfree"
+    QDATA_LONGHUAL = "qdata_longhual"
+    DM_SANFREE = "dm_sanfree"
+print(list(ProductTypeEnum))
+a= ProductTypeEnum("dm_sanfree")
+print(a)
 
-func_b()
+def base_convert(num, base):
+    """把十进制数字转成其他进制
+
+    注意: base 需要  2<= `base` <= 36
+    当进制数base为1时,没有1进制数,而且程序会陷入无限递归循环
+
+    :param num: int 十进制数字
+    :param base: int 要转换的进制数
+
+    :rtype str
+    :return 转换之后的进制数
+
+    :raise FuncParamError 参数错误
+    """
+
+    def base_convert_(num_, base_):
+        # 对于十进制数 0 , 它的任何进制都会是 0
+        if num_ == 0:
+            return "0"
+        # 递归计算 `base` 进制数
+        return base_convert_(num_ // base_, base_).lstrip("0") + "0123456789abcdefghijklmnopqrstuvwxyz"[num_ % base_]
+
+    # 检查参数
+    return base_convert_(num, base)
+
+print(base_convert(num=4496620, base=32).upper())
+
+def nvme_slot(pcie_bus_address: str, ctrl_id: int, namespace_id: int):
+    # print(f"{pcie_bus_address=} {ctrl_id=} {namespace_id=}")
+    domain = pcie_bus_address[:pcie_bus_address.find(':')]
+    bus = pcie_bus_address[pcie_bus_address.find(':') + 1:pcie_bus_address.rfind(':')]
+    device = pcie_bus_address[pcie_bus_address.rfind(':') + 1:pcie_bus_address.rfind('.')]
+    func = pcie_bus_address[pcie_bus_address.rfind('.') + 1:]
+
+    domain_num = int(domain, 16)
+    domain_hex = hex(domain_num % 256).replace('0x', '').rjust(2, '0')
+
+    ctrl = hex((ctrl_id << 3) + namespace_id).replace('0x', '')
+    return f"N{domain_hex}{bus}{device}{func}C{ctrl}"
 
 
-class ReplaceDiskWebsocketStepEnum(int, Enum):
-    pre_check = 2 ** 0
-    user_confirm = 2 ** 1
-    disk_delete_from_ASM = 2 ** 2
-    ASM_rebalance_before_replace = 2 ** 3
-    delete_lun = 2 ** 4
-    unload_physical_device = 2 ** 5
-    replace_disk = 2 ** 6
-    load_physical_device = 2 ** 7
-    format_physical_device = 2 ** 8
-    add_lun = 2 ** 9
-    qlink_mount = 2 ** 10
-    disk_add_to_ASM = 2 ** 11
-    ASM_rebalance_after_replace = 2 ** 12
+print(f'{nvme_slot(pcie_bus_address="10000:01:00.0", ctrl_id=0, namespace_id=1)=}')
+print(f'{nvme_slot(pcie_bus_address="10000:02:00.0", ctrl_id=0, namespace_id=1)=}')
+print(f'{nvme_slot(pcie_bus_address="10001:01:00.0", ctrl_id=0, namespace_id=1)=}')
+print(f'{nvme_slot(pcie_bus_address="10001:02:00.0", ctrl_id=0, namespace_id=1)=}')
+print(f'{nvme_slot(pcie_bus_address="10001:02:00.0", ctrl_id=1, namespace_id=1)=}')
+print(f'{nvme_slot(pcie_bus_address="10001:02:00.0", ctrl_id=1, namespace_id=2)=}')
 
-print(int(ReplaceDiskWebsocketStepEnum.pre_check))
-
-for i in ReplaceDiskWebsocketStepEnum:
-    # print(dir(i))
-    print(f"{i.name}={i.value}")
-print(f"{35 & ReplaceDiskWebsocketStepEnum.pre_check=}")
-print(f"{35 & ReplaceDiskWebsocketStepEnum.user_confirm=}")
-print(f"{35 & ReplaceDiskWebsocketStepEnum.disk_delete_from_ASM=}")
-print(f"{35 & ReplaceDiskWebsocketStepEnum.ASM_rebalance_before_replace=}")
-print(f"{35 & ReplaceDiskWebsocketStepEnum.delete_lun=}")
-print(f"{35 & ReplaceDiskWebsocketStepEnum.unload_physical_device=}")
-print(f"{35 & ReplaceDiskWebsocketStepEnum.replace_disk=}")
-print(f"{35 & ReplaceDiskWebsocketStepEnum.load_physical_device=}")
-print(f"{35 & ReplaceDiskWebsocketStepEnum.format_physical_device=}")
-print(f"{35 & ReplaceDiskWebsocketStepEnum.add_lun=}")
-print(f"{35 & ReplaceDiskWebsocketStepEnum.qlink_mount=}")
-print(f"{35 & ReplaceDiskWebsocketStepEnum.disk_add_to_ASM=}")
-print(f"{35 & ReplaceDiskWebsocketStepEnum.ASM_rebalance_after_replace=}")
-
-import os
-import re
-from collections import defaultdict
-
-ws_map = defaultdict(list)
-
-for _ in ws_map[1]:
-    print(_)
-print(ws_map)
-
-#
-# print("{:.1f}x".format(2.26))
-#
-# list_a = ['a', 'b']
-# list_b = ['a', 'c', 'd']
-#
-# print(bool(set(list_b) - set(list_b)))
-#
-# print('a' in (list_b + list_a))
-#
-# EVENT_SCHEDULER_STARTED = EVENT_SCHEDULER_START = 2 ** 0
-# EVENT_SCHEDULER_SHUTDOWN = 2 ** 1
-# EVENT_SCHEDULER_PAUSED = 2 ** 2
-# EVENT_SCHEDULER_RESUMED = 2 ** 3
-# EVENT_EXECUTOR_ADDED = 2 ** 4
-# EVENT_EXECUTOR_REMOVED = 2 ** 5
-# EVENT_JOBSTORE_ADDED = 2 ** 6
-# EVENT_JOBSTORE_REMOVED = 2 ** 7
-# EVENT_ALL_JOBS_REMOVED = 2 ** 8
-# EVENT_JOB_ADDED = 2 ** 9
-# EVENT_JOB_REMOVED = 2 ** 10
-# EVENT_JOB_MODIFIED = 2 ** 11
-# EVENT_JOB_EXECUTED = 2 ** 12
-# EVENT_JOB_ERROR = 2 ** 13
-# EVENT_JOB_MISSED = 2 ** 14
-# EVENT_JOB_SUBMITTED = 2 ** 15
-# EVENT_JOB_MAX_INSTANCES = 2 ** 16
-#
-# from datetime import datetime
-# print(str(datetime.now()))
-# print(f"all([]) -> {all([])}")
-# print(f"EVENT_SCHEDULER_STARTED -> {EVENT_SCHEDULER_STARTED}: The scheduler was started")
-# print(f"EVENT_SCHEDULER_START -> {EVENT_SCHEDULER_START}: The scheduler was started")
-# print(f"EVENT_SCHEDULER_SHUTDOWN -> {EVENT_SCHEDULER_SHUTDOWN}: The scheduler was shut down")
-# print(f"EVENT_SCHEDULER_PAUSED -> {EVENT_SCHEDULER_PAUSED}: Job processing in the scheduler was paused")
-# print(f"EVENT_SCHEDULER_RESUMED -> {EVENT_SCHEDULER_RESUMED}: Job processing in the scheduler was resumed")
-# print(f"EVENT_EXECUTOR_ADDED -> {EVENT_EXECUTOR_ADDED}: An executor was added to the scheduler")
-# print(f"EVENT_EXECUTOR_REMOVED -> {EVENT_EXECUTOR_REMOVED}: An executor was removed to the scheduler")
-# print(f"EVENT_JOBSTORE_ADDED -> {EVENT_JOBSTORE_ADDED}: A job store was added to the scheduler")
-# print(f"EVENT_JOBSTORE_REMOVED -> {EVENT_JOBSTORE_REMOVED}: A job store was removed from the scheduler")
-# print(f"EVENT_ALL_JOBS_REMOVED -> {EVENT_ALL_JOBS_REMOVED}: All jobs were removed from either all job stores or one particular job store")
-# print(f"EVENT_JOB_ADDED -> {EVENT_JOB_ADDED}: A job was added to a job store")
-# print(f"EVENT_JOB_REMOVED -> {EVENT_JOB_REMOVED}: A job was removed from a job store")
-# print(f"EVENT_JOB_MODIFIED -> {EVENT_JOB_MODIFIED}: A job was modified from outside the scheduler")
-# print(f"EVENT_JOB_EXECUTED -> {EVENT_JOB_EXECUTED}: A job was executed successfully")
-# print(f"EVENT_JOB_ERROR -> {EVENT_JOB_ERROR}: A job raised an exception during execution")
-# print(f"EVENT_JOB_MISSED -> {EVENT_JOB_MISSED}: 	A job’s execution was missed")
-# print(f"EVENT_JOB_SUBMITTED -> {EVENT_JOB_SUBMITTED}: A job was submitted to its executor to be run")
-# print(f"EVENT_JOB_MAX_INSTANCES -> {EVENT_JOB_MAX_INSTANCES}: A job being submitted to its executor was not accepted by the executor because the job has already reached its maximum concurrently executing instances")
+print(f'{nvme_slot(pcie_bus_address="0000:d7:16.4", ctrl_id=0, namespace_id=1)=}')

@@ -24,7 +24,7 @@ if __name__ == '__main__':
     import time
 
     start_time = time.time()
-    tasks = [fetch(url="https://www.baidu.com") for _ in range(10)]
+    tasks = [fetch(url="http://www.baidu.com") for _ in range(10)]
 
     loop.run_until_complete(asyncio.gather(*tasks))
     print("Use time -> {}'s.".format(time.time() - start_time))

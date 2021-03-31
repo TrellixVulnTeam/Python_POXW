@@ -1,0 +1,38 @@
+resource {{ drbd_resource }} {
+  device    {{ drbd_device }};
+  disk      {{ drbd_disk }};
+  meta-disk internal;
+
+  disk{
+  on-io-error detach;
+  c-max-rate 200M;
+  c-min-rate 60M;
+  resync-rate 100M;
+  }
+
+  net {
+    transport "tcp";
+    verify-alg md5;
+    allow-two-primaries;
+    protocol C;
+    after-sb-0pri discard-zero-changes;
+    after-sb-1pri call-pri-lost-after-sb;
+    after-sb-2pri call-pri-lost-after-sb;
+    timeout  30;
+    ping-timeout 15;
+    connect-int 4;
+    ping-int  1;
+    fencing resource-only;
+  }
+
+ handlers {
+    split-brain /sys/module/drbd/parameters/usermode_helper;
+  }
+
+  on {{ local_hostname }} {
+    address   {{ local_ip }}:{{ local_port }};
+  }
+  on {{ peer_hostname }} {
+    address   {{ peer_ip }}:{{ peer_port }};
+  }
+}

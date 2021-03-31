@@ -12,5 +12,3 @@ print("data's type is -> ", type(data))
 print("data info -> ")
 pprint(data)
 
-for c, s in data["Scores"].items():
-    print(c, " -> ", s)

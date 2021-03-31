@@ -26,8 +26,8 @@ def func_request(method: str = REQUEST_GET, url: str = None, num: int = None):
 start_time = time.time()
 with ThreadPool(100) as pool:
     for i in range(10 ** 2):
-        pool.apply_async(func_request, (REQUEST_GET, f"http://127.0.0.1:8000/items/{i}", i))
-
+        pool.apply_async(func_request, (REQUEST_GET, f"http://127.0.0.1:8000/sync_ssh", i))
+        # pool.apply_async(func_request, (REQUEST_GET, f"http://127.0.0.1:8000/async_ssh", i))
     # for i in range(10):
     #     pool.apply_async(func_request, (REQUEST_GET, "http://127.0.0.1:8000/?i=0", i))
 

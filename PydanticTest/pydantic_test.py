@@ -12,18 +12,32 @@
 # History:
 #=============================================================================
 """
+from enum import Enum
 
+from typing import Optional
 from pydantic import BaseModel, Field, validator
 
 
-class test_a(BaseModel):
-    a: str = Field(..., alias="Is_a")
-
-    @validator("a")
-    def convent(cls, v):
-        return [v]
+class FilterEnum(str, Enum):
+    DISK_PATH = "disk_path"
+    DISK_STATUS = "mode_status"
+    STO_NODE = "storage_node"
 
 
-a = test_a(Is_a="10")
-print(a.dict())
-print("".split())
+print("disk_path" in list(FilterEnum))
+print(list(v.value for v in list(FilterEnum)))
+assert "disk_path" == FilterEnum.DISK_PATH
+
+
+# class test_a(BaseModel):
+#     a: int = Field(..., alias="Is_a")
+#     b: Optional[bool] = Field(..., alias="Is_b")
+#
+#     @validator("a")
+#     def convent(cls, v):
+#         return [v]
+#
+#
+# a = test_a(Is_a="10", Is_b=" no")
+# print(a.dict())
+# print("".split())
