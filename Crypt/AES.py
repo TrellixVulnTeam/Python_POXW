@@ -1,107 +1,154 @@
-#!/usr/bin/env python  
-# encoding: utf-8  
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
-@author: Alfons
-@contact: alfons_xh@163.com
-@file: AES.py
-@time: 2017/9/5 9:48
-@version: v1.0
+#=============================================================================
+# FileName: crypt.py
+# Desc:
+# Author: chenhui.shang
+# Email: chenhui.shang@woqutech.com
+# HomePage: www.woqutech.com
+# Version: 0.0.1
+# LastChange:  2020/11/10 5:37 下午
+# History:
+#=============================================================================
 """
-from Crypto.Cipher import AES
-from binascii import b2a_hex, a2b_hex
+import abc
+import base64
 import hashlib
-import logging
-import traceback
+from typing import Optional
 
-BLOCK_SIZE = 32
-
-
-def AES_ECB_ENCRYPT(plain_text, key, mode=AES.MODE_ECB):
-    """
-    AES ECB模式 ZeroPadding 加密，块大小为32byte
-    :param plain_text: 加密的字符串
-    :param key: 加密密钥
-    :param mode: AES模式，默认ECB模式
-    :return: 成功返回加密后的hex字符串，失败返回None
-    """
-    block_size = len(key)
-    if len(key) != block_size:
-        logging.error("AES加密参数错误：%s" % traceback.format_exc())
-        return None
-
-    cryptor = AES.new(key, mode)
-    plain_text += (block_size - len(plain_text) % block_size) * b'\0'
-    cipher_text = cryptor.encrypt(plain_text)
-    # 因为AES加密时候得到的字符串不一定是ascii字符集的，输出到终端或者保存时候可能存在问题
-    # 所以这里统一把加密后的字符串转化为16进制字符串
-    return cipher_text
+from Crypto.Cipher import DES, AES
+from Crypto.Util.Padding import pad, unpad
 
 
-def AES_ECB_DECRYPT(cipher_text, key, mode=AES.MODE_ECB):
-    """
-    AES ECB模式 解密，块大小为32byte
-    :param cipher_text: 解密的hex字符串
-    :param key: 解密密钥
-    :param mode: AES模式，默认ECB模式
-    :return: 成功返回解密后的字符串，失败返回None
-    """
-    cipher_len = len(cipher_text)
-    if len(key) != BLOCK_SIZE or len(cipher_text) % BLOCK_SIZE != 0:
-        logging.error("\nAES解密参数错误, keyWord:%s \ncipher_text:%s\n trackback：%s" % (key, cipher_text, traceback.format_exc()))
-        return None
-
-    cryptor = AES.new(key, mode)
-
-    c = a2b_hex(cipher_text)
-    plain_text = cryptor.decrypt(cipher_text)
-    # plain_text = cryptor.decrypt(cipher_text)
-    # return plain_text.rstrip('\0')
-    return plain_text
+DEFAULT_BLOCK_SIZE = 8
+DES_DEFAULT_PAD_LEN = DEFAULT_BLOCK_SIZE
+AES_DEFAULT_BLOCK_SIZE = 32
 
 
-def md5(plaintext):
-    """
-    md5加密
-    :param plaintext: 加密的字符串
-    :return: 加密后的结果
-    """
-    m = hashlib.md5()
-    m.update(plaintext.encode())
-    return m.hexdigest()
-
-
-# def md5(plaintext, time=1):
-#     """
-#     md5加密
-#     :param plaintext: 加密的字符串
-#     :param time: 加密迭代次数
-#     :return: 加密后的结果
-#     """
-#     tmp_time = 1
-#     m = hashlib.md5()
-#     m.update(plaintext.encode())
-#     while tmp_time < time:
-#         # print m.hexdigest()
-#         m.update(m.hexdigest().encode())
-#         tmp_time += 1
-#     return m.hexdigest()
-
-
-if __name__ == "__main__":
-    # str = "dajidali jinwan chiji"
-    # key1 = md5(md5(str))
-    # print key1
-    # key2 = md5(str, time = 2)
-    # print key2
-    # print key1 == key2
-    # print "KEY:" + key1
-    # plaintext = "第九阿佛教"
-    # print "Plaintext:" + plaintext
-    # # ciphertext = AES_ECB_ENCRYPT(plaintext, key)
-    # key1 = "bc0ef838ed0acd1a31ce55b043a1c14c"
-    # ciphertext = "55c781e86644e99aed984ad12a53a0a2fcc7b4bea42f2a7ee0cd384ba6e33d41df1d1034645130984d199243cc4e9643cea2be30c07a4c851b7092a02c8c98526d4dde88e7c73832dd7348771700530207937d5b986864c7ca56b4cfaff6e78a427e3841a660bca306c22f267033d2f2f659fa01529d329e3287a1999a104b17229bc22476d1dd8fb609f804fcec489504207c2119d0730223851ae7a3fb34ad6b4b942573892c96b64b2372be552fc91eccea5fba818f6cdc1990c7f3f1eac0b364651413be0159eb741d465ad00e23fd9c1e1f6e5482f7930c4145a96f295e "
-    # print "Ciphertext:" + ciphertext
-    # decodetext = AES_ECB_DECRYPT(ciphertext, key1).decode("unicode-escape")
-    # print "Decodetext:" + decodetext
-
+class DecryptError(Exception):
+    """解密异常"""
     pass
+
+
+class CryptBase:
+    def __init__(
+        self,
+        mode: int,
+        key_string: bytes,
+        key_salt: Optional[bytes] = None,
+        key_iter: int = 1,
+    ) -> None:
+        self._mode = mode
+        self._key_str = key_string
+        self._key_salt = key_salt or b'\x00' * DEFAULT_BLOCK_SIZE
+        self._key_iter = key_iter
+
+    @abc.abstractmethod
+    def _creator(self):  # type: ignore
+        pass
+
+    def _new_key(self) -> bytes:
+        """
+        转换加密的key
+        步骤：
+            - 加盐: new_key = key + slat
+            - 循环计算md5：
+                for _ in range(iter):
+                    new_key = md5(new_key)
+        """
+        k = self._key_str + self._key_salt
+        for _ in range(self._key_iter):
+            k = hashlib.md5(k).digest()
+
+        return k
+
+    def encrypt(self, data: str, block_size: int = DEFAULT_BLOCK_SIZE) -> bytes:
+        """
+        加密
+        :param data: 待加密的数据
+        :param block_size: 块大小，默认8bytes
+        :return:
+        """
+        # 每次都需要重新生成对象，否则会抛异常
+        # TypeError: decrypt() cannot be called after encrypt()
+        crypt_obj = self._creator()  # type: ignore
+        crypt_text = base64.b64encode(crypt_obj.encrypt(pad(data_to_pad=data.encode('utf-8'), block_size=block_size)))
+        return crypt_text
+
+    def decrypt(self, data: str, block_size: int = DEFAULT_BLOCK_SIZE) -> bytes:
+        """
+        解密
+        :param data: 待解密的数据
+        :param block_size: 块大小，默认8bytes
+        :return:
+        """
+        try:
+            # 每次都需要重新生成对象，否则会抛异常
+            # TypeError: decrypt() cannot be called after encrypt()
+            crypt_obj = self._creator()  # type: ignore
+            plain_text = unpad(padded_data=crypt_obj.decrypt(base64.b64decode(data)), block_size=block_size)
+            return plain_text
+
+        except Exception as e:
+            raise DecryptError(e)
+
+
+class DesCrypt(CryptBase):
+    """DES 加解密"""
+
+    def __init__(
+        self,
+        key_string: bytes,
+        key_salt: Optional[bytes] = None,
+        key_iter: int = 1,
+        mode: int = DES.MODE_CBC
+    ) -> None:
+        """
+        DES 加解密类
+        :param key_string: des key
+        :param key_salt: 盐
+        :param key_iter: 秘钥的加密轮数
+        :param mode: 加解密模式，默认为CBC方式
+        """
+        super(DesCrypt, self).__init__(mode=mode, key_string=key_string, key_salt=key_salt, key_iter=key_iter)
+
+    def _creator(self):  # type: ignore
+        """
+        准备阶段，转换key，然后取计算后的md5前8位作为秘钥，秘钥位数为 64位
+        """
+        k = self._new_key()
+        return DES.new(k[:8], self._mode, k[8:])
+
+
+class AesCrypt(CryptBase):
+    """AES 加解密"""
+
+    def __init__(
+        self,
+        key_string: bytes,
+        key_salt: Optional[bytes] = None,
+        key_iter: int = 1,
+        mode: int = AES.MODE_ECB
+    ) -> None:
+        """
+        AES 加解密类
+        :param key_string: aes key
+        :param key_salt: 盐
+        :param key_iter: 秘钥的加密轮数
+        :param mode: 加解密模式，默认为ECB方式
+        """
+        super(AesCrypt, self).__init__(mode=mode, key_string=key_string, key_salt=key_salt, key_iter=key_iter)
+
+    def _creator(self):  # type: ignore
+        """
+        准备阶段，转换key，以新key作为秘钥，秘钥位数为 256位
+        """
+        k = self._new_key()
+        return AES.new(k, self._mode)
+
+    def encrypt(self, data: str, block_size: int = AES_DEFAULT_BLOCK_SIZE) -> bytes:
+        return super(AesCrypt, self).encrypt(data=data, block_size=block_size)
+
+    def decrypt(self, data: str, block_size: int = AES_DEFAULT_BLOCK_SIZE) -> bytes:
+        return super(AesCrypt, self).decrypt(data=data, block_size=block_size)
