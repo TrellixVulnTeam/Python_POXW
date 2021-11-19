@@ -7,6 +7,7 @@
 # LastChange:  2020/6/16 下午5:28
 #=============================================================================
 """
+import asyncio
 import time
 import uvicorn
 from fastapi import FastAPI, Form
@@ -18,10 +19,11 @@ i = 0
 
 
 @app.get("/")
-def index():
+async def index():
     global i
     i += 1
     # time.sleep(3)
+    await asyncio.sleep(3)
     return i
 
 

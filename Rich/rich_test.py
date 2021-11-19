@@ -12,28 +12,53 @@
 # History:
 #=============================================================================
 """
+from typing import Optional, List, Any
 
-from rich import print, get_console
-from rich.prompt import Confirm, IntPrompt, Prompt
+from rich import box
+from rich.style import Style
+from rich.prompt import Confirm
+from rich.console import Console
+from rich.table import Table
 
-if __name__ == '__main__':
-    console = get_console()
 
-    console.log(
-        "JSONRPC [i]request[/i]",
-        5,
-        1.3,
-        True,
-        False,
-        None,
-        {
-            "jsonrpc": "2.0",
-            "method": "subtract",
-            "params": {"minuend": 42, "subtrahend": 23},
-            "id": 3,
-        },
+def print_table(title: str, cols: List[str], rows: List[List[Any]], ) -> None:
+    """
+
+    :param title:
+    :param cols:
+    :param rows:
+    :return:
+    """
+    table = Table(
+        title=title,
+        show_lines=True,
+        box=box.ASCII,
+        header_style=Style(color="blue", bold=True),
+        title_style=Style(bgcolor="deep_sky_blue3", bold=True, frame=True),
     )
 
-    console.log("Hello, World!", "{'a': 1}", repr(console))
-    console.input(prompt="fdsa abdf")
-    console.log("foo")
+    for col in cols:
+        table.add_column(col, justify='center', overflow='fold')
+
+    for row in rows:
+        table.add_row(*row)
+
+    Console().print(table)
+
+
+print_table(title="Test Title",
+            cols=["col_1", "col_2", "col_3", ],
+            rows=[
+                ["1", "2", '3'],
+                ["4", "5", '6'],
+                ["7", "8", '9']
+            ])
+
+from rich import print
+from rich.console import RenderGroup
+from rich.panel import Panel
+
+Console().print(RenderGroup(
+    Panel("Hello", style="on blue"),
+    Panel("World", style="on red"),
+))

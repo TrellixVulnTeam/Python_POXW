@@ -16,8 +16,10 @@ p = re.search(r".*?drbd([0-9]*)", "/dev/drbd1002")
 res = p.group(1)
 
 lun_path = "/dv/qdisk/LUN102"
-lun_number = int(re.search(r".*?LUN([\d]*)", lun_path).group(1))
-port_number = 3260 + lun_number
+lun_res = re.match(r".*?LUN(?P<id>[\d]*)", lun_path)
+print(lun_res.groupdict()["id"])
+# lun_number = int(lun_res.id)
+# port_number = 3260 + lun_number
 
 
 # # 获取版本号

@@ -1,0 +1,14 @@
+/dev/sda2
+/dev/sda3
+/dev/sdc
+/dev/sdb
+/dev/sdd
+/dev/sde
+/dev/sdf
+/dev/mapper/VolGroup-root
+/dev/sdg
+/dev/mapper/VolGroup-swap
+/dev/mapper/VolGroup-oswbb
+/dev/mapper/VolGroup-home
+/dev/mapper/VolGroup-opt
+/dev/sda1

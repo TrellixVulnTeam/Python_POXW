@@ -5,67 +5,94 @@
 @time: 2019/9/11
 @author: alfons
 """
-import sys
-print(sys.version)
-print(sys.version_info)
-from  enum import Enum
+from typing import Dict, List
+from pydantic import BaseModel, Field
+
+import json
+
+max_target_id = 4
+set_a = set(range(1, max_target_id + 1))
+set_b = {1, 2, 4}
+
+print(set_a)
+print(set_b)
+print(set_a - set_b)
+
+inquiry_data = b"000006128b01100253454147415445205354313230304d4d30303939202020205354333357464b375a4a4a4b000000000000000000000000000000a20c6020e0046004c00000000000000000000000000000000000000000000000000000000000436f70797269676874202863292032303138205365616761746520416c6c20"
+with open("1", "wb") as f:
+    f.write(inquiry_data)
 
 
-class ProductTypeEnum(str, Enum):
-    QDATA_STANDARD = "qdata_standard"
-    QDATA_SANFREE = "qdata_sanfree"
-    QDATA_LONGHUAL = "qdata_longhual"
-    DM_SANFREE = "dm_sanfree"
-print(list(ProductTypeEnum))
-a= ProductTypeEnum("dm_sanfree")
-print(a)
+class RaidPhysicalDiskInfoModel(object):
+    slot = "N/A"  # 磁盘的slot号，用于快速识别磁盘在物理机上的位置
+    real_path = "N/A"  # 磁盘真实路径
 
-def base_convert(num, base):
-    """把十进制数字转成其他进制
+    parts = list()  # 磁盘的分区信息
 
-    注意: base 需要  2<= `base` <= 36
-    当进制数base为1时,没有1进制数,而且程序会陷入无限递归循环
+    # 虚拟磁盘信息
+    raid_level = "N/A"  # raid等级
+    virtual_drive_id = None  # 物理磁盘所在的逻辑磁盘的virtual_drive
+    cache_policy = "N/A"  # 磁盘对应的VD所使用的的cache策略
+    firmware_state = "N/A"  # 物理磁盘状态
 
-    :param num: int 十进制数字
-    :param base: int 要转换的进制数
+    # -------------------------- 物理磁盘信息 --------------------------
+    # 插槽信息
+    pci_id = -1  # slot号中对应的raid所在的pci插槽所在主板的插槽号
+    pci_bus_address = "N/A"  # slot号中对应的raid所在的pci插槽总线地址
 
-    :rtype str
-    :return 转换之后的进制数
+    enclosure_id = None  # 物理磁盘对应的背板所在的raid卡上的 enclosure_id, 通过MegaCli -EncInfo -aall结果映射得到
+    enclosure_device_id = -1  # 物理磁盘对应的背板所在的raid卡上的 enclosure_device_id
 
-    :raise FuncParamError 参数错误
-    """
+    slot_number = -1  # 物理磁盘所在的背板上的slot_number
 
-    def base_convert_(num_, base_):
-        # 对于十进制数 0 , 它的任何进制都会是 0
-        if num_ == 0:
-            return "0"
-        # 递归计算 `base` 进制数
-        return base_convert_(num_ // base_, base_).lstrip("0") + "0123456789abcdefghijklmnopqrstuvwxyz"[num_ % base_]
+    # 硬件信息
+    interface = "N/A"  # 磁盘接口类型，如SAS、SATA
+    media_type = "N/A"  # 磁盘介质类型，如HDD、SSD
+    wwn = "N/A"  # 磁盘的wwn号
+    vendor = "N/A"  # 磁盘厂商
+    inquiry_data = "N/A"  # 磁盘序列号
+    foreign_state = "N/A"  # 对外的状态
+    temperature = "N/A"  # 磁盘温度
 
-    # 检查参数
-    return base_convert_(num, base)
+    # 磁盘大小信息
+    sector_size = -1  # 扇区大小，单位byte
+    raw_size_str = "N/A"  # 裸盘出厂大小，字符串类型
+    raw_size_byte = -1  # 裸盘出厂大小，单位byte
+    non_coerced_size_str = "N/A"  # raid卡管理下的大小，字符串类型
+    non_coerced_size_byte = -1  # raid卡管理下的大小，单位byte
+    coerced_size_str = "N/A"  # 实际磁盘可使用大小，lsblk展示值，字符串类型
+    coerced_size_byte = -1  # 实际磁盘可使用大小，lsblk展示值，单位byte
 
-print(base_convert(num=4496620, base=32).upper())
+raid_a = RaidPhysicalDiskInfoModel()
+raid_a.interface = "SAS"
 
-def nvme_slot(pcie_bus_address: str, ctrl_id: int, namespace_id: int):
-    # print(f"{pcie_bus_address=} {ctrl_id=} {namespace_id=}")
-    domain = pcie_bus_address[:pcie_bus_address.find(':')]
-    bus = pcie_bus_address[pcie_bus_address.find(':') + 1:pcie_bus_address.rfind(':')]
-    device = pcie_bus_address[pcie_bus_address.rfind(':') + 1:pcie_bus_address.rfind('.')]
-    func = pcie_bus_address[pcie_bus_address.rfind('.') + 1:]
+raid_b = RaidPhysicalDiskInfoModel()
+print(raid_b.interface)
 
-    domain_num = int(domain, 16)
-    domain_hex = hex(domain_num % 256).replace('0x', '').rjust(2, '0')
-
-    ctrl = hex((ctrl_id << 3) + namespace_id).replace('0x', '')
-    return f"N{domain_hex}{bus}{device}{func}C{ctrl}"
-
-
-print(f'{nvme_slot(pcie_bus_address="10000:01:00.0", ctrl_id=0, namespace_id=1)=}')
-print(f'{nvme_slot(pcie_bus_address="10000:02:00.0", ctrl_id=0, namespace_id=1)=}')
-print(f'{nvme_slot(pcie_bus_address="10001:01:00.0", ctrl_id=0, namespace_id=1)=}')
-print(f'{nvme_slot(pcie_bus_address="10001:02:00.0", ctrl_id=0, namespace_id=1)=}')
-print(f'{nvme_slot(pcie_bus_address="10001:02:00.0", ctrl_id=1, namespace_id=1)=}')
-print(f'{nvme_slot(pcie_bus_address="10001:02:00.0", ctrl_id=1, namespace_id=2)=}')
-
-print(f'{nvme_slot(pcie_bus_address="0000:d7:16.4", ctrl_id=0, namespace_id=1)=}')
+# class CephOsd(BaseModel):
+#     name: str
+#     size: str
+#     path: str
+#
+#
+# class CephCluster(BaseModel):
+#     replications: int = Field(3)
+#
+#     original_nodes: List[str]
+#     redundancy_nodes: List[str]
+#
+#     nodes: Dict[str, List[CephOsd]]
+#
+#
+# if __name__ == '__main__':
+#     ceph = CephCluster(replications=3,
+#                        original_nodes=["node_a", "node_b", "node_c"],
+#                        redundancy_nodes=["node_x"],
+#                        nodes=dict(node_a=[CephOsd(name="osd0", size="10GB", path="/dev/sda"),
+#                                           CephOsd(name="osd1", size="10GB", path="/dev/sdb"), ],
+#                                   node_b=[CephOsd(name="osd2", size="10GB", path="/dev/sda"),
+#                                           CephOsd(name="osd3", size="10GB", path="/dev/sdb"), ],
+#                                   node_c=[CephOsd(name="osd4", size="10GB", path="/dev/sda"),
+#                                           CephOsd(name="osd5", size="10GB", path="/dev/sdb"), ],
+#                                   ), )
+#     print(json.dumps(ceph.dict(), indent=4))

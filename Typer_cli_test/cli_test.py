@@ -1,7 +1,7 @@
 import typer
 
-
-def main(name:str, age:int):
+def main(name:str,
+         age:int = typer.Option()):
     typer.echo("Hello World")
 
 

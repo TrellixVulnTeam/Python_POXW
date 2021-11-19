@@ -1,0 +1,15 @@
+[[patch]]
+src_file_name="wwid_to_string.py"
+dst_file_path="/usr/lib/udev/wwid_to_string.py"
+backup_file_path="/usr/lib/udev/wwid_to_string.py.bak"
+#encode=False
+chmode=755
+#chown="root:root"
+
+[[patch]]
+src_file_name="wwid_to_string.py"
+dst_file_path="/usr/lib/udev/wwid_to_string.py"
+backup_file_path="/usr/lib/udev/wwid_to_string.py.bak"
+#encode=False
+chmode=755
+#chown="root:root"

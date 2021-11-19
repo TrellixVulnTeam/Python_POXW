@@ -26,6 +26,10 @@ logger.add("special.log", filter=lambda record: "special" in record["extra"])
 logger.debug("This message is not logged to the file")
 logger.bind(special=True).info("This message, though, is logged to the file!")
 
+
+logger.opt(depth=0).info("hello")
+logger.opt(depth=1).info("hello")
+logger.opt(depth=-1).info("hello")
 # logger.add(sys.stderr, format="{extra[utc]} {message}")
 # logger = logger.patch(lambda record: record["extra"].update(utc=datetime.utcnow()))
 # logger.debug("This message is not logged to the file")

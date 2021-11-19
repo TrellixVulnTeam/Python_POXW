@@ -14,10 +14,13 @@
 """
 import ipaddress
 
-
 ip = ipaddress.ip_address("10.10.100.220")
 if ip != None:
     pass
 
 print(str(ipaddress.IPv4Address("10.10.100.220")))
-pass
+
+print(ipaddress.ip_network("10.10.100.220", strict=True))
+print(str(ipaddress.IPv4Network("10.10.100.220/24", strict=False).network_address))
+
+print(ipaddress.IPv4Network("10.10.100.0/24") in [ipaddress.IPv4Network("10.10.100.0/24")])

@@ -12,9 +12,17 @@
 # History:
 #=============================================================================
 """
+import os
+os.execv()
+import sys
+sys.exit()
+import socket
+print(socket.getprotobyname('tcp'))
+
+
 from dateutil.parser import parse
 
-r = parse("06-08-2020 01:56:33 AM").timestamp()
+r = parse("1622597224")
 print(r)
 
 import time
