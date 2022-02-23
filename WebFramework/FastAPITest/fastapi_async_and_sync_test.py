@@ -12,81 +12,82 @@
 # History:
 #=============================================================================
 """
-import sys
+import concurrent.futures
 import time
 import asyncio
-import paramiko
 import uvicorn
 import functools
-from fastapi import FastAPI, Form
-from pydantic import BaseModel
+from fastapi import FastAPI
 
+# ----------------------------------------
 app = FastAPI()
 route = app.router
 
 
+# -------------------- 同步接口，同步方法 --------------------
 @route.get("/sync_time")
-def sync():
+def sync_time():
     print("sync_time".center(64, "="))
     time.sleep(5)
     return "sync_time"
 
 
-@route.get("/sync")
-def sync():
-    print("sync".center(64, "="))
-    return "sync"
+# -------------------- 异步接口，异步方法 --------------------
+@route.get("/async_time")
+async def async_time():
+    print("async_time".center(64, "="))
+    await asyncio.sleep(5)
+    return "async_time"
 
 
+# -------------------- 异步接口，同步方法 --------------------
+@route.get("/async_with_sync_time")
+async def async_time():
+    print("async_with_sync_time".center(64, "="))
+    time.sleep(5)
+    return "async_with_sync_time"
+
+
+thread_executor = concurrent.futures.ThreadPoolExecutor(max_workers=128)
+
+
+async def run_as_async(func, *args, **kwargs):
+    loop = asyncio.get_running_loop()
+    return await loop.run_in_executor(thread_executor, lambda: func(*args, **kwargs))
+
+
+@route.get("/run_sync_as_async_time")
+async def async_time():
+    print("async_with_sync_time".center(64, "="))
+    # time.sleep(5)
+    await run_as_async(time.sleep, 5)
+    return "run_sync_as_async_time"
+
+
+# -------------------- 使用线程池模拟异步 --------------------
 def run_in_executor(f):
     @functools.wraps(f)
     def inner(*args, **kwargs):
         loop = asyncio.get_running_loop()
-        return loop.run_in_executor(None, lambda: f(*args, **kwargs))
+        return loop.run_in_executor(thread_executor, lambda: f(*args, **kwargs))
 
     return inner
 
 
-class SSH:
-    def __init__(self):
-        self.h = "hello world"
-
-    # @run_in_executor
-    def exec_cmd(self, cmd, timeout):
-        print(self.h)
-        client = paramiko.SSHClient()
-        client.get_host_keys().clear()
-        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        client.connect(hostname="10.10.100.218",
-                       username="root",
-                       port=22,
-                       password="cljslrl0620",
-                       look_for_keys=False
-                       )
-        _, stdout, stderr = client.exec_command(cmd, timeout=timeout)
-        print(stdout.read())
-        print(stderr.read())
-        return "async"
+@run_in_executor
+def thread_time_sleep(time_out: int):
+    time.sleep(time_out)
 
 
-ssh = SSH()
-
-
-@route.get("/sync_ssh")
-def sync_ssh():
-    print("sync_ssh".center(64, "="))
-    return ssh.exec_cmd("ls /tmp && sleep 5", timeout=10)
-
-
-# @route.get("/async_ssh")
-# async def async_ssh():
-#     print("async".center(64, "="))
-#     return await ssh.exec_cmd("ls /tmp && sleep 5", timeout=10)
+@route.get("/async_with_thread_time")
+async def async_time():
+    print("async_with_thread_time".center(64, "="))
+    await thread_time_sleep(5)
+    return "async_with_thread_time"
 
 
 def main():
-    uvicorn.run(app="fastapi_async_and_sync_test:app", host="0.0.0.0", port=8000, workers=10)
-    # uvicorn.run(app=app, host="0.0.0.0", port=8000, workers=1)
+    uvicorn.run(app=app, host="0.0.0.0", port=8000, workers=1)
 
 
 if __name__ == '__main__':

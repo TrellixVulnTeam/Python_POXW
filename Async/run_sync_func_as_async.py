@@ -2,27 +2,20 @@
 # -*- coding: utf-8 -*-
 """
 #=============================================================================
-# FileName: Argv0_test.py
+# FileName: run_sync_func_as_async.py
 # Desc:
 # Author: chenhui.shang
 # Email: chenhui.shang@woqutech.com
 # HomePage: www.woqutech.com
 # Version: 0.0.1
-# LastChange:  2021/11/19 9:15 上午
+# LastChange:  2022/2/18 4:08 PM
 # History:
 #=============================================================================
 """
+import asyncio
 
-
-class Clsa:
-    def __init__(self):
-        self.ssh:int
-        pass
-
+async def run_as_async(func, *args):
+    loop = asyncio.get_running_loop()
+    return await loop.run_in_executor(None, func=func, *args)
 
 if __name__ == '__main__':
-    b: Clsa
-    if b:
-        print("error")
-    a = Clsa()
-    print(a.ssh)

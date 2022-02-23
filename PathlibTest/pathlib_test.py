@@ -2,27 +2,18 @@
 # -*- coding: utf-8 -*-
 """
 #=============================================================================
-# FileName: Argv0_test.py
+# FileName: pathlib_test.py
 # Desc:
 # Author: chenhui.shang
 # Email: chenhui.shang@woqutech.com
 # HomePage: www.woqutech.com
 # Version: 0.0.1
-# LastChange:  2021/11/19 9:15 上午
+# LastChange:  2022/1/5 9:49 AM
 # History:
 #=============================================================================
 """
+import pathlib
 
-
-class Clsa:
-    def __init__(self):
-        self.ssh:int
-        pass
-
-
-if __name__ == '__main__':
-    b: Clsa
-    if b:
-        print("error")
-    a = Clsa()
-    print(a.ssh)
+a_file = pathlib.Path("/test/test_a")
+a_file.parent.mkdir(parents=True, exist_ok=True)    # 创建父文件夹
+a_file.write_text("xxxxx")      # 写入文件内容

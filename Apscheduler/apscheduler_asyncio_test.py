@@ -14,6 +14,7 @@
 """
 from functools import partial
 
+
 class Foo(partial):
     def __ror__(self, other):
         return self(other)
@@ -39,13 +40,12 @@ async def async_time_sleep(task_id, timeout):
 
 scheduler = AsyncIOScheduler()
 for i in range(10):
-    scheduler.add_job(func=sync_time_sleep,
-                      args=(i, 10),)
-
+    print(scheduler.add_job(func=sync_time_sleep,
+                            args=(i, 10), ))
 
 for i in range(10):
-    scheduler.add_job(func=async_time_sleep,
-                      args=(i, 1),)
+    print(scheduler.add_job(func=async_time_sleep,
+                            args=(i, 1), ))
 scheduler.start()
 
 asyncio.get_event_loop().run_forever()

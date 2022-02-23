@@ -2,27 +2,33 @@
 # -*- coding: utf-8 -*-
 """
 #=============================================================================
-# FileName: Argv0_test.py
+# FileName: new_enum.py
 # Desc:
 # Author: chenhui.shang
 # Email: chenhui.shang@woqutech.com
 # HomePage: www.woqutech.com
 # Version: 0.0.1
-# LastChange:  2021/11/19 9:15 上午
+# LastChange:  2022/1/3 8:50 PM
 # History:
 #=============================================================================
 """
+from enum import Enum
 
 
-class Clsa:
-    def __init__(self):
-        self.ssh:int
-        pass
+class QEnum(Enum):
+
+    @classmethod
+    def iter_with_value(cls):
+        return (v.value for v in cls)
+
+
+class QLinkBlockTypeEnum(QEnum):
+    """qlink支持的块设备类型"""
+
+    nvme = "nvme"
+    raid = "raid"
+    qbo = "qbo"
 
 
 if __name__ == '__main__':
-    b: Clsa
-    if b:
-        print("error")
-    a = Clsa()
-    print(a.ssh)
+    print(list(QLinkBlockTypeEnum.iter_with_value()))

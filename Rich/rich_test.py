@@ -29,8 +29,18 @@ def print_table(title: str, cols: List[str], rows: List[List[Any]], ) -> None:
     :param rows:
     :return:
     """
+    console = Console()
+
     table = Table(
         title=title,
+        show_lines=True,
+        box=box.ASCII,
+        header_style=Style(color="blue", bold=True),
+        title_style=Style(bgcolor="deep_sky_blue3", bold=True, frame=True),
+    )
+    console.print(table)
+
+    table = Table(
         show_lines=True,
         box=box.ASCII,
         header_style=Style(color="blue", bold=True),
@@ -43,7 +53,7 @@ def print_table(title: str, cols: List[str], rows: List[List[Any]], ) -> None:
     for row in rows:
         table.add_row(*row)
 
-    Console().print(table)
+    console.print(table)
 
 
 print_table(title="Test Title",
