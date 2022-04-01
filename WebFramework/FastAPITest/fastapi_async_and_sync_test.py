@@ -28,7 +28,7 @@ route = app.router
 @route.get("/sync_time")
 def sync_time():
     print("sync_time".center(64, "="))
-    time.sleep(5)
+    time.sleep(0.1)
     return "sync_time"
 
 
@@ -48,7 +48,7 @@ async def async_time():
     return "async_with_sync_time"
 
 
-thread_executor = concurrent.futures.ThreadPoolExecutor(max_workers=128)
+thread_executor = concurrent.futures.ThreadPoolExecutor(max_workers=12800)
 
 
 async def run_as_async(func, *args, **kwargs):
@@ -86,8 +86,20 @@ async def async_time():
     return "async_with_thread_time"
 
 
+@route.on_event("startup")
+def add_thread_pool():
+    loop = asyncio.get_running_loop()
+    loop.set_default_executor(thread_executor)
+
+
 def main():
-    uvicorn.run(app=app, host="0.0.0.0", port=8000, workers=1)
+    asyncio.to_thread()
+    uvicorn.run(
+        app,
+        host="0.0.0.0",
+        port=8000,
+        loop="asyncio",
+    )
 
 
 if __name__ == '__main__':
