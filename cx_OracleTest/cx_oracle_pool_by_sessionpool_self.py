@@ -13,6 +13,7 @@
 #=============================================================================
 """
 import abc
+import os
 import datetime
 import concurrent.futures
 import asyncio
@@ -32,7 +33,7 @@ import cx_Oracle
 from contextlib import asynccontextmanager
 
 logger = loguru.logger
-thread_executor = concurrent.futures.ThreadPoolExecutor(max_workers=12800)
+thread_executor = concurrent.futures.ThreadPoolExecutor(max_workers=(os.cpu_count() or 10) * 10)
 
 
 async def run_as_async(func, *args, **kwargs):
@@ -52,6 +53,9 @@ class oracle_config:
     call_timeout = 60
 
 
+TIMEOUT_ORACLE_DB_CONN = 3
+
+
 # ====================== 数据结构 ======================
 class OracleAuthEnum(Enum):
     """Oracle连接权限枚举"""
@@ -64,10 +68,6 @@ class OracleAuthEnum(Enum):
     SYSDGD = cx_Oracle.SYSDGD
     SYSKMT = cx_Oracle.SYSKMT
     SYSRAC = cx_Oracle.SYSRAC
-
-
-class DatabaseConnectionNotAvailable(Exception):
-    pass
 
 
 # ====================== Oracle连接池 ======================
@@ -90,7 +90,7 @@ class OraclePoolMetaclass(type):
             encoding: str = "UTF-8",
             timeout: int = 3600,
             max_lifetime_session: int = 86400,
-            ping_interval: int = 60,
+            ping_interval: int = 3,
             **kwargs: Any,
     ) -> "OraclePool":
 
@@ -127,13 +127,13 @@ class OraclePool(metaclass=OraclePoolMetaclass):
             username: str,
             password: str,
             dsn: str,
-            min_session: int = 1,
-            max_session: int = 2,
+            min_session: int = 2,
+            max_session: int = 5,
             session_increment: int = 1,
             encoding: str = "UTF-8",
             timeout: int = 3600,
             max_lifetime_session: int = 86400,
-            ping_interval: int = 60,
+            ping_interval: int = 3,
     ) -> None:
         """
         根据输入内容，返回 oracle 连接池
@@ -164,6 +164,9 @@ class OraclePool(metaclass=OraclePoolMetaclass):
             # ping_interval=ping_interval,
         )
 
+    def __repr__(self) -> str:
+        return f"{id(self)}-{self._pool.dsn}"
+
     def __del__(self) -> None:
         if hasattr(self, "_pool"):
             self._pool.close()
@@ -172,13 +175,17 @@ class OraclePool(metaclass=OraclePoolMetaclass):
     def count(self) -> int:
         return self._pool.opened
 
-    async def acquire(self) -> Tuple[cx_Oracle.Connection, cx_Oracle.Cursor]:
+    async def acquire(self, purity: int = cx_Oracle.ATTR_PURITY_DEFAULT) -> Tuple[cx_Oracle.Connection, cx_Oracle.Cursor]:
         """
         从池子中获取一个连接
 
+        :param purity: 连接的获取方式
+                 cx_Oracle.ATTR_PURITY_DEFAULT - 默认方式，需要查找Oracle文档找到更多的信息
+                 cx_Oracle.ATTR_PURITY_NEW - 获取一个新的连接，不保留之前的会话状态
+                 cx_Oracle.ATTR_PURITY_SELF - 获取一个新的连接，保留之前的会话状态
         :return:
         """
-        connection = await run_as_async(self._pool.acquire)
+        connection = await run_as_async(self._pool.acquire, purity=purity)
         cursor = await run_as_async(connection.cursor)
         return connection, cursor
 
@@ -200,6 +207,7 @@ async def _open_oracle_connection(
         dsn: str,
         mode: OracleAuthEnum,
         encoding: str,
+        connect_timeout: int = TIMEOUT_ORACLE_DB_CONN,
 ) -> "CloudOracleOperator":
     """
     使用 cx_Oracle.Connection 创建 Oracle 连接对象
@@ -209,34 +217,51 @@ async def _open_oracle_connection(
     :param dsn: 登陆的dsn，data source name
     :param mode: 连接模式
     :param encoding: 编码
+    :param connect_timeout: 数据库连接超时时间，单位秒
     :return:
     """
-    logger.info(f"连接 Oracle 连接 -> cx_Oracle.Connection(username={username},password={password},dsn={dsn},mode={mode},encoding={encoding})！")
+    logger.info(f"连接 Oracle 使用直连 -> cx_Oracle.Connection(username={username},password={password},dsn={dsn},mode={mode},encoding={encoding})！")
 
     try:
         # 初始化 cx_Oracle.Connection 对象
-        connection: cx_Oracle.Connection = await run_as_async(
-            cx_Oracle.connect,
-            user=username,
-            password=password,
-            dsn=dsn,
-            mode=mode.value,
-            encoding=encoding,
-            threaded=True,
+        connection: cx_Oracle.Connection = await asyncio.wait_for(
+            fut=run_as_async(
+                cx_Oracle.connect,
+                user=username,
+                password=password,
+                dsn=dsn,
+                mode=mode.value,
+                encoding=encoding,
+                threaded=True,
+            ),
+            timeout=connect_timeout,
         )
 
         # 获取oracle连接及游标
         cursor: cx_Oracle.Cursor = connection.cursor()
-        return CloudOracleOperator(connection=connection, cursor=cursor)
+        return CloudOracleOperator(
+            connection=connection,
+            cursor=cursor,
+            username=username,
+            password=password,
+            dsn=dsn,
+            mode=mode,
+            encoding=encoding,
+            connect_timeout=connect_timeout,
+        )
 
-        # # # oracle操作结束后，回收oracle connection 资源
+        # oracle操作结束后，回收oracle connection 资源
         # # await run_as_async(cursor.close)
         # # await run_as_async(connection.close)
-        #
+
         # logger.info(f"回收 Oracle 连接 -> cx_Oracle.Connection(username={username},password={password},dsn={dsn},mode={mode},encoding={encoding})！")
 
+    except asyncio.TimeoutError:
+        logger.error(f"使用 cx_Oracle.Connection(username={username},password={password},dsn={dsn},mode={mode},encoding={encoding}) 创建Oracle连接超时(timeout={connect_timeout})！")
+        raise ORAError(error='ORA-12170: Oracle连接超时')
+
     except Exception as e:
-        logger.exception(f"使用 cx_Oracle.Connection(username={username},password={password},dsn={dsn},mode={mode},encoding={encoding}) 创建Oracle连接发生异常！\n{e}")
+        logger.error(f"使用 cx_Oracle.Connection(username={username},password={password},dsn={dsn},mode={mode},encoding={encoding}) 创建Oracle连接发生异常！")
         raise e
 
 
@@ -245,6 +270,7 @@ async def _open_oracle_connection_use_pool(
         password: str,
         dsn: str,
         encoding: str,
+        connect_timeout: int = TIMEOUT_ORACLE_DB_CONN,
 ) -> "CloudOracleOperator":
     """
     使用 cx_Oracle.SessionPool 创建 Oracle 连接对象
@@ -253,30 +279,53 @@ async def _open_oracle_connection_use_pool(
     :param password: 登陆密码
     :param dsn: 登陆的dsn，data source name
     :param encoding: 编码
+    :param connect_timeout: 数据库连接超时时间，单位秒
     :return:
     """
-    logger.info(f"连接 Oracle 连接 -> cx_Oracle.SessionPool(username={username},password={password},dsn={dsn})！")
+    logger.info(f"连接 Oracle 使用池子 -> cx_Oracle.SessionPool(username={username},password={password},dsn={dsn})！")
 
     try:
         # 初始化 Oracle 连接池 对象
-        oracle_pool = OraclePool(
+        oracle_pool = await asyncio.wait_for(
+            fut=run_as_async(
+                OraclePool,
+                username=username,
+                password=password,
+                dsn=dsn,
+                encoding=encoding,
+            ),
+            timeout=connect_timeout,
+        )  # type: OraclePool
+
+        # 获取oracle连接及游标
+        connection, cursor = await asyncio.wait_for(
+            fut=oracle_pool.acquire(),
+            timeout=connect_timeout,
+        )
+
+        return CloudOracleOperator(
+            connection=connection,
+            cursor=cursor,
+            pool=oracle_pool,
             username=username,
             password=password,
             dsn=dsn,
+            mode=OracleAuthEnum.DEFAULT_AUTH,
             encoding=encoding,
+            connect_timeout=connect_timeout,
         )
 
-        # 获取oracle连接及游标
-        connection, cursor = await oracle_pool.acquire()
-        return CloudOracleOperator(connection=connection, cursor=cursor, pool=oracle_pool)
-
-        # # oracle操作结束后，回收oracle connection 资源
+        # oracle操作结束后，回收oracle connection 资源
         # await oracle_pool.release(connection=connection, cursor=cursor)
-        #
+
         # logger.info(f"回收 Oracle 连接 -> cx_Oracle.SessionPool(username={username},password={password},dsn={dsn})！")
 
+    except asyncio.TimeoutError:
+        logger.error(f"使用 cx_Oracle.SessionPool(username={username},password={password},dsn={dsn}) 创建Oracle连接超时(timeout={connect_timeout})！")
+        raise ORAError(error='ORA-12170: Oracle连接超时')
+
     except Exception as e:
-        logger.exception(f"使用 cx_Oracle.SessionPool(username={username},password={password},dsn={dsn}) 创建Oracle连接发生异常！\n{e}")
+        logger.error(f"使用 cx_Oracle.SessionPool(username={username},password={password},dsn={dsn}) 创建Oracle连接发生异常！")
         raise e
 
 
@@ -287,7 +336,13 @@ class CloudOracleOperator:
             self,
             connection: cx_Oracle.Connection,
             cursor: cx_Oracle.Cursor,
+            username: str,
+            password: str,
+            dsn: str,
+            mode: OracleAuthEnum,
+            encoding: str,
             pool: Optional[OraclePool] = None,
+            connect_timeout: int = TIMEOUT_ORACLE_DB_CONN,
     ) -> None:
         """
         Cloud Oracle 操作 对象
@@ -301,10 +356,15 @@ class CloudOracleOperator:
 
         self._pool: Optional[OraclePool] = pool
 
-    # 非必要，不调用 close 方法！！！
-    # 非必要，不调用 close 方法！！！
-    # 非必要，不调用 close 方法！！！
-    async def close(self):
+        # 其他配置，判断连接是否存活时使用
+        self._username = username
+        self._password = password
+        self._dsn = dsn
+        self._mode = mode
+        self._encoding = encoding
+        self._connect_timeout = connect_timeout
+
+    async def close(self) -> None:
         if self._pool is not None:
             await self._pool.release(connection=self._connection, cursor=self._cursor)
             logger.info(f"连接池({self._pool})回收连接成功，当前连接数 {self._pool.count}！")
@@ -395,15 +455,41 @@ class CloudOracleOperator:
     def __iter__(self) -> Iterator[cx_Oracle.Cursor]:
         return iter(self._cursor)
 
-    async def is_alive(self) -> bool:
+    async def is_alive(self, raise_exception: bool = False) -> bool:
         """
-        Oracle 连接是否存活
+        Oracle 连接是否存活，新建连接，测试Oracle连通性
+
         :return:
         """
         try:
-            await run_as_async(self._connection.ping)
+            # 2022-04-15
+            # # 新建连接，测试Oracle连通性
+            # async with asyncio.Lock():
+            #     new_operator = await _open_oracle_connection(
+            #         username=self._username,
+            #         password=self._password,
+            #         dsn=self._dsn,
+            #         mode=self._mode,
+            #         encoding=self._encoding,
+            #         connect_timeout=self._connect_timeout,
+            #     )
+            #     await new_operator.close()
+            #
+            # return True
+
+            if self._pool:
+                _connection, _cursor = await self._pool.acquire(purity=cx_Oracle.ATTR_PURITY_NEW)
+                await run_as_async(_cursor.close)  # 关闭游标
+                await run_as_async(_connection.close)  # 关闭连接
+
             return True
-        except Exception:
+        except Exception as e:
+            logger.error(f"判断连接是否存活发生错误！\n{e}")
+            if raise_exception:
+                if isinstance(e, DatabaseError):
+                    raise ORAError(error=str(e))
+                raise e
+
             return False
 
     def _execute(self, sql: str, timeout: int = oracle_config.call_timeout, *args: Any, **kwargs: Any) -> "CloudOracleOperator":
@@ -439,9 +525,13 @@ class CloudOracleOperator:
             logger.exception(f"[{self._connection.dsn} {args} {kwargs} timeout={timeout}'s] 执行sql出现异常!{sql}")
             raise ORAError(error=str(e))
 
-    async def fetchone(self, to_dict: bool = True, title_lower: bool = False, **kwargs: Any) -> Union[List[Dict[str, Any]], List[Tuple[Any]]]:
+    async def fetchone(self, to_dict: bool = True, title_lower: bool = False, **kwargs: Any) -> Union[List[Dict[str, Any]], Tuple[Any]]:
         """
         拿出第一行的数据
+
+        ①当 to_dict = True，返回 [{'DATABASE_ROLE': 'PRIMARY'}]
+        ②当 to_dict = False，返回 ('PRIMARY', )
+
         :param to_dict: 以字典类型进行展示
         :param title_lower: 是否输出小写标题
         """
@@ -451,6 +541,10 @@ class CloudOracleOperator:
     async def fetchall(self, to_dict: bool = True, title_lower: bool = False, **kwargs: Any) -> Union[List[Dict[str, Any]], List[Tuple[Any]]]:
         """
         拿出所有数据
+
+        ①当 to_dict = True，返回 [{'DATABASE_ROLE': 'PRIMARY'}]
+        ②当 to_dict = False，返回 [('PRIMARY', )]
+
         :param to_dict: 以字典类型进行展示
         :param title_lower: 是否输出小写标题
         """
@@ -532,7 +626,11 @@ class CloudOracleManagerBase:
         :param password: 待解密的秘钥
         :return:
         """
-        return password
+        try:
+            return password
+        except Exception:
+            logger.debug(f"解密秘钥({password})发生错误！直接使用password({password})!")
+            return password
 
     async def __aenter__(self) -> "CloudOracleOperator":
         """
@@ -568,32 +666,36 @@ class CloudOracleManagerBase:
 
          :return:
          """
-        # 调整连接模式
-        mode = OracleAuthEnum.SYSDBA if self._username.lower() == "sys" else self._mode
+        try:
+            # 调整连接模式
+            mode = OracleAuthEnum.SYSDBA if self._username.lower() == "sys" else self._mode
 
-        # 调整连接方式
-        with_pool = False if mode != OracleAuthEnum.DEFAULT_AUTH else self._with_pool
+            # 调整连接方式
+            with_pool = False if mode != OracleAuthEnum.DEFAULT_AUTH else self._with_pool
 
-        if not with_pool:
+            if not with_pool:
+                self._operator = await _open_oracle_connection(
+                    username=self._username,
+                    password=self._password,
+                    dsn=self.dsn,
+                    mode=mode,
+                    encoding=self._encoding,
+                )
+            else:
+                self._operator = await _open_oracle_connection_use_pool(
+                    username=self._username,
+                    password=self._password,
+                    dsn=self.dsn,
+                    encoding=self._encoding,
+                )
 
-            self._operator = await _open_oracle_connection(
-                username=self._username,
-                password=self._password,
-                dsn=self.dsn,
-                mode=mode,
-                encoding=self._encoding,
-            )
-        else:
-            self._operator = await _open_oracle_connection_use_pool(
-                username=self._username,
-                password=self._password,
-                dsn=self.dsn,
-                encoding=self._encoding,
-            )
+            return self._operator
 
-        return self._operator
+        except DatabaseError as e:
+            logger.exception(f"数据库连接建立发生异常！\n{e}")
+            raise ORAError(error=str(e))
 
-    async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
+    async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:  # type: ignore
         await self._operator.close()
 
 
@@ -772,7 +874,9 @@ class CloudOracleUseDsn(CloudOracleManagerBase):
 
 # ====================== 测试代码 ======================
 from itertools import chain
-async def run(with_pool: bool):
+
+
+async def test_sql(with_pool: bool):
     async with CloudOracleUseDBName(
             username='test',
             password='test',
@@ -830,15 +934,38 @@ async def run(with_pool: bool):
     # print(f"is_aliave = {await oracle_operator.is_alive()}")
 
 
-async def performance_test():
-    await asyncio.gather(*[run(with_pool=True) for _ in range(100)])
+async def test_connect(
+        index,
+        username,
+        password,
+        dsn,
+):
+    "test#test#(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.10.99.20)(PORT=1521))(CONNECT_DATA=(SID=test2)))"
+    async with CloudOracleUseDsn(
+            username=username,
+            password=password,
+            dsn=dsn,
+    ) as oracle_client:
+        result = await oracle_client.is_alive()
+        print(f"{index} - {dsn} is alive -> {result}")
 
+
+async def performance_test(i):
+    # await asyncio.gather(*[test_sql(with_pool=True) for _ in range(100)])
+    await asyncio.gather(*[
+        test_connect(index=i, username="test",password="test",dsn="(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.10.99.20)(PORT=1521))(CONNECT_DATA=(SID=test1)))"),
+        test_connect(index=i, username="test", password="test", dsn="(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.10.99.20)(PORT=1521))(CONNECT_DATA=(SID=test2)))")
+    ])
+
+    await asyncio.sleep(0.1)
 
 if __name__ == '__main__':
+    for i in range(10 ** 5):
+        asyncio.run(performance_test(i))
     # asyncio.run(performance_test())
 
-    asyncio.run(run(with_pool=True))
-    logger.info('\n')
+    # asyncio.run(test_sql(with_pool=True))
+    # logger.info('\n')
     #
     # asyncio.run(run(with_pool=False))
     # logger.info('\n')

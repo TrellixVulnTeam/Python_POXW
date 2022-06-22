@@ -1,4 +1,5 @@
 import asyncio
+import databases
 from contextlib import asynccontextmanager, contextmanager
 from copy import deepcopy
 from datetime import datetime
@@ -22,9 +23,13 @@ mysql = {
     'database_name': "qdata_cloud"
 }
 
-qdata_async_conn = 'mysql+aiomysql://{username}:{password}@{host}:{port}/{database_name}'.format(**mysql)
+# qdata_asyncmy_url = 'mysql+asyncmy://{username}:{password}@{host}:{port}/{database_name}'.format(**mysql)
+# qdata_asyncmy_engine = create_async_engine(qdata_asyncmy_url, connect_args={"use_unicode": True, "charset": "UTF8MB4"})
+# qdata_asyncmy_databases = databases.Database(qdata_asyncmy_url)
+
+qdata_async_url = 'mysql+aiomysql://{username}:{password}@{host}:{port}/{database_name}'.format(**mysql)
 qdata_async_engine = create_async_engine(
-    qdata_async_conn,
+    qdata_async_url,
     echo=True,
     # echo_pool=True,
     # poolclass=AsyncAdaptedQueuePool,
@@ -36,16 +41,16 @@ qdata_async_engine = create_async_engine(
 )
 QDataAsyncSession = sessionmaker(bind=qdata_async_engine, class_=AsyncSession, autocommit=False, autoflush=False, expire_on_commit=False)
 
-qdata_sync_conn = 'mysql+pymysql://{username}:{password}@{host}:{port}/{database_name}'.format(**mysql)
+qdata_sync_url = 'mysql+pymysql://{username}:{password}@{host}:{port}/{database_name}'.format(**mysql)
 qdata_sync_engine = create_engine(
-    qdata_sync_conn,
+    qdata_sync_url,
     echo=True,
-    echo_pool=True,
-    poolclass=QueuePool,
-    pool_pre_ping=True,
-    pool_size=250,
-    max_overflow=300,
-    pool_recycle=3600,
+    # echo_pool=True,
+    # poolclass=QueuePool,
+    # pool_pre_ping=True,
+    # pool_size=250,
+    # max_overflow=300,
+    # pool_recycle=3600,
     connect_args={"use_unicode": True, "charset": "UTF8MB4"},
 )
 QDataSyncSession = sessionmaker(bind=qdata_sync_engine, class_=Session, autocommit=False, autoflush=False, expire_on_commit=False)

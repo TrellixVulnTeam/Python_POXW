@@ -105,13 +105,15 @@ def func_request(method: str = REQUEST_GET, url: str = None, num: int = None):
 def request_test():
     start_time = time.time()
     with ThreadPool(1000) as pool:
-        for i in range(10 ** 2):
-            pool.apply_async(func_request, (REQUEST_GET, f"http://127.0.0.1:8000/sync_time", i))
+
+        for i in range(5):
+            # pool.apply_async(func_request, (REQUEST_GET, f"http://127.0.0.1:8000/async_time", i))
+            # pool.apply_async(func_request, (REQUEST_GET, f"http://127.0.0.1:8000/sync_time", i))
             # pool.apply_async(
             #     func_request,
             #     (REQUEST_GET, f"http://127.0.0.1:9090/api/v1/query?query=node_time%7Btid%3D%27100006%27%2Cjob%3D%27Host%27%2Cexporter%3D%27host%27%7D&time=1647338807.366", i)
             # )
-            # pool.apply_async(func_request, (REQUEST_GET, f"http://127.0.0.1:8000/async_with_sync_time", i))
+            pool.apply_async(func_request, (REQUEST_GET, f"http://127.0.0.1:8000/async_with_sync_time", i))
             # pool.apply_async(func_request, (REQUEST_GET, f"http://127.0.0.1:8000/run_sync_as_async_time", i))
             # pool.apply_async(func_request, (REQUEST_GET, f"http://127.0.0.1:8000/async_with_thread_time", i))
 

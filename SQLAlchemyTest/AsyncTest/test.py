@@ -14,7 +14,8 @@
 """
 import asyncio
 from sqlalchemy import text
-from sqlalchemy.orm import selectinload
+from sqlalchemy.orm import selectinload, Query
+from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 import concurrent.futures
 import os
@@ -23,8 +24,10 @@ from typing import Any
 import time
 from multiprocessing.pool import ThreadPool
 
-from SQLAlchemyTest.AsyncTest.models.qdata import QDataCluster, QDataNode
+from SQLAlchemyTest.AsyncTest.models.qdata import QDataCluster, QDataNode, RacCluster
 from SQLAlchemyTest.AsyncTest.base import create_all_table, create_database, open_session, open_async_session
+
+from sqlalchemy.util.concurrency import greenlet_spawn
 
 # 线程执行器，线程数量 = CPU数量 * 10
 thread_executor = concurrent.futures.ThreadPoolExecutor(max_workers=(os.cpu_count() or 10) * 10)
@@ -83,32 +86,38 @@ async def run_parallel(
 async def test_sync_sql():
     with open_session() as sync_session:
         query = sync_session.query(QDataCluster)
+
+        # print(await run_parallel([
+        #     greenlet_spawn(sync_session.query(QDataNode).filter(QDataNode.cluster_id == cluster_obj.id, QDataNode.type.in_(["compute", "sanfree"])).all)
+        #     for cluster_obj in await greenlet_spawn(query.all)
+        # ]))
+
         # print(await run_parallel([
         #     run_as_async(sync_session.query(QDataNode).filter(QDataNode.cluster_id == cluster_obj.id, QDataNode.type.in_(["compute", "sanfree"])).all)
         #     for cluster_obj in await run_as_async(query.all)
         # ]))
 
         for cluster_obj in query.all():
-            sync_session.query(QDataNode).all()
-    pass
+            rac_clusters = sync_session.query(RacCluster).all()     #type: RacCluster
+            for rac_cluster in rac_clusters:
+                print(rac_cluster.nodes)
+        pass
 
 
 # ====================== sync 并发 测试 ======================
 def test_sync_sql_single():
     with open_session() as sync_session:
-        query = sync_session.query(QDataCluster).filter(QDataCluster.name.like(f"%%")).order_by(text(f"name ASC"))
-        # print(await run_parallel([
-        #     run_as_async(sync_session.query(QDataNode).filter(QDataNode.cluster_id == cluster_obj.id, QDataNode.type.in_(["compute", "sanfree"])).all)
-        #     for cluster_obj in await run_as_async(query.all)
-        # ]))
+        query = sync_session.query(QDataCluster).options(
+            selectinload(QDataCluster.nodes),
+        )
 
         for cluster_obj in query.all():
-            print(list(sync_session.query(QDataNode).filter(QDataNode.cluster_id == cluster_obj.id, QDataNode.type.in_(["compute", "sanfree"])).all()))
+            print(sync_session.query(QDataNode).filter(QDataNode.cluster_id == cluster_obj.id, QDataNode.type.in_(["compute", "sanfree"])).all())
     pass
 
 
 def test_sync_sql_performance():
-    total_num = 300
+    total_num = 1
     start_time = time.time()
     with ThreadPool(1000) as pool:
         for i in range(total_num):
@@ -121,20 +130,31 @@ def test_sync_sql_performance():
 
 
 # ====================== async 测试 ======================
-async def async_test(async_session):
+async def async_test(async_session: AsyncSession):
+    # result = await async_session.execute(
+    #     select(QDataCluster).options(
+    #         selectinload(QDataCluster.nodes),  # 必须
+    #     ))
+    #
+    # print(await run_parallel([
+    #     async_session.execute(
+    #         select(QDataNode).filter(QDataNode.cluster_id == cluster_obj.id, QDataNode.type.in_(["compute", "sanfree"]))
+    #     ) for cluster_obj in result.scalars()
+    # ]))
+
     all_cluster = await async_session.execute(async_session.sync_session.query(QDataCluster).options(
         selectinload(QDataCluster.nodes),
     ).statement)
 
-    for cluster_obj in all_cluster.scalars():  # type: QDataCluster
-        # print(cluster_obj)
-        for node_obj in cluster_obj.nodes:
-            # print(node_obj)
-            pass
+    print([res.scalars().first() for res in await run_parallel([
+        async_session.execute(
+            async_session.sync_session.query(QDataNode).filter(QDataNode.cluster_id == cluster_obj.id, QDataNode.type.in_(["compute", "sanfree"])).statement
+        ) for cluster_obj in all_cluster.scalars().all()
+    ])])
 
 
 async def test_async_sql():
-    total_num = 1
+    total_num = 10 ** 1
     start_time = time.time()
     async with open_async_session() as async_session:  # type: AsyncSession
         await run_parallel([async_test(async_session) for _ in range(total_num)])
@@ -144,6 +164,17 @@ async def test_async_sql():
 
 
 if __name__ == '__main__':
-    # test_sync_sql_performance()
-    asyncio.run(test_sync_sql())
+    total_num = 10 ** 0
+    start_time = time.time()
+    asyncio.run(run_parallel(
+        [
+            test_sync_sql()
+            for _ in range(total_num)
+        ]
+    ))
+    print("\n\nTotal time use: {:.2f}'s.".format(time.time() - start_time))
+    print(f"Total number: {total_num}")
+
     # asyncio.run(test_async_sql())
+
+    # test_sync_sql_performance()

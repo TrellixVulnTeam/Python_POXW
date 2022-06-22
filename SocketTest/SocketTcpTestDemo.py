@@ -10,7 +10,8 @@ sk = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sk.settimeout(5)
 
 try:
-    sk.connect(("67.230.179.42", 1992))
+    sk.connect(("localhost", 1234))
+    sk.send(b"hello world")
     print("Connect success!")
 except:
     traceback.print_exc()
