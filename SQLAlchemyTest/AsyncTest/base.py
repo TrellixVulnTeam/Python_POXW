@@ -57,7 +57,7 @@ QDataSyncSession = sessionmaker(bind=qdata_sync_engine, class_=Session, autocomm
 
 
 # ======================== 项目中表结构继承的基类 =======================
-class CloudSqlAlchemyEnum(Enum):  # type: ignore
+class CloudSqlAlchemyEnum(str, Enum):  # type: ignore
     def __contains__(self, item: Any) -> bool:
         return item in self.enums
 

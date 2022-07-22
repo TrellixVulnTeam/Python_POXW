@@ -4,19 +4,17 @@
 @author: alfons
 """
 import os
+import json
+import pathlib
 import tarfile
+import pprint
 
-tar_file = "./qdatamagr_upgrade.tar.gz"
+tar_file = "./Q-qdata8.3.1-001.tar.gz"
 
 with tarfile.open(tar_file) as f:
-    names = f.getnames()
-    for n in names:
-        if not n.endswith("/qdata_version.conf"):
+    for file_path in f.getnames():
+        if pathlib.Path(file_path).name != ".version":
             continue
-        f.extract(n, path='./new')
-        print(os.path.join("tmp", n))
 
-try:
-    raise KeyError("err")
-except Exception as e:
-    print(str(e))
+        pprint.pprint(json.loads(f.extractfile(member=file_path).read().decode()), indent=4)
+        pass

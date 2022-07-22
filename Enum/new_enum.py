@@ -15,7 +15,7 @@
 from enum import Enum
 
 
-class QEnum(Enum):
+class QEnum(str, Enum):
 
     @classmethod
     def iter_with_value(cls):

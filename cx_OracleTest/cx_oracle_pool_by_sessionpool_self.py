@@ -57,7 +57,7 @@ TIMEOUT_ORACLE_DB_CONN = 3
 
 
 # ====================== 数据结构 ======================
-class OracleAuthEnum(Enum):
+class OracleAuthEnum(str, Enum):
     """Oracle连接权限枚举"""
 
     DEFAULT_AUTH = cx_Oracle.DEFAULT_AUTH

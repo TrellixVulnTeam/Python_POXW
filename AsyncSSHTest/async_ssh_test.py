@@ -17,16 +17,13 @@ import asyncssh
 from asyncssh import SSHClientConnection
 
 
-async def test_asyncssh():
-    async with asyncssh.connect(
-        '10.10.90.78',
-        port=22,
-        username='root',
-        password='Cljslrl0620!!',
-    ) as conn:  # type: SSHClientConnection
-        res = await conn.run('ls ', input="/tmp")
-        print(res)
+def gen_ws_name(*args, **kwargs) -> str:
+    """
+    生成websocket特征名
 
+    :return:
+    """
+    return "_".join(list(args) + list(kwargs.values()))
 
-if __name__ == '__main__':
-    asyncio.run(test_asyncssh())
+res = gen_ws_name()
+print(res)
